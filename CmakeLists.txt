@@ -15,6 +15,9 @@ project(RType3D VERSION 0.0)
 FILE(GLOB CFILES
         Source/Examplemain.cpp
         Source/Window.cpp
+        Source/Logger.cpp
+        Source/CsvParser.cpp
+        Source/AssetManager.cpp
         Source/Renderer.cpp
         Source/Map.cpp
         Source/Drawable3D.cpp
@@ -23,6 +26,9 @@ FILE(GLOB CFILES
 #add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES
 FILE(GLOB HEADERFILES
         Source/Window.hpp
+        Source/Logger.hpp
+        Source/CsvParser.hpp
+        Source/AssetManager.hpp
         Source/Renderer.hpp
         Source/Map.hpp
         Source/IDrawable.hpp

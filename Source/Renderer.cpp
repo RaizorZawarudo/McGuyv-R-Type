@@ -38,33 +38,6 @@ void RL::Renderer::draw_2D_model(Texture2D texture, int x, int y)
     DrawTexture(texture, x, y, WHITE);
 }
 
-//to implement as argument, the path to or the actual map
-// so that we can parse it and draw the 3dobjects on the grid at their coordinates
-void RL::Renderer::draw_map(RL::Map Map)
-{
-       //mock cubes to be replaced with MAp._mapstaticAssets
-    Vector3 WallBoxPos = { 0.0f, 0.5f, 0.0f };
-    Vector3 WallBoxSize = { 1.0f, 1.0f, 1.0f };
-
-    Vector2 size = {float(Map.getMapWidth()), float(Map.getMapDepth())};
-
-    //DrawGrid(16.0f, 1.0f);
-    DrawPlane({0, 0 ,0}, size, BLUE);
-    
-
-    for (int i = 0; i < Map.getMapDepth(); i++) {
-        for (int j = 0; j < Map.getMapWidth(); j++) {
-            if (Map.getParsedMap()[i][j].tile == 1) { // each if here can represend the drawable u want in the map
-                
-                // here convert CSV positions into 3d WORLD positions. need to translate with origin 0!!
-                WallBoxPos.x = translateCoordinatestoWorld(j, Map.getMapWidth());
-                WallBoxPos.z = translateCoordinatestoWorld(i, Map.getMapDepth());
-                DrawCubeTexture(Map.getwallModel().getTexture(), WallBoxPos, WallBoxSize.x, WallBoxSize.y, WallBoxSize.z, WHITE);
-                //we can also draw anything else if its in the drawables of the map. we can actually add anything here and draw it while its in the list              
-            }
-        }
-    }
-}
 
 float RL::Renderer::translateCoordinatestoWorld(int pos, int borderSize)
 {

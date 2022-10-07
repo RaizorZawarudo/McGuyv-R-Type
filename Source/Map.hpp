@@ -14,47 +14,63 @@
 #include <iterator>
 #include <cstring>
 #include <cstdlib>
+
+#include "CsvParser.hpp"
 #include "Drawable3D.hpp"
 
 typedef struct
     {
-        int tile;
-        int orientation;
-    } gfx_tile_t;
+        std::string _pathName;
+        int _length;
+        float _width;
+        float _height;
 
-namespace RL {
+        Vector3 _cameraPositionMcGuyv;
+    } repeatPathData_t;
+
+typedef struct
+    {
+        std::string _bossRoomName;
+        std::string _bossName;
+
+        float _length;
+        float _width;
+        float _height;
+
+        Vector3 _cameraPositionMcGuyv;
+
+    } bossRoomData_t;
+
     
-    class Map {
+class Map {
     public:
-        Map(std::string mapCSVPath, std::string wallTexturePath, std::string floorTexturePath, std::string crateTexturePath);
+        Map(std::string mapName, std::string mapPath, std::vector<RL::Drawable3D*> zonesModels);
         ~Map();
-        std::vector<std::vector<gfx_tile_t>> parseMap(const std::string &path);
 
-        //random crate generator
-        void generate_all_crates();
-        bool skip_start_areas(int i, int j);
-
-        //Drawer
-        void draw_map();
-
-        //transformer mapcoord to 3d coord
-        float translateCoordinatestoWorld(int pos, int borderSize);
+        //load map data
+        void fillMapData(std::string mapPath, std::vector<RL::Drawable3D*> zonesModels);
+        repeatPathData_t fillPathData(std::string zoneName, std::vector<RL::Drawable3D*> zonesModels);
+        bossRoomData_t fillBossRoomData(std::string zoneName, std::vector<RL::Drawable3D*> zonesModels);
 
         //getters
-        int getMapWidth();
-        int getMapDepth();
-        std::vector<std::vector<gfx_tile_t>> getParsedMap();
-        RL::Drawable3D getwallModel();
+        std::string getMapName();
+        std::vector<repeatPathData_t> getMapPathsData();
+        std::vector<bossRoomData_t> getMapBossRoomData();
+        int getCurrentStage();
+        
 
 
+        
     private:
-        std::vector<std::vector<gfx_tile_t>> _parsedMap;
-        //std::vector<RL::Drawable3D> _mapStaticAssets;
-        RL::Drawable3D _floorModel;
-        RL::Drawable3D _wallModel;
-        RL::Drawable3D _crateModel;
-        std::string _wallTexturepath;
-        int mapWidth;
-        int mapDepth;
-    };
-}
+
+        std::string _mapName;
+
+        std::vector<repeatPathData_t> _repeatPaths;
+        std::vector<bossRoomData_t> _bossRooms;
+        std::vector<std::string> _repeatPathsnames;
+        std::vector<std::string> _bossRoomsnames;
+
+        int currentStage = 0;
+
+        
+};

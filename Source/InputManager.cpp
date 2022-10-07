@@ -4,7 +4,7 @@
 
 RL::InputManager::InputManager(std::string name)
 {
-    this->_name = _name;
+    this->_name = name;
 }
 
 RL::InputManager::~InputManager()

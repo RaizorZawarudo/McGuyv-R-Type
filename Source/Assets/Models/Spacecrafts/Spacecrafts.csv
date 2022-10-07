@@ -1,0 +1,3 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height
+Heaven,simple,Source/Assets/Models/Spacecrafts/Heaven/Heaven.obj,0,0,1,1,1,1
+Earth,simple,Source/Assets/Models/Spacecrafts/Earth/Earth2.obj,Source/Assets/Models/Spacecrafts/Earth/Earth2.png,0,1,1,1,1

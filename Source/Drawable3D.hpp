@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 
 #include "IDrawable.hpp"
+#include "CsvParser.hpp"
 //#include "RaylibTypeEncaps.hpp"
 
 
@@ -21,17 +22,18 @@
 namespace RL {
     enum ModelType {
         MCGUYVER,
-        WALL,
-        CRATE,
-        MODEL,
-        FLOOR,
-        POWER
+        ZONE,
+        SPACESHIP,
+        PROJECTILE,
+        ENNEMY,
+        OSTACLE,
+        POWERUP
     };
 
 
     class Drawable3D: public IDrawable {
         public:
-            Drawable3D(std::string texturePath, std::string modelPath, std::string animationPath, float scale, ModelType type);
+            Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float lenght, float width, float height, Vector3 cameraPositionMcGuyv);
             ~Drawable3D();
 
             // IDrawable methods
@@ -69,23 +71,38 @@ namespace RL {
             ModelAnimation* getAnimation();
 
             Model getModel();
+            std::string getName();
+            float getLength();
+            float getWidth();
+            float getHeight();
+            float getScale();
+            Vector3 getCameraPositionMcGuyv();
 
             void setBoundingBox();
             BoundingBox getBoundingBox();
 
         protected:
-            // These initializations will not work
-            Vector3 _position = {0, 0, 0};
-            Vector3 _boxSize;
 
+            ModelType _type;
+            std::string _name;
+            std::string _style;
+            Color _tint = WHITE;
+            float _scale;
+            Model _model;
+            float _length;
+            float _width;
+            float _height;
+            Vector3 _cameraPositionMcGuyv;
+
+            Vector3 _boxSize;
+            BoundingBox _boundingBox;
+            // These initializations will not work
+            Vector3 _position = {0, 0, 0}; //useless do not add position in the model, add position in the entity data
+            
+            
             bool _imageLoaded = false;
             Image _img;
             Texture2D _texture;
-            Model _model;
-            Color _tint = WHITE;
-            float _scale;
-            ModelType _type;
-            BoundingBox _boundingBox;
             int up;
 
              // Animation

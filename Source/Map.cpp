@@ -7,202 +7,105 @@
 
 #include "Map.hpp"
 
-RL::Map::Map(std::string mapCSVPath, std::string wallTexturePath, std::string floorTexturePath, std::string crateTexturePath)
-:_wallModel(Drawable3D(wallTexturePath, "", "", 1.0, RL::WALL)), _floorModel(RL::Drawable3D(floorTexturePath, "","", 1.0, RL::FLOOR)), _crateModel(RL::Drawable3D(crateTexturePath, "", "", 1.0, RL::CRATE))
+Map::Map(std::string mapName, std::string MapPath, std::vector<RL::Drawable3D*> zonesModels)
 {
-    this->_parsedMap = parseMap(mapCSVPath);
-    this->mapDepth = _parsedMap.size();
-    this->mapWidth = _parsedMap[0].size();
-    //generate_all_crates();
-    this->_wallTexturepath = wallTexturePath;
+    this->_mapName = mapName;
+    fillMapData(MapPath, zonesModels);
+
+
+    
+    //debug end
 }
 
-RL::Map::~Map()
+Map::~Map()
 {
-    this->_parsedMap.clear();
     //this->_mapStaticAssets.clear();
 }
 
-std::vector<std::string> csv_read_row(const std::string &line)
+void Map::fillMapData(std::string MapPath, std::vector<RL::Drawable3D*> zonesModels)
 {
-    std::vector<std::string> row;
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(MapPath);
 
-    char *c_line = const_cast<char *>(line.c_str());
-    char *token = std::strtok(c_line, ",");
+    // repeatPathData_t pathDataPunchCard;
+    // bossRoomData_t bossRoomPunchCard;
 
-    row.emplace_back(token);
-
-    while ((token = std::strtok(nullptr, ","))) {
-        row.emplace_back(token);
-    }
-    return row;
-}
-
-std::vector<std::vector<std::string>> csvToTable(const std::string &filepath)
-{
-    std::vector<std::string> row;
-    std::vector<std::vector<std::string>> table;
-    std::ifstream myFile(filepath);
-    std::string buff;
-
-    if (!myFile.is_open())
-        throw std::runtime_error(filepath + ": Could not open file.");
-    while (getline(myFile, buff)) {
-        row = csv_read_row(buff);
-        table.push_back(row);
-    }
-    myFile.close();
-    return table;
-}
-
-std::vector<std::string> csvToVector(const std::string &filepath)
-{
-    std::vector<std::string> row;
-    std::vector<std::string> output;
-    std::ifstream myFile(filepath);
-    std::string buff;
-
-    if (!myFile.is_open())
-        throw std::runtime_error(filepath + ": Could not open file.");
-    while (getline(myFile, buff)) {
-        row = csv_read_row(buff);
-        output.insert(output.end(), row.begin(), row.end());
-    }
-    myFile.close();
-    return output;
-}
-
-std::vector<std::string> splitStr(std::string str, std::string sep)
-{
-    std::vector<std::string> output;
-    size_t start = 0;
-    size_t end;
-    std::string token;
-
-    while ((end = str.find(sep, start)) != std::string::npos) {
-        token = str.substr(start, end - start);
-        start = end + sep.length();
-        output.push_back (token);
-    }
-    output.push_back(str.substr (start));
-
-    return output;
-}
-
-
-std::vector<std::vector<gfx_tile_t>> RL::Map::parseMap(const std::string &path)
-{
-    std::vector<std::vector<std::string>> parsedCsv = csvToTable(path);
-    std::vector<gfx_tile_t> tempRow;
-    std::vector<std::string> splitCell;
-
-    std::vector<std::vector<gfx_tile_t> > map;
-
-    for (long unsigned int i = 0; i < parsedCsv.size(); i++) {
-        tempRow.clear();
-
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {
+        //HERE WE SEPARATE EACH cell of the csv into its designated value
         for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
-            // Split tile from orientation
-            splitCell = splitStr(parsedCsv[i][j], ";");
-
-            // Push new gfx tile to row
-            tempRow.push_back({
-                stoi(splitCell[0]),
-                (splitCell.size() > 1 ? stoi(splitCell[1]) : 0)
-            });
+            if (j == 0) { //j == 0 corresponds to al simple paths name
+                this->_repeatPathsnames.emplace_back(parsedCsv[i][j]); //to be deleted once implementation line below is tested in main
+                this->_repeatPaths.emplace_back(fillPathData(parsedCsv[i][j], zonesModels));
+            }
+            if (j == 1) {//j == 1 corresponds to all boss room names
+               this->_bossRoomsnames.emplace_back(parsedCsv[i][j]); //to be deleted once implementation line below is tested in main
+               this->_bossRooms.emplace_back(fillBossRoomData(parsedCsv[i][j], zonesModels));
+            }
+            //can add as many columns as we want in the csv if we want to add other types of rooms 
+            // eg : transition pahts to blend from small mountain to big mountain etc etc
         }
-
-        map.push_back(tempRow);
     }
-    return map;
-}
-
-//drawing the map from MAP Class
-
-void RL::Map::draw_map()
-{
-    Vector3 WallBoxPos = { 0.0f, 0.5f, 0.0f };
-    Vector3 WallBoxSize = this->getwallModel().getBoxSize();
-    Vector3 FloorBoxPos = { 0.0f, -0.25f, 0.0f };
-
-    Vector2 size = {20.0f, 20.0f};
-    //DrawGrid(16.0f, 1.0f);
-    //DrawPlane({0, 0 ,0}, size, BLUE);
+    //debugging
+    std::cout << "MAP NAME = " << this->_mapName << std::endl; 
+        for ( int i = 0 ; i < _repeatPathsnames.size(); i++)
+            std::cout << "      has a simpe path called : " << _repeatPathsnames[i] << std::endl;
+        for (int i = 0 ; i < _bossRoomsnames.size(); i++)
+            std::cout << "      has a boss room called : " << _bossRoomsnames[i] << std::endl;
     
 
-    for (int i = 0; i < mapDepth; i++) {
-        for (int j = 0; j < mapWidth; j++) {
-            WallBoxPos.x = translateCoordinatestoWorld(j, mapWidth);
-            WallBoxPos.z = translateCoordinatestoWorld(i, mapDepth);
-            if (_parsedMap[i][j].tile == 1) { // each if here can represend the drawable u want in the map  
-                DrawCubeTexture(_wallModel.getTexture(), WallBoxPos, WallBoxSize.x, WallBoxSize.y, WallBoxSize.z, WHITE);           
-            }
-            if (_parsedMap[i][j].tile == 2) { // each if here can represend the drawable u want in the map  
-                DrawCubeTexture(_crateModel.getTexture(), WallBoxPos, WallBoxSize.x, WallBoxSize.y, WallBoxSize.z, WHITE);           
-            }
-            FloorBoxPos.x = translateCoordinatestoWorld(j, mapWidth);
-            FloorBoxPos.z = translateCoordinatestoWorld(i, mapDepth);
-            DrawCubeTexture(_floorModel.getTexture(), FloorBoxPos, WallBoxSize.x, WallBoxSize.y - 0.5f, WallBoxSize.z, WHITE);
+    
+    //debugging end
+}
+
+repeatPathData_t Map::fillPathData(std::string zoneName, std::vector<RL::Drawable3D*> zonesModels)
+{
+    repeatPathData_t newrepeatPathData;
+
+    newrepeatPathData._pathName = zoneName;
+
+    for (int i  = 0; i < zonesModels.size(); i++) {
+        if (zonesModels.at(i)->getName() == zoneName) {
+            newrepeatPathData._height = zonesModels.at(i)->getHeight();
+            newrepeatPathData._width = zonesModels.at(i)->getWidth();
+            newrepeatPathData._length = zonesModels.at(i)->getLength();
+            newrepeatPathData._cameraPositionMcGuyv = zonesModels.at(i)->getCameraPositionMcGuyv();
         }
     }
+    return newrepeatPathData;
 }
 
-float RL::Map::translateCoordinatestoWorld(int pos, int borderSize)
+bossRoomData_t Map::fillBossRoomData(std::string zoneName, std::vector<RL::Drawable3D*> zonesModels)
 {
-    float newpos = pos - (borderSize / 2);
-    if (borderSize % 2 == 0)
-        newpos += 0.5;
-    return newpos;
-}
+    bossRoomData_t newBossRoomData;
 
-//random crate generator
+    newBossRoomData._bossRoomName = zoneName;
 
-bool RL::Map::skip_start_areas(int i, int j)
-{
-    //check first row 
-    if (i == 1 || i == this->mapDepth - 2) {
-        if (j == 1 || j == this->mapWidth - 2 || j == 2 || j == this->mapWidth - 3)
-            return true;
-    }
-    //check first column 
-    if (j == 1 || j == this->mapWidth - 2) {
-        if (i == 1 || i == this->mapDepth - 2 || i == 2 || i == this->mapDepth - 3)
-            return true;
-    }
-    return false;
-}
-
-void RL::Map::generate_all_crates()
-{
-    int placeCrate;
-    for (int i = 0; i < mapDepth; i++) {
-        for (int j = 0; j < mapWidth; j++) {
-            placeCrate = rand() % 100;
-            if (!skip_start_areas(i, j) && _parsedMap[i][j].tile == 0 && placeCrate > 25)
-                
-                //here we do a randomiser and change the tile to == 2;
-                _parsedMap[i][j].tile = 2;
-            }
+    for (int i  = 0; i < zonesModels.size(); i++) {
+        if (zonesModels.at(i)->getName() == zoneName) {
+            newBossRoomData._height = zonesModels.at(i)->getHeight();
+            newBossRoomData._width = zonesModels.at(i)->getWidth();
+            newBossRoomData._length = zonesModels.at(i)->getLength();
+            newBossRoomData._cameraPositionMcGuyv = zonesModels.at(i)->getCameraPositionMcGuyv();
         }
-}
-//Getters
-
-int RL::Map::getMapWidth()
-{
-    return this->mapWidth;
+    }
+    return newBossRoomData;
 }
 
-int RL::Map::getMapDepth()
+std::string Map::getMapName()
 {
-    return this->mapDepth;    
+    return this->_mapName;
 }
 
-std::vector<std::vector<gfx_tile_t>> RL::Map::getParsedMap()
+std::vector<repeatPathData_t> Map::getMapPathsData()
 {
-    return this->_parsedMap;
+    return this->_repeatPaths;
 }
 
-RL::Drawable3D RL::Map::getwallModel()
+std::vector<bossRoomData_t> Map::getMapBossRoomData()
 {
-    return this->_wallModel;
+    return this->_bossRooms;
+}
+
+int Map::getCurrentStage()
+{
+    return this->currentStage;
 }

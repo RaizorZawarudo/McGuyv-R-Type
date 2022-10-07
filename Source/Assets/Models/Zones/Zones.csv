@@ -1,0 +1,4 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale,length,width,height,camera position
+SmallMountainPath,simple,Source/Assets/Models/Zones/SmallMountainPath/smallMountains.obj,0,0,1,160,16,0,-5;6;0
+BigMountainPath,simple,Source/Assets/Models/Zones/BigMountainPath/bigMountains.obj,0,0,1,160,16,0,-5;6;0
+SmallMountainPathGreen,simple,Source/Assets/Models/Zones/SmallMountainPathGreen/smallMountainsGreen.obj,0,0,1,160,16,0,-5;6;0

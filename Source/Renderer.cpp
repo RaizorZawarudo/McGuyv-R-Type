@@ -38,6 +38,18 @@ void RL::Renderer::draw_2D_model(Texture2D texture, int x, int y)
     DrawTexture(texture, x, y, WHITE);
 }
 
+void RL::Renderer::drawMap(Map Map, Camera camera)
+{
+    if (Map.getFightingBoss()) {
+        //here we do the printing logic for the boss ffight including the stop scrolling and change camera and shit
+        ;
+
+    }
+    else {
+        ;
+
+    }
+}
 
 float RL::Renderer::translateCoordinatestoWorld(int pos, int borderSize)
 {

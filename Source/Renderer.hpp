@@ -9,7 +9,7 @@
 
 #include <raylib.h>
 #include <iostream>
-//#include "Map.hpp"
+#include "Map.hpp"
 
 
 // how does the drawer work :
@@ -29,7 +29,9 @@ namespace RL {
 
             void draw_3D_model(Model model, float x, float y, float z);
             void draw_2D_model(Texture2D texture, int x, int y);
-            //void draw_map(RL::Map Map); //should take map class as parameter, map class containing  each tile and its asset
+
+            void drawMap(Map Map, Camera camera); //should take map class as parameter, map class containing path and boosrooms (and transition rooms maybe if we do it)
+
             void draw_text(std::string text, Color color, int x, int y, Font font, float size); // temporary, should create text class with font and size
 
             float translateCoordinatestoWorld(int pos, int borderSize);

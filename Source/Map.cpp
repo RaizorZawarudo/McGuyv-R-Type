@@ -90,6 +90,66 @@ bossRoomData_t Map::fillBossRoomData(std::string zoneName, std::vector<RL::Drawa
     return newBossRoomData;
 }
 
+void Map::mapUpdate()
+{
+    while (this->_mapQueue.size() < 6)
+        refillMapQueue();
+    
+    if (this->_gameRunning)
+        //updateMapQueue(); //here we decrease the z of each mapSection_t by the movement speed backwards to create parallax effect
+        // generate mobs // obstacles thorugh ECS by reading mob files and obstacles files, to be implemented !! mucho trabajo :S
+        ;
+}
+
+void Map::refillMapQueue()
+{
+    mapQueueSection_t newMapSection;
+    int queueSize = this->getMapQueue().size();
+
+    //test adding boss room
+    if (queueSize == 2)
+        this->_isFightingBoss = true;
+
+    if (this->_isFightingBoss == false) { // this is the logic to add simple paths when not fighting a boss, so the infinite straight loop without anything else
+        newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage)._pathName;
+        if (queueSize == 0) {
+            newMapSection._zPosition = 0.0f;
+            this->_mapQueue.emplace_back(newMapSection);
+        }
+        else {
+            newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_repeatPaths.at(this->_currentStage)._length;
+            this->_mapQueue.emplace_back(newMapSection);
+        }
+    }
+
+    if (this->_isFightingBoss == true) {
+        if (queueSize != 6 && this->_hasSpawnedBossroom == false) {
+            newMapSection._sectionName = this->_bossRooms.at(this->_currentStage)._bossRoomName;
+            newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_repeatPaths.at(this->_currentStage)._length;
+            this->_mapQueue.emplace_back(newMapSection);
+            this->_hasSpawnedBossroom = true;
+            return; //very important or we create one bossroom and one path on the same z!!!
+        }
+        if (queueSize < 6 && this->_hasSpawnedBossroom == true) {
+            //here we add behind the boss room the simple paths of the next level;
+            std::cout << "adding path after bossromm" << std::endl;
+            newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage + 1)._pathName;
+            newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_bossRooms.at(this->_currentStage)._length;
+            std::cout << "new path z = " << newMapSection._zPosition << " and queue size = " << queueSize 
+            << " and previous pos is = " << this->_mapQueue[queueSize - 1]._zPosition
+            << " and bossroom at this current stage length is = " << this->_bossRooms.at(this->_currentStage)._length << std::endl;
+            this->_mapQueue.emplace_back(newMapSection);
+
+        }
+
+
+    }
+
+}
+
+
+//GETTERS
+
 std::string Map::getMapName()
 {
     return this->_mapName;
@@ -105,7 +165,22 @@ std::vector<bossRoomData_t> Map::getMapBossRoomData()
     return this->_bossRooms;
 }
 
+std::vector<mapQueueSection_t> Map::getMapQueue()
+{
+    return this->_mapQueue;
+}
+
 int Map::getCurrentStage()
 {
-    return this->currentStage;
+    return this->_currentStage;
+}
+
+bool Map::getFightingBoss()
+{
+    return this->_isFightingBoss;
+}
+
+bool Map::getGameRunning()
+{
+    return this->_gameRunning;
 }

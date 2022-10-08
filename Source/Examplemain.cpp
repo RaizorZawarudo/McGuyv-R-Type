@@ -1,7 +1,8 @@
 #include "raylib.h"
 #include "AssetManager.hpp"
-//#include "Map.hpp"
+#include "Map.hpp"
 #include "InputManager.hpp"
+#include "Renderer.hpp"
 
 // #include "Window.hpp"
 // #include "CollisionManager.hpp"
@@ -11,27 +12,43 @@
 //------------------------------------------------------------------------------------
 int main(void)
 {
-    float screenWidth = 800.0f;
-    float screenHeight = 600.0f;
-    InitWindow(screenWidth, screenHeight, "raylib [models] example - box collisions");
-    // Initialization
+    float screenWidth = 1024.0f;
+    float screenHeight = 768.0f;
+    // Initialization 
+    InitWindow(screenWidth, screenHeight, "McGuyv´R-Type");
     //--------------------------------------------------------------------------------------
+    Camera camera = { {  -5.0f, 6.0f, 0.0f }, { 0.0f, 0.0f, 15.0f }, { 0.0f, 1.0f, 0.0f }, 70.0f, CAMERA_PERSPECTIVE};
 
     AssetManager AssetManager;
-    std::vector<Map*> Maps = AssetManager.getMaps();
-    // std::vect;
+    RL::Renderer Renderer("BETATESTING");
+
 
     //here debug if implementation of maps work ,, then to do : priniting of maps ina loop way through the RENDERER :D 
 
-    for (int i = 0; i < Maps.size(); i++)    {
-        std::cout << " MAP NAME : " << Maps.at(i)->getMapName() << std::endl;
-        std::cout << Maps.at(i)->getMapPathsData().size() << std::endl;
-        for (int j = 0; j < Maps.at(i)->getMapPathsData().size(); j++ ){
-            std::cout << "path name :  " << Maps.at(i)->getMapPathsData().at(j)._pathName << std::endl;
-            std::cout << "path length : " << Maps.at(i)->getMapPathsData().at(j)._length << std::endl;
-            std::cout << "path width :  " << Maps.at(i)->getMapPathsData().at(j)._width << std::endl;
-            std::cout << "path height :  " << Maps.at(i)->getMapPathsData().at(j)._height << std::endl;
-        }
+    std::vector<Map*> Maps = AssetManager.getMaps();
+    // for (int i = 0; i < Maps.size(); i++)    {
+    //     std::cout << " MAP NAME : " << Maps.at(i)->getMapName() << std::endl;
+    //     std::cout << Maps.at(i)->getMapPathsData().size() << std::endl;
+    //     for (int j = 0; j < Maps.at(i)->getMapPathsData().size(); j++ ){
+    //         std::cout << "path name :  " << Maps.at(i)->getMapPathsData().at(j)._pathName << std::endl;
+    //         std::cout << "path length : " << Maps.at(i)->getMapPathsData().at(j)._length << std::endl;
+    //         std::cout << "path width :  " << Maps.at(i)->getMapPathsData().at(j)._width << std::endl;
+    //         std::cout << "path height :  " << Maps.at(i)->getMapPathsData().at(j)._height << std::endl;
+    //     }
+    // }
+    
+
+    //debugging of map data loading end
+
+    //testing map queue
+
+    int currLevel = 1;
+
+    Maps.at(currLevel)->mapUpdate();
+    std::vector<mapQueueSection_t> currentMapQueue = Maps.at(currLevel)->getMapQueue();
+
+    for (int j = 0; j < currentMapQueue.size(); j++) {
+        std::cout << currentMapQueue[j]._sectionName << " at position " << currentMapQueue[j]._zPosition << std::endl;
     }
 
 
@@ -49,7 +66,6 @@ int main(void)
     Vector3 endWallPos = { 0.0f, 0.0f, 100.0f };
 
 
-    Camera camera = { {  -5.0f, 6.0f, 0.0f }, { 0.0f, 0.0f, 15.0f }, { 0.0f, 1.0f, 0.0f }, 70.0f, CAMERA_PERSPECTIVE};
 
 
     

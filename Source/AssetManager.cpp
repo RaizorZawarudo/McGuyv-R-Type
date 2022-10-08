@@ -126,14 +126,15 @@ void AssetManager::loadAllMaps()
         }
 
         //debugging
-        std::cout << "MAP NAME = " << mapName << " and MAP PATH = " << mapPath << std::endl; // debugging line
+        // std::cout << "MAP NAME = " << mapName << " and MAP PATH = " << mapPath << std::endl; // debugging line
+
         //now we crate a map from each map line in the map .csv
         Map *newMap = new Map(mapName, mapPath, this->_zonesModels);
         this->_maps.emplace_back(newMap);
     //done
     }
     //debugging
-    std::cout << " BIG DEBUG ::  2 == " << this->_maps.size() << std::endl;
+    // std::cout << " BIG DEBUG ::  2 == " << this->_maps.size() << std::endl;
 }
 
 //Getters

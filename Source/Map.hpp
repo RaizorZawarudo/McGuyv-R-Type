@@ -41,6 +41,13 @@ typedef struct
 
     } bossRoomData_t;
 
+typedef struct
+    {
+        std::string _sectionName;
+        float _zPosition;
+
+    } mapQueueSection_t;
+
     
 class Map {
     public:
@@ -52,25 +59,41 @@ class Map {
         repeatPathData_t fillPathData(std::string zoneName, std::vector<RL::Drawable3D*> zonesModels);
         bossRoomData_t fillBossRoomData(std::string zoneName, std::vector<RL::Drawable3D*> zonesModels);
 
+
+        //Map update and logic and scrolling and (to add spawning of bosses and mobs and walls etc)
+        void mapUpdate();
+        void refillMapQueue();
+
         //getters
         std::string getMapName();
         std::vector<repeatPathData_t> getMapPathsData();
         std::vector<bossRoomData_t> getMapBossRoomData();
+        std::vector<mapQueueSection_t> getMapQueue();
         int getCurrentStage();
-        
+        bool getFightingBoss();
+        bool getGameRunning();
 
 
-        
     private:
 
         std::string _mapName;
 
-        std::vector<repeatPathData_t> _repeatPaths;
-        std::vector<bossRoomData_t> _bossRooms;
+        std::vector<repeatPathData_t> _repeatPaths; //this should be in order of game aspect in the csv already
+        std::vector<bossRoomData_t> _bossRooms; // this should be in order also in csv
+        //we dont need a display queue we just need to know what stage we are on  and if we are fighting a boss
+        // eg : we are in stage2, so we can only display repeatPaths[2] and if we enter the conditions to spawn boss, we will have 
+        // is fighting boss == 1 then we display the boss room at the end and stop adding new rooms .
+
+        std::vector<mapQueueSection_t> _mapQueue;
+
+        //delete these two lines later, not usefull anymore
         std::vector<std::string> _repeatPathsnames;
         std::vector<std::string> _bossRoomsnames;
 
-        int currentStage = 0;
+        bool _gameRunning = false;
+        int _currentStage = 0;
+        bool _isFightingBoss = false;
+        bool _hasSpawnedBossroom = false;
 
         
 };

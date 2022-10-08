@@ -38,16 +38,17 @@ void RL::Renderer::draw_2D_model(Texture2D texture, int x, int y)
     DrawTexture(texture, x, y, WHITE);
 }
 
-void RL::Renderer::drawMap(Map Map, Camera camera)
+void RL::Renderer::drawMap(Map* Map, Camera camera, AssetManager AssetManager)
 {
-    if (Map.getFightingBoss()) {
-        //here we do the printing logic for the boss ffight including the stop scrolling and change camera and shit
-        ;
-
-    }
-    else {
-        ;
-
+    
+    int size =  Map->getMapQueue().size();
+    for (int i = 0; i < size ; i++) {
+        DrawModelEx(AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getModel(),
+                    (Vector3){0.0f, 0.0f , Map->getMapQueue().at(i)._zPosition}, {0.0f, 1.0f, 0.0f}, 0.0f,
+                    (Vector3){AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale(),
+                              AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale(),
+                              AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale()},
+                    WHITE);
     }
 }
 

@@ -163,3 +163,25 @@ std::vector<Map*> AssetManager::getMaps()
     return this->_maps;
 }
 
+RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName, RL::ModelType modelType)
+{
+    if (modelType == RL::ModelType::ZONE) {
+        for (int i = 0; i < this->_zonesModels.size(); i++) {
+            if (modelName == this->_zonesModels.at(i)->getName())
+                return this->_zonesModels.at(i);
+        }
+    }
+
+        //find in ZONES
+    // if (modelType == 1)
+    //     //find in ZONES
+    // if (modelType == 1)
+    //     //find in ZONES
+    // if (modelType == 1)
+    //     //find in ZONES
+    // if (modelType == 1)
+    //     //find in ZONES
+    // if (modelType == 1)
+    //     //find in ZONES
+
+}

@@ -42,7 +42,7 @@ int main(void)
 
     //testing map queue
 
-    int currLevel = 1;
+    int currLevel = 0;
 
     Maps.at(currLevel)->mapUpdate();
     std::vector<mapQueueSection_t> currentMapQueue = Maps.at(currLevel)->getMapQueue();
@@ -132,11 +132,11 @@ int main(void)
 
                 DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                   
-                for (int i = 0; i < 6; i++)
-                    DrawModelEx(AssetManager.getZonesModels()[2]->getModel(),{-0.0f, 0.0f, 160.0f + i * 160.0f }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                    //zones indexes -2 always
-
-
+                // for (int i = 0; i < 6; i++)
+                //     DrawModelEx(AssetManager.getZonesModels()[2]->getModel(),{-0.0f, 0.0f, 160.0f + i * 160.0f }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                //     //zones indexes -2 always
+                
+                Renderer.drawMap(Maps.at(currLevel), camera, AssetManager);
 
                 //DrawGrid(2000, 1.0f);        // Draw a grid
 

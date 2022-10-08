@@ -29,8 +29,9 @@ class AssetManager {
         std::vector<RL::Drawable3D*> getProjectileModels();
         std::vector<RL::Drawable3D*> getSpacecraftModels();
         std::vector<RL::Drawable3D*> getEnnemyModels();
-
         std::vector<Map*> getMaps();
+
+        RL::Drawable3D* getSpecificDrawableWithType(std::string modelName, RL::ModelType modelType);
 
     private:
         //3d assets

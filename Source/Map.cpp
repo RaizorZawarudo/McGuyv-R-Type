@@ -104,11 +104,12 @@ void Map::mapUpdate()
 void Map::refillMapQueue()
 {
     mapQueueSection_t newMapSection;
+    newMapSection._isBossRoom = false;
     int queueSize = this->getMapQueue().size();
 
     //test adding boss room
-    if (queueSize == 2)
-        this->_isFightingBoss = true;
+    // if (queueSize == 2)
+    //     this->_isFightingBoss = true;
 
     if (this->_isFightingBoss == false) { // this is the logic to add simple paths when not fighting a boss, so the infinite straight loop without anything else
         newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage)._pathName;
@@ -121,30 +122,35 @@ void Map::refillMapQueue()
             this->_mapQueue.emplace_back(newMapSection);
         }
     }
-
     if (this->_isFightingBoss == true) {
         if (queueSize != 6 && this->_hasSpawnedBossroom == false) {
             newMapSection._sectionName = this->_bossRooms.at(this->_currentStage)._bossRoomName;
             newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_repeatPaths.at(this->_currentStage)._length;
+            newMapSection._isBossRoom = true;
             this->_mapQueue.emplace_back(newMapSection);
             this->_hasSpawnedBossroom = true;
             return; //very important or we create one bossroom and one path on the same z!!!
         }
         if (queueSize < 6 && this->_hasSpawnedBossroom == true) {
             //here we add behind the boss room the simple paths of the next level;
+            //debugging
             std::cout << "adding path after bossromm" << std::endl;
+            //debugging end
             newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage + 1)._pathName;
-            newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_bossRooms.at(this->_currentStage)._length;
+            if (this->_mapQueue[queueSize - 1]._isBossRoom == true)
+                newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_bossRooms.at(this->_currentStage)._length;
+            else
+                newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_repeatPaths.at(this->_currentStage)._length;
+
+            //debugging
             std::cout << "new path z = " << newMapSection._zPosition << " and queue size = " << queueSize 
             << " and previous pos is = " << this->_mapQueue[queueSize - 1]._zPosition
             << " and bossroom at this current stage length is = " << this->_bossRooms.at(this->_currentStage)._length << std::endl;
+            //debugging end
             this->_mapQueue.emplace_back(newMapSection);
 
         }
-
-
     }
-
 }
 
 

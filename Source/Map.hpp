@@ -18,6 +18,7 @@
 #include "CsvParser.hpp"
 #include "Drawable3D.hpp"
 
+
 typedef struct
     {
         std::string _pathName;
@@ -45,6 +46,7 @@ typedef struct
     {
         std::string _sectionName;
         float _zPosition;
+        bool _isBossRoom;
 
     } mapQueueSection_t;
 

@@ -46,6 +46,7 @@ typedef struct
     {
         std::string _sectionName;
         float _zPosition;
+        float _length;
         bool _isBossRoom;
 
     } mapQueueSection_t;
@@ -65,6 +66,7 @@ class Map {
         //Map update and logic and scrolling and (to add spawning of bosses and mobs and walls etc)
         void mapUpdate();
         void refillMapQueue();
+        void updateMapQueue();
 
         //getters
         std::string getMapName();
@@ -75,10 +77,14 @@ class Map {
         bool getFightingBoss();
         bool getGameRunning();
 
+        //setters
+        void setGameRunning();
+
 
     private:
 
         std::string _mapName;
+        float _scrollspeed;
 
         std::vector<repeatPathData_t> _repeatPaths; //this should be in order of game aspect in the csv already
         std::vector<bossRoomData_t> _bossRooms; // this should be in order also in csv

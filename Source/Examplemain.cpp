@@ -45,6 +45,7 @@ int main(void)
     int currLevel = 1;
 
     Maps.at(currLevel)->mapUpdate();
+    Maps.at(currLevel)->setGameRunning();
     std::vector<mapQueueSection_t> currentMapQueue = Maps.at(currLevel)->getMapQueue();
 
     for (int j = 0; j < currentMapQueue.size(); j++) {
@@ -100,8 +101,9 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        camera.position.z += 2.90f;
-        camera.target.z += 2.90f;
+        // camera.position.z += 2.90f;
+        // camera.target.z += 2.90f;
+        AssetManager.getMaps().at(currLevel)->mapUpdate();
         
 
 

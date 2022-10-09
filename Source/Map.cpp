@@ -10,6 +10,7 @@
 Map::Map(std::string mapName, std::string MapPath, std::vector<RL::Drawable3D*> zonesModels)
 {
     this->_mapName = mapName;
+    this->_scrollspeed = 0.2f;
     fillMapData(MapPath, zonesModels);
 
 
@@ -96,9 +97,22 @@ void Map::mapUpdate()
         refillMapQueue();
     
     if (this->_gameRunning)
-        //updateMapQueue(); //here we decrease the z of each mapSection_t by the movement speed backwards to create parallax effect
+        updateMapQueue(); //here we decrease the z of each mapSection_t by the movement speed backwards to create parallax effect
         // generate mobs // obstacles thorugh ECS by reading mob files and obstacles files, to be implemented !! mucho trabajo :S
         ;
+}
+
+void Map::updateMapQueue()
+{
+    for (int i = 0; i < this->_mapQueue.size(); i++) {
+        this->_mapQueue[i]._zPosition -= this->_scrollspeed;
+        if (this->_mapQueue[i]._zPosition < (0 - this->_mapQueue[i]._length)) {
+            //popFirstElementOfQueue()
+        }
+    }
+
+
+
 }
 
 void Map::refillMapQueue()
@@ -115,10 +129,12 @@ void Map::refillMapQueue()
         newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage)._pathName;
         if (queueSize == 0) {
             newMapSection._zPosition = 0.0f;
+            newMapSection._length = this->_repeatPaths.at(this->_currentStage)._length;
             this->_mapQueue.emplace_back(newMapSection);
         }
         else {
             newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_repeatPaths.at(this->_currentStage)._length;
+            newMapSection._length = this->_repeatPaths.at(this->_currentStage)._length;
             this->_mapQueue.emplace_back(newMapSection);
         }
     }
@@ -126,6 +142,7 @@ void Map::refillMapQueue()
         if (queueSize != 6 && this->_hasSpawnedBossroom == false) {
             newMapSection._sectionName = this->_bossRooms.at(this->_currentStage)._bossRoomName;
             newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_repeatPaths.at(this->_currentStage)._length;
+            newMapSection._length = this->_bossRooms.at(this->_currentStage)._length;
             newMapSection._isBossRoom = true;
             this->_mapQueue.emplace_back(newMapSection);
             this->_hasSpawnedBossroom = true;
@@ -137,10 +154,13 @@ void Map::refillMapQueue()
             std::cout << "adding path after bossromm" << std::endl;
             //debugging end
             newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage + 1)._pathName;
-            if (this->_mapQueue[queueSize - 1]._isBossRoom == true)
+            if (this->_mapQueue[queueSize - 1]._isBossRoom == true) {
                 newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_bossRooms.at(this->_currentStage)._length;
-            else
+                newMapSection._length = this->_bossRooms.at(this->_currentStage)._length;
+            } else {
                 newMapSection._zPosition = this->_mapQueue[queueSize - 1]._zPosition + this->_repeatPaths.at(this->_currentStage)._length;
+                newMapSection._length = this->_repeatPaths.at(this->_currentStage)._length;
+            }
 
             //debugging
             std::cout << "new path z = " << newMapSection._zPosition << " and queue size = " << queueSize 
@@ -189,4 +209,11 @@ bool Map::getFightingBoss()
 bool Map::getGameRunning()
 {
     return this->_gameRunning;
+}
+
+//setters
+
+void Map::setGameRunning()
+{
+    this->_gameRunning = !this->_gameRunning;
 }

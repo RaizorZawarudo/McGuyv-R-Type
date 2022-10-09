@@ -57,26 +57,10 @@ int main(void)
     float ennemystartingpos = 20.0f;
 
 
-
-    
-    // Image spacebackground = LoadImage("Source/Assets/SideWallTextures/space.png");
-    // ImageResize(&spacebackground, 800, 600);
-    // Texture2D spacebackgroundText = LoadTextureFromImage(spacebackground);
-    // UnloadImage(spacebackground);
-
-    // Model alienTunnelModel =  LoadModel("Source/Assets/Models/Zones/WideMountainPath/mountainsWide.obj");
-    // Model alienTunnelModel2 = LoadModel("Source/Assets/Models/Zones/BigMountainPath/bigmountains.obj");
-
-
-    // Model Heaven =  LoadModel("Source/Assets/Models/Spacecrafts/Heaven/Heaven.obj");
-    // Texture2D HeavenText = LoadTexture("Source/Assets/Models/Spacecrafts/Heaven/HeavenTexture.png");
-    // SetMaterialTexture(&Heaven.materials[0], MATERIAL_MAP_DIFFUSE, HeavenText);
-
-
-    // Model Earth =  LoadModel("Source/Assets/Models/Spacecrafts/Earth/Earth2.obj");
-
-
-    // std::cout << alienTunnelModel.materialCount << std::endl;
+    Image spacebackground = LoadImage("Source/Assets/SideWallTextures/space.png");
+    ImageResize(&spacebackground, 1024, 768);
+    Texture2D spacebackgroundText = LoadTextureFromImage(spacebackground);
+    UnloadImage(spacebackground);
 
 
     
@@ -90,22 +74,15 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // camera.position.z += 2.90f;
-        // camera.target.z += 2.90f;
+        //UPDATES SECTION
         AssetManager.getMaps().at(currLevel)->mapUpdate();
-        
-
-
-        
-
         //----------------------------------------------------------------------------------
-
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
-            // DrawTexture(spacebackgroundText, 0 , 0 , WHITE);
+            DrawTexture(spacebackgroundText, 0 , 0 , WHITE);
 
             BeginMode3D(camera);
 
@@ -116,24 +93,10 @@ int main(void)
                 DrawCube({-8.0f, 1.0f, camera.position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
                 DrawCube({8.0f, 1.0f, camera.position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
 
-                DrawCube({0.0f, 1.0f, X * 0.0f}, 1.0f, 1.0f, 1.0f,GREEN);
-                DrawCube({0.0f, 1.0f, X * 1.0f}, 1.0f, 1.0f, 1.0f,GREEN);
-                DrawCube({0.0f, 1.0f, X * 2.0f}, 1.0f, 1.0f, 1.0f,GREEN);
-                DrawCube({0.0f, 1.0f, X * 3.0f}, 1.0f, 1.0f, 1.0f,GREEN);
-                DrawCube({0.0f, 1.0f, X * 4.0f}, 1.0f, 1.0f, 1.0f,GREEN);
-                DrawCube({0.0f, 1.0f, X * 5.0f}, 1.0f, 1.0f, 1.0f,GREEN);
-                DrawCube({0.0f, 1.0f, X * 6.0f}, 1.0f, 1.0f, 1.0f,BLACK);
-
                 //DrawModelEx(AssetManager.getSpacecraftModels()[1]->getModel(),{-0.0f, 1.0f, camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {0.3f, 0.3f, 0.3f}, WHITE);
 
                 DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,camera.position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {3.0f, 3.0f, 3.0f}, WHITE);
-
                 DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                
-                // DrawModelEx(AssetManager.getZonesModels()[2]->getModel(),{-0.0f, 0.0f, 0.0f }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // for (int i = 0; i < 6; i++)
-                //     DrawModelEx(AssetManager.getZonesModels()[2]->getModel(),{-0.0f, 0.0f, 160.0f + i * 160.0f }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                //     //zones indexes -2 always
                 
                 Renderer.drawMap(Maps.at(currLevel), camera, AssetManager);
 
@@ -145,10 +108,7 @@ int main(void)
 
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
-
-        
-       
+        //---------------------------------------------------------------------------------- 
     }
 
     // De-Initialization

@@ -1,8 +1,8 @@
-# Blender 3.3.0 MTL File: 'mountains(1).blend'
-# www.blender.org
+# Blender MTL File: 'None'
+# Material Count: 2
 
 newmtl blue-wireframe
-Ns 360.000000
+Ns 359.999993
 Ka 1.000000 1.000000 1.000000
 Kd 0.124211 0.401426 0.800000
 Ks 0.500000 0.500000 0.500000

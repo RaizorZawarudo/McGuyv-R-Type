@@ -49,7 +49,7 @@ void Map::fillMapData(std::string MapPath, std::vector<RL::Drawable3D*> zonesMod
         for ( int i = 0 ; i < _repeatPathsnames.size(); i++)
             std::cout << "      has a simpe path called : " << _repeatPathsnames[i] << std::endl;
         for (int i = 0 ; i < _bossRoomsnames.size(); i++)
-            std::cout << "      has a boss room called : " << _bossRoomsnames[i] << std::endl;
+            std::cout << "      has a boss room called : " << _bossRoomsnames[i] << "of size " << _bossRooms[i]._length << std::endl;
     
 
     
@@ -108,8 +108,8 @@ void Map::refillMapQueue()
     int queueSize = this->getMapQueue().size();
 
     //test adding boss room
-    // if (queueSize == 2)
-    //     this->_isFightingBoss = true;
+    if (queueSize == 2)
+        this->_isFightingBoss = true;
 
     if (this->_isFightingBoss == false) { // this is the logic to add simple paths when not fighting a boss, so the infinite straight loop without anything else
         newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage)._pathName;

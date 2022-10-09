@@ -17,7 +17,7 @@ int main(void)
     // Initialization 
     InitWindow(screenWidth, screenHeight, "McGuyv´R-Type");
     //--------------------------------------------------------------------------------------
-    Camera camera = { {  -5.0f, 6.0f, 0.0f }, { 0.0f, 0.0f, 15.0f }, { 0.0f, 1.0f, 0.0f }, 70.0f, CAMERA_PERSPECTIVE};
+    Camera camera = { {  -4.0f, 6.0f, -15.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 70.0f, CAMERA_PERSPECTIVE};
 
     AssetManager AssetManager;
     RL::Renderer Renderer("BETATESTING");
@@ -42,7 +42,7 @@ int main(void)
 
     //testing map queue
 
-    int currLevel = 0;
+    int currLevel = 1;
 
     Maps.at(currLevel)->mapUpdate();
     std::vector<mapQueueSection_t> currentMapQueue = Maps.at(currLevel)->getMapQueue();
@@ -90,7 +90,7 @@ int main(void)
 
 
     
-    float X = 0.0f;
+    float X = 800.0f;
 
 
 
@@ -100,9 +100,8 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        camera.position.z += 0.20f;
-        camera.target.z += 0.20f;
-        X += 0.02f;
+        camera.position.z += 2.90f;
+        camera.target.z += 2.90f;
         
 
 
@@ -126,19 +125,28 @@ int main(void)
                 DrawCube({-8.0f, 1.0f, camera.position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
                 DrawCube({8.0f, 1.0f, camera.position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
 
+                DrawCube({0.0f, 1.0f, X * 0.0f}, 1.0f, 1.0f, 1.0f,GREEN);
+                DrawCube({0.0f, 1.0f, X * 1.0f}, 1.0f, 1.0f, 1.0f,GREEN);
+                DrawCube({0.0f, 1.0f, X * 2.0f}, 1.0f, 1.0f, 1.0f,GREEN);
+                DrawCube({0.0f, 1.0f, X * 3.0f}, 1.0f, 1.0f, 1.0f,GREEN);
+                DrawCube({0.0f, 1.0f, X * 4.0f}, 1.0f, 1.0f, 1.0f,GREEN);
+                DrawCube({0.0f, 1.0f, X * 5.0f}, 1.0f, 1.0f, 1.0f,GREEN);
+                DrawCube({0.0f, 1.0f, X * 6.0f}, 1.0f, 1.0f, 1.0f,BLACK);
+
                 //DrawModelEx(AssetManager.getSpacecraftModels()[1]->getModel(),{-0.0f, 1.0f, camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {0.3f, 0.3f, 0.3f}, WHITE);
 
                 DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,camera.position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {3.0f, 3.0f, 3.0f}, WHITE);
 
                 DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                  
+                
+                // DrawModelEx(AssetManager.getZonesModels()[2]->getModel(),{-0.0f, 0.0f, 0.0f }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 // for (int i = 0; i < 6; i++)
                 //     DrawModelEx(AssetManager.getZonesModels()[2]->getModel(),{-0.0f, 0.0f, 160.0f + i * 160.0f }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 //     //zones indexes -2 always
                 
                 Renderer.drawMap(Maps.at(currLevel), camera, AssetManager);
 
-                //DrawGrid(2000, 1.0f);        // Draw a grid
+                // DrawGrid(2000, 1.0f);        // Draw a grid
 
             EndMode3D();
 

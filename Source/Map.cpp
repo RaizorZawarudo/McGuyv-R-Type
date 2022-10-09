@@ -10,7 +10,7 @@
 Map::Map(std::string mapName, std::string MapPath, std::vector<RL::Drawable3D*> zonesModels)
 {
     this->_mapName = mapName;
-    this->_scrollspeed = 0.2f;
+    this->_scrollspeed = 1.0f;
     fillMapData(MapPath, zonesModels);
 
 
@@ -102,11 +102,14 @@ void Map::mapUpdate()
         ;
 }
 
+
+//update this functions to stop when in bossroom and to set is fighting boss  to null AFTER boss is killed!
 void Map::updateMapQueue()
 {
     for (int i = 0; i < this->_mapQueue.size(); i++) {
         this->_mapQueue[i]._zPosition -= this->_scrollspeed;
-        if (this->_mapQueue[i]._zPosition < (0 - this->_mapQueue[i]._length)) {
+        if (this->_mapQueue[i]._zPosition < (-20 - this->_mapQueue[i]._length)) {
+            this->_mapQueue.erase(this->_mapQueue.begin());
             //popFirstElementOfQueue()
         }
     }

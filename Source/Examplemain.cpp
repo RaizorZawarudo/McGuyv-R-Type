@@ -56,17 +56,6 @@ int main(void)
     float playerStartingPos = 8.0f;
     float ennemystartingpos = 20.0f;
 
-    float alientunnelLenght = 300.0f; //936.0f;
-
-    float alientunnelGap = 1.0f;
-    Vector3 alienTunnelPos = { 0.0f, -0.0f, alientunnelLenght };
-    Vector3 alienTunnelPos2 = { 0.0f, -0.0f, alientunnelLenght };
-
-
-    Vector3 endWallSize = { 40.0f, 40.0f, 1.0f };
-    Vector3 endWallPos = { 0.0f, 0.0f, 100.0f };
-
-
 
 
     

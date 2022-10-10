@@ -20,6 +20,7 @@ namespace RL {
             void changeCameraX(Vector3 newCamPos);
             void changeCameraY(Vector3 newCamPos);
             void changeCameraZ(Vector3 newCamPos);
+            void changeCameraFov(float newCamFov);
 
             //getter
             Camera getCamera();

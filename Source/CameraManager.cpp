@@ -19,9 +19,11 @@ RL::CameraManager::~CameraManager()
 void RL::CameraManager::changeCameraPosition(Drawable3D* mapModelInQueueAtZero)
 {
     Vector3 newCamPos =  mapModelInQueueAtZero->getCameraPositionMcGuyv();
+    float newCamFov = mapModelInQueueAtZero->getCameraFovMcGuyv();
     changeCameraX(newCamPos);
     changeCameraY(newCamPos);
     changeCameraZ(newCamPos);
+    changeCameraFov(newCamFov);
 
     // this->_ingameCamera.position = newCamPos;
 }
@@ -50,6 +52,13 @@ void RL::CameraManager::changeCameraZ(Vector3 newCamPos)
         this->_ingameCamera.position.z = ((this->_ingameCamera.position.y * 10) + 1)/10;   
 }
 
+void RL::CameraManager::changeCameraFov(float newCamFov)
+{
+    if (newCamFov < this->_ingameCamera.fovy)
+        this->_ingameCamera.fovy = ((this->_ingameCamera.fovy * 10) - 1)/10;
+    else if (newCamFov > this->_ingameCamera.fovy)
+        this->_ingameCamera.fovy = ((this->_ingameCamera.fovy * 10) + 1)/10;   
+}
 
 //getters
 

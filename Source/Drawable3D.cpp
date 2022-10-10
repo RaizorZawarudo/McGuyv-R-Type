@@ -282,3 +282,8 @@ Vector3 RL::Drawable3D::getCameraPositionMcGuyv()
 {
     return this->_cameraPositionMcGuyv;
 }
+
+float RL::Drawable3D::getCameraFovMcGuyv()
+{
+    return this->_cameraFovMcGuyv;
+}

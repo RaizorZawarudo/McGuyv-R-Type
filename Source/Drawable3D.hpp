@@ -75,6 +75,7 @@ namespace RL {
             float getHeight();
             float getScale();
             Vector3 getCameraPositionMcGuyv();
+            float getCameraFovMcGuyv();
 
             void setBoundingBox();
             BoundingBox getBoundingBox();

@@ -17,6 +17,9 @@ namespace RL {
             ~CameraManager();
 
             void changeCameraPosition(Drawable3D* mapModelInQueueAtZero);
+            void changeCameraX(Vector3 newCamPos);
+            void changeCameraY(Vector3 newCamPos);
+            void changeCameraZ(Vector3 newCamPos);
 
             //getter
             Camera getCamera();

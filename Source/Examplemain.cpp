@@ -78,11 +78,13 @@ int main(void)
     {
         //UPDATES SECTION
         AssetManager.getMaps().at(currLevel)->mapUpdate();
-        std::cout << AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName << "and camera pos is = " <<
-        AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().x 
-        << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().y
-        << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().z <<  std::endl;
+        // std::cout << AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName << "and camera pos is = " <<
+        // AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().x 
+        // << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().y
+        // << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().z <<  std::endl;
         cameraManager.changeCameraPosition(AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE));
+
+        std::cout << cameraManager.getCamera().position.x << "and y = "<< cameraManager.getCamera().position.y << "and z = "<< cameraManager.getCamera().position.z  << std::endl;
         //----------------------------------------------------------------------------------
         // Draw
         //----------------------------------------------------------------------------------

@@ -11,7 +11,8 @@
 //and the animationPath should be set to ""
 //the scale can be set to 1
 //set type == RL::MODEL only if its an animated model / bomb. the powerups are RL::POWER, the walls are RL::WALL
-RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float length, float width, float height, Vector3 cameraPositionMcGuyv)
+//add this->_cameraFOV to 90.0f in order to see everything in BOSS MODE OR ELSE IT DOESNT WORK BABY
+RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float length, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv)
 {
     this->_name = name;
     this->_type = type;
@@ -21,6 +22,7 @@ RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string mod
     this->_width = width;
     this->_height = height;
     this->_cameraPositionMcGuyv = cameraPositionMcGuyv;
+    this->_cameraFovMcGuyv = cameraFovMcGuyv;
     // if (_type == RL::ModelType::WALL || _type == RL::ModelType::CRATE)
     //     _boxSize = {1.0, 1.0, 1.0};
     // if (_type == ModelType::FLOOR)

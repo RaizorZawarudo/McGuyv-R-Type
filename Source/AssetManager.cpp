@@ -63,6 +63,7 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
     float width;
     float height;
     Vector3 cameraPositionMcGuyv;
+    float cameraFovMcGuyv;
 
     std::vector<std::vector<std::string>> parsedCsv = csvToTable(path);
     std::vector<RL::Drawable3D*> modelVector;
@@ -93,11 +94,12 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
                 cameraPositionMcGuyv.y = atoi(splitStr( parsedCsv[i][j], ";")[1].c_str());
                 cameraPositionMcGuyv.z = atoi(splitStr( parsedCsv[i][j], ";")[2].c_str());
             }
-                
+            if (j == 10)
+                cameraFovMcGuyv = atoi(parsedCsv[i][j].c_str());                
 
         }
         //HERE WE CREATE A NEW 3D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
-        RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv);
+        RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv);
        // std::cout<< "LOADING THIS MODEL : " << modelName << " " << style << " " << modelPath << " " << texturePath << " " << animationPath << " " << scale  << " " << std::endl;
 
         modelVector.emplace_back(newModel);

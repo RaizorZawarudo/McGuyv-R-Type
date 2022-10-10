@@ -1,4 +1,4 @@
 Loop Zones,Boss Zones
-SmallMountainPath,0
-SmallMountainPathGreen,0
-BigMountainPath,0
+SmallMountainPath,BigMountainPath
+SmallMountainPathGreen,BigMountainPath
+SmallMountainPath,BigMountainPath

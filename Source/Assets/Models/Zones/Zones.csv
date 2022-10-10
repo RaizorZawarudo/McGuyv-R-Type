@@ -1,7 +1,7 @@
 Name,Style,Model Path,Texture Path,Animation Path,scale,length,width,height,camera position
-SmallMountainPath,simple,Source/Assets/Models/Zones/SmallMountainPath/smallMountains.obj,0,0,1,800,16,0,-5;6;0
-BigMountainPath,simple,Source/Assets/Models/Zones/BigMountainPath/bigMountains.obj,0,0,1,800,16,0,-5;6;0
-SmallMountainPathGreen,simple,Source/Assets/Models/Zones/SmallMountainPathGreen/smallMountainsGreen.obj,0,0,1,800,16,0,-5;6;0
-PlaceHolderBossRoom,bossroom,Source/Assets/Models/Zones/PlaceHolderBossRoom/placeHolderBossRoom.obj,0,0,1,160,16,0,0;6;0
-MountainsSmallv2,simple,Source/Assets/Models/Zones/MountainsSmallv2/mountainsSmallv2.obj,0,0,1,160,16,0,-5;6;0
-MountainBigOriginTest,simple,Source/Assets/Models/Zones/MountainBigOriginTest/MB001-origin-moved.obj,0,0,1,400,16,0,-5;6;0
+SmallMountainPath,simple,Source/Assets/Models/Zones/SmallMountainPath/smallMountains.obj,0,0,1,800,16,0,-5;6;-15
+BigMountainPath,simple,Source/Assets/Models/Zones/BigMountainPath/bigMountains.obj,0,0,1,800,16,0,0;6;-15
+SmallMountainPathGreen,simple,Source/Assets/Models/Zones/SmallMountainPathGreen/smallMountainsGreen.obj,0,0,1,800,16,0,-5;6;-15
+PlaceHolderBossRoom,bossroom,Source/Assets/Models/Zones/PlaceHolderBossRoom/placeHolderBossRoom.obj,0,0,1,160,16,0,0;6;-15
+MountainsSmallv2,simple,Source/Assets/Models/Zones/MountainsSmallv2/mountainsSmallv2.obj,0,0,1,160,16,0,-5;6;-15
+MountainBigOriginTest,simple,Source/Assets/Models/Zones/MountainBigOriginTest/MB001-origin-moved.obj,0,0,1,400,16,0,-5;6;-15

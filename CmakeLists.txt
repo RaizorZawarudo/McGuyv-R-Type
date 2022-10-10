@@ -20,7 +20,8 @@ FILE(GLOB CFILES
         Source/AssetManager.cpp
         Source/Renderer.cpp
         Source/Map.cpp
-        Source/Drawable3D.cpp)
+        Source/Drawable3D.cpp
+        Source/CameraManager.cpp)
         #Source/InputManager.cpp)
 
 #add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES
@@ -32,7 +33,8 @@ FILE(GLOB HEADERFILES
         Source/Renderer.hpp
         Source/Map.hpp
         Source/IDrawable.hpp
-        Source/Drawable3D.hpp)
+        Source/Drawable3D.hpp
+        Source/CameraManager.hpp)
         #Source/InputManager.hpp)
 
 

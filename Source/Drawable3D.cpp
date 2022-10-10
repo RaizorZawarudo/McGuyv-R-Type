@@ -20,7 +20,7 @@ RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string mod
     this->_length = length;
     this->_width = width;
     this->_height = height;
-    // this->_cameraPositionMcGuyv = cameraPositionMcGuyv;
+    this->_cameraPositionMcGuyv = cameraPositionMcGuyv;
     // if (_type == RL::ModelType::WALL || _type == RL::ModelType::CRATE)
     //     _boxSize = {1.0, 1.0, 1.0};
     // if (_type == ModelType::FLOOR)

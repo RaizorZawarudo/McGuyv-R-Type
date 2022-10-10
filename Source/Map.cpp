@@ -95,7 +95,6 @@ void Map::mapUpdate()
 {
     while (this->_mapQueue.size() < 6)
         refillMapQueue();
-    
     if (this->_gameRunning)
         updateMapQueue(); //here we decrease the z of each mapSection_t by the movement speed backwards to create parallax effect
         // generate mobs // obstacles thorugh ECS by reading mob files and obstacles files, to be implemented !! mucho trabajo :S
@@ -110,7 +109,7 @@ void Map::updateMapQueue()
     for (int i = 0; i < this->_mapQueue.size(); i++) {
         this->_mapQueue[i]._zPosition -= this->_currentSpeed;
         // if (this->_mapQueue[0]._isBossRoom)
-            //this->_currentSpeed = 0.0f; //here we stop the camera and then in the update after we create the camera class we can update camera angle there from seeing curr map queue model angle;
+        //     this->_currentSpeed = 0.0f; //here we stop the camera and then in the update after we create the camera class we can update camera angle there from seeing curr map queue model angle;
         if (this->_mapQueue[i]._zPosition < (-20 - this->_mapQueue[i]._length)) {
             this->_mapQueue.erase(this->_mapQueue.begin());
         }
@@ -133,7 +132,7 @@ void Map::refillMapQueue()
     if (this->_isFightingBoss == false) { // this is the logic to add simple paths when not fighting a boss, so the infinite straight loop without anything else
         newMapSection._sectionName = this->_repeatPaths.at(this->_currentStage)._pathName;
         if (queueSize == 0) {
-            newMapSection._zPosition = 0.0f;
+            newMapSection._zPosition = -20.0f;
             newMapSection._length = this->_repeatPaths.at(this->_currentStage)._length;
             this->_mapQueue.emplace_back(newMapSection);
         }

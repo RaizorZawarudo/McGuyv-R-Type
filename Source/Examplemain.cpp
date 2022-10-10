@@ -3,6 +3,7 @@
 #include "Map.hpp"
 #include "InputManager.hpp"
 #include "Renderer.hpp"
+#include "CameraManager.hpp"
 
 // #include "Window.hpp"
 // #include "CollisionManager.hpp"
@@ -17,10 +18,11 @@ int main(void)
     // Initialization 
     InitWindow(screenWidth, screenHeight, "McGuyv´R-Type");
     //--------------------------------------------------------------------------------------
-    Camera camera = { {  -4.0f, 6.0f, -15.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 70.0f, CAMERA_PERSPECTIVE};
+    // Camera camera = { {  -4.0f, 6.0f, -15.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 70.0f, CAMERA_PERSPECTIVE};
+    RL::CameraManager cameraManager;
+    RL::Renderer Renderer("BETATESTING");
 
     AssetManager AssetManager;
-    RL::Renderer Renderer("BETATESTING");
 
 
     //here debug if implementation of maps work ,, then to do : priniting of maps ina loop way through the RENDERER :D 
@@ -76,6 +78,11 @@ int main(void)
     {
         //UPDATES SECTION
         AssetManager.getMaps().at(currLevel)->mapUpdate();
+        std::cout << AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName << "and camera pos is = " <<
+        AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().x 
+        << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().y
+        << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().z <<  std::endl;
+        cameraManager.changeCameraPosition(AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE));
         //----------------------------------------------------------------------------------
         // Draw
         //----------------------------------------------------------------------------------
@@ -84,21 +91,21 @@ int main(void)
             ClearBackground(RAYWHITE);
             DrawTexture(spacebackgroundText, 0 , 0 , WHITE);
 
-            BeginMode3D(camera);
+            BeginMode3D(cameraManager.getCamera());
 
                 //DRAW MODEL USING ASSET LIST FROM MANAGER 
                 //TO BE ADDED IN THE RENDERER
 
-                DrawCube({0.0f, 1.0f, camera.position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
-                DrawCube({-8.0f, 1.0f, camera.position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
-                DrawCube({8.0f, 1.0f, camera.position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
+                DrawCube({0.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
+                DrawCube({-8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
+                DrawCube({8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
 
                 //DrawModelEx(AssetManager.getSpacecraftModels()[1]->getModel(),{-0.0f, 1.0f, camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {0.3f, 0.3f, 0.3f}, WHITE);
 
-                DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,camera.position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {3.0f, 3.0f, 3.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {3.0f, 3.0f, 3.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 
-                Renderer.drawMap(Maps.at(currLevel), camera, AssetManager);
+                Renderer.drawMap(Maps.at(currLevel), cameraManager.getCamera(), AssetManager);
 
                 // DrawGrid(2000, 1.0f);        // Draw a grid
 

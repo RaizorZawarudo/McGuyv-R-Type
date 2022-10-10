@@ -21,8 +21,8 @@ FILE(GLOB CFILES
         Source/Renderer.cpp
         Source/Map.cpp
         Source/Drawable3D.cpp
-        Source/CameraManager.cpp)
-        #Source/InputManager.cpp)
+        Source/CameraManager.cpp
+        Source/InputManager.cpp)
 
 #add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES
 FILE(GLOB HEADERFILES
@@ -34,8 +34,8 @@ FILE(GLOB HEADERFILES
         Source/Map.hpp
         Source/IDrawable.hpp
         Source/Drawable3D.hpp
-        Source/CameraManager.hpp)
-        #Source/InputManager.hpp)
+        Source/CameraManager.hpp
+        Source/InputManager.hpp)
 
 
 #add to project

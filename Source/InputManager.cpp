@@ -29,8 +29,8 @@ void RL::InputManager::recordInputs()
         this->_inputQueue.emplace_back('d');
     if (IsKeyDown(KEY_SPACE))
         this->_inputQueue.emplace_back(32);
-        if (IsKeyDown(KEY_ENTER))
-        this->_inputQueue.emplace_back("ascii code of enter");
+    if (IsKeyDown(KEY_ENTER))
+        this->_inputQueue.emplace_back(0x0A);
     //std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
 }
 

@@ -4,6 +4,7 @@
 #include "InputManager.hpp"
 #include "Renderer.hpp"
 #include "CameraManager.hpp"
+#include "InputManager.hpp"
 
 // #include "Window.hpp"
 // #include "CollisionManager.hpp"
@@ -21,6 +22,7 @@ int main(void)
     // Camera camera = { {  -4.0f, 6.0f, -15.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 70.0f, CAMERA_PERSPECTIVE};
     RL::CameraManager cameraManager;
     RL::Renderer Renderer("BETATESTING");
+    RL::InputManager InputManager("TESTINPUTMANAGER");
 
     AssetManager AssetManager;
 
@@ -78,11 +80,9 @@ int main(void)
     {
         //UPDATES SECTION
         AssetManager.getMaps().at(currLevel)->mapUpdate();
-        // std::cout << AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName << "and camera pos is = " <<
-        // AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().x 
-        // << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().y
-        // << AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE)->getCameraPositionMcGuyv().z <<  std::endl;
         cameraManager.changeCameraPosition(AssetManager.getSpecificDrawableWithType(AssetManager.getMaps().at(currLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE));
+        //not sure where record inputs goes
+        InputManager.recordInputs();
 
         std::cout << cameraManager.getCamera().position.x << "and y = "<< cameraManager.getCamera().position.y << "and z = "<< cameraManager.getCamera().position.z  << std::endl;
         //----------------------------------------------------------------------------------
@@ -112,6 +112,9 @@ int main(void)
                 // DrawGrid(2000, 1.0f);        // Draw a grid
 
             EndMode3D();
+
+            //Input queue must be popped
+            InputManager.popInputs();
 
             DrawFPS(10, 10);
 

@@ -97,7 +97,7 @@ void Map::mapUpdate()
         refillMapQueue();
     if (this->_gameRunning)
         updateMapQueue(); //here we decrease the z of each mapSection_t by the movement speed backwards to create parallax effect
-        // generate mobs // obstacles thorugh ECS by reading mob files and obstacles files, to be implemented !! mucho trabajo :S
+        // generate mobs / obstacles thorugh ECS by reading mob files and obstacles files, to be implemented !! mucho trabajo :S
         ;
 }
 
@@ -108,15 +108,14 @@ void Map::updateMapQueue()
 {
     for (int i = 0; i < this->_mapQueue.size(); i++) {
         this->_mapQueue[i]._zPosition -= this->_currentSpeed;
-        // if (this->_mapQueue[0]._isBossRoom)
-        //     this->_currentSpeed = 0.0f; //here we stop the camera and then in the update after we create the camera class we can update camera angle there from seeing curr map queue model angle;
+        // if (this->_mapQueue[0]._isBossRoom && this->_isFightingBoss == true ) // add & isfightingboss = true; if you kill the boss set the isfighting boss to false again
+        //     this->_currentSpeed = 0.0f;
+        if (this->_isFightingBoss == false)
+            this->_currentSpeed = this->_scrollSpeed;
         if (this->_mapQueue[i]._zPosition < (-20 - this->_mapQueue[i]._length)) {
             this->_mapQueue.erase(this->_mapQueue.begin());
         }
     }
-
-
-
 }
 
 void Map::refillMapQueue()

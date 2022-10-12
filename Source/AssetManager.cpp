@@ -82,7 +82,7 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
             if ( j == 4)
                 animationPath = parsedCsv[i][j];
             if (j == 5)
-                scale = atoi(parsedCsv[i][j].c_str());
+                scale = atof(parsedCsv[i][j].c_str());
             if (j == 6)
                 length = atoi(parsedCsv[i][j].c_str());
             if (j == 7)

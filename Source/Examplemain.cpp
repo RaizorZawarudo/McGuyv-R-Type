@@ -70,7 +70,7 @@ int main(void)
     
     float X = 800.0f;
 
-
+    AssetManager.getSpacecraftModels()[3]->setCurrentAnim(0);
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ int main(void)
         //not sure where record inputs goes
         InputManager.recordInputs();
 
-        std::cout << cameraManager.getCamera().position.x << "and y = "<< cameraManager.getCamera().position.y << "and z = "<< cameraManager.getCamera().position.z  << std::endl;
+        // std::cout << cameraManager.getCamera().position.x << "and y = "<< cameraManager.getCamera().position.y << "and z = "<< cameraManager.getCamera().position.z  << std::endl;
         //----------------------------------------------------------------------------------
         // Draw
         //----------------------------------------------------------------------------------
@@ -98,15 +98,32 @@ int main(void)
                 //DRAW MODEL USING ASSET LIST FROM MANAGER 
                 //TO BE ADDED IN THE RENDERER
 
-                DrawCube({0.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
-                DrawCube({-8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
-                DrawCube({8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
+                // DrawCube({0.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
+                // DrawCube({-8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
+                // DrawCube({8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
 
-                //DrawModelEx(AssetManager.getSpacecraftModels()[1]->getModel(),{-0.0f, 1.0f, camera.position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {0.3f, 0.3f, 0.3f}, WHITE);
+                //AssetManager.getSpacecraftModels()[3]->updateModelsAnimation();
 
-                DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {3.0f, 3.0f, 3.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[0]->getModel(),{-0.0f, 1.0f,cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[0]->getModel(),{0.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[1]->getModel(),{2.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[2]->getModel(),{5.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[3]->getModel(),{7.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 
+                DrawModelEx(AssetManager.getSpacecraftModels()[4]->getModel(),{-2.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[5]->getModel(),{-5.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[6]->getModel(),{-7.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[7]->getModel(),{0.0f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getSpacecraftModels()[8]->getModel(),{-2.5f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+
+                // DrawModelEx(AssetManager.getSpacecraftModels()[6]->getModel(),{-7.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                // DrawModelEx(AssetManager.getSpacecraftModels()[7]->getModel(),{-0.0f, 2.5f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+
+                DrawModelEx(AssetManager.getEnnemyModels()[1]->getModel(),{-0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[2]->getModel(),{-2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[3]->getModel(),{-5.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[4]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[5]->getModel(),{2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+
                 Renderer.drawMap(Maps.at(currLevel), cameraManager.getCamera(), AssetManager);
 
                 // DrawGrid(2000, 1.0f);        // Draw a grid

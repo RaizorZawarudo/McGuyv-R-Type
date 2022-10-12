@@ -1,3 +1,10 @@
 Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height
-Heaven,simple,Source/Assets/Models/Spacecrafts/Heaven/Heaven.obj,0,0,1,1,1,1
-Earth,simple,Source/Assets/Models/Spacecrafts/Earth/Earth2.obj,Source/Assets/Models/Spacecrafts/Earth/Earth2.png,0,1,1,1,1
+circleFlat,simple,Source/Assets/Models/Spacecrafts/CircleFlat/circleFlat.obj,0,0,1,1,1,1
+tronOne,simple,Source/Assets/Models/Spacecrafts/TronOne/tronOne.obj,0,0,1,1,1,1
+tronOneYellow,simple,Source/Assets/Models/Spacecrafts/TronOneYellow/tronOneYellow.obj,0,0,1,1,1,1
+tronTwoColour,simple,Source/Assets/Models/Spacecrafts/TronTwoColour/tronTwoColour.obj,0,0,1,1,1,1
+tronTwo,simple,Source/Assets/Models/Spacecrafts/TronTwo/tronTwo.obj,0,0,1,1,1,1
+flatCircleWire,simple,Source/Assets/Models/Spacecrafts/flatCircleWire/flatCirleWire.obj,0,0,1,1,1,1
+rangerWire,simple,Source/Assets/Models/Spacecrafts/RangerWire/rangerWire.obj,0,0,1,1,1,1
+jetLike,simple,Source/Assets/Models/Spacecrafts/JetLike/jetLike.obj,0,0,1,1,1,1
+jetLikeTwo,simple,Source/Assets/Models/Spacecrafts/JetLikeTwo/jetLikeTwo.obj,0,0,1,1,1,1

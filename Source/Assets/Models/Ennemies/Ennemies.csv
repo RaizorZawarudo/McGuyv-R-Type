@@ -1,2 +1,7 @@
 Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height
 MonkeyHead,mob,Source/Assets/Models/Ennemies/MonkeyHead/monkeyHead.obj,0,0,1,2,2,2
+tronDroneWire,simple,Source/Assets/Models/Ennemies/TronDroneWire/tronDroneNoframe.obj,0,0,1,1,1,1
+tronDrone,simple,Source/Assets/Models/Ennemies/TronDrone/tronDrone.obj,0,0,1,1,1,1
+tronHelicopter,simple,Source/Assets/Models/Ennemies/TronHelicopter/tronHelicopterWire.obj,0,0,1,1,1,1
+tronAttackCopter,simple,Source/Assets/Models/Ennemies/TronAttackCopter/tronAttackCopter.obj,0,0,1,1,1,1
+flatRacer,simple,Source/Assets/Models/Ennemies/FlatRacer/flatRacer.obj,0,0,1,1,1,1

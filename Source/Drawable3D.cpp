@@ -121,6 +121,7 @@ void RL::Drawable3D::loadAnimation(std::string path)
         this->unloadAnimation();
     this->_animations = LoadModelAnimations(path.c_str(), &this->_animCount);
     this->_animationLoaded = true;
+    std::cout << this->_animCount << std::endl;
 }
 
 void RL::Drawable3D::unloadAnimation()
@@ -137,6 +138,7 @@ void RL::Drawable3D::updateModelsAnimation()
         return;
 
     this->_currentFrame++;
+    std::cout << this->_currentFrame << std::endl;
     UpdateModelAnimation
     (this->_model, this->_animations[this->_currentAnim], this->_currentFrame);
 }

@@ -5,3 +5,4 @@ tronDrone,simple,Source/Assets/Models/Ennemies/TronDrone/tronDrone.obj,0,0,1,1,1
 tronHelicopter,simple,Source/Assets/Models/Ennemies/TronHelicopter/tronHelicopterWire.obj,0,0,1,1,1,1
 tronAttackCopter,simple,Source/Assets/Models/Ennemies/TronAttackCopter/tronAttackCopter.obj,0,0,1,1,1,1
 flatRacer,simple,Source/Assets/Models/Ennemies/FlatRacer/flatRacer.obj,0,0,1,1,1,1
+alienDrone,simple,Source/Assets/Models/Ennemies/AlienDrone/alienDrone.obj,Source/Assets/Models/Ennemies/AlienDrone/ship_diffuse.tga.png,0,1,1,1,1

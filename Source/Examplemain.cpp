@@ -134,6 +134,9 @@ int main(void)
                 DrawModelEx(AssetManager.getEnnemyModels()[7]->getModel(),{7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
                 DrawModelEx(AssetManager.getEnnemyModels()[8]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
                 DrawModelEx(AssetManager.getEnnemyModels()[10]->getModel(),{0.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[11]->getModel(),{3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[12]->getModel(),{-3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[13]->getModel(),{-7.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
                 
                 Renderer.drawMap(Maps.at(currLevel), cameraManager.getCamera(), AssetManager);
 

@@ -10,3 +10,6 @@ mjolnir,simple,Source/Assets/Models/Ennemies/Mjolnir/Mjolnir.obj,Source/Assets/M
 gunner,simple,Source/Assets/Models/Ennemies/Gunner/gunner.obj,Source/Assets/Models/Ennemies/Gunner/Spaceship_albedo.png,0,1,1,1,1
 hunter,simple,Source/Assets/Models/Ennemies/Hunter/hunter.obj,Source/Assets/Models/Ennemies/Hunter/2_Base_color.jpeg,0,1,1,1,1
 royalship,simple,Source/Assets/Models/Ennemies/Royalship/royalship.obj,0,0,1,1,1,1
+diverge,simple,Source/Assets/Models/Ennemies/Diverge/diverge.obj,Source/Assets/Models/Ennemies/Diverge/1001_Base_Color.png,0,1,1,1,1
+shioneII,simple,Source/Assets/Models/Ennemies/ShiloneII/ShioneII.obj,0,0,1,1,1,1
+serpent2,simple,Source/Assets/Models/Ennemies/Serpent2/Serpent2.obj,0,0,1,1,1,1

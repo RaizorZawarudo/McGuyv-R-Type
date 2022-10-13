@@ -31,6 +31,7 @@ int main(void)
 
     int ennemyIndex = 0;
     int spaceshipIndex = 0;
+    int projectileIndex = 0;
 
     std::vector<Map*> Maps = AssetManager.getMaps();
     // for (int i = 0; i < Maps.size(); i++)    {
@@ -145,6 +146,15 @@ int main(void)
                 }
                     
                 DrawModelEx(AssetManager.getEnnemyModels()[ennemyIndex]->getModel(),{-5.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+
+
+                if (InputManager.playerHasPressedKeyAsChar('l')) {
+                    projectileIndex += 1;
+                    if (projectileIndex == AssetManager.getProjectileModels().size() )
+                        projectileIndex = 0;
+                }
+
+                DrawModelEx(AssetManager.getProjectileModels()[projectileIndex]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
 
                 // DrawModelEx(AssetManager.getEnnemyModels()[1]->getModel(),{-0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 // DrawModelEx(AssetManager.getEnnemyModels()[2]->getModel(),{-2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);

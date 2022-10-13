@@ -1,7 +1,3 @@
-//
-// Created by mindoo on 26.05.22.
-//
-
 #ifndef BOMBERMAN_LOGGER_HPP
 #define BOMBERMAN_LOGGER_HPP
 

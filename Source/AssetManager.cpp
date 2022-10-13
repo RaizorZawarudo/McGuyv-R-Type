@@ -32,6 +32,7 @@ void AssetManager::loadAllModels()
     std::string zonesModelCSVPath = "Source/Assets/Models/Zones/Zones.csv";
     std::string spacecraftModelCSVPath = "Source/Assets/Models/Spacecrafts/Spacecrafts.csv";
     std::string ennemyModelCSVPath = "Source/Assets/Models/Ennemies/Ennemies.csv";
+    std::string projectileCSVPath = "Source/Assets/Models/Projectiles/Projectiles.csv";
 
     //load all zones
     this->_zonesModels = loadModels(zonesModelCSVPath, RL::ModelType::ZONE);
@@ -41,6 +42,7 @@ void AssetManager::loadAllModels()
 
 
     //load all projectiles
+    this->_projectileModels= loadModels(projectileCSVPath, RL::ModelType::PROJECTILE);
 
 
     //load all ennemies

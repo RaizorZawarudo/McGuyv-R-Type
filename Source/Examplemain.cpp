@@ -130,8 +130,11 @@ int main(void)
                 DrawModelEx(AssetManager.getEnnemyModels()[3]->getModel(),{-5.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 DrawModelEx(AssetManager.getEnnemyModels()[4]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 DrawModelEx(AssetManager.getEnnemyModels()[5]->getModel(),{2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[6]->getModel(),{2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
-
+                DrawModelEx(AssetManager.getEnnemyModels()[6]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[7]->getModel(),{7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[8]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[10]->getModel(),{0.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                
                 Renderer.drawMap(Maps.at(currLevel), cameraManager.getCamera(), AssetManager);
 
                 // DrawGrid(2000, 1.0f);        // Draw a grid

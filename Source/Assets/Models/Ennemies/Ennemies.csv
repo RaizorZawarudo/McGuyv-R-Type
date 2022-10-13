@@ -6,3 +6,7 @@ tronHelicopter,simple,Source/Assets/Models/Ennemies/TronHelicopter/tronHelicopte
 tronAttackCopter,simple,Source/Assets/Models/Ennemies/TronAttackCopter/tronAttackCopter.obj,0,0,1,1,1,1
 flatRacer,simple,Source/Assets/Models/Ennemies/FlatRacer/flatRacer.obj,0,0,1,1,1,1
 alienDrone,simple,Source/Assets/Models/Ennemies/AlienDrone/alienDrone.obj,Source/Assets/Models/Ennemies/AlienDrone/ship_diffuse.tga.png,0,1,1,1,1
+mjolnir,simple,Source/Assets/Models/Ennemies/Mjolnir/Mjolnir.obj,Source/Assets/Models/Ennemies/Mjolnir/race1_m_custom_s1_d.png,0,1,1,1,1
+gunner,simple,Source/Assets/Models/Ennemies/Gunner/gunner.obj,Source/Assets/Models/Ennemies/Gunner/Spaceship_albedo.png,0,1,1,1,1
+hunter,simple,Source/Assets/Models/Ennemies/Hunter/hunter.obj,Source/Assets/Models/Ennemies/Hunter/2_Base_color.jpeg,0,1,1,1,1
+royalship,simple,Source/Assets/Models/Ennemies/Royalship/royalship.obj,0,0,1,1,1,1

@@ -13,3 +13,7 @@ royalship,simple,Source/Assets/Models/Ennemies/Royalship/royalship.obj,0,0,1,1,1
 diverge,simple,Source/Assets/Models/Ennemies/Diverge/diverge.obj,Source/Assets/Models/Ennemies/Diverge/1001_Base_Color.png,0,1,1,1,1
 shioneII,simple,Source/Assets/Models/Ennemies/ShiloneII/ShioneII.obj,0,0,1,1,1,1
 serpent2,simple,Source/Assets/Models/Ennemies/Serpent2/Serpent2.obj,0,0,1,1,1,1
+fishFin,simple,Source/Assets/Models/Ennemies/FishFin/fishFin.obj,0,0,1,1,1,1
+trident,simple,Source/Assets/Models/Ennemies/Trident/trident.obj,0,0,1,1,1,1
+corvette,simple,Source/Assets/Models/Ennemies/Corvette/corvette.obj,0,0,1,1,1,1
+starfighter,simple,Source/Assets/Models/Ennemies/Starfighter/starFighter.obj,0,0,1,1,1,1

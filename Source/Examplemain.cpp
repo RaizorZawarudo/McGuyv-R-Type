@@ -130,13 +130,17 @@ int main(void)
                 DrawModelEx(AssetManager.getEnnemyModels()[3]->getModel(),{-5.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 DrawModelEx(AssetManager.getEnnemyModels()[4]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 DrawModelEx(AssetManager.getEnnemyModels()[5]->getModel(),{2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[6]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[7]->getModel(),{7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[8]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[10]->getModel(),{0.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[11]->getModel(),{3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[12]->getModel(),{-3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
-                DrawModelEx(AssetManager.getEnnemyModels()[13]->getModel(),{-7.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {4.0f, 4.0f, 4.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[6]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[7]->getModel(),{7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[8]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[10]->getModel(),{0.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[11]->getModel(),{3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[12]->getModel(),{-3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[13]->getModel(),{-7.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[14]->getModel(),{0.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[15]->getModel(),{-2.5f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[16]->getModel(),{2.5f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getEnnemyModels()[17]->getModel(),{5.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
                 
                 Renderer.drawMap(Maps.at(currLevel), cameraManager.getCamera(), AssetManager);
 

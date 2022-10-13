@@ -17,3 +17,4 @@ blueRacer,simple,Source/Assets/Models/Spacecrafts/BlueRacerColour/blueRacerColou
 blueRacerWire,simple,Source/Assets/Models/Spacecrafts/BlueRaceWire/blueRacerWire.obj,0,0,1,1,1,1
 greyhound,simple,Source/Assets/Models/Spacecrafts/Greyhound/greyhound.obj,Source/Assets/Models/Spacecrafts/Greyhound/Greyhound_hull_1.png,0,1,1,1,1
 greyhoundWire,simple,Source/Assets/Models/Spacecrafts/greyhoundWire/greyhoundWire.obj,0,0,1,1,1,1
+dartAssault,simple,Source/Assets/Models/Spacecrafts/DartAssault/dartAssault.obj,Source/Assets/Models/Spacecrafts/DartAssault/ivdart_ivDart_mat_BaseColor.png,0,1,1,1,1

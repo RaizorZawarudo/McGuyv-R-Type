@@ -17,3 +17,8 @@ fishFin,simple,Source/Assets/Models/Ennemies/FishFin/fishFin.obj,0,0,1,1,1,1
 trident,simple,Source/Assets/Models/Ennemies/Trident/trident.obj,0,0,1,1,1,1
 corvette,simple,Source/Assets/Models/Ennemies/Corvette/corvette.obj,0,0,1,1,1,1
 starfighter,simple,Source/Assets/Models/Ennemies/Starfighter/starFighter.obj,0,0,1,1,1,1
+spacefighter,simple,Source/Assets/Models/Ennemies/SpaceFighter/spaceFighter.obj,0,0,1,1,1,1
+quadFighter,simple,Source/Assets/Models/Ennemies/QuadFighter/quadFighter.obj,0,0,1,1,1,1
+quadSolo,simple,Source/Assets/Models/Ennemies/quadSolo/quadSolo.obj,0,0,1,1,1,1
+quadWarship,simple,Source/Assets/Models/Ennemies/quadWarship/quadWarship.obj,0,0,1,1,1,1
+quadMothership,simple,Source/Assets/Models/Ennemies/quadMothership/quadMothership.obj,0,0,1,1,1,1

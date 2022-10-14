@@ -5,6 +5,7 @@
 #include "Renderer.hpp"
 #include "CameraManager.hpp"
 #include "InputManager.hpp"
+#include "ECS/EntityViewer.hpp"
 
 // #include "Window.hpp"
 // #include "CollisionManager.hpp"
@@ -102,34 +103,6 @@ int main(void)
                 //DRAW MODEL USING ASSET LIST FROM MANAGER 
                 //TO BE ADDED IN THE RENDERER
 
-                // DrawCube({0.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
-                // DrawCube({-8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
-                // DrawCube({8.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos}, 1.0f, 1.0f, 1.0f, RED);
-
-                //AssetManager.getSpacecraftModels()[3]->updateModelsAnimation();
-
-                // DrawModelEx(AssetManager.getSpacecraftModels()[0]->getModel(),{0.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[1]->getModel(),{2.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[2]->getModel(),{5.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[3]->getModel(),{7.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                
-                // DrawModelEx(AssetManager.getSpacecraftModels()[4]->getModel(),{-2.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[5]->getModel(),{-5.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[6]->getModel(),{-7.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[7]->getModel(),{0.0f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[8]->getModel(),{-2.5f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[9]->getModel(),{-5.0f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[10]->getModel(),{-7.5f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[11]->getModel(),{2.5f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[12]->getModel(),{5.0f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[14]->getModel(),{7.5f, 3.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[16]->getModel(),{0.0f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos - 3 }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[17]->getModel(),{-2.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos - 3 }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                
-                // DrawModelEx(AssetManager.getSpacecraftModels()[6]->getModel(),{-7.5f, 1.0f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getSpacecraftModels()[7]->getModel(),{-0.0f, 2.5f, cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-
-
                 if (InputManager.playerHasPressedKeyAsChar('p')) {
                     spaceshipIndex += 1;
                     if (spaceshipIndex == AssetManager.getSpacecraftModels().size() )
@@ -156,24 +129,6 @@ int main(void)
 
                 DrawModelEx(AssetManager.getProjectileModels()[projectileIndex]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
 
-                // DrawModelEx(AssetManager.getEnnemyModels()[1]->getModel(),{-0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[2]->getModel(),{-2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[3]->getModel(),{-5.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[4]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[5]->getModel(),{2.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[6]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[7]->getModel(),{7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[8]->getModel(),{-7.5f, 1.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[10]->getModel(),{0.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[11]->getModel(),{3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[12]->getModel(),{-3.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[13]->getModel(),{-7.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 20 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[14]->getModel(),{0.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[15]->getModel(),{-2.5f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[16]->getModel(),{2.5f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[17]->getModel(),{5.0f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                // DrawModelEx(AssetManager.getEnnemyModels()[18]->getModel(),{-7.5f, 5.0f,cameraManager.getCamera().position.z + ennemystartingpos - 40 }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-                
                 Renderer.drawMap(Maps.at(currLevel), cameraManager.getCamera(), AssetManager);
 
                 // DrawGrid(2000, 1.0f);        // Draw a grid

@@ -127,7 +127,7 @@ int main(void)
                         projectileIndex = 0;
                 }
 
-                DrawModelEx(AssetManager.getProjectileModels()[projectileIndex]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {1.0f, 1.0f, 1.0f}, WHITE);
+                DrawModelEx(AssetManager.getProjectileModels()[projectileIndex]->getModel(),{0.0f, 1.0f,cameraManager.getCamera().position.z + playerStartingPos }, {0, 1, 0}, 180.0f, {4.0f,4.0f, 4.0f}, WHITE);
 
                 Renderer.drawMap(Maps.at(currLevel), cameraManager.getCamera(), AssetManager);
 

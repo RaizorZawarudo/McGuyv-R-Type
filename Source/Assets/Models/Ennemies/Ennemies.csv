@@ -22,3 +22,7 @@ quadFighter,simple,Source/Assets/Models/Ennemies/QuadFighter/quadFighter.obj,0,0
 quadSolo,simple,Source/Assets/Models/Ennemies/quadSolo/quadSolo.obj,0,0,1,1,1,1
 quadWarship,simple,Source/Assets/Models/Ennemies/quadWarship/quadWarship.obj,0,0,1,1,1,1
 quadMothership,simple,Source/Assets/Models/Ennemies/quadMothership/quadMothership.obj,0,0,1,1,1,1
+droneR,simple,Source/Assets/Models/Ennemies/DroneR/droneR.obj,0,0,1,2,4,2
+droneL,simple,Source/Assets/Models/Ennemies/DroneL/droneL.obj,0,0,1,2,2,2
+droneM,simple,Source/Assets/Models/Ennemies/DroneM/droneM.obj,0,0,1,2,2,2
+droneH,simple,Source/Assets/Models/Ennemies/DroneH/droneH.obj,0,0,1,2,2,2

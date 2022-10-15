@@ -1,3 +1,4 @@
 Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height
 orangeLight,basic,Source/Assets/Models/Projectiles/OrangeLight/orangeLight.obj,0,0,1,0.2,0.2,0.2
-testRocket,basic,Source/Assets/Models/Projectiles/TestRocket/testRocket.obj,Source/Assets/Models/Projectiles/TestRocket/Rocket_lambert1_Albedo.png,0,1,0.2,0.2,0.2
+plasmaProj,basic,Source/Assets/Models/Projectiles/plasmaProj/plasmaProj.obj,0,0,1,0.2,0.1,0.1
+missileProj,basic,Source/Assets/Models/Projectiles/missileProj/missileProj.obj,0,0,1,0.2,0.1,0.1

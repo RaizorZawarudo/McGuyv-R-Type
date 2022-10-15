@@ -33,7 +33,7 @@ namespace RL {
             void draw_2D_model(Texture2D texture, int x, int y);
 
             //EDIT:: drawMap should only draw, map logic of scrolling and spawning mobs etc will be in the map class for better encapsulations
-            void drawMap(Map* Map, Camera camera, AssetManager AssetManager); //should take map class as parameter, map class containing path and boosrooms (and transition rooms maybe if we do it)
+            void drawMap(Map* Map, Camera camera, std::shared_ptr<AssetManager> AssetManager); //should take map class as parameter, map class containing path and boosrooms (and transition rooms maybe if we do it)
 
 
             void draw_text(std::string text, Color color, int x, int y, Font font, float size); // temporary, should create text class with font and size

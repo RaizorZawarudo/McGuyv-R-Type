@@ -38,16 +38,16 @@ void RL::Renderer::draw_2D_model(Texture2D texture, int x, int y)
     DrawTexture(texture, x, y, WHITE);
 }
 
-void RL::Renderer::drawMap(Map* Map, Camera camera, AssetManager AssetManager)
+void RL::Renderer::drawMap(Map* Map, Camera camera, std::shared_ptr<AssetManager> AssetManager)
 {
     int size =  Map->getMapQueue().size();
     for (int i = 0; i < size ; i++) {
         // std::cout << "drawing at position : " << Map->getMapQueue().at(i)._zPosition << std::endl;
-        DrawModelEx(AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getModel(),
+        DrawModelEx(AssetManager->getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getModel(),
                     (Vector3){0.0f, 0.0f , Map->getMapQueue().at(i)._zPosition}, {0.0f, 1.0f, 0.0f}, 0.0f,
-                    (Vector3){AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale(),
-                              AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale(),
-                              AssetManager.getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale()},
+                    (Vector3){AssetManager->getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale(),
+                              AssetManager->getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale(),
+                              AssetManager->getSpecificDrawableWithType(Map->getMapQueue().at(i)._sectionName, RL::ModelType::ZONE)->getScale()},
                     WHITE);
     }
 }

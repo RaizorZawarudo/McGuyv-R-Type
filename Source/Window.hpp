@@ -16,7 +16,7 @@
 namespace RL {
     class Window {
     public:
-        Window(std::string title, Vector2 dimensions = {1920, 1080},
+        Window(std::string title, Vector2 dimensions = {1024, 768},
                bool initLater = false);
         ~Window();
 

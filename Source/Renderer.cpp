@@ -38,6 +38,12 @@ void RL::Renderer::draw_2D_model(Texture2D texture, int x, int y)
     DrawTexture(texture, x, y, WHITE);
 }
 
+void RL::Renderer::drawBackground(std::shared_ptr<AssetManager> AssetManager, int currentLevel)
+{
+    draw_2D_model(AssetManager->getSpecificBackground(AssetManager->getMaps().at(currentLevel)->getBackgroundName())->getTexture() , 0 , 0);
+        
+}
+
 void RL::Renderer::drawMap(Map* Map, Camera camera, std::shared_ptr<AssetManager> AssetManager)
 {
     int size =  Map->getMapQueue().size();

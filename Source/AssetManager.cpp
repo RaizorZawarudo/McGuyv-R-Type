@@ -19,8 +19,6 @@ AssetManager::AssetManager()
     // ex : mountainsPath + big mountainpath + mountainboss room + big mountain boss room
 
     loadAllMaps();
-
-
 }
 
 AssetManager::~AssetManager()
@@ -33,6 +31,10 @@ void AssetManager::loadAllModels()
     std::string spacecraftModelCSVPath = "Source/Assets/Models/Spacecrafts/Spacecrafts.csv";
     std::string ennemyModelCSVPath = "Source/Assets/Models/Ennemies/Ennemies.csv";
     std::string projectileCSVPath = "Source/Assets/Models/Projectiles/Projectiles.csv";
+    std::string mapBackgroundCSVPath = "Source/Assets/BackgroundTextures/Backgrounds.csv";
+
+    //load all backgrounds;
+    this->_ingameBackgrounds = loadAllBackgrounds(mapBackgroundCSVPath);
 
     //load all zones
     this->_zonesModels = loadModels(zonesModelCSVPath, RL::ModelType::ZONE);
@@ -118,6 +120,7 @@ void AssetManager::loadAllMaps()
 
     std::string mapName;
     std::string mapPath;
+    std::string backgroundName;
 
 
     for (long unsigned int i = 1; i < parsedCsv.size(); i++) {;
@@ -127,18 +130,47 @@ void AssetManager::loadAllMaps()
                 mapName = parsedCsv[i][j];
             if (j == 1)
                 mapPath = parsedCsv[i][j];
+            if (j == 2)
+                backgroundName = parsedCsv[i][j];
         }
 
         //debugging
         // std::cout << "MAP NAME = " << mapName << " and MAP PATH = " << mapPath << std::endl; // debugging line
 
         //now we crate a map from each map line in the map .csv
-        Map *newMap = new Map(mapName, mapPath, this->_zonesModels);
+        Map *newMap = new Map(mapName, mapPath, this->_zonesModels, backgroundName);
         this->_maps.emplace_back(newMap);
     //done
     }
     //debugging
     // std::cout << " BIG DEBUG ::  2 == " << this->_maps.size() << std::endl;
+}
+
+
+std::vector<RL::Drawable2D*> AssetManager::loadAllBackgrounds(const std::string &backgroundCSVPath)
+{
+
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(backgroundCSVPath);
+
+    std::string backgroundName;
+    std::string backgroundPath;
+
+    std::vector<RL::Drawable2D*> backgroundVector;
+
+
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {;
+        //HERE WE SEPARATE EACH cell of the csv into its designated value
+        for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
+            if (j == 0)
+                backgroundName = parsedCsv[i][j];
+            if (j == 1)
+                backgroundPath = parsedCsv[i][j];
+        }
+        //HERE WE CREATE A NEW 2D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
+        RL::Drawable2D *newbackgroundDrawable = new RL::Drawable2D(backgroundPath, backgroundName);       
+        backgroundVector.push_back(newbackgroundDrawable);
+    }
+    return backgroundVector;
 }
 
 //Getters
@@ -165,6 +197,19 @@ std::vector<RL::Drawable3D*> AssetManager::getEnnemyModels()
 std::vector<Map*> AssetManager::getMaps()
 {
     return this->_maps;
+}
+
+std::vector<RL::Drawable2D*> AssetManager::getBackgrounds()
+{
+    return this->_ingameBackgrounds;
+}
+
+RL::Drawable2D* AssetManager::getSpecificBackground(std::string backgroundName)
+{
+    for (RL::Drawable2D* drawable : this->_ingameBackgrounds) {
+        if (drawable->getName() == backgroundName)
+            return drawable;
+    }
 }
 
 RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName, RL::ModelType modelType)

@@ -94,10 +94,10 @@ namespace RL {
             Vector3 _cameraPositionMcGuyv;
             float _cameraFovMcGuyv;
 
-            Vector3 _boxSize;
-            BoundingBox _boundingBox;
-            // These initializations will not work
-            Vector3 _position = {0, 0, 0}; //useless do not add position in the model, add position in the entity data
+            // Vector3 _boxSize;
+            // BoundingBox _boundingBox;
+            // // These initializations will not work
+            // Vector3 _position = {0, 0, 0}; //useless do not add position in the model, add position in the entity data
             
             
             bool _imageLoaded = false;

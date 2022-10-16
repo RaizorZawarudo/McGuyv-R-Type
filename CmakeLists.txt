@@ -22,6 +22,7 @@ FILE(GLOB CFILES
         Source/Renderer.cpp
         Source/Map.cpp
         Source/Drawable3D.cpp
+        Source/Drawable2D.cpp
         Source/CameraManager.cpp
         Source/InputManager.cpp)
 
@@ -36,6 +37,7 @@ FILE(GLOB HEADERFILES
         Source/Map.hpp
         Source/IDrawable.hpp
         Source/Drawable3D.hpp
+        Source/Drawable2D.hpp
         Source/CameraManager.hpp
         Source/InputManager.hpp
         Source/ECS/ECS.hpp

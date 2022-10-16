@@ -54,7 +54,7 @@ typedef struct
     
 class Map {
     public:
-        Map(std::string mapName, std::string mapPath, std::vector<RL::Drawable3D*> zonesModels);
+        Map(std::string mapName, std::string mapPath, std::vector<RL::Drawable3D*> zonesModels, std::string backgroundName);
         ~Map();
 
         //load map data
@@ -70,6 +70,7 @@ class Map {
 
         //getters
         std::string getMapName();
+        std::string getBackgroundName();
         std::vector<repeatPathData_t> getMapPathsData();
         std::vector<bossRoomData_t> getMapBossRoomData();
         std::vector<mapQueueSection_t> getMapQueue();
@@ -84,6 +85,7 @@ class Map {
     private:
 
         std::string _mapName;
+        std::string _backgroundName;
         float _scrollSpeed = 2.0f;
         float _currentSpeed;
 

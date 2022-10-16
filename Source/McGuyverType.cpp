@@ -15,6 +15,10 @@ McGuyverType::McGuyverType()
     this->_renderer = std::make_shared<RL::Renderer>("Renderer");
     this->_inputManager = std::make_shared<RL::InputManager>("InputManager");
     this->_entityManager = std::make_shared<EntityManager>();
+
+    //here we resize all the maps to be the dimension of the window
+    for (Map* map: this->_assetManager->getMaps())
+        _assetManager->getSpecificBackground(map->getBackgroundName())->resize(_window->getDimensions());
 }
 
 McGuyverType::~McGuyverType()
@@ -24,10 +28,11 @@ McGuyverType::~McGuyverType()
 void McGuyverType::startGame()
 {
     SetTargetFPS(60);
-    _assetManager->getMaps().at(_currentLevel)->setGameRunning();
+    _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choice
+
     while (_window->isWindowOpen()) {
         //UI LOOP functions
-        gameLoop();
+        gameLoop(); //might take more arguments to refelct player choice of map and choice of character
     }
     _window->close();
     
@@ -55,7 +60,9 @@ void McGuyverType::gameLoop()
     //----------------------------------------------------------------------------------
     _renderer->beginDrawing();
         _renderer->clearBackground();
-        // DrawTexture(spacebackgroundText, 0 , 0 , WHITE);
+
+        _renderer->drawBackground(_assetManager, _currentLevel);
+
         _renderer->begin3DMode(_cameraManager->getCamera());
             //DRAW MODEL USING ASSET LIST FROM MANAGER 
             //TO BE ADDED IN THE RENDERER

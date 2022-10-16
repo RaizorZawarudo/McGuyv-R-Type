@@ -7,9 +7,10 @@
 
 #include "Map.hpp"
 
-Map::Map(std::string mapName, std::string MapPath, std::vector<RL::Drawable3D*> zonesModels)
+Map::Map(std::string mapName, std::string MapPath, std::vector<RL::Drawable3D*> zonesModels, std::string backgroundName)
 {
     this->_mapName = mapName;
+    this->_backgroundName = backgroundName;
     this->_currentSpeed = this->_scrollSpeed;
     fillMapData(MapPath, zonesModels);
 
@@ -182,6 +183,11 @@ void Map::refillMapQueue()
 std::string Map::getMapName()
 {
     return this->_mapName;
+}
+
+std::string Map::getBackgroundName()
+{
+    return this->_backgroundName;
 }
 
 std::vector<repeatPathData_t> Map::getMapPathsData()

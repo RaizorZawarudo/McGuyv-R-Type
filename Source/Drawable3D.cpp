@@ -73,38 +73,38 @@ void RL::Drawable3D::load3DModel( std::string modelPath, std::string texturePath
 void RL::Drawable3D::draw()
 {
     //BeginDrawing();
-    if (this->_type == RL::ZONE)
-        DrawCubeTexture(this->_texture, this->_position, 1.0f, 1.0f, 1.0f, WHITE);
-    if (this->_type == RL::SPACESHIP) {
-        DrawModelEx(this->_model, this->_position, {0, 1, 0}, this->_rotationAngle, (Vector3) {this->_scale,this->_scale,this->_scale} , WHITE);
-        //DrawModel(this->_model, this->_position, this->_scale, WHITE);
-        //DrawSphere(this->_position, 0.5f, RED);
-    }
-    // if (this->_type == RL::POWERUP)
-    //     drawPower();  //here we implement the movement and rotation of the poweup and bouncy etc etc and smaller size etc etc
-    //EndDrawing();
-}
-
-// void RL::Drawable3D::drawPower()
-// {
-//     if (this->_position.y >= 0.59f && this->up == 0) {
-//         this->_position.y -= 0.01f;
-//         DrawCubeTexture(this->_texture, this->_position, 0.6f, 0.6f, 0.6f, WHITE);
-//         if (this->_position.y <= 0.6f)
-//             this->up = 1;
-//         }
-//     if (this->_position.y <= 1.41f && this->up == 1) {
-//         this->_position.y += 0.01f;
-//         DrawCubeTexture(this->_texture, this->_position, 0.6f, 0.6f, 0.6f, WHITE);
-//         if (this->_position.y >= 1.4f)
-//             this->up = 0;
-//         }
-
+//     if (this->_type == RL::ZONE)
+//         DrawCubeTexture(this->_texture, this->_position, 1.0f, 1.0f, 1.0f, WHITE);
+//     if (this->_type == RL::SPACESHIP) {
+//         DrawModelEx(this->_model, this->_position, {0, 1, 0}, this->_rotationAngle, (Vector3) {this->_scale,this->_scale,this->_scale} , WHITE);
+//         //DrawModel(this->_model, this->_position, this->_scale, WHITE);
+//         //DrawSphere(this->_position, 0.5f, RED);
+//     }
+//     // if (this->_type == RL::POWERUP)
+//     //     drawPower();  //here we implement the movement and rotation of the poweup and bouncy etc etc and smaller size etc etc
+//     //EndDrawing();
 // }
 
+// // void RL::Drawable3D::drawPower()
+// // {
+// //     if (this->_position.y >= 0.59f && this->up == 0) {
+// //         this->_position.y -= 0.01f;
+// //         DrawCubeTexture(this->_texture, this->_position, 0.6f, 0.6f, 0.6f, WHITE);
+// //         if (this->_position.y <= 0.6f)
+// //             this->up = 1;
+// //         }
+// //     if (this->_position.y <= 1.41f && this->up == 1) {
+// //         this->_position.y += 0.01f;
+// //         DrawCubeTexture(this->_texture, this->_position, 0.6f, 0.6f, 0.6f, WHITE);
+// //         if (this->_position.y >= 1.4f)
+// //             this->up = 0;
+// //         }
 
-//
-// ANIMATION
+}
+
+
+// //
+// // ANIMATION
 //
 void RL::Drawable3D::loadAnimation(std::string path)
 {
@@ -165,32 +165,32 @@ int RL::Drawable3D::getCurrentAnim() const
     return this->_currentAnim;
 }
 
-//NOT SURE IF NEEDED TO BE IMPLEMENTED THIS WAY
-// void RL::Drawable3D::setBoundingBox()
-// {
-//     if (this->_type == RL::MODEL)
-//         this->_boundingBox.max.x = this->_position.x - 0.5f;
-//         this->_boundingBox.max.y = this->_position.y - 0.5f;
-//         this->_boundingBox.max.z = this->_position.z - 0.5f;
-//         this->_boundingBox.min.x = this->_position.x + 0.5f;
-//         this->_boundingBox.min.y = this->_position.y + 0.5f;
-//         this->_boundingBox.min.z = this->_position.z + 0.5f;
+// //NOT SURE IF NEEDED TO BE IMPLEMENTED THIS WAY
+// // void RL::Drawable3D::setBoundingBox()
+// // {
+// //     if (this->_type == RL::MODEL)
+// //         this->_boundingBox.max.x = this->_position.x - 0.5f;
+// //         this->_boundingBox.max.y = this->_position.y - 0.5f;
+// //         this->_boundingBox.max.z = this->_position.z - 0.5f;
+// //         this->_boundingBox.min.x = this->_position.x + 0.5f;
+// //         this->_boundingBox.min.y = this->_position.y + 0.5f;
+// //         this->_boundingBox.min.z = this->_position.z + 0.5f;
 
     
-//     if (this->_type == RL::WALL || this->_type == RL::FLOOR)
-//         this->_boundingBox = {(Vector3) {this->_position.x - (this->_boxSize.x ) / 2,
-//                                          this->_position.y - (this->_boxSize.y ) / 2,
-//                                          this->_position.z - (this->_boxSize.z ) / 2} ,
-//                               (Vector3) {this->_position.x + (this->_boxSize.x ) / 2,
-//                                          this->_position.y + (this->_boxSize.y ) / 2,
-//                                          this->_position.z + (this->_boxSize.z ) / 2}
-//                                          };
-// }
+// //     if (this->_type == RL::WALL || this->_type == RL::FLOOR)
+// //         this->_boundingBox = {(Vector3) {this->_position.x - (this->_boxSize.x ) / 2,
+// //                                          this->_position.y - (this->_boxSize.y ) / 2,
+// //                                          this->_position.z - (this->_boxSize.z ) / 2} ,
+// //                               (Vector3) {this->_position.x + (this->_boxSize.x ) / 2,
+// //                                          this->_position.y + (this->_boxSize.y ) / 2,
+// //                                          this->_position.z + (this->_boxSize.z ) / 2}
+// //                                          };
+// // }
 
-BoundingBox RL::Drawable3D::getBoundingBox()
-{
-    return this->_boundingBox;
-}
+// // BoundingBox RL::Drawable3D::getBoundingBox()
+// // {
+// //     return this->_boundingBox;
+// // }
 
 void RL::Drawable3D::unloadAll()
 {
@@ -221,24 +221,24 @@ void RL::Drawable3D::setRotation(float newRotation)
     this->_rotationAngle = newRotation;
 }
 
-void RL::Drawable3D::setPosition(float x, float y, float z)
-{
-    this->_position.x = x;
-    this->_position.y = y;
-    this->_position.z = z;
+// void RL::Drawable3D::setPosition(float x, float y, float z)
+// {
+//     this->_position.x = x;
+//     this->_position.y = y;
+//     this->_position.z = z;
 
-    //setBoundingBox();
-}
+//     //setBoundingBox();
+// }
 
-Vector3 RL::Drawable3D::getPosition()
- {
-     return this->_position;
- }
+// Vector3 RL::Drawable3D::getPosition()
+//  {
+//      return this->_position;
+//  }
 
- Vector3 RL::Drawable3D::getBoxSize()
- {
-     return this->_boxSize;
- }
+//  Vector3 RL::Drawable3D::getBoxSize()
+//  {
+//      return this->_boxSize;
+//  }
 
  Texture2D RL::Drawable3D::getTexture()
  {

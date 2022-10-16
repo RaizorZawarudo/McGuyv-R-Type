@@ -29,6 +29,7 @@ namespace RL {
 
             void clearBackground(); // Done on window no ?
 
+            void drawBackground(std::shared_ptr<AssetManager> AssetManager, int currentLevel);
             void draw_3D_model(Model model, float x, float y, float z);
             void draw_2D_model(Texture2D texture, int x, int y);
 

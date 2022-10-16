@@ -75,18 +75,23 @@ class Map {
         std::vector<bossRoomData_t> getMapBossRoomData();
         std::vector<mapQueueSection_t> getMapQueue();
         int getCurrentStage();
+        int getMaxStage();
         bool getFightingBoss();
         bool getGameRunning();
 
         //setters
         void setGameRunning();
+        void setFightingBossTrue();
+        void setFightingBossFalse();
+        void setHasSpawnedBossFalse();
+        void bossIsDown();
 
 
     private:
 
         std::string _mapName;
         std::string _backgroundName;
-        float _scrollSpeed = 2.0f;
+        float _scrollSpeed = 9.0f;
         float _currentSpeed;
 
         std::vector<repeatPathData_t> _repeatPaths; //this should be in order of game aspect in the csv already
@@ -103,6 +108,7 @@ class Map {
 
         bool _gameRunning = false;
         int _currentStage = 0;
+        int _maxStage;
         bool _isFightingBoss = false;
         bool _hasSpawnedBossroom = false;
 

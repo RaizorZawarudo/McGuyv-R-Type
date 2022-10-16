@@ -87,8 +87,17 @@ void McGuyverType::gameLoop()
                     projectileIndex = 0;
             }
             DrawModelEx(_assetManager->getProjectileModels()[projectileIndex]->getModel(),{0.0f, 1.0f, _cameraManager->getCamera().position.z + _playerStartingZ }, {0, 1, 0}, 180.0f, {4.0f,4.0f, 4.0f}, WHITE);
+
+
+
+            if (_inputManager->playerHasPressedKeyAsChar('b'))
+                _assetManager->getMaps().at(_currentLevel)->setFightingBossTrue();
+            if (_inputManager->playerHasPressedKeyAsChar('v'))
+                _assetManager->getMaps().at(_currentLevel)->bossIsDown();
             _renderer->drawMap( _assetManager->getMaps().at(_currentLevel), _cameraManager->getCamera(), _assetManager);
             // DrawGrid(2000, 1.0f);        // Draw a grid
+            // std::cout << " current stage = " << this->_assetManager->getMaps().at(_currentLevel)->getCurrentStage() 
+            // << "and max stage is = " << this->_assetManager->getMaps().at(_currentLevel)->getMaxStage() << std::endl;
         _renderer->end3DMode();
         //Input queue must be popped
         _inputManager->popInputs();

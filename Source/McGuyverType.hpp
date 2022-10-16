@@ -6,13 +6,14 @@
 */
 
 #include "raylib.h"
+#include "Window.hpp"
 #include "AssetManager.hpp"
 #include "Map.hpp"
 #include "InputManager.hpp"
 #include "Renderer.hpp"
 #include "CameraManager.hpp"
 #include "ECS/EntityViewer.hpp"
-#include "Window.hpp"
+#include "Components&Systems/ISystem.hpp"
 // #include "CollisionManager.hpp"
 
 #pragma once
@@ -44,10 +45,10 @@ class McGuyverType {
         std::shared_ptr<EntityManager> _entityManager;
         //std::shared_ptr<std::shared_ptr<ISystems>> _systems;
 
-        //the pressed by player must be saved every frame
-        std::vector<int> _keysPressed;
+        
+        std::vector<int> _keysPressed; //the pressed by player must be saved every frame
 
-        //game related data
+        //game related data     
         int _currentLevel = 1;
         float _playerStartingZ = 8.0f;
         float enemyStartingZ = 20.0f;

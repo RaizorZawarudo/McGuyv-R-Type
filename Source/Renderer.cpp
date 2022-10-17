@@ -27,7 +27,7 @@ void RL::Renderer::draw_text(std::string text, Color color, int x, int y, Font f
 void RL::Renderer::draw_3D_model(Model model, float x, float y, float z)
 {
     Vector3 position = { x, y, z };
-    float scale = 0.1f;
+    float scale = 1.0f;
     DrawModel(model, position, scale, WHITE);
     //DrawModelEx(model, position, (Vector3){ 1.0f, 0.0f, 0.0f }, rotationangle, (Vector3){ 0.1f, 0.1f, 0.1f }, WHITE);
 

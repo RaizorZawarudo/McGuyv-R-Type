@@ -16,6 +16,10 @@ McGuyverType::McGuyverType()
     this->_inputManager = std::make_shared<RL::InputManager>("InputManager");
     this->_entityManager = std::make_shared<EntityManager>();
 
+
+
+    // this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager));
+
     //here we resize all the maps to be the dimension of the window
     for (Map* map: this->_assetManager->getMaps())
         _assetManager->getSpecificBackground(map->getBackgroundName())->resize(_window->getDimensions());
@@ -25,11 +29,16 @@ McGuyverType::~McGuyverType()
 {
 }
 
-void McGuyverType::startGame()
+void McGuyverType::startGame() // must have player choices etc
 {
     SetTargetFPS(60);
-    _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choice
+    //HERE WE CREATE PLAYERS, assume player chose the DartAssault spaceship for testing
 
+    createPlayer("dartAssault");
+
+
+
+    _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choice
     while (_window->isWindowOpen()) {
         //UI LOOP functions
         gameLoop(); //might take more arguments to refelct player choice of map and choice of character
@@ -40,6 +49,7 @@ void McGuyverType::startGame()
 
 void McGuyverType::gameLoop()
 {
+    // here we need to check with clients if new people connect in order to create new player entities with their spaceship choice
 
     _inputManager->popInputs();
     _inputManager->recordInputs();
@@ -51,7 +61,7 @@ void McGuyverType::gameLoop()
     //do all checks if needed ( pause game, open whatefver menu, communicated with whatever process)
     //here we loop through all our systems to update them
     // for( std::shared_ptr<ISystem> system : _systems)
-    //     system->update(what has the be updated as a system)
+    //     system->update(this->_allEntities);
     //then we draw (normally we draw in systems but with networking we have to split it)
     //then if game ends or somethings
     //then finish
@@ -64,22 +74,22 @@ void McGuyverType::gameLoop()
         _renderer->drawBackground(_assetManager, _currentLevel);
 
         _renderer->begin3DMode(_cameraManager->getCamera());
-            //DRAW MODEL USING ASSET LIST FROM MANAGER 
-            //TO BE ADDED IN THE RENDERER
+        
+        for (int i = 0; i < _inputManager->getInputs().size(); i++)
+            std::cout << _inputManager->getInputs()[i] << std::endl;
+
+
             if (_inputManager->playerHasPressedKeyAsChar('p')) {
                spaceshipIndex += 1;
                 if (spaceshipIndex == _assetManager->getSpacecraftModels().size() )
                     spaceshipIndex = 0;
             }
-            DrawModelEx(_assetManager->getSpacecraftModels()[spaceshipIndex]->getModel(),{2.5f, 1.0f, _cameraManager->getCamera().position.z + enemyStartingZ }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-            
-                
+            DrawModelEx(_assetManager->getSpacecraftModels()[spaceshipIndex]->getModel(),{2.5f, 1.0f, _cameraManager->getCamera().position.z + enemyStartingZ }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);     
             if (_inputManager->playerHasPressedKeyAsChar('e')) {
                 ennemyIndex += 1;
                 if (ennemyIndex == _assetManager->getEnnemyModels().size() )
                     ennemyIndex = 0;
-            }
-                
+            }   
             DrawModelEx(_assetManager->getEnnemyModels()[ennemyIndex]->getModel(),{-5.0f, 1.0f,_cameraManager->getCamera().position.z + enemyStartingZ }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
             if (_inputManager->playerHasPressedKeyAsChar('l')) {
                 projectileIndex += 1;
@@ -87,14 +97,21 @@ void McGuyverType::gameLoop()
                     projectileIndex = 0;
             }
             DrawModelEx(_assetManager->getProjectileModels()[projectileIndex]->getModel(),{0.0f, 1.0f, _cameraManager->getCamera().position.z + _playerStartingZ }, {0, 1, 0}, 180.0f, {4.0f,4.0f, 4.0f}, WHITE);
-
-
-
             if (_inputManager->playerHasPressedKeyAsChar('b'))
                 _assetManager->getMaps().at(_currentLevel)->setFightingBossTrue();
             if (_inputManager->playerHasPressedKeyAsChar('v'))
                 _assetManager->getMaps().at(_currentLevel)->bossIsDown();
+
+
+
+
             _renderer->drawMap( _assetManager->getMaps().at(_currentLevel), _cameraManager->getCamera(), _assetManager);
+            for (EntityID _ent:  EntityViewer<Position, Velocity, Input, EntityModelType>(*_entityManager.get()) ) {
+                Position *objectPos = _entityManager->Get<Position>(_ent);
+                ModelName *objectModelName = _entityManager->Get<ModelName>(_ent);
+                EntityModelType *modelType = _entityManager->Get<EntityModelType>(_ent);
+                _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->x, objectPos->y, objectPos->z);
+            }
             // DrawGrid(2000, 1.0f);        // Draw a grid
             // std::cout << " current stage = " << this->_assetManager->getMaps().at(_currentLevel)->getCurrentStage() 
             // << "and max stage is = " << this->_assetManager->getMaps().at(_currentLevel)->getMaxStage() << std::endl;
@@ -105,6 +122,29 @@ void McGuyverType::gameLoop()
     _renderer->endDrawing();
     //---------------------------------------------------------------------------------- 
     
+}
+
+
+
+void McGuyverType::createPlayer(std::string modelName)
+{
+    EntityID id = _entityManager->CreateNewEntity();
+    // _entityManager->Assign<RL::ModelType>(id, RL::ModelType::SPACESHIP);
+    _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::SPACESHIP});
+    _entityManager->Assign<ModelName>(id, ModelName{modelName});
+    _entityManager->Assign<Position>(id, _playerStartingPos);
+    _entityManager->Assign<Input>(id, Input{NONE});
+    _entityManager->Assign<Velocity>(id, Velocity{0.2f, 0.2f, 0.2f});
+
+
+}
+
+
+//getters
+
+std::shared_ptr <EntityManager> McGuyverType::getEm()
+{
+    return _entityManager;
 }
 
 

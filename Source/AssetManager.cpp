@@ -221,6 +221,13 @@ RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName,
         }
     }
 
+    if (modelType == RL::ModelType::SPACESHIP) {
+        for (int i = 0; i < this->_spacecraftModels.size(); i++) {
+            if (modelName == this->_spacecraftModels.at(i)->getName())
+                return this->_spacecraftModels.at(i);
+        }
+    }
+
         //find in ZONES
     // if (modelType == 1)
     //     //find in ZONES

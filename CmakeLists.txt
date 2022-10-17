@@ -28,6 +28,10 @@ FILE(GLOB CFILES
 
 #add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES
 FILE(GLOB HEADERFILES
+        Source/ECS/ComponentPool.hpp
+        Source/ECS/EntityManager.hpp
+        Source/ECS/ECS.hpp
+        Source/ECS/EntityViewer.hpp
         Source/McGuyverType.hpp
         Source/Window.hpp
         Source/Logger.hpp
@@ -39,11 +43,7 @@ FILE(GLOB HEADERFILES
         Source/Drawable3D.hpp
         Source/Drawable2D.hpp
         Source/CameraManager.hpp
-        Source/InputManager.hpp
-        Source/ECS/ECS.hpp
-        Source/ECS/EntityManager.hpp
-        Source/ECS/EntityViewer.hpp
-        Source/ECS/ComponentPool.hpp)
+        Source/InputManager.hpp)
 
 
 #add to project

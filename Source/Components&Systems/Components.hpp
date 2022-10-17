@@ -12,10 +12,8 @@
 #include "deque"
 
 #include "../Drawable3D.hpp"
-// #include "../Raylib/RaylibTypeEncaps.hpp"
 #include "../ECS/ECS.hpp"
 
-typedef std::pair<size_t, size_t> coordinates_t;
 
 enum PlayerNumber {
     One = 0,
@@ -24,14 +22,31 @@ enum PlayerNumber {
     Four = 4,
 };
 
+// dont change order, it defines their dying priority
+enum EntityType {
+    MCGUYVER,
+    PLAYER,
+    ENNEMY,
+    PROJECTILE,
+    OBSTACLE,
+    POWERUP
+};
+
+struct EntityModelType {
+    RL::ModelType modelType;
+
+};
+
 enum UserInput {
-    LAY_BOMB = -6,
-    LAY_BOMB2 = 103,
-    CLOSED_WINDOW = -5,
-    UP = -4,
-    LEFT = -3,
-    DOWN = -2,
-    RIGHT = -1,
+    SHOOT = 10,
+    FIRSTWEAPON = 49,
+    SECONDWEAPON = 50,
+    THIRDWEAPON = 51,
+    UP = 122,
+    LEFT = 113,
+    DOWN = 115,
+    RIGHT = 100,
+    FORWARD = 32,
     UP2 = 119,
     LEFT2 = 97,
     DOWN2 = 115,
@@ -42,6 +57,10 @@ enum UserInput {
 
 struct Input {
     UserInput pressedKey; // fly up down left right forward, shoot, activate shield (backspace), cahge weapons ( 1, 2, 3)
+};
+
+struct IsAlive {
+    bool alive;
 };
 
 struct Position {
@@ -60,17 +79,6 @@ struct Position {
 
 struct Owner {
     EntityID id;
-};
-
-
-// dont change order, it defines their dying priority
-enum CollisionObjectType {
-    MCGUYVER,
-    PLAYER,
-    ENNEMY,
-    PROJECTILE,
-    OBSTACLE,
-    POWERUP
 };
 
 enum TargetType {

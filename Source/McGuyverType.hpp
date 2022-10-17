@@ -12,8 +12,12 @@
 #include "InputManager.hpp"
 #include "Renderer.hpp"
 #include "CameraManager.hpp"
+#include "ECS/EntityManager.hpp"
 #include "ECS/EntityViewer.hpp"
+#include "ECS/ComponentPool.hpp"
+#include "ECS/EntityManager.hpp"
 #include "Components&Systems/ISystem.hpp"
+// #include "Components&Systems/MovementSystem.hpp"
 // #include "CollisionManager.hpp"
 
 #pragma once
@@ -28,11 +32,14 @@ class McGuyverType {
         void gameLoop();
 
         //entity creation functions
-        //void createPlayer();
+        void createPlayer(std::string modelName);
         //void createEnnemy();
         //void createProjectile();
         //void createObstacle();
         //void createPowerup();
+
+        //getters
+        std::shared_ptr<EntityManager> getEm();
 
     protected:
     private:
@@ -43,13 +50,18 @@ class McGuyverType {
         std::shared_ptr<RL::Window> _window;
         // std::shared_ptr<RL::CollisionManager> _collisionManager;
         std::shared_ptr<EntityManager> _entityManager;
-        //std::shared_ptr<std::shared_ptr<ISystems>> _systems;
+        std::vector<std::shared_ptr<ISystem>> _systems;
 
         
         std::vector<int> _keysPressed; //the pressed by player must be saved every frame
 
+        //Entities
+        std::vector<EntityID> _allEntities;
+        std::vector<EntityID> _players;
+
         //game related data     
         int _currentLevel = 1;
+        Position _playerStartingPos = {0.0f, 1.0f, 0.0f};
         float _playerStartingZ = 8.0f;
         float enemyStartingZ = 20.0f;
         //timer

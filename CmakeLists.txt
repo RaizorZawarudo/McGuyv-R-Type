@@ -43,7 +43,9 @@ FILE(GLOB HEADERFILES
         Source/Drawable3D.hpp
         Source/Drawable2D.hpp
         Source/CameraManager.hpp
-        Source/InputManager.hpp)
+        Source/InputManager.hpp
+        Source/Components&Systems/MovementSystem.hpp
+        Source/Components&Systems/ISystem.hpp)
 
 
 #add to project

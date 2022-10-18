@@ -19,11 +19,11 @@
     
 namespace RL {
     enum ModelType {
+        SPACESHIP = -1,
         MCGUYVER,
-        ZONE,
-        SPACESHIP,
-        PROJECTILE,
         ENNEMY,
+        ZONE,
+        PROJECTILE,
         OSTACLE,
         POWERUP
     };

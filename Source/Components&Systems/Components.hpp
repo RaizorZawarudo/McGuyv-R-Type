@@ -22,7 +22,6 @@ enum PlayerNumber {
     Four = 4,
 };
 
-// dont change order, it defines their dying priority
 enum EntityType {
     MCGUYVER,
     PLAYER,
@@ -56,7 +55,8 @@ enum UserInput {
 };
 
 struct Input {
-    UserInput pressedKey; // fly up down left right forward, shoot, activate shield (backspace), cahge weapons ( 1, 2, 3)
+    std::vector<int> _inputQueue;
+    // UserInput pressedKey; // fly up down left right forward, shoot, activate shield (backspace), cahge weapons ( 1, 2, 3)
 };
 
 struct IsAlive {
@@ -64,14 +64,12 @@ struct IsAlive {
 };
 
 struct Position {
-    float x;
-    float y;
-    float z;
+    Vector3 pos;
 
     bool operator==(Position &position) {
-        if (this->x == position.x && \
-            this->y == position.y && \
-            this->z == position.z)
+        if (this->pos.x == position.pos.x && \
+            this->pos.y == position.pos.y && \
+            this->pos.z == position.pos.z)
             return true;
         return false;
     }
@@ -79,6 +77,7 @@ struct Position {
 
 struct Owner {
     EntityID id;
+    RL::ModelType ownerType;
 };
 
 enum TargetType {
@@ -92,6 +91,10 @@ enum TargetType {
 
 struct ModelName {
     std::string modelname;
+};
+
+struct ModelScale {
+    float modelScale;
 };
 
 struct AmmoCapacity {
@@ -174,11 +177,3 @@ struct Shield {
     int shield;
 };
 
-// ?
-
-
-typedef struct
-{
-    int tile;
-    int orientation;
-} gfx_tile_t;

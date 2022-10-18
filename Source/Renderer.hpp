@@ -30,7 +30,7 @@ namespace RL {
             void clearBackground(); // Done on window no ?
 
             void drawBackground(std::shared_ptr<AssetManager> AssetManager, int currentLevel);
-            void draw_3D_model(Model model, float x, float y, float z);
+            void draw_3D_model(Model model, Vector3 position, float scale, RL::ModelType ownerType);
             void draw_2D_model(Texture2D texture, int x, int y);
 
             //EDIT:: drawMap should only draw, map logic of scrolling and spawning mobs etc will be in the map class for better encapsulations

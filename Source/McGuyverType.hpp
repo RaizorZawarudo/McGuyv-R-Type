@@ -17,7 +17,7 @@
 #include "ECS/ComponentPool.hpp"
 #include "ECS/EntityManager.hpp"
 #include "Components&Systems/ISystem.hpp"
-// #include "Components&Systems/MovementSystem.hpp"
+#include "Components&Systems/MovementSystem.hpp"
 // #include "CollisionManager.hpp"
 
 #pragma once
@@ -61,14 +61,16 @@ class McGuyverType {
 
         //game related data     
         int _currentLevel = 1;
-        Position _playerStartingPos = {0.0f, 1.0f, 0.0f};
+        Position _playerStartingPos = {0.0f, 1.0f, -8.0f};
         float _playerStartingZ = 8.0f;
         float enemyStartingZ = 20.0f;
+        EntityID _thisClientPlayerEntityID;
         //timer
         //gamepaused
         //ui-related stuff
         //drawable2D to be added to the assetmanager !!
         //enemy waves and obstacle waves to be added to assetmanager!!
+
 
 
         //main transfer functions to remake archi : DELETE ASAP

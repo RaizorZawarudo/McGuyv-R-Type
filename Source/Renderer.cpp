@@ -24,12 +24,15 @@ void RL::Renderer::draw_text(std::string text, Color color, int x, int y, Font f
     DrawTextEx(font, text.c_str(), Vector2 {float(x), float(y)}, size, 2, color);
 }
 
-void RL::Renderer::draw_3D_model(Model model, float x, float y, float z)
+void RL::Renderer::draw_3D_model(Model model, Vector3 position, float scale, RL::ModelType ownerType)
 {
-    Vector3 position = { x, y, z };
-    float scale = 1.0f;
-    DrawModel(model, position, scale, WHITE);
+    float yRotationAngle = 0;
+    if (ownerType == RL::ModelType::SPACESHIP)
+        yRotationAngle = 180.0f;
+    //DrawModel(model, position, scale, WHITE);
     //DrawModelEx(model, position, (Vector3){ 1.0f, 0.0f, 0.0f }, rotationangle, (Vector3){ 0.1f, 0.1f, 0.1f }, WHITE);
+    DrawModelEx(model, position, {0, 1, 0}, yRotationAngle, {scale, scale, scale}, WHITE);
+
 
 }
 

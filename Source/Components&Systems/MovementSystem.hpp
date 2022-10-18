@@ -33,38 +33,41 @@ class MovementSystem : public ISystem {
                 Position* entityPos = _em->Get<Position>(ent);
                 Velocity* entityVel = _em->Get<Velocity>(ent);
                 Input* entityMovement = _em->Get<Input>(ent);
-                EntityType* entityType = _em->Get<EntityType>(ent);
+                EntityModelType* entityType = _em->Get<EntityModelType>(ent);
 
-                if (*entityType == PLAYER) {
-                    switch (entityMovement->pressedKey) {
-                        case UP:
-                        case UP2:
-                            //playerSprite->model->setCurrentAnim(1);
-                            moveUp(entityPos, entityVel);
-                            break;
-                        case DOWN:
-                            //playerSprite->model->setCurrentAnim(1);
-                            moveDown(entityPos, entityVel);
-                            break;
-                        case LEFT:
-                        case LEFT2:
-                            //playerSprite->model->setCurrentAnim(1);
-                            moveLeft(entityPos, entityVel);
-                            break;
-                        case RIGHT:
-                            //playerSprite->model->setCurrentAnim(1);
-                            //playerSprite->model->updateModelsAnimation();
-                            moveRight(entityPos, entityVel);
-                            break;
-                        // case FORWARD :
-                        //     moveForward(entityPos, entityVel);
-                        // case SHOOT: 
-                        //     shootProjectile(weapontype); // here we have to create the entity depending on the bullet type, so we need the weapons pointer
-                        // case FIRSTWEAPON :
-                        // case SECONDWEAPON:
-                        // case THIRDWEAPON:
-                        case NONE:
-                            break;
+                if (entityType->modelType == RL::ModelType::SPACESHIP) {
+                    std::cout << "THERE IS SPACESHIP IN MOVEMENT SYSTEMS!!!" << std::endl;
+                    for (int keypressed : entityMovement->_inputQueue) { // && ID of entity = id of client
+                        switch (keypressed) {
+                            case UP:
+                            case UP2:
+                                //playerSprite->model->setCurrentAnim(1);
+                                moveUp(entityPos, entityVel);
+                                break;
+                            case DOWN:
+                                //playerSprite->model->setCurrentAnim(1);
+                                moveDown(entityPos, entityVel);
+                                break;
+                            case LEFT:
+                            case LEFT2:
+                                //playerSprite->model->setCurrentAnim(1);
+                                moveLeft(entityPos, entityVel);
+                                break;
+                            case RIGHT:
+                                //playerSprite->model->setCurrentAnim(1);
+                                //playerSprite->model->updateModelsAnimation();
+                                moveRight(entityPos, entityVel);
+                                break;
+                            // case FORWARD :
+                            //     moveForward(entityPos, entityVel);
+                            // case SHOOT: 
+                            //     shootProjectile(weapontype); // here we have to create the entity depending on the bullet type, so we need the weapons pointer
+                            // case FIRSTWEAPON :
+                            // case SECONDWEAPON:
+                            // case THIRDWEAPON:
+                            case NONE:
+                                break;
+                        }
                     }
                 }
             }
@@ -100,37 +103,29 @@ class MovementSystem : public ISystem {
         // }
 
         bool checkPressedUp() {
-            if (_type == Player_One)
-                return _inputManager->playerHasPressedKeyAsChar(UP);
-            else if (_type == Player_Two)
-                return _inputManager->playerHasPressedKeyAsChar(UP2);
+            if (_inputManager->playerHasPressedKeyAsChar(UP) || _inputManager->playerHasPressedKeyAsChar(UP2) )
+                return true;
             else
                 return false;
         }
 
         bool checkPressedDown() {
-            if (_type == Player_One)
-                return _inputManager->playerHasPressedKeyAsChar(DOWN);
-            else if (_type == Player_Two)
-                return _inputManager->playerHasPressedKeyAsChar(DOWN2);
+            if (_inputManager->playerHasPressedKeyAsChar(DOWN) || _inputManager->playerHasPressedKeyAsChar(DOWN2) )
+                return true;
             else
                 return false;
         }
 
         bool checkPressedLeft() {
-            if (_type == Player_One)
-                return _inputManager->playerHasPressedKeyAsChar(LEFT);
-            else if (_type == Player_Two)
-                return _inputManager->playerHasPressedKeyAsChar(LEFT2);
+            if (_inputManager->playerHasPressedKeyAsChar(LEFT) || _inputManager->playerHasPressedKeyAsChar(LEFT2))
+                return true;
             else
                 return false;
         }
 
         bool checkPressedRight() {
-            if (_type == Player_One)
-                return _inputManager->playerHasPressedKeyAsChar(RIGHT);
-            else if (_type == Player_Two)
-                return _inputManager->playerHasPressedKeyAsChar(RIGHT2);
+            if (_inputManager->playerHasPressedKeyAsChar(RIGHT) || _inputManager->playerHasPressedKeyAsChar(RIGHT2))
+                return true;
             else
                 return false;
         }
@@ -145,7 +140,7 @@ class MovementSystem : public ISystem {
                 moveDownLeft(pos, vel);
                 return;
             }
-                pos->x -= vel->x;
+                pos->pos.x -= vel->x;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(270.0f);
 
@@ -161,7 +156,7 @@ class MovementSystem : public ISystem {
                 moveDownRight(pos, vel);
                 return;
             }
-                pos->x += vel->x;
+                pos->pos.x += vel->x;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(90.0f);
         };
@@ -176,7 +171,7 @@ class MovementSystem : public ISystem {
                 moveUpRight(pos, vel);
                 return;
             }
-                pos->y -= vel->y;
+                pos->pos.y -= vel->y;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(180.0f);
         };
@@ -193,23 +188,23 @@ class MovementSystem : public ISystem {
                 moveDownRight(pos, vel);
                 return;
             }
-                pos->y += vel->y;
+                pos->pos.y += vel->y;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(0.0f);
         };
 
         void moveUpLeft(Position *pos, Velocity *vel)
         {
-                pos->x -= vel->x / 2;
-                pos->y -= vel->y / 2;
+                pos->pos.x -= vel->x / 2;
+                pos->pos.y -= vel->y / 2;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(225.0f);
         };
 
         void moveUpRight(Position *pos, Velocity *vel)
         {
-                pos->x += vel->x / 2;
-                pos->y -= vel->y / 2;
+                pos->pos.x += vel->x / 2;
+                pos->pos.y -= vel->y / 2;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(135.0f);
         };
@@ -217,16 +212,16 @@ class MovementSystem : public ISystem {
         void moveDownLeft(Position *pos, Velocity *vel)
         {
 
-                pos->x -= vel->x / 2;
-                pos->y += vel->y / 2;
+                pos->pos.x -= vel->x / 2;
+                pos->pos.y += vel->y / 2;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(315.0f);
         };
 
         void moveDownRight(Position *pos, Velocity *vel)
         {
-                pos->x += vel->x / 2;
-                pos->y += vel->y / 2;
+                pos->pos.x += vel->x / 2;
+                pos->pos.y += vel->y / 2;
             //     playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
             //     playerSprite->model->setRotation(45.0f);
             // }

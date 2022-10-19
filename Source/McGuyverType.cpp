@@ -18,7 +18,7 @@ McGuyverType::McGuyverType()
 
 
     this->_systems.push_back(std::make_shared<InputSystem>(this->_entityManager, this->_inputManager, this->_thisClientPlayerEntityID));
-    this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager, this->_inputManager));
+    this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager));
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
 
     //here we resize all the maps to be the dimension of the window
@@ -33,10 +33,9 @@ McGuyverType::~McGuyverType()
 void McGuyverType::startGame() // must have player choices etc
 {
     SetTargetFPS(60);
+    
+    
     //HERE WE CREATE PLAYERS, assume player chose the DartAssault spaceship for testing
-
-
-
     createPlayer("dartAssault");
 
 
@@ -55,20 +54,8 @@ void McGuyverType::gameLoop()
 {
     // here we need to check with clients if new people connect in order to create new player entities with their spaceship choice
 
-    // _inputManager->popInputs();
-    // _inputManager->recordInputs();
-    // _keysPressed = _inputManager->getInputs();
-
     _assetManager->getMaps().at(_currentLevel)->mapUpdate();
     _cameraManager->changeCameraPosition(_assetManager->getSpecificDrawableWithType(_assetManager->getMaps().at(_currentLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE));
-    
-    //  for (EntityID _ent:  EntityViewer<Input, Owner>(*_entityManager.get()) ) {
-    //         if (_entityManager->Get<Owner>(_ent)->id == this->_thisClientPlayerEntityID) {
-    //             _entityManager->Get<Input>(_ent)->_inputQueue = this->_inputManager->getInputs();
-    //         }
-
-    //     }
-    
     //do all checks if needed ( pause game, open whatefver menu, communicated with whatever process)
     //here we loop through all our systems to update them
     for( std::shared_ptr<ISystem> system : _systems)
@@ -130,17 +117,6 @@ void McGuyverType::gameLoop()
             // << "and max stage is = " << this->_assetManager->getMaps().at(_currentLevel)->getMaxStage() << std::endl;
         _renderer->end3DMode();
 
-        //record inputs on client side
-        //_inputManager->recordInputs();
-
-       
-
-        // then we assing the recorded inut to the entity corresponding to the client.
-        //Input queue must be popped
-        //here we have to clear the inputs of all the entities after sending to server
-        // for (EntityID _ent:  EntityViewer<Input>(*_entityManager.get()) )
-        //     _entityManager->Get<Input>(_ent)->_inputQueue.clear();
-        // _inputManager->popInputs();
 
         // send data to server functions
         DrawFPS(10, 10);

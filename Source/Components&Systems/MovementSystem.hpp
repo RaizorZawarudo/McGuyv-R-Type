@@ -21,11 +21,20 @@ class MovementSystem : public ISystem {
         //     Player_AI,
         //     Other
         // };
-        MovementSystem(std::shared_ptr<EntityManager> em, std::shared_ptr<RL::InputManager> inputManager) : _inputManager(inputManager)
+        MovementSystem(std::shared_ptr<EntityManager> em)
         {
             _em = em;
         };
         ~MovementSystem() {};
+
+        bool entityHasPressedKeyAsChar(Input *entityMovement, int key)
+        {
+            for (int i = 0; i < entityMovement->_inputQueue.size(); i++) {
+                    if (entityMovement->_inputQueue[i]== key)
+                        return true;
+            }
+             return false;        
+        };
 
         void update(std::vector<EntityID> &allEntities) override {
             for (EntityID ent : EntityViewer<Position, Velocity, Input, EntityModelType>(*_em.get())) {
@@ -41,21 +50,21 @@ class MovementSystem : public ISystem {
                             case UP:
                             case UP2:
                                 //playerSprite->model->setCurrentAnim(1);
-                                moveUp(entityPos, entityVel);
+                                moveUp(entityPos, entityVel, entityMovement); // add entitiyMovement to constructor
                                 break;
                             case DOWN:
                                 //playerSprite->model->setCurrentAnim(1);
-                                moveDown(entityPos, entityVel);
+                                moveDown(entityPos, entityVel, entityMovement);
                                 break;
                             case LEFT:
                             case LEFT2:
                                 //playerSprite->model->setCurrentAnim(1);
-                                moveLeft(entityPos, entityVel);
+                                moveLeft(entityPos, entityVel, entityMovement);
                                 break;
                             case RIGHT:
                                 //playerSprite->model->setCurrentAnim(1);
                                 //playerSprite->model->updateModelsAnimation();
-                                moveRight(entityPos, entityVel);
+                                moveRight(entityPos, entityVel, entityMovement);
                                 break;
                             // case FORWARD :
                             //     moveForward(entityPos, entityVel);
@@ -104,41 +113,41 @@ class MovementSystem : public ISystem {
         //     return true;
         // }
 
-        bool checkPressedUp() {
-            if (_inputManager->playerHasPressedKeyAsChar(UP) || _inputManager->playerHasPressedKeyAsChar(UP2) )
+        bool checkPressedUp(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::UP) || entityHasPressedKeyAsChar(entityMovement, UserInput::UP2) )
+                return true;
+            else
+                return false;
+         }
+
+        bool checkPressedDown(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::DOWN) || entityHasPressedKeyAsChar(entityMovement, UserInput::DOWN2) )
                 return true;
             else
                 return false;
         }
 
-        bool checkPressedDown() {
-            if (_inputManager->playerHasPressedKeyAsChar(DOWN) || _inputManager->playerHasPressedKeyAsChar(DOWN2) )
+        bool checkPressedLeft(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::LEFT) || entityHasPressedKeyAsChar(entityMovement, UserInput::LEFT2))
                 return true;
             else
                 return false;
         }
 
-        bool checkPressedLeft() {
-            if (_inputManager->playerHasPressedKeyAsChar(LEFT) || _inputManager->playerHasPressedKeyAsChar(LEFT2))
+        bool checkPressedRight(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::RIGHT) || entityHasPressedKeyAsChar(entityMovement, UserInput::RIGHT2))
                 return true;
             else
                 return false;
         }
 
-        bool checkPressedRight() {
-            if (_inputManager->playerHasPressedKeyAsChar(RIGHT) || _inputManager->playerHasPressedKeyAsChar(RIGHT2))
-                return true;
-            else
-                return false;
-        }
-
-        void moveLeft(Position *pos, Velocity *vel)
+        void moveLeft(Position *pos, Velocity *vel, Input* entityMovement)
         {
-            if (checkPressedUp()) {
+            if (checkPressedUp(entityMovement)) {
                 moveUpLeft(pos, vel);
                 return;
             }
-            if (checkPressedDown()) {
+            if (checkPressedDown(entityMovement)) {
                 moveDownLeft(pos, vel);
                 return;
             }
@@ -148,13 +157,13 @@ class MovementSystem : public ISystem {
 
         };
 
-        void moveRight(Position *pos, Velocity *vel)
+        void moveRight(Position *pos, Velocity *vel, Input* entityMovement)
         {
-            if (checkPressedUp()) {
+            if (checkPressedUp(entityMovement)) {
                 moveUpRight(pos, vel);
                 return;
             }
-            if (checkPressedDown()) {
+            if (checkPressedDown(entityMovement)) {
                 moveDownRight(pos, vel);
                 return;
             }
@@ -163,13 +172,13 @@ class MovementSystem : public ISystem {
                 // playerSprite->model->setRotation(90.0f);
         };
 
-        void moveUp(Position *pos, Velocity *vel)
+        void moveUp(Position *pos, Velocity *vel, Input* entityMovement)
         {
-            if (checkPressedLeft()) {
+            if (checkPressedLeft(entityMovement)) {
                 moveUpLeft(pos, vel);
                 return;
             }
-            if (checkPressedRight()) {
+            if (checkPressedRight(entityMovement)) {
                 moveUpRight(pos, vel);
                 return;
             }
@@ -178,15 +187,15 @@ class MovementSystem : public ISystem {
                 // playerSprite->model->setRotation(180.0f);
         };
 
-        void moveDown(Position *pos, Velocity *vel)
+        void moveDown(Position *pos, Velocity *vel, Input* entityMovement)
         {
-            if (checkPressedLeft()) {
+            if (checkPressedLeft(entityMovement)) {
                 moveDownLeft(pos, vel);
                 // playerSprite->model->setCurrentAnim(1);
                 // playerSprite->model->updateModelsAnimation();
                 return;
             }
-            if (checkPressedRight()) {
+            if (checkPressedRight(entityMovement)) {
                 moveDownRight(pos, vel);
                 return;
             }
@@ -230,7 +239,6 @@ class MovementSystem : public ISystem {
         };
 
     private:
-        std::shared_ptr<RL::InputManager> _inputManager;
         // RL::CollisionManager _colManager;
         // PlayerType _type = Other;
         EntityID _ent;

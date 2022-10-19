@@ -27,7 +27,7 @@ void RL::Renderer::draw_text(std::string text, Color color, int x, int y, Font f
 void RL::Renderer::draw_3D_model(Model model, Vector3 position, float scale, RL::ModelType ownerType)
 {
     float yRotationAngle = 0;
-    if (ownerType == RL::ModelType::SPACESHIP)
+    if (ownerType == RL::ModelType::SPACESHIP || ownerType == RL::ModelType::MCGUYVER)
         yRotationAngle = 180.0f;
     //DrawModel(model, position, scale, WHITE);
     //DrawModelEx(model, position, (Vector3){ 1.0f, 0.0f, 0.0f }, rotationangle, (Vector3){ 0.1f, 0.1f, 0.1f }, WHITE);

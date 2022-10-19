@@ -17,8 +17,9 @@ McGuyverType::McGuyverType()
     this->_entityManager = std::make_shared<EntityManager>();
 
 
-
+    this->_systems.push_back(std::make_shared<InputSystem>(this->_entityManager, this->_inputManager, this->_thisClientPlayerEntityID));
     this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager, this->_inputManager));
+    this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
 
     //here we resize all the maps to be the dimension of the window
     for (Map* map: this->_assetManager->getMaps())
@@ -45,6 +46,7 @@ void McGuyverType::startGame() // must have player choices etc
         //UI LOOP functions
         gameLoop(); //might take more arguments to refelct player choice of map and choice of character
     }
+    //clear everything
     _window->close();
     
 }
@@ -54,20 +56,18 @@ void McGuyverType::gameLoop()
     // here we need to check with clients if new people connect in order to create new player entities with their spaceship choice
 
     // _inputManager->popInputs();
-    _inputManager->recordInputs();
-    _keysPressed = _inputManager->getInputs();
+    // _inputManager->recordInputs();
+    // _keysPressed = _inputManager->getInputs();
 
     _assetManager->getMaps().at(_currentLevel)->mapUpdate();
     _cameraManager->changeCameraPosition(_assetManager->getSpecificDrawableWithType(_assetManager->getMaps().at(_currentLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE));
     
-     for (EntityID _ent:  EntityViewer<Input, Owner>(*_entityManager.get()) ) {
-            if (_entityManager->Get<Owner>(_ent)->id == this->_thisClientPlayerEntityID) {
-                std::cout << "THERE IS AN ENITITY WITH CLIENT ID" << std::endl;
-                _entityManager->Get<Input>(_ent)->_inputQueue = this->_inputManager->getInputs();
-                // std::cout << _entityManager->Get<Input>(_ent)->_inputQueue[0] << std::endl;
-            }
+    //  for (EntityID _ent:  EntityViewer<Input, Owner>(*_entityManager.get()) ) {
+    //         if (_entityManager->Get<Owner>(_ent)->id == this->_thisClientPlayerEntityID) {
+    //             _entityManager->Get<Input>(_ent)->_inputQueue = this->_inputManager->getInputs();
+    //         }
 
-        }
+    //     }
     
     //do all checks if needed ( pause game, open whatefver menu, communicated with whatever process)
     //here we loop through all our systems to update them
@@ -132,11 +132,15 @@ void McGuyverType::gameLoop()
 
         //record inputs on client side
         //_inputManager->recordInputs();
+
        
 
         // then we assing the recorded inut to the entity corresponding to the client.
         //Input queue must be popped
-        _inputManager->popInputs();
+        //here we have to clear the inputs of all the entities after sending to server
+        // for (EntityID _ent:  EntityViewer<Input>(*_entityManager.get()) )
+        //     _entityManager->Get<Input>(_ent)->_inputQueue.clear();
+        // _inputManager->popInputs();
 
         // send data to server functions
         DrawFPS(10, 10);
@@ -152,9 +156,8 @@ void McGuyverType::createPlayer(std::string modelName)
     EntityID id = _entityManager->CreateNewEntity();
     //register this entity as the player for this client
     std::vector<int> playerInput;
-    this->_thisClientPlayerEntityID = id;
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::SPACESHIP});
-    _entityManager->Assign<Owner>(id, Owner{id, RL::ModelType::SPACESHIP});
+    _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
     _entityManager->Assign<ModelName>(id, ModelName{modelName});
     _entityManager->Assign<Position>(id, _playerStartingPos);
     _entityManager->Assign<Input>(id, Input{playerInput});

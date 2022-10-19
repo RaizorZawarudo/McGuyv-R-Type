@@ -18,6 +18,8 @@
 #include "ECS/EntityManager.hpp"
 #include "Components&Systems/ISystem.hpp"
 #include "Components&Systems/MovementSystem.hpp"
+#include "Components&Systems/InputSystem.hpp"
+#include "Components&Systems/ClearInputsSystem.hpp"
 // #include "CollisionManager.hpp"
 
 #pragma once
@@ -64,7 +66,7 @@ class McGuyverType {
         Position _playerStartingPos = {0.0f, 1.0f, -8.0f};
         float _playerStartingZ = 8.0f;
         float enemyStartingZ = 20.0f;
-        EntityID _thisClientPlayerEntityID;
+        EntityID _thisClientPlayerEntityID = -1000; //create a rand function where initiatilising client to have a unique ID for networking
         //timer
         //gamepaused
         //ui-related stuff

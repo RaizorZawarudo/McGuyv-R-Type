@@ -19,6 +19,9 @@ void RL::InputManager::recordInputs()
     if (pressedKey != 0)
         this->_inputQueue.emplace_back(pressedKey);
 
+    //here we hardcode the keys that you want to be recognised when holding down.
+    //because you want to add the hold down as a keypress everyframe or else it will
+    //only record the moment you press it down
     if (IsKeyDown(KEY_W))
         this->_inputQueue.emplace_back('w');
     if (IsKeyDown(KEY_S))

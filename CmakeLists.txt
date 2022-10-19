@@ -24,7 +24,9 @@ FILE(GLOB CFILES
         Source/Drawable3D.cpp
         Source/Drawable2D.cpp
         Source/CameraManager.cpp
-        Source/InputManager.cpp)
+        Source/InputManager.cpp
+        Source/Components&Systems/InputSystem.cpp
+        Source/Components&Systems/ClearInputsSystem.cpp)
 
 #add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES
 FILE(GLOB HEADERFILES
@@ -45,6 +47,8 @@ FILE(GLOB HEADERFILES
         Source/CameraManager.hpp
         Source/InputManager.hpp
         Source/Components&Systems/MovementSystem.hpp
+        Source/Components&Systems/InputSystem.hpp
+        Source/Components&Systems/ClearInputsSystem.hpp
         Source/Components&Systems/ISystem.hpp)
 
 

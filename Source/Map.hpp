@@ -91,7 +91,7 @@ class Map {
 
         std::string _mapName;
         std::string _backgroundName;
-        float _scrollSpeed = 9.0f;
+        float _scrollSpeed = 0.2f;
         float _currentSpeed;
 
         std::vector<repeatPathData_t> _repeatPaths; //this should be in order of game aspect in the csv already

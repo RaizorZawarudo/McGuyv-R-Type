@@ -28,7 +28,7 @@ class MovementSystem : public ISystem {
         ~MovementSystem() {};
 
         void update(std::vector<EntityID> &allEntities) override {
-            for (EntityID ent : EntityViewer<Position, Velocity, Input, EntityType>(*_em.get())) {
+            for (EntityID ent : EntityViewer<Position, Velocity, Input, EntityModelType>(*_em.get())) {
                 _ent = ent;
                 Position* entityPos = _em->Get<Position>(ent);
                 Velocity* entityVel = _em->Get<Velocity>(ent);
@@ -36,7 +36,6 @@ class MovementSystem : public ISystem {
                 EntityModelType* entityType = _em->Get<EntityModelType>(ent);
 
                 if (entityType->modelType == RL::ModelType::SPACESHIP) {
-                    std::cout << "THERE IS SPACESHIP IN MOVEMENT SYSTEMS!!!" << std::endl;
                     for (int keypressed : entityMovement->_inputQueue) { // && ID of entity = id of client
                         switch (keypressed) {
                             case UP:
@@ -60,6 +59,9 @@ class MovementSystem : public ISystem {
                                 break;
                             // case FORWARD :
                             //     moveForward(entityPos, entityVel);
+                            
+                            //The other buttons are going to be in other systems
+                            
                             // case SHOOT: 
                             //     shootProjectile(weapontype); // here we have to create the entity depending on the bullet type, so we need the weapons pointer
                             // case FIRSTWEAPON :
@@ -140,7 +142,7 @@ class MovementSystem : public ISystem {
                 moveDownLeft(pos, vel);
                 return;
             }
-                pos->pos.x -= vel->x;
+                pos->pos.x += vel->x;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(270.0f);
 
@@ -156,7 +158,7 @@ class MovementSystem : public ISystem {
                 moveDownRight(pos, vel);
                 return;
             }
-                pos->pos.x += vel->x;
+                pos->pos.x -= vel->x;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(90.0f);
         };
@@ -171,7 +173,7 @@ class MovementSystem : public ISystem {
                 moveUpRight(pos, vel);
                 return;
             }
-                pos->pos.y -= vel->y;
+                pos->pos.y += vel->y;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(180.0f);
         };
@@ -188,23 +190,23 @@ class MovementSystem : public ISystem {
                 moveDownRight(pos, vel);
                 return;
             }
-                pos->pos.y += vel->y;
+                pos->pos.y -= vel->y;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(0.0f);
         };
 
         void moveUpLeft(Position *pos, Velocity *vel)
         {
-                pos->pos.x -= vel->x / 2;
-                pos->pos.y -= vel->y / 2;
+                pos->pos.x += vel->x / 2;
+                pos->pos.y += vel->y / 2;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(225.0f);
         };
 
         void moveUpRight(Position *pos, Velocity *vel)
         {
-                pos->pos.x += vel->x / 2;
-                pos->pos.y -= vel->y / 2;
+                pos->pos.x -= vel->x / 2;
+                pos->pos.y += vel->y / 2;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(135.0f);
         };
@@ -212,16 +214,16 @@ class MovementSystem : public ISystem {
         void moveDownLeft(Position *pos, Velocity *vel)
         {
 
-                pos->pos.x -= vel->x / 2;
-                pos->pos.y += vel->y / 2;
+                pos->pos.x += vel->x / 2;
+                pos->pos.y -= vel->y / 2;
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(315.0f);
         };
 
         void moveDownRight(Position *pos, Velocity *vel)
         {
-                pos->pos.x += vel->x / 2;
-                pos->pos.y += vel->y / 2;
+                pos->pos.x -= vel->x / 2;
+                pos->pos.y -= vel->y / 2;
             //     playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
             //     playerSprite->model->setRotation(45.0f);
             // }

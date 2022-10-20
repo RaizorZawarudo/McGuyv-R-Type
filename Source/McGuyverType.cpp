@@ -74,8 +74,6 @@ void McGuyverType::gameLoop()
 
     //     _renderer->begin3DMode(_cameraManager->getCamera());
         
-    //     for (int i = 0; i < _inputManager->getInputs().size(); i++)
-    //         std::cout << _inputManager->getInputs()[i] << std::endl;
 
 
             // if (_inputManager->playerHasPressedKeyAsChar('p')) {
@@ -135,13 +133,17 @@ void McGuyverType::createPlayer(std::string modelName)
     std::vector<int> playerInput;
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::SPACESHIP});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
+    
     _entityManager->Assign<ModelName>(id, ModelName{modelName});
-    _entityManager->Assign<Position>(id, _playerStartingPos);
-    _entityManager->Assign<Input>(id, Input{playerInput});
-    _entityManager->Assign<Velocity>(id, Velocity{0.2f, 0.2f, 0.2f});
-    _entityManager->Assign<IsAlive>(id, IsAlive{true});
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
+    _entityManager->Assign<PitchYawRoll>(id, PitchYawRoll{0.0f, 0.0f, 0.0f});
+    _entityManager->Assign<Input>(id, Input{playerInput});
+    
+    _entityManager->Assign<IsAlive>(id, IsAlive{true});
+    _entityManager->Assign<Position>(id, _playerStartingPos);
+    _entityManager->Assign<Velocity>(id, Velocity{0.2f, 0.2f, 0.2f});
     _entityManager->Assign<Score>(id, Score{0});
+    _entityManager->Assign<Hp>(id, Hp{100});
     _entityManager->Assign<Shield>(id, Shield{0});
 
 

@@ -24,13 +24,15 @@ void RL::Renderer::draw_text(std::string text, Color color, int x, int y, Font f
     DrawTextEx(font, text.c_str(), Vector2 {float(x), float(y)}, size, 2, color);
 }
 
-void RL::Renderer::draw_3D_model(Model model, Vector3 position, float scale, RL::ModelType ownerType)
+void RL::Renderer::draw_3D_model(Model model, Vector3 position, float scale, RL::ModelType ownerType, const PitchYawRoll *pYR)
 {
     float yRotationAngle = 0;
+    float pitch = DEG2RAD*pYR->pitch;
+    float reyaw = DEG2RAD*pYR->yaw;
+    float roll = DEG2RAD*pYR->roll;
     if (ownerType == RL::ModelType::SPACESHIP || ownerType == RL::ModelType::MCGUYVER)
         yRotationAngle = 180.0f;
-    //DrawModel(model, position, scale, WHITE);
-    //DrawModelEx(model, position, (Vector3){ 1.0f, 0.0f, 0.0f }, rotationangle, (Vector3){ 0.1f, 0.1f, 0.1f }, WHITE);
+    model.transform = MatrixRotateXYZ((Vector3){ pitch, reyaw ,roll });
     DrawModelEx(model, position, {0, 1, 0}, yRotationAngle, {scale, scale, scale}, WHITE);
 
 

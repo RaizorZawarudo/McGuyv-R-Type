@@ -5,6 +5,7 @@
 ** DrawingSystem
 */
 
+#include "ISystem.hpp"
 #include "DrawingSystem.hpp"
 
 
@@ -35,7 +36,9 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                 EntityModelType *modelType = _em->Get<EntityModelType>(_ent);
                 ModelScale *modelScale = _em->Get<ModelScale>(_ent);
                 Owner *owner = _em->Get<Owner>(_ent);
-                _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType);
+                PitchYawRoll *pitchYawRoll = _em->Get<PitchYawRoll>(_ent);
+                _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType, pitchYawRoll);
+            }
             
         _renderer->end3DMode();
 
@@ -43,6 +46,6 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
         // send data to server functions
         DrawFPS(10, 10);
     _renderer->endDrawing();
-    }
 }
+
 

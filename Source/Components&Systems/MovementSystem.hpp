@@ -12,6 +12,11 @@
 #include "../InputManager.hpp"
 // #include "../CollisionManager.hpp"
 
+const float MAXLEFT = 7.0F;
+const float MAXRIGHT = -7.0F;
+const float MAXUP = 6.0F;
+const float MAXDOWN = 1.0F;
+
 
 class MovementSystem : public ISystem {
     public:
@@ -37,47 +42,34 @@ class MovementSystem : public ISystem {
         };
 
         void update(std::vector<EntityID> &allEntities) override {
-            for (EntityID ent : EntityViewer<Position, Velocity, Input, EntityModelType>(*_em.get())) {
+            for (EntityID ent : EntityViewer<Position, Velocity, Input, EntityModelType, PitchYawRoll>(*_em.get())) {
                 _ent = ent;
                 Position* entityPos = _em->Get<Position>(ent);
                 Velocity* entityVel = _em->Get<Velocity>(ent);
                 Input* entityMovement = _em->Get<Input>(ent);
                 EntityModelType* entityType = _em->Get<EntityModelType>(ent);
+                PitchYawRoll* pitchYawRoll = _em->Get<PitchYawRoll>(ent);
+                
 
                 if (entityType->modelType == RL::ModelType::SPACESHIP) {
+                    if (entityMovement->_inputQueue.empty()) {
+                        if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 1.0f;
+                        else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 1.0f;
+                        if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
+                        else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
+                    }
                     for (int keypressed : entityMovement->_inputQueue) { // && ID of entity = id of client
-                        switch (keypressed) {
-                            case UP:
-                            case UP2:
-                                //playerSprite->model->setCurrentAnim(1);
-                                moveUp(entityPos, entityVel, entityMovement); // add entitiyMovement to constructor
-                                break;
-                            case DOWN:
-                                //playerSprite->model->setCurrentAnim(1);
-                                moveDown(entityPos, entityVel, entityMovement);
-                                break;
-                            case LEFT:
-                            case LEFT2:
-                                //playerSprite->model->setCurrentAnim(1);
-                                moveLeft(entityPos, entityVel, entityMovement);
-                                break;
-                            case RIGHT:
-                                //playerSprite->model->setCurrentAnim(1);
-                                //playerSprite->model->updateModelsAnimation();
-                                moveRight(entityPos, entityVel, entityMovement);
-                                break;
-                            // case FORWARD :
-                            //     moveForward(entityPos, entityVel);
-                            
-                            //The other buttons are going to be in other systems
-                            
-                            // case SHOOT: 
-                            //     shootProjectile(weapontype); // here we have to create the entity depending on the bullet type, so we need the weapons pointer
-                            // case FIRSTWEAPON :
-                            // case SECONDWEAPON:
-                            // case THIRDWEAPON:
-                            case NONE:
-                                break;
+                        if (keypressed == UP || keypressed == UP2) moveUp(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == DOWN) moveDown(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
+                            else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
+                        }
+                        if (keypressed == LEFT || keypressed == LEFT2) moveLeft(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == RIGHT) moveRight(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 0.5f;
+                            else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 0.5f;
                         }
                     }
                 }
@@ -87,31 +79,6 @@ class MovementSystem : public ISystem {
         // if entity == ENNEMY do AI movement
 
         //if entity == PROJECTILE == DO MOVEMENTS FOR PROJECTILES
-
-
-
-        // if entity == obstale to movement for obstacle
-
-        // bool checkMovable(Pos pos, bool wallPass) {
-        //     if (_colManager.collisionsWithWalls((RL::Vector3f){pos.x, pos.y, pos.z}, *_map.get()))
-        //         return false;
-        //     if (!wallPass && _colManager.collisionsWithCrates((RL::Vector3f){pos.x, pos.y, pos.z}, *_map.get()))
-        //         return false;
-        //     Sprite *player = _em->Get<Sprite>(_ent);
-        //     Pos *playerPos = _em->Get<Pos>(_ent);
-        //     for (EntityID ent : EntityViewer<Pos, Sprite, BombProperty, BombOwner>(*_em.get())) {
-        //         Sprite *bomb = _em->Get<Sprite>(ent);
-        //         Pos *bombPos = _em->Get<Pos>(ent); //remove again
-        //         BombProperty *bombProperty = _em->Get<BombProperty>(ent);
-        //         if (_colManager.collisionsWithModels((RL::Vector3f){pos.x, pos.y, pos.z}, *bomb->model)) {
-        //             for (Blocking blocking : bombProperty->blockingForPlayer) {
-        //                 if (blocking.id == _ent && blocking.isBlocking)
-        //                     return false;
-        //             }
-        //         }
-        //     }
-        //     return true;
-        // }
 
         bool checkPressedUp(Input* entityMovement) {
             if (entityHasPressedKeyAsChar(entityMovement, UserInput::UP) || entityHasPressedKeyAsChar(entityMovement, UserInput::UP2) )
@@ -141,13 +108,17 @@ class MovementSystem : public ISystem {
                 return false;
         }
 
-        void moveLeft(Position *pos, Velocity *vel, Input* entityMovement)
+        void moveLeft(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
         {
-            if (checkPressedUp(entityMovement)) {
+            pitchYawRoll->roll > -20.0f ? pitchYawRoll->roll -= 1.0f : pitchYawRoll->roll -= 0.0f;
+
+            if (pos->pos.x > MAXLEFT) return;
+
+            if ((pos->pos.y < MAXUP) && checkPressedUp(entityMovement)) {
                 moveUpLeft(pos, vel);
                 return;
             }
-            if (checkPressedDown(entityMovement)) {
+            if ((pos->pos.y > MAXUP) && checkPressedDown(entityMovement)) {
                 moveDownLeft(pos, vel);
                 return;
             }
@@ -157,13 +128,18 @@ class MovementSystem : public ISystem {
 
         };
 
-        void moveRight(Position *pos, Velocity *vel, Input* entityMovement)
+        void moveRight(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
         {
-            if (checkPressedUp(entityMovement)) {
+        
+            pitchYawRoll->roll < 20.0f ? pitchYawRoll->roll += 1.0f : pitchYawRoll->roll += 0.0f;
+
+            if (pos->pos.x < MAXRIGHT) return;
+
+            if ((pos->pos.y < MAXUP) && checkPressedUp(entityMovement)) {
                 moveUpRight(pos, vel);
                 return;
             }
-            if (checkPressedDown(entityMovement)) {
+            if ((pos->pos.y > MAXUP) && checkPressedDown(entityMovement)) {
                 moveDownRight(pos, vel);
                 return;
             }
@@ -172,13 +148,17 @@ class MovementSystem : public ISystem {
                 // playerSprite->model->setRotation(90.0f);
         };
 
-        void moveUp(Position *pos, Velocity *vel, Input* entityMovement)
+        void moveUp(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
         {
-            if (checkPressedLeft(entityMovement)) {
+            pitchYawRoll->pitch > -15.0f ? pitchYawRoll->pitch -= 1.0f : pitchYawRoll->pitch -= 0.0f;
+
+            if (pos->pos.y > MAXUP) return;
+
+            if ((pos->pos.x < MAXLEFT) && checkPressedLeft(entityMovement)) {
                 moveUpLeft(pos, vel);
                 return;
             }
-            if (checkPressedRight(entityMovement)) {
+            if ((pos->pos.x > -MAXRIGHT) && checkPressedRight(entityMovement)) {
                 moveUpRight(pos, vel);
                 return;
             }
@@ -187,15 +167,19 @@ class MovementSystem : public ISystem {
                 // playerSprite->model->setRotation(180.0f);
         };
 
-        void moveDown(Position *pos, Velocity *vel, Input* entityMovement)
+        void moveDown(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
         {
-            if (checkPressedLeft(entityMovement)) {
+            pitchYawRoll->pitch < 15.0f ? pitchYawRoll->pitch += MAXUP : pitchYawRoll->pitch += 0.0f;
+
+            if (pos->pos.y < MAXDOWN) return;
+
+            if ((pos->pos.x < MAXLEFT) && checkPressedLeft(entityMovement)) {
                 moveDownLeft(pos, vel);
                 // playerSprite->model->setCurrentAnim(1);
                 // playerSprite->model->updateModelsAnimation();
                 return;
             }
-            if (checkPressedRight(entityMovement)) {
+            if ((pos->pos.x > MAXRIGHT) && checkPressedRight(entityMovement)) {
                 moveDownRight(pos, vel);
                 return;
             }

@@ -102,13 +102,6 @@ struct AmmoCapacity {
     std::size_t curAmmo;
 };
 
-// enum ItemType {
-//     SPEED_UP = 's',
-//     BOMB_UP = 'b',
-//     FIRE_UP = 'f',
-//     WALLPASS = 'w'
-// };
-
 
 
 // struct Level {
@@ -175,5 +168,11 @@ struct Hp {
 
 struct Shield {
     int shield;
+};
+
+struct PitchYawRoll {
+    float pitch;
+    float yaw;
+    float roll;
 };
 

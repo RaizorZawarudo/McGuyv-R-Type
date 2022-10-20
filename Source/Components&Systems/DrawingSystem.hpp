@@ -11,6 +11,7 @@
 #include "../Renderer.hpp"
 #include "../AssetManager.hpp"
 #include "../CameraManager.hpp"
+#include "raymath.h"
 
 class DrawingSystem : public ISystem  {
     public:

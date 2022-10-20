@@ -33,11 +33,18 @@ class AssetManager {
         std::vector<RL::Drawable3D*> getEnnemyModels();
         std::vector<Map*> getMaps();
         std::vector<RL::Drawable2D*> getBackgrounds();
+        int getCurrentMapBeingPlayed();
+
 
         RL::Drawable2D* getSpecificBackground(std::string backgroundName);
         RL::Drawable3D* getSpecificDrawableWithType(std::string modelName, RL::ModelType modelType);
 
+        //setters
+
+        void setCurrentMapBeingPlayed(int level);
+
     private:
+        int _currentLevelBeingPlayed;
         //3d assets
         std::vector<RL::Drawable3D*> _zonesModels;
         std::vector<RL::Drawable3D*> _projectileModels;

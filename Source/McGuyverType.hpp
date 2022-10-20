@@ -20,6 +20,7 @@
 #include "Components&Systems/MovementSystem.hpp"
 #include "Components&Systems/InputSystem.hpp"
 #include "Components&Systems/ClearInputsSystem.hpp"
+#include "Components&Systems/DrawingSystem.hpp"
 // #include "CollisionManager.hpp"
 
 #pragma once
@@ -63,9 +64,10 @@ class McGuyverType {
 
         //game related data     
         int _currentLevel = 1;
-        Position _playerStartingPos = {0.0f, 1.0f, -8.0f};
-        float _playerStartingZ = 8.0f;
-        float enemyStartingZ = 20.0f;
+        Position _playerStartingPos = {0.0f, 1.0f, -8.0f}; //can delete 
+        float _playerStartingZ = 8.0f; //can delete
+        float enemyStartingZ = 20.0f; // cand delete
+
         EntityID _thisClientPlayerEntityID = -1000; //create a rand function where initiatilising client to have a unique ID for networking
         //timer
         //gamepaused

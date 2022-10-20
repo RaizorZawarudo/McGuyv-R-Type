@@ -20,6 +20,7 @@ McGuyverType::McGuyverType()
     this->_systems.push_back(std::make_shared<InputSystem>(this->_entityManager, this->_inputManager, this->_thisClientPlayerEntityID));
     this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager));
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
+    this->_systems.push_back(std::make_shared<DrawingSystem>(this->_entityManager, this->_renderer, this->_assetManager, this->_cameraManager));
 
     //here we resize all the maps to be the dimension of the window
     for (Map* map: this->_assetManager->getMaps())
@@ -39,7 +40,7 @@ void McGuyverType::startGame() // must have player choices etc
     createPlayer("dartAssault");
 
 
-
+    _assetManager->setCurrentMapBeingPlayed(_currentLevel);
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choice
     while (_window->isWindowOpen()) {
         //UI LOOP functions
@@ -66,15 +67,15 @@ void McGuyverType::gameLoop()
 
     // Draw
     //----------------------------------------------------------------------------------
-    _renderer->beginDrawing();
-        _renderer->clearBackground();
+    // _renderer->beginDrawing();
+    //     _renderer->clearBackground();
 
-        _renderer->drawBackground(_assetManager, _currentLevel);
+    //     _renderer->drawBackground(_assetManager, _currentLevel);
 
-        _renderer->begin3DMode(_cameraManager->getCamera());
+    //     _renderer->begin3DMode(_cameraManager->getCamera());
         
-        for (int i = 0; i < _inputManager->getInputs().size(); i++)
-            std::cout << _inputManager->getInputs()[i] << std::endl;
+    //     for (int i = 0; i < _inputManager->getInputs().size(); i++)
+    //         std::cout << _inputManager->getInputs()[i] << std::endl;
 
 
             // if (_inputManager->playerHasPressedKeyAsChar('p')) {
@@ -103,24 +104,24 @@ void McGuyverType::gameLoop()
 
 
 
-            _renderer->drawMap( _assetManager->getMaps().at(_currentLevel), _cameraManager->getCamera(), _assetManager);
-            for (EntityID _ent:  EntityViewer<Position, Velocity, Input, EntityModelType>(*_entityManager.get()) ) {
-                Position *objectPos = _entityManager->Get<Position>(_ent);
-                ModelName *objectModelName = _entityManager->Get<ModelName>(_ent);
-                EntityModelType *modelType = _entityManager->Get<EntityModelType>(_ent);
-                ModelScale *modelScale = _entityManager->Get<ModelScale>(_ent);
-                Owner *owner = _entityManager->Get<Owner>(_ent);
-                _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType);
-            }
-            // DrawGrid(2000, 1.0f);        // Draw a grid
-            // std::cout << " current stage = " << this->_assetManager->getMaps().at(_currentLevel)->getCurrentStage() 
-            // << "and max stage is = " << this->_assetManager->getMaps().at(_currentLevel)->getMaxStage() << std::endl;
-        _renderer->end3DMode();
+    //         _renderer->drawMap( _assetManager->getMaps().at(_currentLevel), _cameraManager->getCamera(), _assetManager);
+    //         for (EntityID _ent:  EntityViewer<Position, Velocity, Input, EntityModelType>(*_entityManager.get()) ) {
+    //             Position *objectPos = _entityManager->Get<Position>(_ent);
+    //             ModelName *objectModelName = _entityManager->Get<ModelName>(_ent);
+    //             EntityModelType *modelType = _entityManager->Get<EntityModelType>(_ent);
+    //             ModelScale *modelScale = _entityManager->Get<ModelScale>(_ent);
+    //             Owner *owner = _entityManager->Get<Owner>(_ent);
+    //             _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType);
+    //         }
+    //         // DrawGrid(2000, 1.0f);        // Draw a grid
+    //         // std::cout << " current stage = " << this->_assetManager->getMaps().at(_currentLevel)->getCurrentStage() 
+    //         // << "and max stage is = " << this->_assetManager->getMaps().at(_currentLevel)->getMaxStage() << std::endl;
+    //     _renderer->end3DMode();
 
 
-        // send data to server functions
-        DrawFPS(10, 10);
-    _renderer->endDrawing();
+    //     // send data to server functions
+    //     DrawFPS(10, 10);
+    // _renderer->endDrawing();
     //---------------------------------------------------------------------------------- 
     
 }

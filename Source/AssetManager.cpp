@@ -242,4 +242,17 @@ RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName,
 
 }
 
+int AssetManager::getCurrentMapBeingPlayed()
+{
+    return this->_currentLevelBeingPlayed;
+}
+
+
+//Setters
+
+void AssetManager::setCurrentMapBeingPlayed(int level)
+{
+    this->_currentLevelBeingPlayed = level;
+}
+
 

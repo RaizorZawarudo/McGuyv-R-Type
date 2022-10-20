@@ -16,6 +16,8 @@ const float MAXLEFT = 7.0F;
 const float MAXRIGHT = -7.0F;
 const float MAXUP = 6.0F;
 const float MAXDOWN = 1.0F;
+const float MAXFORWARD = 20.0f;
+const float PLAYERSTARTINGZ = -8.0f;
 
 
 class MovementSystem : public ISystem {
@@ -49,6 +51,7 @@ class MovementSystem : public ISystem {
                 Input* entityMovement = _em->Get<Input>(ent);
                 EntityModelType* entityType = _em->Get<EntityModelType>(ent);
                 PitchYawRoll* pitchYawRoll = _em->Get<PitchYawRoll>(ent);
+                int forward = 0;
                 
 
                 if (entityType->modelType == RL::ModelType::SPACESHIP) {
@@ -57,7 +60,9 @@ class MovementSystem : public ISystem {
                         else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 1.0f;
                         if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
                         else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
+                        if (entityPos->pos.z > PLAYERSTARTINGZ) entityPos->pos.z -= 0.2f;
                     }
+
                     for (int keypressed : entityMovement->_inputQueue) { // && ID of entity = id of client
                         if (keypressed == UP || keypressed == UP2) moveUp(entityPos, entityVel, entityMovement, pitchYawRoll);
                         else if (keypressed == DOWN) moveDown(entityPos, entityVel, entityMovement, pitchYawRoll);
@@ -65,13 +70,20 @@ class MovementSystem : public ISystem {
                             if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
                             else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
                         }
+
                         if (keypressed == LEFT || keypressed == LEFT2) moveLeft(entityPos, entityVel, entityMovement, pitchYawRoll);
                         else if (keypressed == RIGHT) moveRight(entityPos, entityVel, entityMovement, pitchYawRoll);
                         else {
                             if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 0.5f;
                             else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 0.5f;
                         }
+
+                        if (keypressed == FORWARD) forward = 1;
                     }
+                    if (forward == 1 )moveForward(entityPos, entityVel, entityMovement, pitchYawRoll);
+                    else
+                        if (entityPos->pos.z > PLAYERSTARTINGZ) entityPos->pos.z -= 0.2f;
+                    forward = 0;
                 }
             }
         };
@@ -187,6 +199,14 @@ class MovementSystem : public ISystem {
                 // playerSprite->model->setPosition((RL::Vector3f){pos->x, pos->y, pos->z});
                 // playerSprite->model->setRotation(0.0f);
         };
+
+        void moveForward(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
+        {
+            if (pos->pos.z > MAXFORWARD) return;
+
+            pos->pos.z += vel->z;
+
+        }
 
         void moveUpLeft(Position *pos, Velocity *vel)
         {

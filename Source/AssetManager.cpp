@@ -254,5 +254,3 @@ void AssetManager::setCurrentMapBeingPlayed(int level)
 {
     this->_currentLevelBeingPlayed = level;
 }
-
-

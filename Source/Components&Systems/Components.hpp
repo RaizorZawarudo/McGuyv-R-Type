@@ -176,3 +176,6 @@ struct PitchYawRoll {
     float roll;
 };
 
+struct Collider {
+    BoundingBox collider;
+};

@@ -12,7 +12,7 @@
 //the scale can be set to 1
 //set type == RL::MODEL only if its an animated model / bomb. the powerups are RL::POWER, the walls are RL::WALL
 //add this->_cameraFOV to 90.0f in order to see everything in BOSS MODE OR ELSE IT DOESNT WORK BABY
-RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float length, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv)
+RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float length, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv, Vector3 velocity, int hp, float shootCD)
 {
     this->_name = name;
     this->_type = type;
@@ -23,6 +23,10 @@ RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string mod
     this->_height = height;
     this->_cameraPositionMcGuyv = cameraPositionMcGuyv;
     this->_cameraFovMcGuyv = cameraFovMcGuyv;
+    this->_velocity = velocity;
+    this->_hp = hp;
+    this->_shootCD = shootCD;
+
     // if (_type == RL::ModelType::WALL || _type == RL::ModelType::CRATE)
     //     _boxSize = {1.0, 1.0, 1.0};
     // if (_type == ModelType::FLOOR)
@@ -288,4 +292,19 @@ Vector3 RL::Drawable3D::getCameraPositionMcGuyv()
 float RL::Drawable3D::getCameraFovMcGuyv()
 {
     return this->_cameraFovMcGuyv;
+}
+
+Vector3 RL::Drawable3D::getVelocity()
+{
+    return this->_velocity;
+}
+
+int RL::Drawable3D::getHp()
+{
+    return this->_hp;
+}
+
+float RL::Drawable3D::getShootCD()
+{
+    return this->_shootCD;
 }

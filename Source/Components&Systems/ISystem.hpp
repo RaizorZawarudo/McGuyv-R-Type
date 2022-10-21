@@ -14,7 +14,7 @@
 
 class ISystem {
     public:
-        ~ISystem() = default;
+        virtual ~ISystem() = default;
 
         virtual void update(std::vector<EntityID> &allEntities) = 0;
     

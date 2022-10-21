@@ -17,10 +17,13 @@
 #include "ECS/ComponentPool.hpp"
 #include "ECS/EntityManager.hpp"
 #include "Components&Systems/ISystem.hpp"
+#include "Components&Systems/Components.hpp"
+#include "Components&Systems/ShootingSystem.hpp"
 #include "Components&Systems/MovementSystem.hpp"
 #include "Components&Systems/InputSystem.hpp"
 #include "Components&Systems/ClearInputsSystem.hpp"
 #include "Components&Systems/DrawingSystem.hpp"
+#include "Components&Systems/DeleteEntitiesSystem.hpp"
 // #include "CollisionManager.hpp"
 
 #pragma once
@@ -36,6 +39,7 @@ class McGuyverType {
 
         //entity creation functions
         void createPlayer(std::string modelName);
+        std::vector<ProjectileWeapon> generateStartWeaponset(std::string modelName);
         //void createEnnemy();
         //void createProjectile();
         //void createObstacle();

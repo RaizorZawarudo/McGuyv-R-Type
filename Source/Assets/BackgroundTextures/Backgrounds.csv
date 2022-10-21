@@ -1,4 +1,7 @@
 name,path
-retrosun,Source/Assets/BackgroundTextures/retrosun.png
-cosmicCliffs,Source/Assets/BackgroundTextures/cosmicCliffs.png
-retromountains,Source/Assets/BackgroundTextures/retromountains.png
+sunvalleytron,Source/Assets/BackgroundTextures/sunvalleytron.png
+city1,Source/Assets/BackgroundTextures/city1.png
+city2,Source/Assets/BackgroundTextures/city2.png
+grid0,Source/Assets/BackgroundTextures/grid_0.png
+grid1,Source/Assets/BackgroundTextures/grid_1.png
+aicity,Source/Assets/BackgroundTextures/aiCity.png

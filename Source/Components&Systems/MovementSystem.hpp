@@ -5,8 +5,7 @@
 ** MovementSystem
 */
 
-#ifndef MOVEMENTSYSTEM_HPP_
-#define MOVEMENTSYSTEM_HPP_
+#pragma once
 
 #include "ISystem.hpp"
 #include "../InputManager.hpp"
@@ -44,13 +43,16 @@ class MovementSystem : public ISystem {
         };
 
         void update(std::vector<EntityID> &allEntities) override {
-            for (EntityID ent : EntityViewer<Position, Velocity, Input, EntityModelType, PitchYawRoll>(*_em.get())) {
+            for (EntityID ent : EntityViewer<Position, Velocity,EntityModelType, PitchYawRoll, Collider>(*_em.get())) {
                 _ent = ent;
                 Position* entityPos = _em->Get<Position>(ent);
                 Velocity* entityVel = _em->Get<Velocity>(ent);
                 Input* entityMovement = _em->Get<Input>(ent);
                 EntityModelType* entityType = _em->Get<EntityModelType>(ent);
                 PitchYawRoll* pitchYawRoll = _em->Get<PitchYawRoll>(ent);
+                ModelDimensions* modelDimensions = _em->Get<ModelDimensions>(ent);
+                Owner *entityOwner = _em->Get<Owner>(ent);
+                Collider* entityCollider = _em->Get<Collider>(ent);
                 int forward = 0;
                 
 
@@ -63,7 +65,7 @@ class MovementSystem : public ISystem {
                         if (entityPos->pos.z > PLAYERSTARTINGZ) entityPos->pos.z -= 0.2f;
                     }
 
-                    for (int keypressed : entityMovement->_inputQueue) { // && ID of entity = id of client
+                    for (int keypressed : entityMovement->_inputQueue) {
                         if (keypressed == UP || keypressed == UP2) moveUp(entityPos, entityVel, entityMovement, pitchYawRoll);
                         else if (keypressed == DOWN) moveDown(entityPos, entityVel, entityMovement, pitchYawRoll);
                         else {
@@ -85,12 +87,39 @@ class MovementSystem : public ISystem {
                         if (entityPos->pos.z > PLAYERSTARTINGZ) entityPos->pos.z -= 0.2f;
                     forward = 0;
                 }
+
+                if (entityType->modelType == RL::ModelType::PROJECTILE) {
+                    entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
+
+
+                }
+                // if entity == ENNEMY do AI movement
+
+                // if entitiy == OBSTACLE == DO MOVEMENTS FOR OBSTACLES
+
+
+
+                //after the entity has moved we set its bounding box in order for the collisionsystem to detect collisions
+                setEntityBoundingBox(entityCollider, entityPos, modelDimensions);
+
+                // std::cout << "bounding box : " << entityCollider->collider.max.x << entityCollider->collider.max.y << entityCollider->collider.max.z << entityCollider->collider.min.x << entityCollider->collider.min.y << entityCollider->collider.min.z<< std::endl;
+
             }
         };
 
-        // if entity == ENNEMY do AI movement
+        
+        void setEntityBoundingBox(Collider* entityCollider, Position* entityPos, ModelDimensions* modelDimensions)
+        {
+            entityCollider->collider = {(Vector3) {entityPos->pos.x - (modelDimensions->widthX ) / 2,
+                                         entityPos->pos.y - (modelDimensions->heightY ) / 2,
+                                         entityPos->pos.z - (modelDimensions->lengthZ ) / 2} ,
+                              (Vector3) {entityPos->pos.x + (modelDimensions->widthX ) / 2,
+                                         entityPos->pos.y + (modelDimensions->heightY ) / 2,
+                                         entityPos->pos.z + (modelDimensions->lengthZ ) / 2}
+                                         };
 
-        //if entity == PROJECTILE == DO MOVEMENTS FOR PROJECTILES
+        };
+
 
         bool checkPressedUp(Input* entityMovement) {
             if (entityHasPressedKeyAsChar(entityMovement, UserInput::UP) || entityHasPressedKeyAsChar(entityMovement, UserInput::UP2) )
@@ -247,5 +276,3 @@ class MovementSystem : public ISystem {
         // PlayerType _type = Other;
         EntityID _ent;
 };
-
-#endif /* !MOVEMENTSYSTEM_HPP_ */

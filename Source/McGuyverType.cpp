@@ -18,8 +18,12 @@ McGuyverType::McGuyverType()
 
 
     this->_systems.push_back(std::make_shared<InputSystem>(this->_entityManager, this->_inputManager, this->_thisClientPlayerEntityID));
-    this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager));
+    this->_systems.push_back(std::make_shared<ShootingSystem>(this->_entityManager, this->_assetManager));
+    this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager)); //this sets the bounding boxes so it must come as the last system before collisions 
+    //add collision system
+    //add ui update system (ui buttons , ui scores updates, ui keypresses to stop game etc etc)
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
+    this->_systems.push_back(std::make_shared<DeleteEntitiesSystem>(this->_entityManager));
     this->_systems.push_back(std::make_shared<DrawingSystem>(this->_entityManager, this->_renderer, this->_assetManager, this->_cameraManager));
 
     //here we resize all the maps to be the dimension of the window
@@ -124,7 +128,30 @@ void McGuyverType::gameLoop()
     
 }
 
+std::vector<ProjectileWeapon> McGuyverType::generateStartWeaponset(std::string modelName)
+{
+    std::vector<ProjectileWeapon> startWeaponset;
 
+    ProjectileWeapon BaseWeapon;
+    Vector3 Vel;
+
+    BaseWeapon.name = "Lazer";
+    BaseWeapon.modelName = modelName;
+    BaseWeapon.maxAmmo = -999; // unlimitted ammo stock
+    BaseWeapon.curAmmo = -999; // unlimitted ammo, both the -999 are for unlimited should define it later
+    BaseWeapon.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models
+    BaseWeapon.range = 50.0f; // TODO: same as above
+    BaseWeapon.cooldowninseconds = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getShootCD();
+    BaseWeapon.damage = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getHp();
+    Vel = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getVelocity();
+    BaseWeapon.vel = {Vel.x, Vel.y, Vel.z};
+    BaseWeapon.lasttimeweaponwasshot = 0;
+
+    startWeaponset.push_back(BaseWeapon);
+
+
+    return startWeaponset;
+}
 
 void McGuyverType::createPlayer(std::string modelName)
 {
@@ -136,7 +163,11 @@ void McGuyverType::createPlayer(std::string modelName)
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName});
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
+    _entityManager->Assign<ModelDimensions>(id, ModelDimensions{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getWidth(),
+                                                                _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getHeight(),
+                                                                _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getLength()});
     _entityManager->Assign<PitchYawRoll>(id, PitchYawRoll{0.0f, 0.0f, 0.0f});
+    _entityManager->Assign<Collider>(id, Collider{BoundingBox{}});
     _entityManager->Assign<Input>(id, Input{playerInput});
     
     _entityManager->Assign<IsAlive>(id, IsAlive{true});
@@ -144,7 +175,12 @@ void McGuyverType::createPlayer(std::string modelName)
     _entityManager->Assign<Velocity>(id, Velocity{0.2f, 0.2f, 0.2f});
     _entityManager->Assign<Score>(id, Score{0});
     _entityManager->Assign<Hp>(id, Hp{100});
-    _entityManager->Assign<Shield>(id, Shield{0});
+    _entityManager->Assign<Shield>(id, Shield{100});
+
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("missileProj"), 0});
+    
+
+    //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
 
 
 }

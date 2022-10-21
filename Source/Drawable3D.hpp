@@ -31,7 +31,7 @@ namespace RL {
 
     class Drawable3D: public IDrawable {
         public:
-            Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float lenght, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv);
+            Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float lenght, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv, Vector3 velocity, int hp, float shootCD);
             ~Drawable3D();
 
             // IDrawable methods
@@ -76,6 +76,9 @@ namespace RL {
             float getScale();
             Vector3 getCameraPositionMcGuyv();
             float getCameraFovMcGuyv();
+            Vector3 getVelocity();
+            int getHp();
+            float getShootCD();
 
             void setBoundingBox();
             BoundingBox getBoundingBox();
@@ -91,8 +94,11 @@ namespace RL {
             float _length;
             float _width;
             float _height;
+            Vector3 _velocity;
             Vector3 _cameraPositionMcGuyv;
             float _cameraFovMcGuyv;
+            int _hp;
+            float _shootCD;
 
             // Vector3 _boxSize;
             // BoundingBox _boundingBox;

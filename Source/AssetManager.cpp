@@ -62,12 +62,15 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
     std::string modelPath;
     std::string texturePath;
     std::string animationPath;
-    float scale;
-    float length;
-    float width;
-    float height;
-    Vector3 cameraPositionMcGuyv;
+    float scale = 1;
+    float length= 1;
+    float width = 1;
+    float height = 1;
+    Vector3 cameraPositionMcGuyv = {0, 0, 0};
     float cameraFovMcGuyv;
+    Vector3 velocity = {0, 0, 0};
+    int hp = 0;
+    float shootCD = 0;
 
     std::vector<std::vector<std::string>> parsedCsv = csvToTable(path);
     std::vector<RL::Drawable3D*> modelVector;
@@ -91,19 +94,32 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
                 length = atoi(parsedCsv[i][j].c_str());
             if (j == 7)
                 width = atoi(parsedCsv[i][j].c_str());
-            if (j ==8)
+            if (j == 8)
                 height = atoi(parsedCsv[i][j].c_str());
-            if (j == 9) {
+            if (j == 9 && type == RL::ModelType::ZONE) {
                 cameraPositionMcGuyv.x = atoi(splitStr( parsedCsv[i][j], ";")[0].c_str());
                 cameraPositionMcGuyv.y = atoi(splitStr( parsedCsv[i][j], ";")[1].c_str());
                 cameraPositionMcGuyv.z = atoi(splitStr( parsedCsv[i][j], ";")[2].c_str());
             }
-            if (j == 10)
-                cameraFovMcGuyv = atoi(parsedCsv[i][j].c_str());                
+            else if (j == 9 && type == RL::ModelType::PROJECTILE) {
+                velocity.x = atof(parsedCsv[i][j].c_str());
+                velocity.y = velocity.x;
+                velocity.z = velocity.x;
+            }
+            if (j == 10 && type == RL::ModelType::ZONE)
+                cameraFovMcGuyv = atoi(parsedCsv[i][j].c_str());    
+            else if (j == 10 && type == RL::ModelType::PROJECTILE)
+                hp = atoi(parsedCsv[i][j].c_str());
+
+            if (j == 11 && type == RL::ModelType::PROJECTILE) {
+                shootCD = atof(parsedCsv[i][j].c_str());
+            }
+
+
 
         }
         //HERE WE CREATE A NEW 3D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
-        RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv);
+        RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv, velocity, hp, shootCD);
        // std::cout<< "LOADING THIS MODEL : " << modelName << " " << style << " " << modelPath << " " << texturePath << " " << animationPath << " " << scale  << " " << std::endl;
 
         modelVector.emplace_back(newModel);
@@ -225,6 +241,13 @@ RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName,
         for (int i = 0; i < this->_spacecraftModels.size(); i++) {
             if (modelName == this->_spacecraftModels.at(i)->getName())
                 return this->_spacecraftModels.at(i);
+        }
+    }
+
+    if (modelType == RL::ModelType::PROJECTILE) {
+        for (int i = 0; i < this->_projectileModels.size(); i++) {
+            if (modelName == this->_projectileModels.at(i)->getName())
+                return this->_projectileModels.at(i);
         }
     }
 

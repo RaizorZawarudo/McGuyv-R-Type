@@ -30,7 +30,7 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
 
 
             _renderer->drawMap( _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed()), _cameraManager->getCamera(), _assetManager);
-            for (EntityID _ent:  EntityViewer<Position, Velocity, Input, EntityModelType>(*_em.get()) ) {
+            for (EntityID _ent:  EntityViewer<Position, EntityModelType>(*_em.get()) ) {
                 Position *objectPos = _em->Get<Position>(_ent);
                 ModelName *objectModelName = _em->Get<ModelName>(_ent);
                 EntityModelType *modelType = _em->Get<EntityModelType>(_ent);
@@ -43,7 +43,7 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
         _renderer->end3DMode();
 
 
-        // send data to server functions
+
         DrawFPS(10, 10);
     _renderer->endDrawing();
 }

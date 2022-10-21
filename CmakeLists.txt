@@ -1,6 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "-g3")
+SET(GCC_COVERAGE_LINK_FLAGS    "-v")
 
 #check if windows and set compilepath
 if (WIN32)
@@ -25,8 +26,10 @@ FILE(GLOB CFILES
         Source/Drawable2D.cpp
         Source/CameraManager.cpp
         Source/InputManager.cpp
+        Source/Components&Systems/ShootingSystem.cpp
         Source/Components&Systems/DrawingSystem.cpp
         Source/Components&Systems/InputSystem.cpp
+        Source/Components&Systems/DeleteEntitiesSystem.cpp
         Source/Components&Systems/ClearInputsSystem.cpp)
 
 #add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES
@@ -47,11 +50,13 @@ FILE(GLOB HEADERFILES
         Source/Drawable2D.hpp
         Source/CameraManager.hpp
         Source/InputManager.hpp
-        Cource/Components&Systems/DrawingSystem.hpp
+        Source/Components&Systems/ISystem.hpp
+        Source/Components&Systems/ShootingSystem.hpp
+        Source/Components&Systems/DrawingSystem.hpp
         Source/Components&Systems/MovementSystem.hpp
         Source/Components&Systems/InputSystem.hpp
-        Source/Components&Systems/ClearInputsSystem.hpp
-        Source/Components&Systems/ISystem.hpp)
+        Source/Components&Systems/DeleteEntitiesSystem.hpp
+        Source/Components&Systems/ClearInputsSystem.hpp)
 
 
 #add to project

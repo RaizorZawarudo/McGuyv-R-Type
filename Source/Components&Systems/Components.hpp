@@ -75,6 +75,16 @@ struct Position {
     }
 };
 
+struct PitchYawRoll {
+    float pitch;
+    float yaw;
+    float roll;
+};
+
+struct Collider {
+    BoundingBox collider;
+};
+
 struct Owner {
     EntityID id;
     RL::ModelType ownerType;
@@ -97,10 +107,16 @@ struct ModelScale {
     float modelScale;
 };
 
-struct AmmoCapacity {
-    std::size_t maxAmmo;
-    std::size_t curAmmo;
+struct ModelDimensions {
+    float heightY;
+    float widthX;
+    float lengthZ;
 };
+
+// struct AmmoCapacity {
+//     std::size_t maxAmmo;
+//     std::size_t curAmmo;
+// };
 
 
 
@@ -108,21 +124,7 @@ struct AmmoCapacity {
 //     std::size_t level;
 // };
 
-// struct Skillset {
-//     std::size_t bombUp;
-//     std::size_t speedUp;
-//     std::size_t fireUp;
-//     bool wallPass;
 
-//     Skillset operator+=(const Skillset &other) {
-//         bombUp += other.bombUp;
-//         speedUp += other.speedUp;
-//         fireUp += other.fireUp;
-//         if (!wallPass && other.wallPass)
-//             wallPass = true;
-//         return *this;
-//     };
-// };
 
 struct UIPos {
     int x;
@@ -170,12 +172,31 @@ struct Shield {
     int shield;
 };
 
-struct PitchYawRoll {
-    float pitch;
-    float yaw;
-    float roll;
+struct ProjectileWeapon {
+    std::string name;
+    std::string modelName;
+    Velocity vel;
+    float range;
+    float splash;
+    int maxAmmo;
+    int curAmmo;
+    int damage;
+
+    float cooldowninseconds;
+    double lasttimeweaponwasshot;
+
+    ProjectileWeapon operator+=(const ProjectileWeapon &other) {
+        curAmmo += other.curAmmo;
+        if (curAmmo > maxAmmo) curAmmo = maxAmmo;
+        return *this;
+    }
 };
 
-struct Collider {
-    BoundingBox collider;
+struct Weaponset {
+    std::vector<ProjectileWeapon> weapons;
+    std::size_t currentWeapon;
 };
+
+
+
+

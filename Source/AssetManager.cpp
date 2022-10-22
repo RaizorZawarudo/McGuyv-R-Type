@@ -34,6 +34,7 @@ void AssetManager::loadAllModels()
     std::string mapBackgroundCSVPath = "Source/Assets/BackgroundTextures/Backgrounds.csv";
     std::string obstacleCSVPath = "Source/Assets/Models/Obstacles/Obstacles.csv";
     std::string explosionCSVPath = "Source/Assets/Models/Explosions/Explosions.csv";
+    std::string effectsCSVPath = "Source/Assets/Models/Effects/Effects.csv";
 
     //load all backgrounds;
     this->_ingameBackgrounds = loadAllBackgrounds(mapBackgroundCSVPath);
@@ -57,6 +58,9 @@ void AssetManager::loadAllModels()
 
     //load all exposions , they have animation !!
     this->_explosionModelsAnim = loadExplosionModels(explosionCSVPath, RL::ModelType::EXPLOSION);
+
+    //load all effects ( like shield etc)
+    this->_effectsModels3D = loadEffectModels3D(effectsCSVPath, RL::ModelType::EFFECT);
 
     //load all powerups
 
@@ -237,6 +241,12 @@ std::vector<RL::Drawable3D*> AssetManager::loadExplosionModels(const std::string
                 animationPath = parsedCsv[i][j];
             if (j == 5)
                 scale = atof(parsedCsv[i][j].c_str());
+            if (j == 6)
+                length = atoi(parsedCsv[i][j].c_str());
+            if (j == 7)
+                width = atoi(parsedCsv[i][j].c_str());
+            if (j == 8)
+                height = atoi(parsedCsv[i][j].c_str()); 
         }
         //HERE WE CREATE A NEW 3D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
         RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv, velocity, hp, shootCD, explosionname);
@@ -246,6 +256,54 @@ std::vector<RL::Drawable3D*> AssetManager::loadExplosionModels(const std::string
     }
 
     return modelVector;
+}
+
+std::vector<RL::Drawable3D*> AssetManager::loadEffectModels3D(const std::string &path, RL::ModelType type)
+{
+    std::string modelName;
+    std::string style;
+    std::string modelPath;
+    std::string texturePath;
+    std::string animationPath;
+    float scale = 1;
+    float length= 1;
+    float width = 1;
+    float height = 1;
+    Vector3 velocity = {0, 0, 0};
+    Vector3 cameraPositionMcGuyv = {0, 0, 0};
+    float cameraFovMcGuyv;
+    int hp = 0;
+    float shootCD = 0;
+    std::string explosionname;
+
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(path);
+    std::vector<RL::Drawable3D*> modelVector;
+
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {;
+        //HERE WE SEPARATE EACH cell of the csv into its designated value
+        for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
+            if (j == 0)
+                modelName = parsedCsv[i][j];
+            if (j == 1)
+                style = parsedCsv[i][j];
+            if (j == 2)
+                modelPath = parsedCsv[i][j];
+            if (j == 3)
+                texturePath = parsedCsv[i][j];
+            if ( j == 4)
+                animationPath = parsedCsv[i][j];
+            if (j == 5)
+                scale = atof(parsedCsv[i][j].c_str());
+        }
+        //HERE WE CREATE A NEW 3D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
+        RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv, velocity, hp, shootCD, explosionname);
+       // std::cout<< "LOADING THIS MODEL : " << modelName << " " << style << " " << modelPath << " " << texturePath << " " << animationPath << " " << scale  << " " << std::endl;
+
+        modelVector.emplace_back(newModel);
+    }
+
+    return modelVector;
+
 }
 
 void AssetManager::loadAllMaps()
@@ -335,6 +393,11 @@ std::vector<RL::Drawable3D*> AssetManager::getObstacleModels()
     return this->_obstacleModels;
 }
 
+std::vector<RL::Drawable3D*> AssetManager::getEffectsModels3D()
+{
+    return this->_obstacleModels;
+}
+
 std::vector<Map*> AssetManager::getMaps()
 {
     return this->_maps;
@@ -387,6 +450,13 @@ RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName,
         for (int i = 0; i < this->_explosionModelsAnim.size(); i++) {
             if (modelName == this->_explosionModelsAnim.at(i)->getName())
                 return this->_explosionModelsAnim.at(i);
+        }
+    }
+
+    if (modelType == RL::ModelType::EFFECT) {
+        for (int i = 0; i < this->_effectsModels3D.size(); i++) {
+            if (modelName == this->_effectsModels3D.at(i)->getName())
+                return this->_effectsModels3D.at(i);
         }
     }
 

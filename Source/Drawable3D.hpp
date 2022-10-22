@@ -26,7 +26,8 @@ namespace RL {
         PROJECTILE,
         OBSTACLE,
         POWERUP,
-        EXPLOSION
+        EXPLOSION,
+        EFFECT
     };
 
 

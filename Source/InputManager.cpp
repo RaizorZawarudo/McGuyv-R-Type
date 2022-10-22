@@ -30,6 +30,8 @@ void RL::InputManager::recordInputs()
         this->_inputQueue.emplace_back('a');
     if (IsKeyDown(KEY_D))
         this->_inputQueue.emplace_back('d');
+    if (IsKeyDown(KEY_P))
+        this->_inputQueue.emplace_back('p');
     if (IsKeyDown(KEY_SPACE))
         this->_inputQueue.emplace_back(32);
     if (IsKeyDown(KEY_ENTER))

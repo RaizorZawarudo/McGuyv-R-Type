@@ -1,0 +1,2 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale int,lenght float,width float,height float
+plasmaShield,basic,Source/Assets/Models/Effects/shield/shield.obj,0,0,1,4,4,4

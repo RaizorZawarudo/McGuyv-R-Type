@@ -20,6 +20,7 @@ ShootingSystem::~ShootingSystem()
 
 void ShootingSystem::update(std::vector<EntityID> &allEntities)
 {
+    bool haspressedShield = false;
     for (EntityID ent : EntityViewer<Position, Input, IsAlive, Weaponset>(*_em.get())) { //creatre a timer system that updates all timers i guess?
         Position* entityPos = _em->Get<Position>(ent);
         Input* keypresses = _em->Get<Input>(ent);
@@ -28,16 +29,22 @@ void ShootingSystem::update(std::vector<EntityID> &allEntities)
         ModelDimensions* modelDimensions = _em->Get<ModelDimensions>(ent);
         if (entityType->modelType == RL::ModelType::SPACESHIP ||entityType->modelType == RL::ModelType::ENNEMY) {
             for (int keypressed : keypresses->_inputQueue) {
-                if (keypressed == SHOOT) createProjectile(entityPos, weaponSet, modelDimensions, ent, entityType);
+                if (keypressed == SHOOT) {
+                    createProjectile(entityPos, weaponSet, modelDimensions, ent, entityType);
+                    std::cout << "my score is " << _em->Get<Score>(ent)->score << std::endl;
+                }
+                if (keypressed == SHIELD) {
+                    haspressedShield= true;
+                    _em->Get<Shield>(ent)->shieldActive = true;
+                }
                 // if(keypressed == FIRSTWEAPON) switchWeapon(0);
                 // if(keypressed == FIRSTWEAPON) switchWeapon(1);
                 // if(keypressed == FIRSTWEAPON) switchWeapon(2);
             }
+            if (!haspressedShield)
+                _em->Get<Shield>(ent)->shieldActive = false;
         }
-
     }
-
-
 }
 
 void ShootingSystem::createProjectile(Position* entityPos, Weaponset* weaponSet, ModelDimensions* modelDimensions, EntityID ownerID, EntityModelType* ownerModelType) //add clockcomponent that has a clock inside
@@ -81,6 +88,7 @@ void ShootingSystem::createProjectile(Position* entityPos, Weaponset* weaponSet,
 
         std::cout << "player 1 is at position : " << entityPos->pos.x << " " << entityPos->pos.y << " " << entityPos->pos.z << std::endl;
         std::cout << "shooting bullet at position" << _em->Get<Position>(id)->pos.x << " " << _em->Get<Position>(id)->pos.y << " " << _em->Get<Position>(id)->pos.z << std::endl;
+        std::cout << "owner id : " << _em->Get<Owner>(id)->id << std::endl;
     }
     else {
         //play empty gun sound

@@ -25,6 +25,7 @@ class AssetManager {
         std::vector<RL::Drawable3D*> loadModels(const std::string &path, RL::ModelType type);
         std::vector<RL::Drawable3D*> loadObstacleModels(const std::string &path, RL::ModelType type);
         std::vector<RL::Drawable3D*> loadExplosionModels(const std::string &path, RL::ModelType type);
+        std::vector<RL::Drawable3D*> loadEffectModels3D(const std::string &path, RL::ModelType type);
         std::vector<Map*> loadMaps();
         std::vector<RL::Drawable2D*> loadAllBackgrounds(const std::string &path);
 
@@ -35,6 +36,7 @@ class AssetManager {
         std::vector<RL::Drawable3D*> getEnnemyModels();
         std::vector<RL::Drawable3D*> getObstacleModels();
         std::vector<RL::Drawable3D*> getExplosionModels();
+        std::vector<RL::Drawable3D*> getEffectsModels3D();
         std::vector<Map*> getMaps();
         std::vector<RL::Drawable2D*> getBackgrounds();
         int getCurrentMapBeingPlayed();
@@ -56,6 +58,7 @@ class AssetManager {
         std::vector<RL::Drawable3D*> _ennemyModels;
         std::vector<RL::Drawable3D*> _obstacleModels;
         std::vector<RL::Drawable3D*> _explosionModelsAnim;
+        std::vector<RL::Drawable3D*> _effectsModels3D;
         std::vector<RL::Drawable2D*> _ingameBackgrounds;
 
         //maps

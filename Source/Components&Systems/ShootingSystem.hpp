@@ -9,6 +9,7 @@
 
 #include "ISystem.hpp"
 #include "../AssetManager.hpp"
+#include "../Renderer.hpp"
 
 class ShootingSystem : public ISystem  {
     public:

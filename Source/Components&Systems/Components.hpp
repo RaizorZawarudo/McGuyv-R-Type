@@ -50,8 +50,10 @@ enum UserInput {
     LEFT2 = 97,
     DOWN2 = 115,
     RIGHT2 = 100,
+    SHIELD = 112,
     NONE = -7,
-    ESCAPE = -8
+    ESCAPE = -8,
+
 };
 
 struct Input {
@@ -146,7 +148,7 @@ struct Velocity {
 };
 
 struct Score {
-    std::size_t score;
+    int score;
 };
 
 struct Hp {
@@ -155,6 +157,7 @@ struct Hp {
 
 struct Shield {
     int shield;
+    bool shieldActive;
 };
 
 struct ProjectileWeapon {

@@ -38,27 +38,39 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
     Collider* projectileCollider = _em->Get<Collider>(projectile);
     Collider* otherCollider = _em->Get<Collider>(other);
     if (CheckCollisionBoxes(projectileCollider->collider, otherCollider->collider)) {
-        std::cout << _em->Get<ModelName>(projectile)->modelname << " collided with" << _em->Get<ModelName>(other)->modelname << std::endl;
+
+        std::cout << _em->Get<ModelName>(projectile)->modelname << " collided with " << _em->Get<ModelName>(other)->modelname << std::endl;
         //create bullet impact (another explosion) entity with the path stored in the projectile´s components ==> createExplosion(_em->Get<ExplosionName>)(projectile)->name); this one has to be super small preferably except for badabig weapons
 
         //set bullet to dead
         _em->Get<IsAlive>(projectile)->alive = false;
-        //reduce other hp by bullet damage
-        _em->Get<Hp>(other)->hp -= _em->Get<Hp>(projectile)->hp;
+
+        //reduce other shield or hp by bullet damage
+        if (_em->Get<Shield>(other)) {
+            _em->Get<Shield>(other)->shieldActive ? _em->Get<Shield>(other)->shield -= _em->Get<Hp>(projectile)->hp : _em->Get<Hp>(other)->hp -= _em->Get<Hp>(projectile)->hp;
+            if ( _em->Get<Shield>(other)->shield < 0) {
+                _em->Get<Hp>(other)->hp += _em->Get<Shield>(other)->shield;
+                _em->Get<Shield>(other)->shield = 0;
+            }
+        }
+        else {
+            _em->Get<Hp>(other)->hp -= _em->Get<Hp>(projectile)->hp;
+        }
+
+        
         // give points to owner
+        _em->Get<Score>(_em->Get<Owner>(projectile)->id)->score += _em->Get<Hp>(projectile)->hp;
+
+        
 
 
+        //check if other hp is below zero : if yes set it to dead and create an explosion entity with the explosion path stored in the other´s components ==>  createExplosion(_em->Get<ExplosionName>(other)->name);
         if (_em->Get<Hp>(other)->hp <= 0) {
             _em->Get<IsAlive>(other)->alive = false;
             Position* projectilePos = _em->Get<Position>(projectile);
             ModelName* otherName = _em->Get<ModelName>(other);
             create_explosion(projectilePos->pos, otherName->explosionname);
         }
-
-        //check if other hp is below zero : if yes set it to dead and create an explosion entity with the explosion path stored in the other´s components ==>  createExplosion(_em->Get<ExplosionName>(other)->name);
-        // Position* projectilePos = _em->Get<Position>(projectile);
-        // ModelName* otherName = _em->Get<ModelName>(other);
-        // create_explosion(projectilePos->pos, otherName->explosionname); //here should be create bullet impact but we test explosion
     }
 }
 

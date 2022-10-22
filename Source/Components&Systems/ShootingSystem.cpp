@@ -50,14 +50,14 @@ void ShootingSystem::createProjectile(Position* entityPos, Weaponset* weaponSet,
         weaponSet->weapons.at(weaponSet->currentWeapon).lasttimeweaponwasshot = GetTime();// reset cooldown
 
         std::cout << weaponSet->weapons.at(weaponSet->currentWeapon).modelName << "has : "
-        << weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo << " ammo left";
+        << weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo << " ammo left" << std::endl;
 
         EntityID id = _em->CreateNewEntity();
         //register this entity as the player for this client
         _em->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::PROJECTILE});
         _em->Assign<Owner>(id, Owner{ownerID, ownerModelType->modelType});
         _em->Assign<IsAlive>(id, IsAlive{true});
-        _em->Assign<ModelName>(id, ModelName{weaponSet->weapons.at(weaponSet->currentWeapon).modelName});
+        _em->Assign<ModelName>(id, ModelName{weaponSet->weapons.at(weaponSet->currentWeapon).modelName,_assetManager->getSpecificDrawableWithType(weaponSet->weapons.at(weaponSet->currentWeapon).modelName, RL::ModelType::PROJECTILE)->getExplosionName()});
         _em->Assign<ModelScale>(id, ModelScale{_assetManager->getSpecificDrawableWithType(weaponSet->weapons.at(weaponSet->currentWeapon).modelName, RL::ModelType::PROJECTILE)->getScale()});
         _em->Assign<ModelDimensions>(id, ModelDimensions{_assetManager->getSpecificDrawableWithType(weaponSet->weapons.at(weaponSet->currentWeapon).modelName, RL::ModelType::PROJECTILE)->getWidth(),
                                                         _assetManager->getSpecificDrawableWithType(weaponSet->weapons.at(weaponSet->currentWeapon).modelName, RL::ModelType::PROJECTILE)->getHeight(),

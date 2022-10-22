@@ -43,7 +43,7 @@ class MovementSystem : public ISystem {
         };
 
         void update(std::vector<EntityID> &allEntities) override {
-            for (EntityID ent : EntityViewer<Position, Velocity,EntityModelType, PitchYawRoll, Collider>(*_em.get())) {
+            for (EntityID ent : EntityViewer<Position, Velocity, EntityModelType, PitchYawRoll, Collider>(*_em.get())) {
                 _ent = ent;
                 Position* entityPos = _em->Get<Position>(ent);
                 Velocity* entityVel = _em->Get<Velocity>(ent);

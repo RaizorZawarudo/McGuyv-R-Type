@@ -90,17 +90,9 @@ struct Owner {
     RL::ModelType ownerType;
 };
 
-enum TargetType {
-    MCGUYVER_TARGET,
-    PLAYER_TARGET,
-    PROJECTILE_TARGET,
-    ENNEMY_TARGET,
-    OBSTACLE_TARGET,
-    POWERUP_TARGET,
-};
-
 struct ModelName {
     std::string modelname;
+    std::string explosionname;
 };
 
 struct ModelScale {
@@ -113,18 +105,11 @@ struct ModelDimensions {
     float lengthZ;
 };
 
-// struct AmmoCapacity {
-//     std::size_t maxAmmo;
-//     std::size_t curAmmo;
-// };
-
-
-
-// struct Level {
-//     std::size_t level;
-// };
-
-
+struct AnimationData {
+    int currentFrame;
+    int currentAnim;
+    int maxFrame;
+};
 
 struct UIPos {
     int x;
@@ -196,6 +181,16 @@ struct Weaponset {
     std::vector<ProjectileWeapon> weapons;
     std::size_t currentWeapon;
 };
+
+enum TargetType {
+    MCGUYVER_TARGET,
+    PLAYER_TARGET,
+    PROJECTILE_TARGET,
+    ENNEMY_TARGET,
+    OBSTACLE_TARGET,
+    POWERUP_TARGET,
+};
+
 
 
 

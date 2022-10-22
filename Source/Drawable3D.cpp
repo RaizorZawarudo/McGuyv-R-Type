@@ -12,7 +12,7 @@
 //the scale can be set to 1
 //set type == RL::MODEL only if its an animated model / bomb. the powerups are RL::POWER, the walls are RL::WALL
 //add this->_cameraFOV to 90.0f in order to see everything in BOSS MODE OR ELSE IT DOESNT WORK BABY
-RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float length, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv, Vector3 velocity, int hp, float shootCD)
+RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float length, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv, Vector3 velocity, int hp, float shootCD, std::string explosionname)
 {
     this->_name = name;
     this->_type = type;
@@ -26,11 +26,8 @@ RL::Drawable3D::Drawable3D(RL::ModelType type, std::string name, std::string mod
     this->_velocity = velocity;
     this->_hp = hp;
     this->_shootCD = shootCD;
+    this->_explosionname = explosionname;
 
-    // if (_type == RL::ModelType::WALL || _type == RL::ModelType::CRATE)
-    //     _boxSize = {1.0, 1.0, 1.0};
-    // if (_type == ModelType::FLOOR)
-    //     _boxSize = {1.0, 0.5, 1.0};
 
     this->load3DModel(modelPath, texturePath, animationPath);
 }
@@ -57,11 +54,10 @@ void RL::Drawable3D::load3DModel( std::string modelPath, std::string texturePath
         this->_texture = LoadTextureFromImage(this->_img);
         SetMaterialTexture(&this->_model.materials[0], MATERIAL_MAP_DIFFUSE, this->_texture);
         UnloadImage(this->_img);
-        //HERE ADD LOAD ANIMATION, 
-        loadAnimation(animationPath);
     }
+    //HERE ADD LOAD ANIMATION, 
+    loadAnimation(animationPath);
     this->_imageLoaded = true;
-    //setBoundingBox();
 }
 
 
@@ -125,7 +121,7 @@ void RL::Drawable3D::loadAnimation(std::string path)
         this->unloadAnimation();
     this->_animations = LoadModelAnimations(path.c_str(), &this->_animCount);
     this->_animationLoaded = true;
-    std::cout << this->_animCount << std::endl;
+    std::cout << this->_animCount << this->_animations[1].frameCount << std::endl;
 }
 
 void RL::Drawable3D::unloadAnimation()
@@ -136,15 +132,14 @@ void RL::Drawable3D::unloadAnimation()
     this->_animationLoaded = false;
 }
 
-void RL::Drawable3D::updateModelsAnimation()
+int RL::Drawable3D::updateModelsAnimation(int currFrame, int currAnim) // add int as parameter to set to the animation frame of the entity
 {
-    if (!this->_animationLoaded)
-        return;
-
-    this->_currentFrame++;
-    std::cout << this->_currentFrame << std::endl;
-    UpdateModelAnimation
-    (this->_model, this->_animations[this->_currentAnim], this->_currentFrame);
+    if (currFrame > this->_animations[currAnim].frameCount) {
+        currFrame = 0;
+    }
+    UpdateModelAnimation(this->_model, this->_animations[currAnim], currFrame);
+    std::cout << "framecount = " << this->_animations[currAnim].frameCount << std::endl;
+    return this->_animations[currAnim].frameCount;
 }
 
 void RL::Drawable3D::setCurrentAnim(int anim)
@@ -168,33 +163,6 @@ int RL::Drawable3D::getCurrentAnim() const
 {
     return this->_currentAnim;
 }
-
-// //NOT SURE IF NEEDED TO BE IMPLEMENTED THIS WAY
-// // void RL::Drawable3D::setBoundingBox()
-// // {
-// //     if (this->_type == RL::MODEL)
-// //         this->_boundingBox.max.x = this->_position.x - 0.5f;
-// //         this->_boundingBox.max.y = this->_position.y - 0.5f;
-// //         this->_boundingBox.max.z = this->_position.z - 0.5f;
-// //         this->_boundingBox.min.x = this->_position.x + 0.5f;
-// //         this->_boundingBox.min.y = this->_position.y + 0.5f;
-// //         this->_boundingBox.min.z = this->_position.z + 0.5f;
-
-    
-// //     if (this->_type == RL::WALL || this->_type == RL::FLOOR)
-// //         this->_boundingBox = {(Vector3) {this->_position.x - (this->_boxSize.x ) / 2,
-// //                                          this->_position.y - (this->_boxSize.y ) / 2,
-// //                                          this->_position.z - (this->_boxSize.z ) / 2} ,
-// //                               (Vector3) {this->_position.x + (this->_boxSize.x ) / 2,
-// //                                          this->_position.y + (this->_boxSize.y ) / 2,
-// //                                          this->_position.z + (this->_boxSize.z ) / 2}
-// //                                          };
-// // }
-
-// // BoundingBox RL::Drawable3D::getBoundingBox()
-// // {
-// //     return this->_boundingBox;
-// // }
 
 void RL::Drawable3D::unloadAll()
 {
@@ -224,25 +192,6 @@ void RL::Drawable3D::setRotation(float newRotation)
 {
     this->_rotationAngle = newRotation;
 }
-
-// void RL::Drawable3D::setPosition(float x, float y, float z)
-// {
-//     this->_position.x = x;
-//     this->_position.y = y;
-//     this->_position.z = z;
-
-//     //setBoundingBox();
-// }
-
-// Vector3 RL::Drawable3D::getPosition()
-//  {
-//      return this->_position;
-//  }
-
-//  Vector3 RL::Drawable3D::getBoxSize()
-//  {
-//      return this->_boxSize;
-//  }
 
  Texture2D RL::Drawable3D::getTexture()
  {
@@ -307,4 +256,9 @@ int RL::Drawable3D::getHp()
 float RL::Drawable3D::getShootCD()
 {
     return this->_shootCD;
+}
+
+std::string RL::Drawable3D::getExplosionName()
+{
+    return this->_explosionname;
 }

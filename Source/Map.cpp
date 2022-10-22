@@ -229,6 +229,11 @@ bool Map::getGameRunning()
     return this->_gameRunning;
 }
 
+float Map::getScrollSpeed()
+{
+    return this->_scrollSpeed;
+}
+
 //setters
 
 void Map::setGameRunning()

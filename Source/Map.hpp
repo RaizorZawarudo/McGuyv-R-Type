@@ -78,6 +78,7 @@ class Map {
         int getMaxStage();
         bool getFightingBoss();
         bool getGameRunning();
+        float getScrollSpeed();
 
         //setters
         void setGameRunning();

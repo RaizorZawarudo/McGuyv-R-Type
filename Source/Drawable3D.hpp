@@ -24,14 +24,15 @@ namespace RL {
         ENNEMY,
         ZONE,
         PROJECTILE,
-        OSTACLE,
-        POWERUP
+        OBSTACLE,
+        POWERUP,
+        EXPLOSION
     };
 
 
     class Drawable3D: public IDrawable {
         public:
-            Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float lenght, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv, Vector3 velocity, int hp, float shootCD);
+            Drawable3D(RL::ModelType type, std::string name, std::string modelPath, std::string texturePath, std::string animationPath, float scale, std::string style, float lenght, float width, float height, Vector3 cameraPositionMcGuyv, float cameraFovMcGuyv, Vector3 velocity, int hp, float shootCD, std::string explosionname);
             ~Drawable3D();
 
             // IDrawable methods
@@ -47,7 +48,7 @@ namespace RL {
             // Animation
             void loadAnimation(std::string path);
             void unloadAnimation();
-            void updateModelsAnimation();
+            int updateModelsAnimation(int currFrame, int  currAnim);
             void resetAnimSequence();
             void setCurrentAnim(int anim);
             int getCurrentAnim() const;
@@ -79,6 +80,7 @@ namespace RL {
             Vector3 getVelocity();
             int getHp();
             float getShootCD();
+            std::string getExplosionName();
 
             void setBoundingBox();
             BoundingBox getBoundingBox();
@@ -99,6 +101,7 @@ namespace RL {
             float _cameraFovMcGuyv;
             int _hp;
             float _shootCD;
+            std::string _explosionname;
 
             // Vector3 _boxSize;
             // BoundingBox _boundingBox;

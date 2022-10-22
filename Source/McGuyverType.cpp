@@ -21,6 +21,7 @@ McGuyverType::McGuyverType()
     this->_systems.push_back(std::make_shared<ShootingSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager)); //this sets the bounding boxes so it must come as the last system before collisions 
     //add collision system
+    this->_systems.push_back(std::make_shared<CollisionSystem>(this->_entityManager, this->_assetManager));
     //add ui update system (ui buttons , ui scores updates, ui keypresses to stop game etc etc)
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
     this->_systems.push_back(std::make_shared<DeleteEntitiesSystem>(this->_entityManager));
@@ -42,10 +43,17 @@ void McGuyverType::startGame() // must have player choices etc
     
     //HERE WE CREATE PLAYERS, assume player chose the DartAssault spaceship for testing
     createPlayer("dartAssault");
+    createObstacle("cube1Blue",(Vector3){4, 5, 15});
+    createObstacle("cube2Blue",_ennemyStartingPos.pos);
 
 
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choice
+    for (int i = 1; i < 27 ; i++)
+    {
+        std::cout << "E"<<i<<".obj,";
+    }
+
     while (_window->isWindowOpen()) {
         //UI LOOP functions
         gameLoop(); //might take more arguments to refelct player choice of map and choice of character
@@ -158,11 +166,13 @@ void McGuyverType::createPlayer(std::string modelName)
     EntityID id = _entityManager->CreateNewEntity();
     //register this entity as the player for this client
     std::vector<int> playerInput;
+    Vector3 Vel;
+
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::SPACESHIP});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
     
-    _entityManager->Assign<ModelName>(id, ModelName{modelName});
-    _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
+    _entityManager->Assign<ModelName>(id, ModelName{modelName,_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getExplosionName()});
+    _entityManager->Assign<ModelScale>(id, ModelScale{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getScale()});
     _entityManager->Assign<ModelDimensions>(id, ModelDimensions{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getWidth(),
                                                                 _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getHeight(),
                                                                 _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getLength()});
@@ -172,13 +182,41 @@ void McGuyverType::createPlayer(std::string modelName)
     
     _entityManager->Assign<IsAlive>(id, IsAlive{true});
     _entityManager->Assign<Position>(id, _playerStartingPos);
-    _entityManager->Assign<Velocity>(id, Velocity{0.2f, 0.2f, 0.2f});
+    Vel = _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getVelocity();
+    _entityManager->Assign<Velocity>(id, Velocity{Vel.x, Vel.y, Vel.z});
     _entityManager->Assign<Score>(id, Score{0});
-    _entityManager->Assign<Hp>(id, Hp{100});
+    _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getHp()});
     _entityManager->Assign<Shield>(id, Shield{100});
 
-    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("missileProj"), 0});
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("orangeLight"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     
+
+    //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
+
+
+}
+
+void McGuyverType::createObstacle(std::string modelName, Vector3 position)
+{
+    float scrollspeed;
+    EntityID id = _entityManager->CreateNewEntity();
+
+    _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
+    _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
+    
+    _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getExplosionName()});
+    _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
+    _entityManager->Assign<ModelDimensions>(id, ModelDimensions{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getWidth(),
+                                                                _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getHeight(),
+                                                                _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getLength()});
+    _entityManager->Assign<PitchYawRoll>(id, PitchYawRoll{0.0f, 0.0f, 0.0f});
+    _entityManager->Assign<Collider>(id, Collider{BoundingBox{}});
+    
+    _entityManager->Assign<IsAlive>(id, IsAlive{true});
+    _entityManager->Assign<Position>(id, Position{position});
+    scrollspeed = _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getScrollSpeed();
+    _entityManager->Assign<Velocity>(id, Velocity{scrollspeed, scrollspeed, scrollspeed});
+    _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getHp()});    
 
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
 

@@ -21,7 +21,7 @@ DeleteEntitiesSystem::~DeleteEntitiesSystem()
 void DeleteEntitiesSystem::update(std::vector<EntityID> &allEntities)
 {
     for (EntityID ent : EntityViewer<Position, IsAlive>(*_em.get())) {
-        if (_em->Get<Position>(ent)->pos.z > MAXPOSSIBLEZ || _em->Get<Position>(ent)->pos.z < MINPOSSIBLEZ) {
+        if (_em->Get<Position>(ent)->pos.z > MAXPOSSIBLEZ || _em->Get<Position>(ent)->pos.z < MINPOSSIBLEZ || !_em->Get<IsAlive>(ent)->alive) {
             std::cout << "entity " << ent << "destroyed" << std::endl;
             _em->Remove<Position>(ent);
             _em->Remove<EntityModelType>(ent);

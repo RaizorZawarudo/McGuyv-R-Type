@@ -28,8 +28,8 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
 
         _renderer->begin3DMode(_cameraManager->getCamera());
 
-
             _renderer->drawMap( _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed()), _cameraManager->getCamera(), _assetManager);
+
             for (EntityID _ent:  EntityViewer<Position, EntityModelType>(*_em.get()) ) {
                 Position *objectPos = _em->Get<Position>(_ent);
                 ModelName *objectModelName = _em->Get<ModelName>(_ent);
@@ -37,6 +37,14 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                 ModelScale *modelScale = _em->Get<ModelScale>(_ent);
                 Owner *owner = _em->Get<Owner>(_ent);
                 PitchYawRoll *pitchYawRoll = _em->Get<PitchYawRoll>(_ent);
+                int maxFrame;
+                //update the animation of the model before printing it if its a explosion
+                if (modelType->modelType == RL::ModelType::EXPLOSION) {
+                    AnimationData* animData = _em->Get<AnimationData>(_ent);
+                    maxFrame = _assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->updateModelsAnimation(animData->currentFrame, animData->currentAnim);
+                    animData->currentFrame <= maxFrame? animData->currentFrame++ : _em->Get<IsAlive>(_ent)->alive = false;
+                    std::cout << animData->currentFrame << " is the current frame of explosion and maxFrame is = " << maxFrame << std::endl;
+                }
                 _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType, pitchYawRoll);
             }
             

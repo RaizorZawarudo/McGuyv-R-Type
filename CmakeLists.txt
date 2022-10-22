@@ -29,6 +29,7 @@ FILE(GLOB CFILES
         Source/Components&Systems/ShootingSystem.cpp
         Source/Components&Systems/DrawingSystem.cpp
         Source/Components&Systems/InputSystem.cpp
+        Source/Components&Systems/CollisionSystem.cpp
         Source/Components&Systems/DeleteEntitiesSystem.cpp
         Source/Components&Systems/ClearInputsSystem.cpp)
 
@@ -54,6 +55,7 @@ FILE(GLOB HEADERFILES
         Source/Components&Systems/ShootingSystem.hpp
         Source/Components&Systems/DrawingSystem.hpp
         Source/Components&Systems/MovementSystem.hpp
+        Source/Components&Systems/CollisionSystem.hpp
         Source/Components&Systems/InputSystem.hpp
         Source/Components&Systems/DeleteEntitiesSystem.hpp
         Source/Components&Systems/ClearInputsSystem.hpp)

@@ -113,6 +113,10 @@ struct AnimationData {
     int maxFrame;
 };
 
+struct UIAvatarNames {
+    std::string avatarName;
+};
+
 struct UIPos {
     int x;
     int y;

@@ -7,10 +7,12 @@
 
 #include "Drawable2D.hpp"
 
-RL::Drawable2D::Drawable2D(std::string assetPath, std::string name)
+RL::Drawable2D::Drawable2D(std::string assetPath, std::string name, float width, float height, std::string type)
 {
     this->_name = name;
     this->loadImage(assetPath);
+    this->_size = Vector2{width, height};
+    this->_type = type;
 }
 
 RL::Drawable2D::~Drawable2D()
@@ -76,18 +78,25 @@ void RL::Drawable2D::setPosition(float x, float y, float z)
 }
 
 Vector3 RL::Drawable2D::getPosition()
- {
-     return this->_position;
- }
+{
+    return this->_position;
+}
+Texture2D RL::Drawable2D::getTexture()
+{
+    return this->_texture;
+}
+std::string RL::Drawable2D::getName()
+{
+   return this->_name;
+}
 
- Texture2D RL::Drawable2D::getTexture()
- {
-     return this->_texture;
- }
+Vector2 RL::Drawable2D::getSize()
+{
+    return this->_size;
+}
 
- std::string RL::Drawable2D::getName()
- {
-    return this->_name;
- }
-
+std::string RL::Drawable2D::getType()
+{
+    return this->_type;
+}
 

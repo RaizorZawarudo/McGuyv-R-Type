@@ -18,7 +18,7 @@
 namespace RL {
     class Drawable2D: public IDrawable {
         public:
-            Drawable2D(std::string assetPath, std::string name);
+            Drawable2D(std::string assetPath, std::string name, float width, float height, std::string type);
             ~Drawable2D();
 
             // IDrawable methods
@@ -38,13 +38,17 @@ namespace RL {
             Vector3 getPosition();
             Texture2D getTexture();
             std::string getName();
+            Vector2 getSize();
+            std::string getType();
         protected:
             // These initializations will not work
             Vector3 _position = {0, 0, 0};
             Vector2 _size = {0, 0};
+            
 
 
             std::string _name;
+            std::string _type;
 
             bool _imageLoaded = false;
             Image _img;

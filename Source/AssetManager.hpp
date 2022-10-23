@@ -10,13 +10,14 @@
 #include "Drawable3D.hpp"
 #include "Drawable2D.hpp"
 #include "Map.hpp"
+#include "ECS/ECS.hpp"
 
 #pragma once
 
 
 class AssetManager {
     public:
-        AssetManager();
+        AssetManager(EntityID currentClientID);
         ~AssetManager();
 
         //loading functions
@@ -28,6 +29,8 @@ class AssetManager {
         std::vector<RL::Drawable3D*> loadEffectModels3D(const std::string &path, RL::ModelType type);
         std::vector<Map*> loadMaps();
         std::vector<RL::Drawable2D*> loadAllBackgrounds(const std::string &path);
+        std::vector<RL::Drawable2D*> loadAllIcons(const std::string &path);
+        std::vector<Font> loadAllFonts(const std::string &path);
 
         //getters
         std::vector<RL::Drawable3D*> getZonesModels();
@@ -39,17 +42,22 @@ class AssetManager {
         std::vector<RL::Drawable3D*> getEffectsModels3D();
         std::vector<Map*> getMaps();
         std::vector<RL::Drawable2D*> getBackgrounds();
+        std::vector<RL::Drawable2D*> getUIelements();
+        std::vector<Font> getAllFonts();
         int getCurrentMapBeingPlayed();
+        EntityID getCurrentClientID();
 
 
         RL::Drawable2D* getSpecificBackground(std::string backgroundName);
         RL::Drawable3D* getSpecificDrawableWithType(std::string modelName, RL::ModelType modelType);
+        RL::Drawable2D* getSpecificIcon(std::string modelName);
 
         //setters
 
         void setCurrentMapBeingPlayed(int level);
 
     private:
+        EntityID _currentclientID;
         int _currentLevelBeingPlayed;
         //3d assets
         std::vector<RL::Drawable3D*> _zonesModels;
@@ -59,10 +67,16 @@ class AssetManager {
         std::vector<RL::Drawable3D*> _obstacleModels;
         std::vector<RL::Drawable3D*> _explosionModelsAnim;
         std::vector<RL::Drawable3D*> _effectsModels3D;
+
+        //2d assets
         std::vector<RL::Drawable2D*> _ingameBackgrounds;
+        std::vector<RL::Drawable2D*> _IconsUIelements;
 
         //maps
         std::vector<Map*> _maps;
+
+        //fonts
+        std::vector<Font> _fonts;
 
 };
 

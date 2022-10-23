@@ -11,7 +11,7 @@ McGuyverType::McGuyverType()
 {
     this->_window  = std::make_shared<RL::Window>("McGuyv R-Type");
     this->_cameraManager = std::make_shared<RL::CameraManager>();
-    this->_assetManager = std::make_shared<AssetManager>();
+    this->_assetManager = std::make_shared<AssetManager>(this->_thisClientPlayerEntityID);
     this->_renderer = std::make_shared<RL::Renderer>("Renderer");
     this->_inputManager = std::make_shared<RL::InputManager>("InputManager");
     this->_entityManager = std::make_shared<EntityManager>();
@@ -25,11 +25,20 @@ McGuyverType::McGuyverType()
     //add ui update system (ui buttons , ui scores updates, ui keypresses to stop game etc etc)
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
     this->_systems.push_back(std::make_shared<DeleteEntitiesSystem>(this->_entityManager));
-    this->_systems.push_back(std::make_shared<DrawingSystem>(this->_entityManager, this->_renderer, this->_assetManager, this->_cameraManager));
+    this->_systems.push_back(std::make_shared<DrawingSystem>(this->_entityManager, this->_renderer, this->_assetManager, this->_cameraManager, this->_window));
 
     //here we resize all the maps to be the dimension of the window
     for (Map* map: this->_assetManager->getMaps())
         _assetManager->getSpecificBackground(map->getBackgroundName())->resize(_window->getDimensions());
+    for (RL::Drawable2D* icon: this->_assetManager->getUIelements()) {
+        if (icon->getType() == "player") {
+            icon->resize(Vector2{_window->getDimensions().x * 7.8f / 100,_window->getDimensions().y * 10.4f / 100 });
+
+        }
+        else if (icon->getType() == "bottomPannel") {
+            icon->resize(Vector2{_window->getDimensions().x * 31.25f / 100,_window->getDimensions().y * 15.62f / 100 });
+        }
+    }
 }
 
 McGuyverType::~McGuyverType()
@@ -42,10 +51,12 @@ void McGuyverType::startGame() // must have player choices etc
     
     
     //HERE WE CREATE PLAYERS, assume player chose the DartAssault spaceship for testing
-    createPlayer("dartAssault");
+    createPlayer("dartAssault", "malibuPepe");
     
-    createObstacle("cube1Blue",(Vector3){4, 5, 15});
-    createObstacle("cube2Blue",_ennemyStartingPos.pos);
+    createObstacle("cube2Blue",(Vector3){4, 5, 15});
+    createObstacle("cube2Blue",(Vector3){3, 5, 15});
+    createObstacle("cube2Blue",(Vector3){2, 5, 15});
+    createObstacle("cube2Blue",(Vector3){-4, 5, 15});
 
     
 
@@ -71,66 +82,9 @@ void McGuyverType::gameLoop()
     //here we loop through all our systems to update them
     for( std::shared_ptr<ISystem> system : _systems)
         system->update(this->_allEntities);
-    //then we draw (normally we draw in systems but with networking we have to split it)
     //then if game ends or somethings
     //then finish
 
-    // Draw
-    //----------------------------------------------------------------------------------
-    // _renderer->beginDrawing();
-    //     _renderer->clearBackground();
-
-    //     _renderer->drawBackground(_assetManager, _currentLevel);
-
-    //     _renderer->begin3DMode(_cameraManager->getCamera());
-        
-
-
-            // if (_inputManager->playerHasPressedKeyAsChar('p')) {
-            //    spaceshipIndex += 1;
-            //     if (spaceshipIndex == _assetManager->getSpacecraftModels().size() )
-            //         spaceshipIndex = 0;
-            // }
-            // DrawModelEx(_assetManager->getSpacecraftModels()[spaceshipIndex]->getModel(),{2.5f, 1.0f, _cameraManager->getCamera().position.z + enemyStartingZ }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);     
-            // if (_inputManager->playerHasPressedKeyAsChar('e')) {
-            //     ennemyIndex += 1;
-            //     if (ennemyIndex == _assetManager->getEnnemyModels().size() )
-            //         ennemyIndex = 0;
-            // }   
-            // DrawModelEx(_assetManager->getEnnemyModels()[ennemyIndex]->getModel(),{-5.0f, 1.0f,_cameraManager->getCamera().position.z + enemyStartingZ }, {0, 1, 0}, 0.0f, {1.0f, 1.0f, 1.0f}, WHITE);
-            // if (_inputManager->playerHasPressedKeyAsChar('l')) {
-            //     projectileIndex += 1;
-            //     if (projectileIndex == _assetManager->getProjectileModels().size() )
-            //         projectileIndex = 0;
-            // }
-            // DrawModelEx(_assetManager->getProjectileModels()[projectileIndex]->getModel(),{0.0f, 1.0f, _cameraManager->getCamera().position.z + _playerStartingZ }, {0, 1, 0}, 180.0f, {4.0f,4.0f, 4.0f}, WHITE);
-            // if (_inputManager->playerHasPressedKeyAsChar('b'))
-            //     _assetManager->getMaps().at(_currentLevel)->setFightingBossTrue();
-            // if (_inputManager->playerHasPressedKeyAsChar('v'))
-            //     _assetManager->getMaps().at(_currentLevel)->bossIsDown();
-
-
-
-
-    //         _renderer->drawMap( _assetManager->getMaps().at(_currentLevel), _cameraManager->getCamera(), _assetManager);
-    //         for (EntityID _ent:  EntityViewer<Position, Velocity, Input, EntityModelType>(*_entityManager.get()) ) {
-    //             Position *objectPos = _entityManager->Get<Position>(_ent);
-    //             ModelName *objectModelName = _entityManager->Get<ModelName>(_ent);
-    //             EntityModelType *modelType = _entityManager->Get<EntityModelType>(_ent);
-    //             ModelScale *modelScale = _entityManager->Get<ModelScale>(_ent);
-    //             Owner *owner = _entityManager->Get<Owner>(_ent);
-    //             _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType);
-    //         }
-    //         // DrawGrid(2000, 1.0f);        // Draw a grid
-    //         // std::cout << " current stage = " << this->_assetManager->getMaps().at(_currentLevel)->getCurrentStage() 
-    //         // << "and max stage is = " << this->_assetManager->getMaps().at(_currentLevel)->getMaxStage() << std::endl;
-    //     _renderer->end3DMode();
-
-
-    //     // send data to server functions
-    //     DrawFPS(10, 10);
-    // _renderer->endDrawing();
-    //---------------------------------------------------------------------------------- 
     
 }
 
@@ -159,7 +113,7 @@ std::vector<ProjectileWeapon> McGuyverType::generateStartWeaponset(std::string m
     return startWeaponset;
 }
 
-void McGuyverType::createPlayer(std::string modelName)
+void McGuyverType::createPlayer(std::string modelName, std::string avatarName) // here we will add base weapon choice, avatar choice as well chosen by user in menu, the avatar is just cosmetic
 {
     EntityID id = _entityManager->CreateNewEntity();
     //register this entity as the player for this client
@@ -168,6 +122,8 @@ void McGuyverType::createPlayer(std::string modelName)
 
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::SPACESHIP});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
+
+    _entityManager->Assign<UIAvatarNames>(id, UIAvatarNames{avatarName});
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName,_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getExplosionName()});
     _entityManager->Assign<ModelScale>(id, ModelScale{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getScale()});
@@ -186,7 +142,7 @@ void McGuyverType::createPlayer(std::string modelName)
     _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getHp()});
     _entityManager->Assign<Shield>(id, Shield{100});
 
-    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("orangeLight"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("plasmaProj"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     
 
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
@@ -201,7 +157,7 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
     std::cout << "LOL";
 
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
-    _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
+    _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::OBSTACLE});
 
     
     

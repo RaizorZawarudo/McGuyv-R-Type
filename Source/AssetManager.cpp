@@ -11,8 +11,9 @@
 #include "Drawable3D.hpp"
 
 
-AssetManager::AssetManager()
+AssetManager::AssetManager(EntityID currentClientID)
 {
+    this->_currentclientID = currentClientID;
     loadAllModels();
     
     //load all maps ( maps is the data structure which contains the matching paths to be linked together to create the world
@@ -35,9 +36,17 @@ void AssetManager::loadAllModels()
     std::string obstacleCSVPath = "Source/Assets/Models/Obstacles/Obstacles.csv";
     std::string explosionCSVPath = "Source/Assets/Models/Explosions/Explosions.csv";
     std::string effectsCSVPath = "Source/Assets/Models/Effects/Effects.csv";
+    std::string iconsUICSVPath = "Source/Assets/Icons/Icons.csv";
+    std::string fontsCSVPath = "Source/Assets/Fonts/Fonts.csv";
+
+    //load all fonts
+    this->_fonts = loadAllFonts(fontsCSVPath);
 
     //load all backgrounds;
     this->_ingameBackgrounds = loadAllBackgrounds(mapBackgroundCSVPath);
+
+    //load all Icons & IngameUI Elements
+    this->_IconsUIelements = loadAllIcons(iconsUICSVPath);
 
     //load all zones
     this->_zonesModels = loadModels(zonesModelCSVPath, RL::ModelType::ZONE);
@@ -348,6 +357,9 @@ std::vector<RL::Drawable2D*> AssetManager::loadAllBackgrounds(const std::string 
 
     std::string backgroundName;
     std::string backgroundPath;
+    float width = 0; // windowsize basically
+    float height = 0; // window size basically
+    std::string type;
 
     std::vector<RL::Drawable2D*> backgroundVector;
 
@@ -359,12 +371,69 @@ std::vector<RL::Drawable2D*> AssetManager::loadAllBackgrounds(const std::string 
                 backgroundName = parsedCsv[i][j];
             if (j == 1)
                 backgroundPath = parsedCsv[i][j];
+            if (j == 2)
+                type = parsedCsv[i][j];
         }
         //HERE WE CREATE A NEW 2D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
-        RL::Drawable2D *newbackgroundDrawable = new RL::Drawable2D(backgroundPath, backgroundName);       
+        RL::Drawable2D *newbackgroundDrawable = new RL::Drawable2D(backgroundPath, backgroundName, width, height, type);       
         backgroundVector.push_back(newbackgroundDrawable);
     }
     return backgroundVector;
+}
+
+std::vector<RL::Drawable2D*> AssetManager::loadAllIcons(const std::string &backgroundCSVPath)
+{
+
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(backgroundCSVPath);
+
+    std::string iconName;
+    std::string iconPath;
+    float iconwidth;
+    float iconheight;
+    std::string type;
+
+    std::vector<RL::Drawable2D*> iconVector;
+
+
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {;
+        //HERE WE SEPARATE EACH cell of the csv into its designated value
+        for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
+            if (j == 0)
+                iconName = parsedCsv[i][j];
+            if (j == 1)
+                iconPath = parsedCsv[i][j];
+            if (j == 2)
+                iconwidth = atof(parsedCsv[i][j].c_str());
+            if (j == 3)
+                iconheight = atof(parsedCsv[i][j].c_str());
+            if (j == 4)
+                type = parsedCsv[i][j];
+        }
+        //HERE WE CREATE A NEW 2D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
+        RL::Drawable2D *newiconDrawable = new RL::Drawable2D(iconPath, iconName, iconwidth, iconheight, type);       
+        iconVector.push_back(newiconDrawable);
+    }
+    return iconVector;
+}
+
+std::vector<Font> AssetManager::loadAllFonts(const std::string &fontCSVPath)
+{
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(fontCSVPath);
+
+    std::string fontpath;
+    Font newfont;
+     std::vector<Font> fontVector;
+
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {
+        //HERE WE SEPARATE EACH cell of the csv into its designated value
+        for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
+            if (j == 1)
+                fontpath = parsedCsv[i][j];
+        }
+        newfont = LoadFontEx(fontpath.c_str(), 25, 0, 250);
+        fontVector.push_back(newfont);
+    }
+    return fontVector;
 }
 
 //Getters
@@ -406,6 +475,16 @@ std::vector<Map*> AssetManager::getMaps()
 std::vector<RL::Drawable2D*> AssetManager::getBackgrounds()
 {
     return this->_ingameBackgrounds;
+}
+
+std::vector<RL::Drawable2D*> AssetManager::getUIelements()
+{
+    return this->_IconsUIelements;
+}
+
+std::vector<Font> AssetManager::getAllFonts()
+{
+    return this->_fonts;
 }
 
 RL::Drawable2D* AssetManager::getSpecificBackground(std::string backgroundName)
@@ -474,9 +553,23 @@ RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName,
 
 }
 
+RL::Drawable2D* AssetManager::getSpecificIcon(std::string iconName)
+{
+    for (RL::Drawable2D* drawable : this->_IconsUIelements) {
+        if (drawable->getName() == iconName)
+            return drawable;
+    }
+
+}
+
 int AssetManager::getCurrentMapBeingPlayed()
 {
     return this->_currentLevelBeingPlayed;
+}
+
+EntityID AssetManager::getCurrentClientID()
+{
+    return this->_currentclientID;
 }
 
 

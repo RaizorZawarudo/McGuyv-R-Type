@@ -93,11 +93,11 @@ class MovementSystem : public ISystem {
 
 
                 }
-                // if entity == ENNEMY do AI movement
-
                 // if entitiy == OBSTACLE == DO MOVEMENTS FOR OBSTACLES
 
 
+
+                // if entity == ENNEMY do AI movement
 
                 //after the entity has moved we set its bounding box in order for the collisionsystem to detect collisions
                 setEntityBoundingBox(entityCollider, entityPos, modelDimensions);

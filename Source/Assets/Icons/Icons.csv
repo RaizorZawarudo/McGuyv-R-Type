@@ -1,0 +1,5 @@
+name,path,width,height,type
+malibuPepe65,Source/Assets/Icons/MalibuPepe/malibuPepe65.png,80,80,player
+malibuPepe30,Source/Assets/Icons/MalibuPepe/malibuPepe30.png,80,80,player
+malibuPepe00,Source/Assets/Icons/MalibuPepe/malibuPepe00.png,80,80,player
+playerPannel,Source/Assets/Icons/PlayerHUD/playerPannels.png,300,120,bottomPannel

@@ -42,17 +42,14 @@ void McGuyverType::startGame() // must have player choices etc
     
     
     //HERE WE CREATE PLAYERS, assume player chose the DartAssault spaceship for testing
-    createPlayer("dartAssault");
+    createPlayer("greyhound");
     createObstacle("cube1Blue",(Vector3){4, 5, 15});
     createObstacle("cube2Blue",_ennemyStartingPos.pos);
 
+    std::cout << "LOL";
 
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
-    _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choice
-    for (int i = 1; i < 27 ; i++)
-    {
-        std::cout << "E"<<i<<".obj,";
-    }
+    _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
 
     while (_window->isWindowOpen()) {
         //UI LOOP functions

@@ -46,7 +46,7 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                     std::cout << animData->currentFrame << " is the current frame of explosion and maxFrame is = " << maxFrame << std::endl;
                 }
                 if (_em->Get<Shield>(_ent) && _em->Get<Shield>(_ent)->shieldActive && _em->Get<Shield>(_ent)->shield > 0)
-                    _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("plasmaShield", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll);
+                    _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("shieldblue25", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll); //change scale to obj Dimensions->lengthZ /2 , and change the shield models to be back to 1 square size in blender !
                     
                 _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType, pitchYawRoll);
             }

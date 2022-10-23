@@ -9,7 +9,7 @@ int counter;
 int main(void)
 {
     McGuyverType Game;
-    std::cout << "LOL";
+
     Game.startGame();
 
     return 0;

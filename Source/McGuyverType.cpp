@@ -42,11 +42,12 @@ void McGuyverType::startGame() // must have player choices etc
     
     
     //HERE WE CREATE PLAYERS, assume player chose the DartAssault spaceship for testing
-    createPlayer("greyhound");
+    createPlayer("dartAssault");
+    
     createObstacle("cube1Blue",(Vector3){4, 5, 15});
     createObstacle("cube2Blue",_ennemyStartingPos.pos);
 
-    std::cout << "LOL";
+    
 
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
@@ -200,6 +201,8 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
 
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
+
+    std::cout << "LOL";
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getExplosionName()});
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});

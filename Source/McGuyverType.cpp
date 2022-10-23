@@ -197,12 +197,13 @@ void McGuyverType::createPlayer(std::string modelName)
 void McGuyverType::createObstacle(std::string modelName, Vector3 position)
 {
     float scrollspeed;
-    EntityID id = _entityManager->CreateNewEntity();
+    EntityID id = _entityManager->CreateNewEntity(); // this causes the segfault, check when i delete entities that i do it properly
+    std::cout << "LOL";
 
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
 
-    std::cout << "LOL";
+    
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getExplosionName()});
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});

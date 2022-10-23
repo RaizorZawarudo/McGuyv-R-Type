@@ -116,24 +116,49 @@ void DrawingSystem::playerUIDrawing(EntityID clientplayerID)
 void DrawingSystem::handleWeaponslots(EntityID clientplayerID)
 {
     if (_em->Get<Weaponset>(clientplayerID)->currentWeapon == 0)
-        _renderer->draw_text("1", GREEN, _window->getDimensions().x/100 * WEAPON1INDX ,_window->getDimensions().y/100 * WEAPON1INDY, _assetManager->getAllFonts().at(0), 25);
+        _renderer->draw_text("1", GREEN, _window->getDimensions().x/100 * WEAPON1INDX ,_window->getDimensions().y/100 * WEAPON1INDY, _assetManager->getAllFonts().at(0), 22);
     else
-        _renderer->draw_text("1", RAYWHITE, _window->getDimensions().x/100 * WEAPON1INDX ,_window->getDimensions().y/100 * WEAPON1INDY, _assetManager->getAllFonts().at(0), 25);
+        _renderer->draw_text("1", RAYWHITE, _window->getDimensions().x/100 * WEAPON1INDX ,_window->getDimensions().y/100 * WEAPON1INDY, _assetManager->getAllFonts().at(0), 22);
     if (_em->Get<Weaponset>(clientplayerID)->currentWeapon == 1) 
-        _renderer->draw_text("2", GREEN, _window->getDimensions().x/100 * WEAPON2INDX ,_window->getDimensions().y/100 * WEAPON2INDY, _assetManager->getAllFonts().at(0), 25);
+        _renderer->draw_text("2", GREEN, _window->getDimensions().x/100 * WEAPON2INDX ,_window->getDimensions().y/100 * WEAPON2INDY, _assetManager->getAllFonts().at(0), 22);
     else
-        _renderer->draw_text("2", RAYWHITE, _window->getDimensions().x/100 * WEAPON2INDX ,_window->getDimensions().y/100 * WEAPON2INDY, _assetManager->getAllFonts().at(0), 25);
+        _renderer->draw_text("2", RAYWHITE, _window->getDimensions().x/100 * WEAPON2INDX ,_window->getDimensions().y/100 * WEAPON2INDY, _assetManager->getAllFonts().at(0), 22);
     if(_em->Get<Weaponset>(clientplayerID)->currentWeapon == 2)
-        _renderer->draw_text("3", GREEN, _window->getDimensions().x/100 * WEAPON3INDX ,_window->getDimensions().y/100 * WEAPON3INDY, _assetManager->getAllFonts().at(0), 25);
+        _renderer->draw_text("3", GREEN, _window->getDimensions().x/100 * WEAPON3INDX ,_window->getDimensions().y/100 * WEAPON3INDY, _assetManager->getAllFonts().at(0), 22);
     else
-        _renderer->draw_text("3", RAYWHITE, _window->getDimensions().x/100 * WEAPON3INDX ,_window->getDimensions().y/100 * WEAPON3INDY, _assetManager->getAllFonts().at(0), 25);
+        _renderer->draw_text("3", RAYWHITE, _window->getDimensions().x/100 * WEAPON3INDX ,_window->getDimensions().y/100 * WEAPON3INDY, _assetManager->getAllFonts().at(0), 22);
 }
 
 void DrawingSystem::handleWeaponAmmo(EntityID clientplayerID)
 {
     //first weapon always full ammo cannot be dropped
-    _renderer->draw_text("--",
-    GREEN, _window->getDimensions().x/100 * WEAP1AMMOX ,_window->getDimensions().y/100 * WEAP1AMMOY, _assetManager->getAllFonts().at(0), 16);
-    
+    if (_em->Get<Weaponset>(clientplayerID)->currentWeapon == 0) {
+        _renderer->draw_text("--", GREEN, _window->getDimensions().x * WEAP1AMMOX /100,
+        _window->getDimensions().y/100 * WEAP1AMMOY, _assetManager->getAllFonts().at(0), 16);
+    }
+    else {
+        _renderer->draw_text("--", RAYWHITE, _window->getDimensions().x * WEAP1AMMOX /100 ,
+        _window->getDimensions().y/100 * WEAP1AMMOY, _assetManager->getAllFonts().at(0), 16);
+    }
+
+    if (_em->Get<Weaponset>(clientplayerID)->weapons.size() >= 2) {
+        if (_em->Get<Weaponset>(clientplayerID)->currentWeapon == 1)
+            _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(1).curAmmo), GREEN, _window->getDimensions().x * WEAP1AMMOX /100,
+            _window->getDimensions().y/100 * WEAP1AMMOY, _assetManager->getAllFonts().at(0), 16);
+        else
+            _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(1).curAmmo), RAYWHITE, _window->getDimensions().x * WEAP2AMMOX /100,
+            _window->getDimensions().y/100 * WEAP2AMMOY, _assetManager->getAllFonts().at(0), 16);
+
+    }
+
+    if (_em->Get<Weaponset>(clientplayerID)->weapons.size() == 3) {
+        if (_em->Get<Weaponset>(clientplayerID)->currentWeapon == 2)
+            _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(2).curAmmo), GREEN, _window->getDimensions().x * WEAP3AMMOX /100,
+            _window->getDimensions().y/100 * WEAP3AMMOY, _assetManager->getAllFonts().at(0), 16);
+        else
+            _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(2).curAmmo), RAYWHITE, _window->getDimensions().x * WEAP3AMMOX /100,
+            _window->getDimensions().y/100 * WEAP3AMMOY, _assetManager->getAllFonts().at(0), 16);
+
+    }    
 
 }

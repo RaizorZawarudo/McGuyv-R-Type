@@ -24,17 +24,19 @@ const int PLAYERICONY = 83;
 const int SCOREX = 62;
 const int SCOREY = 87;
 
-const int WEAPON1INDX = 28;
-const int WEAPON1INDY = 83;
-const int WEAPON2INDX = 33;
-const int WEAPON2INDY= 83;
-const int WEAPON3INDX = 38;
-const int WEAPON3INDY = 83;
+const float WEAPON1INDX = 4.2+28;
+const float WEAPON1INDY = 82.5;
+const float WEAPON2INDX = 4.2+33;
+const float WEAPON2INDY = 82.5;
+const float WEAPON3INDX = 4.2+38;
+const float WEAPON3INDY = 82.5;
 
-const int WEAP1AMMOX = 28;
-const int WEAP1AMMOY = 90;
-// const int WEAP2AMMOX = ;
-// const int WEAP3AMMOX = ; 
+const float WEAP1AMMOX = 4.2+28;
+const float WEAP1AMMOY = 91;
+const float WEAP2AMMOX = 4.2+32.2;
+const float WEAP2AMMOY = 91;
+const float WEAP3AMMOX = 4.2+37.2;
+const float WEAP3AMMOY = 91;
 
 class DrawingSystem : public ISystem  {
     public:
@@ -58,6 +60,5 @@ class DrawingSystem : public ISystem  {
         std::shared_ptr<AssetManager> _assetManager;
         std::shared_ptr<RL::CameraManager> _cameraManager;
         std::shared_ptr<RL::Window> _window;
-
 };
 

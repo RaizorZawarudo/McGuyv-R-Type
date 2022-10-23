@@ -95,7 +95,7 @@ std::vector<ProjectileWeapon> McGuyverType::generateStartWeaponset(std::string m
     ProjectileWeapon BaseWeapon;
     Vector3 Vel;
 
-    BaseWeapon.name = "Lazer";
+    BaseWeapon.name = modelName;
     BaseWeapon.modelName = modelName;
     BaseWeapon.maxAmmo = -999; // unlimitted ammo stock
     BaseWeapon.curAmmo = -999; // unlimitted ammo, both the -999 are for unlimited should define it later
@@ -111,6 +111,11 @@ std::vector<ProjectileWeapon> McGuyverType::generateStartWeaponset(std::string m
 
 
     return startWeaponset;
+}
+
+void addWeapon()
+{
+
 }
 
 void McGuyverType::createPlayer(std::string modelName, std::string avatarName) // here we will add base weapon choice, avatar choice as well chosen by user in menu, the avatar is just cosmetic
@@ -142,10 +147,30 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::SPACESHIP)->getHp()});
     _entityManager->Assign<Shield>(id, Shield{100});
 
+    //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
     _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("plasmaProj"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     
 
-    //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
+    //mock extra weapon for ui testing to delete later
+
+    ProjectileWeapon BaseWeapon;
+    Vector3 Veli;
+
+    BaseWeapon.name = "missileProj";
+    BaseWeapon.modelName = "missileProj";
+    BaseWeapon.maxAmmo = 1000; // unlimitted ammo stock
+    BaseWeapon.curAmmo = 100; // unlimitted ammo, both the -999 are for unlimited should define it later
+    BaseWeapon.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models
+    BaseWeapon.range = 50.0f; // TODO: same as above
+    BaseWeapon.cooldowninseconds = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getShootCD();
+    BaseWeapon.damage = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getHp();
+    Veli = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getVelocity();
+    BaseWeapon.vel = {Veli.x, Veli.y, Veli.z};
+    BaseWeapon.lasttimeweaponwasshot = 0;
+
+    _entityManager->Get<Weaponset>(id)->weapons.push_back(BaseWeapon);
+
+
 
 
 }

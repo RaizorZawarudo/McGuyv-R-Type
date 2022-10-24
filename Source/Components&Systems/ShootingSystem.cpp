@@ -31,15 +31,14 @@ void ShootingSystem::update(std::vector<EntityID> &allEntities)
             for (int keypressed : keypresses->_inputQueue) {
                 if (keypressed == SHOOT) {
                     createProjectile(entityPos, weaponSet, modelDimensions, ent, entityType);
-                    std::cout << "my score is " << _em->Get<Score>(ent)->score << std::endl;
                 }
                 if (keypressed == SHIELD) {
                     haspressedShield= true;
                     _em->Get<Shield>(ent)->shieldActive = true;
                 }
-                // if(keypressed == FIRSTWEAPON) switchWeapon(0);
-                // if(keypressed == FIRSTWEAPON) switchWeapon(1);
-                // if(keypressed == FIRSTWEAPON) switchWeapon(2);
+                if(keypressed == FIRSTWEAPON) switchWeapon(0, weaponSet);
+                if(keypressed == SECONDWEAPON) switchWeapon(1, weaponSet);
+                // if(keypressed == THIRDWEAPON) switchWeapon(2);
             }
             if (!haspressedShield)
                 _em->Get<Shield>(ent)->shieldActive = false;
@@ -50,14 +49,11 @@ void ShootingSystem::update(std::vector<EntityID> &allEntities)
 void ShootingSystem::createProjectile(Position* entityPos, Weaponset* weaponSet, ModelDimensions* modelDimensions, EntityID ownerID, EntityModelType* ownerModelType) //add clockcomponent that has a clock inside
 {
     //if timer of weapon > cooldown
-    if (weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo > 0 || weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo == -999 &&
+    if ((weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo > 0 || weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo == -999) &&
         GetTime() - weaponSet->weapons.at(weaponSet->currentWeapon).lasttimeweaponwasshot >  weaponSet->weapons.at(weaponSet->currentWeapon).cooldowninseconds) {
         weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo > 0 ? 
-        weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo -1 : weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo - 0; // reduce ammo by one unit or do nothing if unlimited ammo
+        weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo -= 1 : weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo -= 0; // reduce ammo by one unit or do nothing if unlimited ammo
         weaponSet->weapons.at(weaponSet->currentWeapon).lasttimeweaponwasshot = GetTime();// reset cooldown
-
-        std::cout << weaponSet->weapons.at(weaponSet->currentWeapon).modelName << "has : "
-        << weaponSet->weapons.at(weaponSet->currentWeapon).curAmmo << " ammo left" << std::endl;
 
         EntityID id = _em->CreateNewEntity();
         //register this entity as the player for this client
@@ -98,4 +94,11 @@ void ShootingSystem::createProjectile(Position* entityPos, Weaponset* weaponSet,
 
 
 
+}
+
+void ShootingSystem::switchWeapon(int weaponIndex, Weaponset* weaponSet)
+{
+    if (weaponSet->weapons.size() >= weaponIndex + 1) {
+        weaponSet->currentWeapon = weaponIndex;
+    }
 }

@@ -153,22 +153,22 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
 
     //mock extra weapon for ui testing to delete later
 
-    ProjectileWeapon BaseWeapon;
+    ProjectileWeapon BaseWeapon2;
     Vector3 Veli;
 
-    BaseWeapon.name = "missileProj";
-    BaseWeapon.modelName = "missileProj";
-    BaseWeapon.maxAmmo = 1000; // unlimitted ammo stock
-    BaseWeapon.curAmmo = 100; // unlimitted ammo, both the -999 are for unlimited should define it later
-    BaseWeapon.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models
-    BaseWeapon.range = 50.0f; // TODO: same as above
-    BaseWeapon.cooldowninseconds = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getShootCD();
-    BaseWeapon.damage = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getHp();
-    Veli = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getVelocity();
-    BaseWeapon.vel = {Veli.x, Veli.y, Veli.z};
-    BaseWeapon.lasttimeweaponwasshot = 0;
+    BaseWeapon2.name = "missileProj";
+    BaseWeapon2.modelName = "missileProj";
+    BaseWeapon2.maxAmmo = 1000; // unlimitted ammo stock
+    BaseWeapon2.curAmmo = 100; // unlimitted ammo, both the -999 are for unlimited should define it later
+    BaseWeapon2.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models
+    BaseWeapon2.range = 50.0f; // TODO: same as above
+    BaseWeapon2.cooldowninseconds = _assetManager->getSpecificDrawableWithType(BaseWeapon2.modelName, RL::ModelType::PROJECTILE)->getShootCD();
+    BaseWeapon2.damage = _assetManager->getSpecificDrawableWithType(BaseWeapon2.modelName, RL::ModelType::PROJECTILE)->getHp();
+    Veli = _assetManager->getSpecificDrawableWithType(BaseWeapon2.modelName, RL::ModelType::PROJECTILE)->getVelocity();
+    BaseWeapon2.vel = {Veli.x, Veli.y, Veli.z};
+    BaseWeapon2.lasttimeweaponwasshot = 0.0f;
 
-    _entityManager->Get<Weaponset>(id)->weapons.push_back(BaseWeapon);
+    _entityManager->Get<Weaponset>(id)->weapons.push_back(BaseWeapon2);
 
 
 

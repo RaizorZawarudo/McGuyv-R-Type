@@ -17,6 +17,7 @@ class ShootingSystem : public ISystem  {
         ~ShootingSystem();
 
         void update(std::vector<EntityID> &allEntities) override;
+        void switchWeapon(int weaponindex, Weaponset* weaponSet);
 
         void createProjectile(Position* entityPos, Weaponset* weaponSet, ModelDimensions* modelDimensions, EntityID ownerID, EntityModelType* ownerModelType);
     protected:

@@ -15,8 +15,8 @@ void InputSystem::update(std::vector<EntityID> &allEntities)
 {
      //clear all the inputs from the 
     _inputManager->recordInputs();
-    for (int i = 0; i < _inputManager->getInputs().size(); i++)
-            std::cout << _inputManager->getInputs()[i] << std::endl;
+    // for (int i = 0; i < _inputManager->getInputs().size(); i++)
+    //         std::cout << _inputManager->getInputs()[i] << std::endl;
     // send data to server functions
     //networking GETINPUTS OF OTHER PLAYERS
     _keysPressed = _inputManager->getInputs(); // add the recording of other players inputs to the vector of vector of keypressed ( change type from int to struct containing an id + the vector of ints)

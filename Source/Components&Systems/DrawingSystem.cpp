@@ -143,7 +143,7 @@ void DrawingSystem::handleWeaponAmmo(EntityID clientplayerID)
 
     if (_em->Get<Weaponset>(clientplayerID)->weapons.size() >= 2) {
         if (_em->Get<Weaponset>(clientplayerID)->currentWeapon == 1)
-            _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(1).curAmmo), GREEN, _window->getDimensions().x * WEAP1AMMOX /100,
+            _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(1).curAmmo), GREEN, _window->getDimensions().x * WEAP2AMMOX /100,
             _window->getDimensions().y/100 * WEAP1AMMOY, _assetManager->getAllFonts().at(0), 16);
         else
             _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(1).curAmmo), RAYWHITE, _window->getDimensions().x * WEAP2AMMOX /100,

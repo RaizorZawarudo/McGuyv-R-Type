@@ -47,7 +47,7 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
 
         //reduce other shield or hp by bullet damage
         if (_em->Get<Shield>(other)) {
-            _em->Get<Shield>(other)->shieldActive ? _em->Get<Shield>(other)->shield -= _em->Get<Hp>(projectile)->hp : _em->Get<Hp>(other)->hp -= _em->Get<Hp>(projectile)->hp;
+            _em->Get<Shield>(other)->shieldActive ? _em->Get<Shield>(other)->shield -= _em->Get<Hp>(projectile)->hp / 2 : _em->Get<Hp>(other)->hp -= _em->Get<Hp>(projectile)->hp;
             if ( _em->Get<Shield>(other)->shield < 0) {
                 _em->Get<Hp>(other)->hp += _em->Get<Shield>(other)->shield;
                 _em->Get<Shield>(other)->shield = 0;
@@ -86,8 +86,6 @@ void CollisionSystem::body_collisions(EntityID ent, EntityID other)
 
 void CollisionSystem::create_explosion(Vector3 pos, std::string exploName)
 {
-    std::cout << "should explode with this animation : " << exploName << " at this position " << pos.y << " " << pos.y << " " << pos.z << std::endl;
-
     EntityID id = _em->CreateNewEntity();
     _em->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::EXPLOSION});
     _em->Assign<Owner>(id, Owner{id, RL::ModelType::EXPLOSION});

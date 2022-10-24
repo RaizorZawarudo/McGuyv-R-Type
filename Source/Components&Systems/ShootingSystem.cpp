@@ -38,7 +38,8 @@ void ShootingSystem::update(std::vector<EntityID> &allEntities)
                 }
                 if(keypressed == FIRSTWEAPON) switchWeapon(0, weaponSet);
                 if(keypressed == SECONDWEAPON) switchWeapon(1, weaponSet);
-                // if(keypressed == THIRDWEAPON) switchWeapon(2);
+                if(keypressed == THIRDWEAPON) switchWeapon(2, weaponSet);
+                if(keypressed == DROPWEAPON) dropWeapon(weaponSet);
             }
             if (!haspressedShield)
                 _em->Get<Shield>(ent)->shieldActive = false;
@@ -100,5 +101,18 @@ void ShootingSystem::switchWeapon(int weaponIndex, Weaponset* weaponSet)
 {
     if (weaponSet->weapons.size() >= weaponIndex + 1) {
         weaponSet->currentWeapon = weaponIndex;
+        //play switch weapon sound
     }
+}
+
+void ShootingSystem::dropWeapon(Weaponset* weaponSet)
+{
+    if (weaponSet->currentWeapon != 0) {
+        weaponSet->weapons.erase(weaponSet->weapons.begin() + weaponSet->currentWeapon);
+        weaponSet->currentWeapon -= 1;
+    }
+    
+
+    //create a powerup that has velocity and the ammo left in the weapon for others to pickup at postion player - player sizeZ /2 - powerup size /2;
+
 }

@@ -51,6 +51,7 @@ enum UserInput {
     DOWN2 = 115,
     RIGHT2 = 100,
     SHIELD = 112,
+    DROPWEAPON = 108,
     NONE = -7,
     ESCAPE = -8,
 

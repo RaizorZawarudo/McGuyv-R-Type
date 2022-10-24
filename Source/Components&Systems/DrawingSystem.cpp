@@ -49,7 +49,6 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                     AnimationData* animData = _em->Get<AnimationData>(_ent);
                     maxFrame = _assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->updateModelsAnimation(animData->currentFrame, animData->currentAnim);
                     animData->currentFrame <= maxFrame? animData->currentFrame++ : _em->Get<IsAlive>(_ent)->alive = false;
-                    std::cout << animData->currentFrame << " is the current frame of explosion and maxFrame is = " << maxFrame << std::endl;
                 }
                 //draw shield depending on shield health
                 if (_em->Get<Shield>(_ent) && _em->Get<Shield>(_ent)->shieldActive && _em->Get<Shield>(_ent)->shield > 0) {
@@ -104,10 +103,10 @@ void DrawingSystem::playerUIDrawing(EntityID clientplayerID)
     
     //handle ammo of each weapon
     handleWeaponAmmo(clientplayerID);
-    
-    
 
-    // if (_em->Get<Weaponset>(clientplayerID)->weapons.at(1) != nullptr)
+    //handle shield
+    handleShield(clientplayerID);
+    
 
     //handle score
     _renderer->draw_text(std::to_string(_em->Get<Score>(clientplayerID)->score), RAYWHITE, _window->getDimensions().x/100 * SCOREX ,_window->getDimensions().y/100 * SCOREY, _assetManager->getAllFonts().at(0), 25);
@@ -158,7 +157,13 @@ void DrawingSystem::handleWeaponAmmo(EntityID clientplayerID)
         else
             _renderer->draw_text(std::to_string(_em->Get<Weaponset>(clientplayerID)->weapons.at(2).curAmmo), RAYWHITE, _window->getDimensions().x * WEAP3AMMOX /100,
             _window->getDimensions().y/100 * WEAP3AMMOY, _assetManager->getAllFonts().at(0), 16);
-
     }    
+
+}
+
+void DrawingSystem::handleShield(EntityID clientplayerID)
+{
+    _renderer->draw_text(std::to_string(_em->Get<Shield>(clientplayerID)->shield), RAYWHITE, _window->getDimensions().x * SHIELDVALUEX /100,
+                        _window->getDimensions().y/100 * SHIELDVALUEY, _assetManager->getAllFonts().at(0), 16);
 
 }

@@ -138,7 +138,6 @@ int RL::Drawable3D::updateModelsAnimation(int currFrame, int currAnim) // add in
         currFrame = 0;
     }
     UpdateModelAnimation(this->_model, this->_animations[currAnim], currFrame);
-    std::cout << "framecount = " << this->_animations[currAnim].frameCount << std::endl;
     return this->_animations[currAnim].frameCount;
 }
 

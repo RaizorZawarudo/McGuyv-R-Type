@@ -31,6 +31,8 @@ const float WEAPON2INDY = 82.5;
 const float WEAPON3INDX = 4.2+38;
 const float WEAPON3INDY = 82.5;
 
+const float SHIELDVALUEX = 4.2+23;
+const float SHIELDVALUEY = 91;
 const float WEAP1AMMOX = 4.2+28;
 const float WEAP1AMMOY = 91;
 const float WEAP2AMMOX = 4.2+32.2;
@@ -51,6 +53,8 @@ class DrawingSystem : public ISystem  {
 
         void handleWeaponslots(EntityID clientplayerID);
         void handleWeaponAmmo(EntityID clientplayerID);
+
+        void handleShield(EntityID clientplayerID);
 
 
 

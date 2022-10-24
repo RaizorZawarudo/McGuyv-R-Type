@@ -18,6 +18,7 @@ class CollisionSystem : public ISystem {
 
         void update(std::vector<EntityID> &allEntities) override;
         void bullet_collisions(EntityID ent, EntityID other);
+        void obstacle_collisions(EntityID ent, EntityID other);
         void powerUp_collisons(EntityID ent, EntityID other);
         void body_collisions(EntityID ent, EntityID other);
 

@@ -22,6 +22,7 @@ void CollisionSystem::update(std::vector<EntityID> &allEntities)
         for (EntityID other : EntityViewer<Position, Collider>(*_em.get())) {
             if ( ent != other) {
                 bullet_collisions(ent, other);
+                obstacle_collisions(ent,other);
                 // powerUp_collisons(ent, other);
                 // body_collisions(ent, other);
             }
@@ -76,6 +77,48 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
     }
 }
 
+void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
+{
+    if (_em->Get<EntityModelType>(obstacle)->modelType != RL::ModelType::OBSTACLE)
+        return;
+    if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::OBSTACLE || _em->Get<EntityModelType>(other)->modelType == RL::ModelType::PROJECTILE)
+        return;
+    if (!_em->Get<IsAlive>(obstacle)->alive)
+        return;
+    
+    Collider* obstacleCollider = _em->Get<Collider>(obstacle);
+    Collider* otherCollider = _em->Get<Collider>(other);
+    if (CheckCollisionBoxes(obstacleCollider->collider, otherCollider->collider)) {
+        std::cout << _em->Get<ModelName>(obstacle)->modelname << " collided with " << _em->Get<ModelName>(other)->modelname << std::endl;
+       
+
+        //reduce other shield or hp by obstacle hp
+        if (_em->Get<Shield>(other)) {
+            _em->Get<Shield>(other)->shieldActive ? _em->Get<Shield>(other)->shield -= _em->Get<Hp>(obstacle)->hp / 2 : _em->Get<Hp>(other)->hp -= _em->Get<Hp>(obstacle)->hp;
+            if ( _em->Get<Shield>(other)->shield < 0) {
+                _em->Get<Hp>(other)->hp += _em->Get<Shield>(other)->shield;
+                _em->Get<Shield>(other)->shield = 0;
+            }
+        }
+        else {
+            _em->Get<Hp>(other)->hp -= _em->Get<Hp>(obstacle)->hp;
+        }
+
+        //check if other hp is below zero : if yes set it to dead and create an explosion entity with the explosion path stored in the other´s components ==>  createExplosion(_em->Get<ExplosionName>(other)->name);
+        if (_em->Get<Hp>(other)->hp <= 0) {
+            _em->Get<IsAlive>(other)->alive = false;
+            Position* obstaclePos = _em->Get<Position>(obstacle);
+            ModelName* otherName = _em->Get<ModelName>(other);
+            create_explosion(obstaclePos->pos, otherName->explosionname);
+        }
+
+        _em->Get<IsAlive>(obstacle)->alive = false;
+        Position* obstaclePos = _em->Get<Position>(obstacle);
+        ModelName* obstacleName = _em->Get<ModelName>(obstacle);
+        create_explosion(obstaclePos->pos, obstacleName->explosionname);
+    }
+}
+
 void CollisionSystem::powerUp_collisons(EntityID ent, EntityID other)
 {
 
@@ -97,4 +140,5 @@ void CollisionSystem::create_explosion(Vector3 pos, std::string exploName)
     _em->Assign<Position>(id, Position{pos});
     _em->Assign<PitchYawRoll>(id, PitchYawRoll{0.0f, 0.0f, 0.0f});
     _em->Assign<AnimationData>(id, AnimationData{0, 0});
+    std::cout << "creating explosion" << std::endl;
 }

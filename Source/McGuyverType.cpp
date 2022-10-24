@@ -60,8 +60,9 @@ void McGuyverType::startGame() // must have player choices etc
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
     
     createPlayer("dartAssault", "malibuPepe");
-    createObstacle("cube2Blue",(Vector3){3, 5, 15});
-    createObstacle("cube2Blue",(Vector3){4, 5, 15});
+    createObstacle("cube2Blue",(Vector3){5, 5, 15});
+    createObstacle("cube2Blue",(Vector3){5, 5, 10});
+    createObstacle("cube2Blue",(Vector3){5, 3, 10});
 
     createObstacle("cube2Blue",(Vector3){2, 5, 15});
     createObstacle("cube2Blue",(Vector3){-4, 5, 15});    
@@ -81,6 +82,7 @@ void McGuyverType::startGame() // must have player choices etc
         _entityManager->DestroyEntity(_ent);
     }
     //clear everything in asset manager maannnn
+
     
     
 }

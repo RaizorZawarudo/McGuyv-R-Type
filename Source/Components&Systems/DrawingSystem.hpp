@@ -30,15 +30,17 @@ const float WEAPON2INDX = 4.2+33;
 const float WEAPON2INDY = 82.5;
 const float WEAPON3INDX = 4.2+38;
 const float WEAPON3INDY = 82.5;
+const float SHIELDINDX = 4+22.2;
+const float SHIELDINDY = 83.2;
 
-const float SHIELDVALUEX = 4.2+23;
-const float SHIELDVALUEY = 91;
+const float SHIELDVALUEX = 4+23;
+const float SHIELDVALUEY = 92;
 const float WEAP1AMMOX = 4.2+28;
-const float WEAP1AMMOY = 91;
+const float WEAP1AMMOY = 92;
 const float WEAP2AMMOX = 4.2+32.2;
-const float WEAP2AMMOY = 91;
+const float WEAP2AMMOY = 92;
 const float WEAP3AMMOX = 4.2+37.2;
-const float WEAP3AMMOY = 91;
+const float WEAP3AMMOY = 92;
 
 class DrawingSystem : public ISystem  {
     public:

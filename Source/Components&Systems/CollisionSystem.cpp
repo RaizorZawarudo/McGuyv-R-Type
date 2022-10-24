@@ -33,6 +33,8 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
 {
     if (_em->Get<EntityModelType>(projectile)->modelType != RL::ModelType::PROJECTILE)
         return;
+    if (!_em->Get<IsAlive>(projectile)->alive)
+        return;
     // Position* projectilePos = _em->Get<Position>(projectile);
     // Position* otherPos = _em->Get<Position>(other);
     Collider* projectileCollider = _em->Get<Collider>(projectile);

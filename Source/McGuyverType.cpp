@@ -51,24 +51,37 @@ void McGuyverType::startGame() // must have player choices etc
     
     
     //HERE WE CREATE PLAYERS, assume player chose the DartAssault spaceship for testing
-    createPlayer("dartAssault", "malibuPepe");
     
-    createObstacle("cube2Blue",(Vector3){4, 5, 15});
-    createObstacle("cube2Blue",(Vector3){3, 5, 15});
-    createObstacle("cube2Blue",(Vector3){2, 5, 15});
-    createObstacle("cube2Blue",(Vector3){-4, 5, 15});
 
     
+    //this order or setting level then creating entities then setting game to play is necessary for no seggy
+
 
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
+    
+    createPlayer("dartAssault", "malibuPepe");
+    createObstacle("cube2Blue",(Vector3){3, 5, 15});
+    createObstacle("cube2Blue",(Vector3){4, 5, 15});
+
+    createObstacle("cube2Blue",(Vector3){2, 5, 15});
+    createObstacle("cube2Blue",(Vector3){-4, 5, 15});    
+    
+    
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
 
     while (_window->isWindowOpen()) {
         //UI LOOP functions
         gameLoop(); //might take more arguments to refelct player choice of map and choice of character
     }
-    //clear everything
     _window->close();
+
+    //clear everything in entities
+    for (EntityID _ent:  EntityViewer<>(*_entityManager.get()) ) {
+        std::cout << "destroying entity : " << _ent << std::endl;
+        _entityManager->DestroyEntity(_ent);
+    }
+    //clear everything in asset manager maannnn
+    
     
 }
 
@@ -150,6 +163,7 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
     _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("plasmaProj"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     
+    std::cout << "PLAYER LOL" << std::endl;
 
     //mock extra weapon for ui testing to delete later
 
@@ -177,10 +191,9 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
 
 void McGuyverType::createObstacle(std::string modelName, Vector3 position)
 {
-    float scrollspeed;
     EntityID id = _entityManager->CreateNewEntity(); // this causes the segfault, check when i delete entities that i do it properly
-    std::cout << "LOL";
 
+    float scrollspeed;
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::OBSTACLE});
 
@@ -188,6 +201,7 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getExplosionName()});
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
+    
     _entityManager->Assign<ModelDimensions>(id, ModelDimensions{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getWidth(),
                                                                 _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getHeight(),
                                                                 _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getLength()});
@@ -198,7 +212,7 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
     _entityManager->Assign<Position>(id, Position{position});
     scrollspeed = _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getScrollSpeed();
     _entityManager->Assign<Velocity>(id, Velocity{scrollspeed, scrollspeed, scrollspeed});
-    _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getHp()});    
+    _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getHp()});
 
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
 

@@ -9,6 +9,7 @@
 #define ENTITY_MANAGER_HPP_
 
 #include <vector>
+#include <iostream>
 
 #include "ECS.hpp"
 #include "ComponentPool.hpp"
@@ -26,13 +27,20 @@ class EntityManager
 
         EntityID CreateNewEntity() {
             if (!freeEntities.empty()) {
+                std::cout << "LOL1" << std::endl;
                 EntityIndex newIndex = freeEntities.back();
+                std::cout << "LOL2" << std::endl;
                 freeEntities.pop_back();
+                std::cout << "LOL3" << std::endl;
                 EntityID newID = CreateEntityId(newIndex, GetEntityVersion(entities[newIndex].id));
+                std::cout << "LOL4" << std::endl;
                 entities[newIndex].id = newID;
+                std::cout << "LOL5" << std::endl;
                 return entities[newIndex].id;
             }
+            std::cout << "LOL6" << std::endl;
             entities.push_back({ CreateEntityId(EntityIndex(entities.size()), 0), ComponentMask() });
+            std::cout << "LOL7" << std::endl;
             return entities.back().id;
         }
         void DestroyEntity(EntityID id) {

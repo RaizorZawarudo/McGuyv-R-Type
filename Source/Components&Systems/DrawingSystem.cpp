@@ -163,6 +163,8 @@ void DrawingSystem::handleWeaponAmmo(EntityID clientplayerID)
 
 void DrawingSystem::handleShield(EntityID clientplayerID)
 {
+     _renderer->draw_text("SHIELD", RAYWHITE, _window->getDimensions().x/100 * SHIELDINDX ,_window->getDimensions().y/100 * SHIELDINDY, _assetManager->getAllFonts().at(0), 12);
+
     _renderer->draw_text(std::to_string(_em->Get<Shield>(clientplayerID)->shield), RAYWHITE, _window->getDimensions().x * SHIELDVALUEX /100,
                         _window->getDimensions().y/100 * SHIELDVALUEY, _assetManager->getAllFonts().at(0), 16);
 

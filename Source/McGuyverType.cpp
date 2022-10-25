@@ -231,8 +231,8 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     ProjectileWeapon BaseWeapon2;
     Vector3 Veli;
 
-    BaseWeapon2.name = "missileProj";
-    BaseWeapon2.modelName = "missileProj";
+    BaseWeapon2.name = "fireball";
+    BaseWeapon2.modelName = "fireball";
     BaseWeapon2.maxAmmo = 1000; // unlimitted ammo stock
     BaseWeapon2.curAmmo = 100; // unlimitted ammo, both the -999 are for unlimited should define it later
     BaseWeapon2.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models

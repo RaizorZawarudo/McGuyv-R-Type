@@ -60,16 +60,15 @@ void McGuyverType::startGame() // must have player choices etc
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
     
     createPlayer("dartAssault", "malibuPepe");
-    // createObstacle("cube2Blue",(Vector3){5, 5, 15});
-    // createObstacle("cube2Blue",(Vector3){5, 5, 10});
-    // createObstacle("cube2Blue",(Vector3){5, 3, 10});
-
-    // createObstacle("cube2Blue",(Vector3){2, 5, 15});
-    // createObstacle("cube2Blue",(Vector3){-4, 5, 15});    
+    
     
     
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
 
+    for (int i = 0 ; i< 65 ; i++) {
+            std::cout << "\"e" << i << ".obj\" ";
+
+    }
 
     float x;
     float y;
@@ -188,7 +187,7 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     _entityManager->Assign<Shield>(id, Shield{100});
 
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
-    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("plasmaProj"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("orangeLight"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     
     std::cout << "PLAYER LOL" << std::endl;
 

@@ -47,6 +47,7 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                 //update the animation of the model before printing it if its a explosion
                 if (modelType->modelType == RL::ModelType::EXPLOSION) {
                     AnimationData* animData = _em->Get<AnimationData>(_ent);
+                    std::cout << animData->currentFrame << std::endl;
                     maxFrame = _assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->updateModelsAnimation(animData->currentFrame, animData->currentAnim);
                     animData->currentFrame <= maxFrame? animData->currentFrame++ : _em->Get<IsAlive>(_ent)->alive = false;
                 }

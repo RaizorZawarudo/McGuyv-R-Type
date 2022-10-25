@@ -90,10 +90,15 @@ class MovementSystem : public ISystem {
 
                 if (entityType->modelType == RL::ModelType::PROJECTILE) {
                     entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
+                //here we can add special shit ( special bullet movements whatefver)
 
 
                 }
-                // if entitiy == OBSTACLE == DO MOVEMENTS FOR OBSTACLES
+                
+                if (entityType->modelType == RL::ModelType::OBSTACLE) {
+                    entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
+                //here we can add special shit (obstacles moving in circles idk whatever, they just have another data in the "waves csv " that indicates if it has attribut 1, 2 ,3,4 etc, and each attribute links toa function in this if aka, 1 = sinusoidal, 2= circle ,3= teleport, 4 = back and forth youdont know)
+                }
 
 
 

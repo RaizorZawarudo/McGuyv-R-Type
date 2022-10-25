@@ -60,20 +60,40 @@ void McGuyverType::startGame() // must have player choices etc
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
     
     createPlayer("dartAssault", "malibuPepe");
-    createObstacle("cube2Blue",(Vector3){5, 5, 15});
-    createObstacle("cube2Blue",(Vector3){5, 5, 10});
-    createObstacle("cube2Blue",(Vector3){5, 3, 10});
+    // createObstacle("cube2Blue",(Vector3){5, 5, 15});
+    // createObstacle("cube2Blue",(Vector3){5, 5, 10});
+    // createObstacle("cube2Blue",(Vector3){5, 3, 10});
 
-    createObstacle("cube2Blue",(Vector3){2, 5, 15});
-    createObstacle("cube2Blue",(Vector3){-4, 5, 15});    
+    // createObstacle("cube2Blue",(Vector3){2, 5, 15});
+    // createObstacle("cube2Blue",(Vector3){-4, 5, 15});    
     
     
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
 
+
+    float x;
+    float y;
+    double lastshot= 0;
+    bool shootingstaractive = false;
+
     while (_window->isWindowOpen()) {
         //UI LOOP functions
         gameLoop(); //might take more arguments to refelct player choice of map and choice of character
+
+        // MOCK SPAWN OF OBSTACLES FOR TESTING TO DELETE !!
+        if (GetTime()- lastshot > 1) {
+            y = std::rand() % 9;
+            x = std::rand() % 7;
+            x += 2;
+            std::cout << "shooting a star at X = " << x << " Y = " << y << std::endl;
+            if ( std::rand() % 2 == 0)
+                x *= -1;
+            createObstacle("cube2Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
+            lastshot = GetTime();            
+        }
     }
+
+    
     _window->close();
 
     //clear everything in entities
@@ -97,6 +117,11 @@ void McGuyverType::gameLoop()
     //here we loop through all our systems to update them
     for( std::shared_ptr<ISystem> system : _systems)
         system->update(this->_allEntities);
+    
+
+    
+
+                    
     //then if game ends or somethings
     //then finish
 
@@ -197,7 +222,7 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
 
     float scrollspeed;
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
-    _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::OBSTACLE});
+    _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::ENNEMY});
 
     
     

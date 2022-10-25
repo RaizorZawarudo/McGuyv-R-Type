@@ -27,7 +27,7 @@ void ShootingSystem::update(std::vector<EntityID> &allEntities)
         EntityModelType* entityType = _em->Get<EntityModelType>(ent);
         Weaponset* weaponSet = _em->Get<Weaponset>(ent);
         ModelDimensions* modelDimensions = _em->Get<ModelDimensions>(ent);
-        if (entityType->modelType == RL::ModelType::SPACESHIP ||entityType->modelType == RL::ModelType::ENNEMY) {
+        if (entityType->modelType == RL::ModelType::SPACESHIP || entityType->modelType == RL::ModelType::ENNEMY) {
             for (int keypressed : keypresses->_inputQueue) {
                 if (keypressed == SHOOT) {
                     createProjectile(entityPos, weaponSet, modelDimensions, ent, entityType);

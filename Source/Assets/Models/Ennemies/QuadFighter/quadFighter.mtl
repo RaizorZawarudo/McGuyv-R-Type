@@ -1,7 +1,7 @@
 # Blender MTL File: 'None'
 # Material Count: 7
 
-newmtl 07_-_Default
+newmtl 07_-_Default.001
 Ns 259.920732
 Ka 1.000000 1.000000 1.000000
 Kd 0.552941 0.000000 0.000000
@@ -10,8 +10,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump Map #9
-refl Map #3
+map_Bump #9
+map_Kd #3
 
 newmtl 07_-_Defhgfhfgfault
 Ns 597.140958
@@ -22,8 +22,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Bump -bm 0.300000 Map #9
-refl Map #3
+map_Bump -bm 0.300000 #9
+map_Kd #3
 
 newmtl black_mat_for_body
 Ns 685.935204
@@ -34,7 +34,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-refl Map #0
+map_Kd #0
 
 newmtl dfsdfsdf
 Ns 199.999995
@@ -65,7 +65,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-refl Map #3
+map_Kd #3
 
 newmtl next_mat_glow
 Ns 211.121257
@@ -76,4 +76,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-refl Map #3
+map_Kd #3

@@ -1,3 +1,3 @@
 Name,Style,Model Path,Texture Path,Animation Path,scale int,lenght float,width float,height float,hp int,explosionname
-cube1Blue,C1,Source/Assets/Models/Obstacles/cube1Blue/cube1Blue.obj,0,0,1,1,1,1,20,lowPoly
+cube1Blue,C1,Source/Assets/Models/Obstacles/cube1Blue/cube1Blue.obj,0,0,1,1.5,1.5,1.5,20,lowPoly
 cube2Blue,C2,Source/Assets/Models/Obstacles/cube2Blue/cube2Blue.obj,0,0,1,2,2,2,40,lowPoly

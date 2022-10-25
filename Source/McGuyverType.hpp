@@ -40,6 +40,7 @@ class McGuyverType {
 
         //entity creation functions
         void createPlayer(std::string modelName, std::string avatarName);
+        void createEnnemy(std::string modelName, Vector3 position);
         void createObstacle(std::string modelName, Vector3 position);
         std::vector<ProjectileWeapon> generateStartWeaponset(std::string modelName);
         //void createEnnemy();
@@ -71,7 +72,7 @@ class McGuyverType {
         //game related data     
         int _currentLevel = 1;
         Position _playerStartingPos = {0.0f, 1.0f, -8.0f};
-        Position _ennemyStartingPos = {0.0f, 4.0f, 20.0f}; //can delete 
+        Position _ennemyStartingPos = {0.0f, 4.0f, 0.0f}; //can delete 
         float _playerStartingZ = 8.0f; //can delete
         float enemyStartingZ = 20.0f; // cand delete
 

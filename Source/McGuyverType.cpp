@@ -59,7 +59,11 @@ void McGuyverType::startGame() // must have player choices etc
 
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
     
-    createPlayer("dartAssault", "malibuPepe");
+    createPlayer("warpShip", "malibuPepe");
+    createEnnemy("droneR", Vector3{-4.0f, 4.0f, -5.0f});
+    createEnnemy("frigateOne", Vector3{0.0f, 4.0f, -5.0f});
+    createEnnemy("frigateTwo", Vector3{3.0f, 4.0f, -5.0f});
+    createEnnemy("frigateThree", Vector3{5.0f, 4.0f, -5.0f});
     
     
     
@@ -79,15 +83,15 @@ void McGuyverType::startGame() // must have player choices etc
         //UI LOOP functions
         gameLoop(); //might take more arguments to refelct player choice of map and choice of character
 
+        
         // MOCK SPAWN OF OBSTACLES FOR TESTING TO DELETE !!
         if (GetTime()- lastshot > 1) {
             y = std::rand() % 9;
             x = std::rand() % 7;
             x += 2;
-            std::cout << "shooting a star at X = " << x << " Y = " << y << std::endl;
             if ( std::rand() % 2 == 0)
                 x *= -1;
-            createObstacle("cube2Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
+            createObstacle("cube1Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
             lastshot = GetTime();            
         }
     }
@@ -102,8 +106,6 @@ void McGuyverType::startGame() // must have player choices etc
     }
     //clear everything in asset manager maannnn
 
-    
-    
 }
 
 void McGuyverType::gameLoop()
@@ -157,6 +159,42 @@ void addWeapon()
 
 }
 
+void McGuyverType::createEnnemy(std::string modelName, Vector3 ennemyPos) // here we will add base weapon choice, avatar choice as well chosen by user in menu, the avatar is just cosmetic
+{
+    EntityID id = _entityManager->CreateNewEntity();
+    //register this entity as the player for this client
+    std::vector<int> playerInput;
+    Vector3 Vel;
+    
+    float scrollspeed;
+    _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::ENNEMY});
+    
+    _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::ENNEMY});
+    
+    _entityManager->Assign<IsAlive>(id, IsAlive{true});
+    
+
+    
+    
+    _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getExplosionName()});
+    
+    _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
+   
+    
+    _entityManager->Assign<Position>(id,Position{ennemyPos});
+    
+    _entityManager->Assign<PitchYawRoll>(id, PitchYawRoll{0.0f, 0.0f, 0.0f});
+    _entityManager->Assign<ModelDimensions>(id, ModelDimensions{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getWidth(),
+                                                                _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getHeight(),
+                                                                _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getLength()});
+    _entityManager->Assign<Collider>(id, Collider{BoundingBox{}});
+    
+    scrollspeed = _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getScrollSpeed();
+    _entityManager->Assign<Velocity>(id, Velocity{scrollspeed, scrollspeed, scrollspeed});
+    _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getHp()});
+    
+}
+
 void McGuyverType::createPlayer(std::string modelName, std::string avatarName) // here we will add base weapon choice, avatar choice as well chosen by user in menu, the avatar is just cosmetic
 {
     EntityID id = _entityManager->CreateNewEntity();
@@ -187,10 +225,7 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     _entityManager->Assign<Shield>(id, Shield{100});
 
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
-    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("orangeLight"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
-    
-    std::cout << "PLAYER LOL" << std::endl;
-
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("plasmaProj"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     //mock extra weapon for ui testing to delete later
 
     ProjectileWeapon BaseWeapon2;
@@ -209,10 +244,7 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     BaseWeapon2.lasttimeweaponwasshot = 0.0f;
 
     _entityManager->Get<Weaponset>(id)->weapons.push_back(BaseWeapon2);
-
-
-
-
+    std::cout << "PLAYER LOL" << std::endl;
 }
 
 void McGuyverType::createObstacle(std::string modelName, Vector3 position)

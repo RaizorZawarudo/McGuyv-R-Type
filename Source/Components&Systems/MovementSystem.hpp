@@ -9,7 +9,6 @@
 
 #include "ISystem.hpp"
 #include "../InputManager.hpp"
-// #include "../CollisionManager.hpp"
 
 const float MAXLEFT = 7.0F;
 const float MAXRIGHT = -7.0F;

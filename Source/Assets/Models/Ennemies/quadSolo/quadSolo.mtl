@@ -10,8 +10,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump Map #9
-refl Map #3
+map_Bump #9
+map_Kd #3
 
 newmtl 567
 Ns 52.780314
@@ -22,8 +22,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Bump Map #9
-refl Map #14
+map_Bump #9
+map_Kd #14
 
 newmtl black_mat_for_body.001
 Ns 199.999995

@@ -113,15 +113,15 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
             if (j == 5)
                 scale = atof(parsedCsv[i][j].c_str());
             if (j == 6)
-                length = atoi(parsedCsv[i][j].c_str());
+                length = atof(parsedCsv[i][j].c_str());
             if (j == 7)
-                width = atoi(parsedCsv[i][j].c_str());
+                width = atof(parsedCsv[i][j].c_str());
             if (j == 8)
-                height = atoi(parsedCsv[i][j].c_str());
+                height = atof(parsedCsv[i][j].c_str());
             if (j == 9 && type == RL::ModelType::ZONE) {
-                cameraPositionMcGuyv.x = atoi(splitStr( parsedCsv[i][j], ";")[0].c_str());
-                cameraPositionMcGuyv.y = atoi(splitStr( parsedCsv[i][j], ";")[1].c_str());
-                cameraPositionMcGuyv.z = atoi(splitStr( parsedCsv[i][j], ";")[2].c_str());
+                cameraPositionMcGuyv.x = atof(splitStr( parsedCsv[i][j], ";")[0].c_str());
+                cameraPositionMcGuyv.y = atof(splitStr( parsedCsv[i][j], ";")[1].c_str());
+                cameraPositionMcGuyv.z = atof(splitStr( parsedCsv[i][j], ";")[2].c_str());
             }
             else if (j == 9 && (type == RL::ModelType::PROJECTILE ||type == RL::ModelType::ENNEMY || type == RL::ModelType::SPACESHIP)) {
                 velocity.x = atof(parsedCsv[i][j].c_str());
@@ -129,7 +129,7 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
                 velocity.z = velocity.x;
             }
             if (j == 10 && type == RL::ModelType::ZONE)
-                cameraFovMcGuyv = atoi(parsedCsv[i][j].c_str());    
+                cameraFovMcGuyv = atof(parsedCsv[i][j].c_str());    
             else if (j == 10 && (type == RL::ModelType::PROJECTILE ||type == RL::ModelType::ENNEMY || type == RL::ModelType::SPACESHIP))
                 hp = atoi(parsedCsv[i][j].c_str());
 
@@ -193,11 +193,11 @@ std::vector<RL::Drawable3D*> AssetManager::loadObstacleModels(const std::string 
             if (j == 5)
                 scale = atof(parsedCsv[i][j].c_str());
             if (j == 6)
-                length = atoi(parsedCsv[i][j].c_str());
+                length = atof(parsedCsv[i][j].c_str());
             if (j == 7)
-                width = atoi(parsedCsv[i][j].c_str());
+                width = atof(parsedCsv[i][j].c_str());
             if (j == 8)
-                height = atoi(parsedCsv[i][j].c_str());  
+                height = atof(parsedCsv[i][j].c_str());  
             if (j == 9 && type)
                 hp = atoi(parsedCsv[i][j].c_str());
             if (j == 10)
@@ -251,11 +251,11 @@ std::vector<RL::Drawable3D*> AssetManager::loadExplosionModels(const std::string
             if (j == 5)
                 scale = atof(parsedCsv[i][j].c_str());
             if (j == 6)
-                length = atoi(parsedCsv[i][j].c_str());
+                length = atof(parsedCsv[i][j].c_str());
             if (j == 7)
-                width = atoi(parsedCsv[i][j].c_str());
+                width = atof(parsedCsv[i][j].c_str());
             if (j == 8)
-                height = atoi(parsedCsv[i][j].c_str()); 
+                height = atof(parsedCsv[i][j].c_str()); 
         }
         //HERE WE CREATE A NEW 3D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
         RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv, velocity, hp, shootCD, explosionname);
@@ -536,6 +536,13 @@ RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName,
         for (int i = 0; i < this->_effectsModels3D.size(); i++) {
             if (modelName == this->_effectsModels3D.at(i)->getName())
                 return this->_effectsModels3D.at(i);
+        }
+    }
+
+    if (modelType == RL::ModelType::ENNEMY) {
+        for (int i = 0; i < this->_ennemyModels.size(); i++) {
+            if (modelName == this->_ennemyModels.at(i)->getName())
+                return this->_ennemyModels.at(i);
         }
     }
 

@@ -24,7 +24,7 @@ McGuyverType::McGuyverType()
     this->_systems.push_back(std::make_shared<CollisionSystem>(this->_entityManager, this->_assetManager));
     //add ui update system (ui buttons , ui scores updates, ui keypresses to stop game etc etc)
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
-    this->_systems.push_back(std::make_shared<DeleteEntitiesSystem>(this->_entityManager));
+    this->_systems.push_back(std::make_shared<DeleteEntitiesSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<DrawingSystem>(this->_entityManager, this->_renderer, this->_assetManager, this->_cameraManager, this->_window));
 
     //here we resize all the maps to be the dimension of the window
@@ -44,6 +44,12 @@ McGuyverType::McGuyverType()
 McGuyverType::~McGuyverType()
 {
 }
+void McGuyverType::createSeggySafe()
+{
+    EntityID id = _entityManager->CreateNewEntity();
+
+
+}
 
 void McGuyverType::startGame() // must have player choices etc
 {
@@ -58,7 +64,9 @@ void McGuyverType::startGame() // must have player choices etc
 
 
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
-    
+
+
+    createSeggySafe();
     createPlayer("warpShip", "malibuPepe");
     createEnnemy("droneR", Vector3{-4.0f, 4.0f, -5.0f});
     createEnnemy("frigateOne", Vector3{0.0f, 4.0f, -5.0f});

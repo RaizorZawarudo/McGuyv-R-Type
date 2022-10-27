@@ -39,6 +39,7 @@ class McGuyverType {
         void gameLoop();
 
         //entity creation functions
+        void createSeggySafe();
         void createPlayer(std::string modelName, std::string avatarName);
         void createEnnemy(std::string modelName, Vector3 position);
         void createObstacle(std::string modelName, Vector3 position);

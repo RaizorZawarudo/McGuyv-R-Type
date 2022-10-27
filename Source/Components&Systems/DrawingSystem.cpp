@@ -30,8 +30,7 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
         _renderer->begin3DMode(_cameraManager->getCamera());
 
             _renderer->drawMap( _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed()), _cameraManager->getCamera(), _assetManager);
-
-            for (EntityID _ent:  EntityViewer<Position, EntityModelType>(*_em.get()) ) {
+           for (EntityID _ent:  EntityViewer<Position, EntityModelType>(*_em.get()) ) {
                 Position *objectPos = _em->Get<Position>(_ent);
                 ModelName *objectModelName = _em->Get<ModelName>(_ent);
                 EntityModelType *modelType = _em->Get<EntityModelType>(_ent);
@@ -58,14 +57,13 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                     if (_em->Get<Shield>(_ent)->shield >= 25 && _em->Get<Shield>(_ent)->shield < 50) _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("shieldblue25", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll); //change scale to obj Dimensions->lengthZ /2 , and change the shield models to be back to 1 square size in blender !
                     if (_em->Get<Shield>(_ent)->shield > 0 && _em->Get<Shield>(_ent)->shield < 25) _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("shieldblue00", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll); //change scale to obj Dimensions->lengthZ /2 , and change the shield models to be back to 1 square size in blender !  
                     }
-                
                 _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType, pitchYawRoll);
+
             }            
         _renderer->end3DMode();
         //now we draw the HUD
         _renderer->draw_2D_model(_assetManager->getSpecificIcon("playerPannel")->getTexture(),_window->getDimensions().x/100 * PANNELLEFTX ,_window->getDimensions().y/100 * PANNELSY);
         _renderer->draw_2D_model(_assetManager->getSpecificIcon("playerPannel")->getTexture(),_window->getDimensions().x/100 * PANNELRIGHTX ,_window->getDimensions().y/100 * PANNELSY);
-
         //now we draw the data relative to the player on top of the hud
         playerUIDrawing(clientplayerID);
         
@@ -94,21 +92,19 @@ void DrawingSystem::playerUIDrawing(EntityID clientplayerID)
         avatarstatusName.append("30");
         _renderer->draw_2D_model(_assetManager->getSpecificIcon(avatarstatusName)->getTexture(), _window->getDimensions().x * PLAYERICONX /100  , _window->getDimensions().y * PLAYERICONY /100);
     }
-    if (_em->Get<Hp>(clientplayerID)->hp >= 0 && _em->Get<Hp>(clientplayerID)->hp < 30) {
+    if (_em->Get<Hp>(clientplayerID)->hp > 0 && _em->Get<Hp>(clientplayerID)->hp < 30) {
         avatarstatusName.append("00");
         _renderer->draw_2D_model(_assetManager->getSpecificIcon(avatarstatusName)->getTexture(), _window->getDimensions().x * PLAYERICONX /100  , _window->getDimensions().y * PLAYERICONY /100);
     }
 
+    //add if hp <= 0 display PEPERIP
+
     //handle weaponslots
     handleWeaponslots(clientplayerID);
-    
     //handle ammo of each weapon
     handleWeaponAmmo(clientplayerID);
-
     //handle shield
     handleShield(clientplayerID);
-    
-
     //handle score
     _renderer->draw_text(std::to_string(_em->Get<Score>(clientplayerID)->score), RAYWHITE, _window->getDimensions().x/100 * SCOREX ,_window->getDimensions().y/100 * SCOREY, _assetManager->getAllFonts().at(0), 25);
 }

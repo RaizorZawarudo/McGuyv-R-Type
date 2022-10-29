@@ -23,11 +23,11 @@ namespace RL {
         MCGUYVER,
         ENNEMY,
         ZONE,
-        PROJECTILE,
+        PROJECTILE,// weapons
         OBSTACLE,
-        POWERUP,
+        POWERUP,//loots
         EXPLOSION,
-        EFFECT
+        EFFECT //shield
     };
 
 
@@ -53,7 +53,6 @@ namespace RL {
             void resetAnimSequence();
             void setCurrentAnim(int anim);
             int getCurrentAnim() const;
-
             bool isAnimLoaded() const;
 
             // Getters and setters
@@ -67,9 +66,7 @@ namespace RL {
             Vector3 getBoxSize();
 
             Texture2D getTexture();
-
             ModelAnimation* getAnimation();
-
             Model getModel();
             std::string getName();
             float getLength();

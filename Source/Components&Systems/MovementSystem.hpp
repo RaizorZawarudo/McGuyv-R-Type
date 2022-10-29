@@ -44,18 +44,20 @@ class MovementSystem : public ISystem {
         void update(std::vector<EntityID> &allEntities) override {
             for (EntityID ent : EntityViewer<Position, Velocity, EntityModelType, PitchYawRoll, Collider>(*_em.get())) {
                 _ent = ent;
-                Position* entityPos = _em->Get<Position>(ent);
-                Velocity* entityVel = _em->Get<Velocity>(ent);
-                Input* entityMovement = _em->Get<Input>(ent);
                 EntityModelType* entityType = _em->Get<EntityModelType>(ent);
+                Position* entityPos = _em->Get<Position>(ent);
                 PitchYawRoll* pitchYawRoll = _em->Get<PitchYawRoll>(ent);
                 ModelDimensions* modelDimensions = _em->Get<ModelDimensions>(ent);
-                Owner *entityOwner = _em->Get<Owner>(ent);
                 Collider* entityCollider = _em->Get<Collider>(ent);
-                int forward = 0;
+                Velocity* entityVel = _em->Get<Velocity>(ent);
+                Owner *entityOwner = _em->Get<Owner>(ent);
+
                 
 
+                int forward = 0;
+
                 if (entityType->modelType == RL::ModelType::SPACESHIP) {
+                    Input* entityMovement = _em->Get<Input>(ent);
                     if (entityMovement->_inputQueue.empty()) {
                         if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 1.0f;
                         else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 1.0f;
@@ -87,6 +89,9 @@ class MovementSystem : public ISystem {
                     forward = 0;
                 }
 
+
+                
+
                 if (entityType->modelType == RL::ModelType::PROJECTILE) {
                     entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
                 //here we can add special shit ( special bullet movements whatefver)
@@ -97,6 +102,12 @@ class MovementSystem : public ISystem {
                 if (entityType->modelType == RL::ModelType::OBSTACLE) {
                     entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
                 //here we can add special shit (obstacles moving in circles idk whatever, they just have another data in the "waves csv " that indicates if it has attribut 1, 2 ,3,4 etc, and each attribute links toa function in this if aka, 1 = sinusoidal, 2= circle ,3= teleport, 4 = back and forth youdont know)
+                }
+
+                if (entityType->modelType == RL::ModelType::POWERUP) { //little myguyv for powerups
+                    pitchYawRoll->yaw += 0.5f;
+                    entityPos->pos.z += entityVel->z * (-1);
+                    continue;
                 }
 
 

@@ -190,6 +190,15 @@ struct Weaponset {
     std::size_t currentWeapon;
 };
 
+struct Loot {
+    bool hasloot;
+};
+
+struct Timer {
+    double lastTimeClocked;
+    float cooldowninseconds;
+};
+
 enum TargetType {
     MCGUYVER_TARGET,
     PLAYER_TARGET,

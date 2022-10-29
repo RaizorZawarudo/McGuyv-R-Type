@@ -32,6 +32,8 @@ void CollisionSystem::update(std::vector<EntityID> &allEntities)
 
 void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
 {
+    if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::POWERUP)
+        return;
     if (_em->Get<EntityModelType>(projectile)->modelType != RL::ModelType::PROJECTILE)
         return;
     if (!_em->Get<IsAlive>(projectile)->alive)
@@ -59,13 +61,9 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
         else {
             _em->Get<Hp>(other)->hp -= _em->Get<Hp>(projectile)->hp;
         }
-
         
         // give points to owner
         _em->Get<Score>(_em->Get<Owner>(projectile)->id)->score += _em->Get<Hp>(projectile)->hp;
-
-        
-
 
         //check if other hp is below zero : if yes set it to dead and create an explosion entity with the explosion path stored in the other´s components ==>  createExplosion(_em->Get<ExplosionName>(other)->name);
         if (_em->Get<Hp>(other)->hp <= 0) {
@@ -79,6 +77,8 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
 
 void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
 {
+    if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::POWERUP)
+        return;
     if (_em->Get<EntityModelType>(obstacle)->modelType != RL::ModelType::OBSTACLE)
         return;
     if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::OBSTACLE || _em->Get<EntityModelType>(other)->modelType == RL::ModelType::PROJECTILE)
@@ -121,6 +121,7 @@ void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
 
 void CollisionSystem::powerUp_collisons(EntityID ent, EntityID other)
 {
+    //no create explosion here, just add a pickup powerup sound.
 
 }
 

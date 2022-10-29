@@ -22,7 +22,8 @@ McGuyverType::McGuyverType()
     this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager)); //this sets the bounding boxes so it must come as the last system before collisions 
     //add collision system
     this->_systems.push_back(std::make_shared<CollisionSystem>(this->_entityManager, this->_assetManager));
-    //add ui update system (ui buttons , ui scores updates, ui keypresses to stop game etc etc)
+    this->_systems.push_back(std::make_shared<LootSystem>(this->_entityManager, this->_assetManager));
+    //add ui update system (ui buttons ui keypresses to stop game etc etc)
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
     this->_systems.push_back(std::make_shared<DeleteEntitiesSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<DrawingSystem>(this->_entityManager, this->_renderer, this->_assetManager, this->_cameraManager, this->_window));
@@ -44,12 +45,6 @@ McGuyverType::McGuyverType()
 McGuyverType::~McGuyverType()
 {
 }
-void McGuyverType::createSeggySafe()
-{
-    EntityID id = _entityManager->CreateNewEntity();
-
-
-}
 
 void McGuyverType::startGame() // must have player choices etc
 {
@@ -66,12 +61,7 @@ void McGuyverType::startGame() // must have player choices etc
     _assetManager->setCurrentMapBeingPlayed(_currentLevel);
 
 
-    createSeggySafe();
-    createPlayer("warpShip", "malibuPepe");
-    createEnnemy("droneR", Vector3{-4.0f, 4.0f, -5.0f});
-    createEnnemy("frigateOne", Vector3{0.0f, 4.0f, -5.0f});
-    createEnnemy("frigateTwo", Vector3{3.0f, 4.0f, -5.0f});
-    createEnnemy("frigateThree", Vector3{5.0f, 4.0f, -5.0f});
+    createPlayer("dartAssault", "malibuPepe"); //add clientID in player constructor so it can be found for multiplayer in the server etc etc
     
     
     
@@ -93,7 +83,7 @@ void McGuyverType::startGame() // must have player choices etc
 
         
         // MOCK SPAWN OF OBSTACLES FOR TESTING TO DELETE !!
-        if (GetTime()- lastshot > 1) {
+        if (GetTime() - lastshot > 0.5) {
             y = std::rand() % 9;
             x = std::rand() % 7;
             x += 2;
@@ -233,7 +223,7 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     _entityManager->Assign<Shield>(id, Shield{100});
 
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
-    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("plasmaProj"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("orangeLight"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     //mock extra weapon for ui testing to delete later
 
     ProjectileWeapon BaseWeapon2;
@@ -241,7 +231,7 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
 
     BaseWeapon2.name = "fireball";
     BaseWeapon2.modelName = "fireball";
-    BaseWeapon2.maxAmmo = 1000; // unlimitted ammo stock
+    BaseWeapon2.maxAmmo = 999; // unlimitted ammo stock
     BaseWeapon2.curAmmo = 100; // unlimitted ammo, both the -999 are for unlimited should define it later
     BaseWeapon2.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models
     BaseWeapon2.range = 50.0f; // TODO: same as above
@@ -262,6 +252,8 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
     float scrollspeed;
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::ENNEMY});
+
+    _entityManager->Assign<Loot>(id, Loot{true});
 
     
     

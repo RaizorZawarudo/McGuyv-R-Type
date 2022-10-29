@@ -31,9 +31,10 @@ FILE(GLOB CFILES
         Source/Components&Systems/InputSystem.cpp
         Source/Components&Systems/CollisionSystem.cpp
         Source/Components&Systems/DeleteEntitiesSystem.cpp
+        Source/Components&Systems/LootSystem.cpp
         Source/Components&Systems/ClearInputsSystem.cpp)
 
-#add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES
+#add Header files   ... UNCOMMENT LATER WHEN U HAVE MORE FILES HERE
 FILE(GLOB HEADERFILES
         Source/ECS/ComponentPool.hpp
         Source/ECS/EntityManager.hpp
@@ -58,6 +59,7 @@ FILE(GLOB HEADERFILES
         Source/Components&Systems/CollisionSystem.hpp
         Source/Components&Systems/InputSystem.hpp
         Source/Components&Systems/DeleteEntitiesSystem.hpp
+        Source/Components&Systems/LootSystem.hpp
         Source/Components&Systems/ClearInputsSystem.hpp)
 
 

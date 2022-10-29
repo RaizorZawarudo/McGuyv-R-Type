@@ -38,7 +38,6 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                 Owner *owner = _em->Get<Owner>(_ent);
                 PitchYawRoll *pitchYawRoll = _em->Get<PitchYawRoll>(_ent);
                 int maxFrame;
-
                 //find the player of this client and store his id for UI display later (score etc etc)
                 if (modelType->modelType == RL::ModelType::SPACESHIP && owner->id == _assetManager->getCurrentClientID()) {
                     clientplayerID = _ent;
@@ -58,7 +57,6 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                     if (_em->Get<Shield>(_ent)->shield > 0 && _em->Get<Shield>(_ent)->shield < 25) _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("shieldblue00", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll); //change scale to obj Dimensions->lengthZ /2 , and change the shield models to be back to 1 square size in blender !  
                     }
                 _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType, pitchYawRoll);
-
             }            
         _renderer->end3DMode();
         //now we draw the HUD

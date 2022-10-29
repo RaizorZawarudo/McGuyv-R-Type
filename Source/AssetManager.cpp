@@ -36,6 +36,7 @@ void AssetManager::loadAllModels()
     std::string obstacleCSVPath = "Source/Assets/Models/Obstacles/Obstacles.csv";
     std::string explosionCSVPath = "Source/Assets/Models/Explosions/Explosions.csv";
     std::string effectsCSVPath = "Source/Assets/Models/Effects/Effects.csv";
+    std::string powerUpCSVPath = "Source/Assets/Models/PowerUps/PowerUps.csv";
     std::string iconsUICSVPath = "Source/Assets/Icons/Icons.csv";
     std::string fontsCSVPath = "Source/Assets/Fonts/Fonts.csv";
 
@@ -72,6 +73,7 @@ void AssetManager::loadAllModels()
     this->_effectsModels3D = loadEffectModels3D(effectsCSVPath, RL::ModelType::EFFECT);
 
     //load all powerups
+    this->_powerUpModels = loadPowerUpModels(powerUpCSVPath, RL::ModelType::POWERUP);
 
     //done
 }
@@ -381,6 +383,53 @@ std::vector<RL::Drawable2D*> AssetManager::loadAllBackgrounds(const std::string 
     return backgroundVector;
 }
 
+std::vector<RL::Drawable3D*> AssetManager::loadPowerUpModels(const std::string &path, RL::ModelType type)
+{
+    std::string modelName;
+    std::string style;
+    std::string modelPath;
+    std::string texturePath;
+    std::string animationPath;
+    float scale = 1;
+    float length= 1;
+    float width = 1;
+    float height = 1;
+    Vector3 velocity = {0, 0, 0};
+    Vector3 cameraPositionMcGuyv = {0, 0, 0};
+    float cameraFovMcGuyv;
+    int hp = 0;
+    float shootCD = 0;
+    std::string explosionname;
+
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(path);
+    std::vector<RL::Drawable3D*> modelVector;
+
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {;
+        //HERE WE SEPARATE EACH cell of the csv into its designated value
+        for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
+            if (j == 0)
+                modelName = parsedCsv[i][j];
+            if (j == 1)
+                style = parsedCsv[i][j];
+            if (j == 2)
+                modelPath = parsedCsv[i][j];
+            if (j == 3)
+                texturePath = parsedCsv[i][j];
+            if ( j == 4)
+                animationPath = parsedCsv[i][j];
+        }
+        //HERE WE CREATE A NEW 3D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
+        RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv, velocity, hp, shootCD, explosionname);
+       // std::cout<< "LOADING THIS MODEL : " << modelName << " " << style << " " << modelPath << " " << texturePath << " " << animationPath << " " << scale  << " " << std::endl;
+
+        modelVector.emplace_back(newModel);
+    }
+
+    return modelVector;
+
+}
+
+
 std::vector<RL::Drawable2D*> AssetManager::loadAllIcons(const std::string &backgroundCSVPath)
 {
 
@@ -543,6 +592,13 @@ RL::Drawable3D* AssetManager::getSpecificDrawableWithType(std::string modelName,
         for (int i = 0; i < this->_ennemyModels.size(); i++) {
             if (modelName == this->_ennemyModels.at(i)->getName())
                 return this->_ennemyModels.at(i);
+        }
+    }
+
+    if (modelType == RL::ModelType::POWERUP) {
+        for (int i = 0; i < this->_powerUpModels.size(); i++) {
+            if (modelName == this->_powerUpModels.at(i)->getName())
+                return this->_powerUpModels.at(i);
         }
     }
 

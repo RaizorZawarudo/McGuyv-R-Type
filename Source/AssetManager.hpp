@@ -27,6 +27,7 @@ class AssetManager {
         std::vector<RL::Drawable3D*> loadObstacleModels(const std::string &path, RL::ModelType type);
         std::vector<RL::Drawable3D*> loadExplosionModels(const std::string &path, RL::ModelType type);
         std::vector<RL::Drawable3D*> loadEffectModels3D(const std::string &path, RL::ModelType type);
+        std::vector<RL::Drawable3D*> loadPowerUpModels(const std::string &path, RL::ModelType type);
         std::vector<Map*> loadMaps();
         std::vector<RL::Drawable2D*> loadAllBackgrounds(const std::string &path);
         std::vector<RL::Drawable2D*> loadAllIcons(const std::string &path);
@@ -67,6 +68,7 @@ class AssetManager {
         std::vector<RL::Drawable3D*> _obstacleModels;
         std::vector<RL::Drawable3D*> _explosionModelsAnim;
         std::vector<RL::Drawable3D*> _effectsModels3D;
+        std::vector<RL::Drawable3D*> _powerUpModels;
 
         //2d assets
         std::vector<RL::Drawable2D*> _ingameBackgrounds;

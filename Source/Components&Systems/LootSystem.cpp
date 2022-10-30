@@ -28,7 +28,7 @@ void LootSystem::update(std::vector<EntityID> &allEntities)
             if (rand < 3)
                 create_loot(_em->Get<Position>(ent)->pos, "plasmaProj");
             if (rand >= 3 && rand <= 5)
-                create_loot(_em->Get<Position>(ent)->pos, "orangeLight");
+                create_loot(_em->Get<Position>(ent)->pos, "shield");
             if (rand >= 6 && rand <= 8)
                 create_loot(_em->Get<Position>(ent)->pos, "fireball");
         }
@@ -70,8 +70,8 @@ ProjectileWeapon LootSystem::generateWeaponLoot(std::string projectileName)
 
     BaseWeapon.name = projectileName;
     BaseWeapon.modelName = projectileName;
-    BaseWeapon.maxAmmo = 999; // unlimitted ammo stock
-    BaseWeapon.curAmmo = 100; // unlimitted ammo, both the -999 are for unlimited should define it later
+    BaseWeapon.maxAmmo = 999; // max amom is 999
+    BaseWeapon.curAmmo = 100; // set ammo per loot to 50? 
     BaseWeapon.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models
     BaseWeapon.range = 50.0f; // TODO: same as above
     BaseWeapon.cooldowninseconds = _assetManager->getSpecificDrawableWithType(BaseWeapon.modelName, RL::ModelType::PROJECTILE)->getShootCD();
@@ -87,6 +87,7 @@ Shield LootSystem::generateShieldLoot()
 {
     Shield ShieldLoot;
 
-    ShieldLoot.shield += 20;
+    ShieldLoot.shield = 20;
+    ShieldLoot.shieldActive = false;
     return ShieldLoot;
 }

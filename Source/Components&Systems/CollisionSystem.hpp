@@ -24,6 +24,7 @@ class CollisionSystem : public ISystem {
 
         void create_explosion(Vector3 pos, std::string exploName);
         void pick_up_weaponLoot(EntityID powerup, EntityID other);
+        void pick_up_shieldLoot(EntityID powerup, EntityID other);
 
     protected:
     private:

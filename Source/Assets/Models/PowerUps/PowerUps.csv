@@ -3,3 +3,4 @@ missileProj,projectile,Source/Assets/Models/PowerUps/missileProj/powerUpCube.obj
 plasmaProj,projectile,Source/Assets/Models/PowerUps/plasmaProj/powerUpCube.obj,0,0
 orangeLight,projectile,Source/Assets/Models/PowerUps/orangeLight/powerUpCube.obj,0,0
 fireball,projectile,Source/Assets/Models/PowerUps/fireball/powerUpCube.obj,0,0
+shield,shield,Source/Assets/Models/PowerUps/Shield/powerUpCube.obj,0,0

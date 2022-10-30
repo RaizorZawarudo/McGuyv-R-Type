@@ -24,7 +24,7 @@ void CollisionSystem::update(std::vector<EntityID> &allEntities)
                 bullet_collisions(ent, other);
                 obstacle_collisions(ent,other);
                 powerUp_collisons(ent, other);
-                // body_collisions(ent, other);
+                // body_collisions(ent, other); // player vs ennemies and player player blocking
             }
         }
     }
@@ -138,6 +138,19 @@ void CollisionSystem::powerUp_collisons(EntityID powerup, EntityID other)
             }
 
         }
+        return;
+    }
+    if (_em->Get<PowerUpType>(powerup)->type == PowerUpEnum::SHIELDPOWER) {
+        if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::SPACESHIP) { //add ennemy type when u create AI to change weapon for them
+            Collider* powerupCollider = _em->Get<Collider>(powerup);
+            Collider* otherCollider = _em->Get<Collider>(other);
+            if (CheckCollisionBoxes(powerupCollider->collider, otherCollider->collider)) {
+                std::cout << "collinding with player by powerup" << std::endl;
+                pick_up_shieldLoot(powerup, other);
+                _em->Get<IsAlive>(powerup)->alive = false;
+            }
+        }
+        return;
     }
 }
 
@@ -159,6 +172,12 @@ void CollisionSystem::pick_up_weaponLoot(EntityID powerup, EntityID other)
             return;
         }     
     }
+}
+
+void CollisionSystem::pick_up_shieldLoot(EntityID powerup, EntityID other)
+{
+    _em->Get<Shield>(other)->shield += _em->Get<Shield>(powerup)->shield;
+    _em->Get<IsAlive>(powerup)->alive = false;
 }
 
 void CollisionSystem::body_collisions(EntityID ent, EntityID other)

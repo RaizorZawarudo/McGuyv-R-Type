@@ -109,7 +109,8 @@ void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
             Position* obstaclePos = _em->Get<Position>(obstacle);
             ModelName* otherName = _em->Get<ModelName>(other);
             create_explosion(obstaclePos->pos, otherName->explosionname);
-        }
+            std::cout << "client ID collisions system" << _assetManager->getCurrentClientID() << std::endl;
+         }
         _em->Get<IsAlive>(obstacle)->alive = false;
         Position* obstaclePos = _em->Get<Position>(obstacle);
         ModelName* obstacleName = _em->Get<ModelName>(obstacle);

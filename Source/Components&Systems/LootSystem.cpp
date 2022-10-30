@@ -19,7 +19,7 @@ LootSystem::~LootSystem()
 //to do : the randomness of lootm from a seed sent by server SIR
 void LootSystem::update(std::vector<EntityID> &allEntities)
 {
-    std::cout << "seggy hunt loot" << std::endl;
+    std::cout << "client ID loot system start" << _assetManager->getCurrentClientID() << std::endl;
     int rand = std::rand() % 10;
     for (EntityID ent : EntityViewer<Loot>(*_em.get())) {
         if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::POWERUP && _em->Get<EntityModelType>(ent)->modelType != RL::ModelType::SPACESHIP && !_em->Get<IsAlive>(ent)->alive) {
@@ -60,6 +60,7 @@ void LootSystem::create_loot(Vector3 pos, std::string lootName)
         _em->Assign<PowerUpType>(id, PowerUpType{PowerUpEnum::SHIELDPOWER});
     }
     std::cout << "creating LOOT" << std::endl;
+    std::cout << "client ID loot system end" << _assetManager->getCurrentClientID() << std::endl;
 }
 
 ProjectileWeapon LootSystem::generateWeaponLoot(std::string projectileName)

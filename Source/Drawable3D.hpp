@@ -79,6 +79,7 @@ namespace RL {
             int getHp();
             float getShootCD();
             std::string getExplosionName();
+            std::string getStyle();
 
             void setBoundingBox();
             BoundingBox getBoundingBox();
@@ -100,6 +101,8 @@ namespace RL {
             int _hp;
             float _shootCD;
             std::string _explosionname;
+
+
 
             // Vector3 _boxSize;
             // BoundingBox _boundingBox;

@@ -23,6 +23,7 @@ class CollisionSystem : public ISystem {
         void body_collisions(EntityID ent, EntityID other);
 
         void create_explosion(Vector3 pos, std::string exploName);
+        void pick_up_weaponLoot(EntityID powerup, EntityID other);
 
     protected:
     private:

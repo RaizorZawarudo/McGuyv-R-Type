@@ -20,6 +20,9 @@ class LootSystem : public ISystem {
 
         void create_loot(Vector3 pos, std::string lootName);
 
+        ProjectileWeapon generateWeaponLoot(std::string projectileName);
+        Shield generateShieldLoot();
+
     protected:
     private:
         std::shared_ptr<AssetManager> _assetManager;

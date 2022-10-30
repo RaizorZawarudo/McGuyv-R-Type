@@ -82,10 +82,6 @@ void ShootingSystem::createProjectile(Position* entityPos, Weaponset* weaponSet,
         _em->Assign<ProjectileWeapon>(id, ProjectileWeapon{weaponSet->weapons.at(weaponSet->currentWeapon)});
 
         //play sound of specific weapon being fired, to add in csv the sound name :)
-
-        std::cout << "player 1 is at position : " << entityPos->pos.x << " " << entityPos->pos.y << " " << entityPos->pos.z << std::endl;
-        std::cout << "shooting bullet at position" << _em->Get<Position>(id)->pos.x << " " << _em->Get<Position>(id)->pos.y << " " << _em->Get<Position>(id)->pos.z << std::endl;
-        std::cout << "owner id : " << _em->Get<Owner>(id)->id << std::endl;
     }
     else {
         //play empty gun sound

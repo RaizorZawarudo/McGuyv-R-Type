@@ -121,7 +121,6 @@ void RL::Drawable3D::loadAnimation(std::string path)
         this->unloadAnimation();
     this->_animations = LoadModelAnimations(path.c_str(), &this->_animCount);
     this->_animationLoaded = true;
-    std::cout << this->_animCount << this->_animations[1].frameCount << std::endl;
 }
 
 void RL::Drawable3D::unloadAnimation()
@@ -146,7 +145,6 @@ void RL::Drawable3D::setCurrentAnim(int anim)
     // this->_currentAnim;
 
     if (anim >= this->_animCount) {
-        std::cout << "Animation index invalid" << std::endl;
         return;
     }
 
@@ -260,4 +258,9 @@ float RL::Drawable3D::getShootCD()
 std::string RL::Drawable3D::getExplosionName()
 {
     return this->_explosionname;
+}
+
+std::string RL::Drawable3D::getStyle()
+{
+    return this->_style;
 }

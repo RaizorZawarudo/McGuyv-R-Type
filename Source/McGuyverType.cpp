@@ -67,10 +67,6 @@ void McGuyverType::startGame() // must have player choices etc
     
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
 
-    for (int i = 0 ; i< 65 ; i++) {
-            std::cout << "\"e" << i << ".obj\" ";
-
-    }
 
     float x;
     float y;
@@ -190,6 +186,9 @@ void McGuyverType::createEnnemy(std::string modelName, Vector3 ennemyPos) // her
     scrollspeed = _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getScrollSpeed();
     _entityManager->Assign<Velocity>(id, Velocity{scrollspeed, scrollspeed, scrollspeed});
     _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getHp()});
+
+    //add weaponset to mobs so that they can pickup weapons
+
     
 }
 
@@ -202,6 +201,7 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
 
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::SPACESHIP});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::MCGUYVER});
+    std::cout << "OWNER ID CREATE PLAYER " << _entityManager->Get<Owner>(id)->id << std::endl;
 
     _entityManager->Assign<UIAvatarNames>(id, UIAvatarNames{avatarName});
     

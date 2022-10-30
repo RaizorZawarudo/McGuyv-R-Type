@@ -23,7 +23,7 @@ void CollisionSystem::update(std::vector<EntityID> &allEntities)
             if ( ent != other) {
                 bullet_collisions(ent, other);
                 obstacle_collisions(ent,other);
-                // powerUp_collisons(ent, other);
+                powerUp_collisons(ent, other);
                 // body_collisions(ent, other);
             }
         }
@@ -103,7 +103,6 @@ void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
         else {
             _em->Get<Hp>(other)->hp -= _em->Get<Hp>(obstacle)->hp;
         }
-
         //check if other hp is below zero : if yes set it to dead and create an explosion entity with the explosion path stored in the other´s components ==>  createExplosion(_em->Get<ExplosionName>(other)->name);
         if (_em->Get<Hp>(other)->hp <= 0) {
             _em->Get<IsAlive>(other)->alive = false;
@@ -111,7 +110,6 @@ void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
             ModelName* otherName = _em->Get<ModelName>(other);
             create_explosion(obstaclePos->pos, otherName->explosionname);
         }
-
         _em->Get<IsAlive>(obstacle)->alive = false;
         Position* obstaclePos = _em->Get<Position>(obstacle);
         ModelName* obstacleName = _em->Get<ModelName>(obstacle);
@@ -119,14 +117,52 @@ void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
     }
 }
 
-void CollisionSystem::powerUp_collisons(EntityID ent, EntityID other)
+void CollisionSystem::powerUp_collisons(EntityID powerup, EntityID other)
 {
+    if (!_em->Get<IsAlive>(powerup)->alive || !_em->Get<IsAlive>(other)->alive)
+        return;
     //no create explosion here, just add a pickup powerup sound.
+    if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::POWERUP)
+        return;
+    if (_em->Get<EntityModelType>(powerup)->modelType != RL::ModelType::POWERUP)
+        return;
+    if (_em->Get<PowerUpType>(powerup)->type == PowerUpEnum::WEAPONPOWER) {
+        if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::SPACESHIP) { //add ennemy type when u create AI to change weapon for them
+            Collider* powerupCollider = _em->Get<Collider>(powerup);
+            Collider* otherCollider = _em->Get<Collider>(other);
+            if (CheckCollisionBoxes(powerupCollider->collider, otherCollider->collider)) {
+                std::cout << "collinding with player by powerup" << std::endl;
+                pick_up_weaponLoot(powerup, other);
+                _em->Get<IsAlive>(powerup)->alive = false;
+            }
 
+        }
+    }
+}
+
+void CollisionSystem::pick_up_weaponLoot(EntityID powerup, EntityID other)
+{
+    //check if the player already has the weapon in base weapon
+    if (_em->Get<Weaponset>(other)->weapons.at(0).modelName == _em->Get<Loot>(powerup)->weaponLoot.name)
+        return;
+    for (int i = _em->Get<Weaponset>(other)->weapons.size()- 1; i < _em->Get<Weaponset>(other)->weapons.size(); i++) { 
+        //check if he has the weapon already looted to increase its ammo       
+        if (_em->Get<Weaponset>(other)->weapons.at(i).modelName == _em->Get<Loot>(powerup)->weaponLoot.modelName) {
+            _em->Get<Weaponset>(other)->weapons.at(i).curAmmo += _em->Get<Loot>(powerup)->weaponLoot.curAmmo;
+            _em->Get<Weaponset>(other)->weapons.at(i).curAmmo > 999 ? _em->Get<Weaponset>(other)->weapons.at(i).curAmmo = 999 : _em->Get<Weaponset>(other)->weapons.at(i).curAmmo + 0;
+            return;
+        }
+        //add weapon if we dont have it
+        if (_em->Get<Weaponset>(other)->weapons.size() < 3) {
+            _em->Get<Weaponset>(other)->weapons.push_back(_em->Get<Loot>(powerup)->weaponLoot);
+            return;
+        }     
+    }
 }
 
 void CollisionSystem::body_collisions(EntityID ent, EntityID other)
 {
+    
 
 }
 

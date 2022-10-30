@@ -107,7 +107,6 @@ class MovementSystem : public ISystem {
                 if (entityType->modelType == RL::ModelType::POWERUP) { //little myguyv for powerups
                     pitchYawRoll->yaw += 0.5f;
                     entityPos->pos.z += entityVel->z * (-1);
-                    continue;
                 }
 
 

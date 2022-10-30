@@ -31,6 +31,18 @@ enum EntityType {
     POWERUP
 };
 
+enum PowerUpEnum {
+    WEAPONPOWER,
+    SHIELDPOWER,
+    REFLECTPOWER,
+    IMMUNEPOWER,
+    ETCPoWER
+};
+
+struct PowerUpType {
+    PowerUpEnum type;
+};
+
 struct EntityModelType {
     RL::ModelType modelType;
 
@@ -118,15 +130,6 @@ struct UIAvatarNames {
     std::string avatarName;
 };
 
-struct UIPos {
-    int x;
-    int y;
-};
-
-struct UiContinue {
-    bool continueToRight;
-};
-
 struct Velocity {
     float x;
     float y;
@@ -163,6 +166,10 @@ struct Hp {
 struct Shield {
     int shield;
     bool shieldActive;
+    Shield operator+=(const Shield &other) {
+        shield += other.shield;
+        return *this;
+    }
 };
 
 struct ProjectileWeapon {
@@ -192,6 +199,8 @@ struct Weaponset {
 
 struct Loot {
     bool hasloot;
+    ProjectileWeapon weaponLoot;
+    Shield shieldLoot;
 };
 
 struct Timer {

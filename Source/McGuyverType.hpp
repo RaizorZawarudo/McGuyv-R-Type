@@ -78,7 +78,7 @@ class McGuyverType {
         float _playerStartingZ = 8.0f; //can delete
         float enemyStartingZ = 20.0f; // cand delete
 
-        EntityID _thisClientPlayerEntityID = -1000; //create a rand function where initiatilising client to have a unique ID for networking
+        EntityID _thisClientPlayerEntityID = 100000; //create a rand function where initiatilising client to have a unique ID for networking
         //timer
         //gamepaused
         //ui-related stuff

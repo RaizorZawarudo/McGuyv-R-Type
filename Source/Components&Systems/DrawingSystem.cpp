@@ -21,6 +21,7 @@ DrawingSystem::~DrawingSystem()
 
 void DrawingSystem::update(std::vector<EntityID> &allEntities)
 {
+    
     EntityID clientplayerID;
     _renderer->beginDrawing();
         _renderer->clearBackground();
@@ -41,11 +42,11 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                 //find the player of this client and store his id for UI display later (score etc etc)
                 if (modelType->modelType == RL::ModelType::SPACESHIP && owner->id == _assetManager->getCurrentClientID()) {
                     clientplayerID = _ent;
+                    std::cout << "player owner ID = " << _assetManager->getCurrentClientID() << std::endl;
                 }
                 //update the animation of the model before printing it if its a explosion
                 if (modelType->modelType == RL::ModelType::EXPLOSION) {
                     AnimationData* animData = _em->Get<AnimationData>(_ent);
-                    std::cout << animData->currentFrame << std::endl;
                     maxFrame = _assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->updateModelsAnimation(animData->currentFrame, animData->currentAnim);
                     animData->currentFrame <= maxFrame? animData->currentFrame++ : _em->Get<IsAlive>(_ent)->alive = false;
                 }
@@ -63,10 +64,13 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
         _renderer->draw_2D_model(_assetManager->getSpecificIcon("playerPannel")->getTexture(),_window->getDimensions().x/100 * PANNELLEFTX ,_window->getDimensions().y/100 * PANNELSY);
         _renderer->draw_2D_model(_assetManager->getSpecificIcon("playerPannel")->getTexture(),_window->getDimensions().x/100 * PANNELRIGHTX ,_window->getDimensions().y/100 * PANNELSY);
         //now we draw the data relative to the player on top of the hud
+       
         playerUIDrawing(clientplayerID);
+        
         
         DrawFPS(10, 10);
     _renderer->endDrawing();
+    
 }
 
 void DrawingSystem::explosionDrawing()
@@ -80,7 +84,10 @@ void DrawingSystem::shieldDrawing()
 
 void DrawingSystem::playerUIDrawing(EntityID clientplayerID)
 {
+    std::cout << "seggyy hunt playerUI" << std::endl;
+    std::cout << " clientplayerID = " <<clientplayerID << std::endl;
     std::string avatarstatusName = _em->Get<UIAvatarNames>(clientplayerID)->avatarName;
+    
     //these three ifs handle the player avatar
     if (_em->Get<Hp>(clientplayerID)->hp >= 65) {
         avatarstatusName.append("65");
@@ -94,9 +101,9 @@ void DrawingSystem::playerUIDrawing(EntityID clientplayerID)
         avatarstatusName.append("00");
         _renderer->draw_2D_model(_assetManager->getSpecificIcon(avatarstatusName)->getTexture(), _window->getDimensions().x * PLAYERICONX /100  , _window->getDimensions().y * PLAYERICONY /100);
     }
+    
 
     //add if hp <= 0 display PEPERIP
-
     //handle weaponslots
     handleWeaponslots(clientplayerID);
     //handle ammo of each weapon

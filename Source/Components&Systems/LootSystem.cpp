@@ -49,7 +49,7 @@ void LootSystem::create_loot(Vector3 pos, std::string lootName)
                                                                 _assetManager->getSpecificDrawableWithType(lootName, RL::ModelType::POWERUP)->getHeight(),
                                                                 _assetManager->getSpecificDrawableWithType(lootName, RL::ModelType::POWERUP)->getLength()});
     _em->Assign<Collider>(id, Collider{BoundingBox{}});
-    _em->Assign<Velocity>(id, Velocity{0.0f, 0.0f, 0.0f});
+    _em->Assign<Velocity>(id, Velocity{0.0f, 0.0f, 0.4f});
     _em->Assign<Timer>(id, Timer{GetTime(), 12});
     if (_assetManager->getSpecificDrawableWithType(lootName, RL::ModelType::POWERUP)->getStyle() == "projectile") {
         _em->Assign<Loot>(id, Loot{true,generateWeaponLoot(lootName), Shield{20, false}});

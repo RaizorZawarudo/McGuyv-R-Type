@@ -87,6 +87,8 @@ class Map {
         void setHasSpawnedBossFalse();
         void bossIsDown();
 
+        //create a set map speed function to increase difficulty type with speed :D
+
 
     private:
 

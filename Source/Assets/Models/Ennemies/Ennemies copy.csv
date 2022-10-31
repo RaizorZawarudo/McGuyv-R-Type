@@ -1,0 +1,17 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height,velocity float,hp,explosionname
+tronDrone,simple,Source/Assets/Models/Ennemies/TronDrone/tronDrone.obj,0,0,1,1,1,1,0.2,100,lowPoly
+tronHelicopter,simple,Source/Assets/Models/Ennemies/TronHelicopter/tronHelicopterWire.obj,0,0,1,1,1,1,0.2,100,lowPoly
+tronAttackCopter,simple,Source/Assets/Models/Ennemies/TronAttackCopter/tronAttackCopter.obj,0,0,1,1,1,1,0.2,100,lowPoly
+diverge,simple,Source/Assets/Models/Ennemies/Diverge/diverge.obj,Source/Assets/Models/Ennemies/Diverge/1001_Base_Color.png,0,1,1,1,1,0.2,100,lowPoly
+spacefighter,simple,Source/Assets/Models/Ennemies/SpaceFighter/spaceFighter.obj,0,0,1,1,1,1,0.2,100,lowPoly
+quadFighter,simple,Source/Assets/Models/Ennemies/QuadFighter/quadFighter.obj,0,0,1,2,2.5,1,0.2,100,lowPoly
+quadSolo,simple,Source/Assets/Models/Ennemies/quadSolo/quadSolo.obj,0,0,1,2,2,1,0.2,100,lowPoly
+quadWarship,simple,Source/Assets/Models/Ennemies/quadWarship/quadWarship.obj,0,0,1,1,1,1,0.2,100,lowPoly
+quadMothership,simple,Source/Assets/Models/Ennemies/quadMothership/quadMothership.obj,0,0,1,1,1,1,0.2,100,lowPoly
+droneR,simple,Source/Assets/Models/Ennemies/DroneR/droneR.obj,0,0,1,2,4,2,0.2,100,lowPoly
+droneL,simple,Source/Assets/Models/Ennemies/DroneL/droneL.obj,0,0,1,2,2,2,0.2,100,lowPoly
+droneM,simple,Source/Assets/Models/Ennemies/DroneM/droneM.obj,0,0,1,2,2,2,0.2,100,lowPoly
+droneH,simple,Source/Assets/Models/Ennemies/DroneH/droneH.obj,0,0,1,2,2,2,0.2,100,lowPoly
+frigateOne,simple,Source/Assets/Models/Ennemies/Frigate1/frigateOne.obj,0,0,1,2,2,2,0.2,150,lowPoly
+frigateTwo,simple,Source/Assets/Models/Ennemies/Frigate2/frigateTwo.obj,0,0,1,2,2,2,0.2,150,lowPoly
+frigateThree,simple,Source/Assets/Models/Ennemies/Frigate3/frigateThree.obj,0,0,1,2,2,2,0.2,150,lowPoly

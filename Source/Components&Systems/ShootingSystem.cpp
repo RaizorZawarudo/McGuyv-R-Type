@@ -73,8 +73,8 @@ void ShootingSystem::createProjectile(Position* entityPos, Weaponset* weaponSet,
         _em->Assign<Position>(id, {entityPos->pos.x,
                                    entityPos->pos.y,
                                    entityPos->pos.z + (((modelDimensions->lengthZ /2) + (_em->Get<ModelDimensions>(id)->lengthZ / 2)) * (- ownerModelType->modelType))});
-        _em->Assign<Velocity>(id, {weaponSet->weapons.at(weaponSet->currentWeapon).vel.x,
-                                   weaponSet->weapons.at(weaponSet->currentWeapon).vel.y,
+        _em->Assign<Velocity>(id, {0.0f,
+                                   0.0f,
                                    weaponSet->weapons.at(weaponSet->currentWeapon).vel.z}); // very important  x - OWNERTYPE to change de direction of the bullet, to do in movement system if entity is projectile
 
         _em->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(weaponSet->weapons.at(weaponSet->currentWeapon).modelName, RL::ModelType::PROJECTILE)->getHp()});

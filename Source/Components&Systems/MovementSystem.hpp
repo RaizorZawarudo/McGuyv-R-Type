@@ -93,6 +93,8 @@ class MovementSystem : public ISystem {
                 
 
                 if (entityType->modelType == RL::ModelType::PROJECTILE) {
+                    entityPos->pos.x += entityVel->x; // add sinusoidal or wahtever
+                    entityPos->pos.y += entityVel->y * (-1); // for dropping bombs
                     entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
                 //here we can add special shit ( special bullet movements whatefver)
 

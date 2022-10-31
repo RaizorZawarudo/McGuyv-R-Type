@@ -116,6 +116,8 @@ void DrawingSystem::playerUIDrawing(EntityID clientplayerID)
     handleWeaponslots(clientplayerID);
     //handle ammo of each weapon
     handleWeaponAmmo(clientplayerID);
+    //handle weapon icons
+    handleWeaponIcons(clientplayerID);
     //handle shield
     handleShield(clientplayerID);
     //handle score
@@ -169,6 +171,29 @@ void DrawingSystem::handleWeaponAmmo(EntityID clientplayerID)
             _window->getDimensions().y/100 * WEAP3AMMOY, _assetManager->getAllFonts().at(0), 16);
     }    
 
+}
+
+void DrawingSystem::handleWeaponIcons(EntityID clientplayerID)
+{
+    //first weapon always full ammo cannot be dropped
+    _renderer->draw_2D_model(_assetManager->getSpecificIcon(_em->Get<Weaponset>(clientplayerID)->weapons.at(0).modelName)->getTexture(),
+    _window->getDimensions().x * WEAPON1ICONX /100  , _window->getDimensions().y * WEAPON1ICONY /100);
+    
+
+    if (_em->Get<Weaponset>(clientplayerID)->weapons.size() >= 2) {
+        _renderer->draw_2D_model(_assetManager->getSpecificIcon(_em->Get<Weaponset>(clientplayerID)->weapons.at(1).modelName)->getTexture(),
+        _window->getDimensions().x * WEAPON2ICONX /100  , _window->getDimensions().y * WEAPON2ICONY /100);
+    }
+
+    if (_em->Get<Weaponset>(clientplayerID)->weapons.size() == 3) {
+        _renderer->draw_2D_model(_assetManager->getSpecificIcon(_em->Get<Weaponset>(clientplayerID)->weapons.at(2).modelName)->getTexture(),
+        _window->getDimensions().x * WEAPON3ICONX /100  , _window->getDimensions().y * WEAPON3ICONY /100);
+    }
+
+    if (_em->Get<Shield>(clientplayerID)->shield >0 ) {
+        _renderer->draw_2D_model(_assetManager->getSpecificIcon("shield")->getTexture(),
+        _window->getDimensions().x * SHIELDICONX /100  , _window->getDimensions().y * SHIELDICONY /100);
+    }
 }
 
 void DrawingSystem::handleShield(EntityID clientplayerID)

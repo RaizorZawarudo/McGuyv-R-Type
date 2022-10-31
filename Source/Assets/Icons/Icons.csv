@@ -3,3 +3,8 @@ malibuPepe65,Source/Assets/Icons/MalibuPepe/malibuPepe65.png,80,80,player
 malibuPepe30,Source/Assets/Icons/MalibuPepe/malibuPepe30.png,80,80,player
 malibuPepe00,Source/Assets/Icons/MalibuPepe/malibuPepe00.png,80,80,player
 playerPannel,Source/Assets/Icons/PlayerHUD/playerPannels.png,300,120,bottomPannel
+missileProj,Source/Assets/Models/PowerUps/missileProj/missileProjpre.png,40,40,power
+fireball,Source/Assets/Models/PowerUps/fireball/fireball.png,40,40,power
+orangeLight,Source/Assets/Models/PowerUps/orangeLight/orangeLight.png,40,40,power
+plasmaProj,Source/Assets/Models/PowerUps/plasmaProj/plasmaProj.png,40,40,power
+shield,Source/Assets/Models/PowerUps/Shield/shieldbasic.png,40,40,power

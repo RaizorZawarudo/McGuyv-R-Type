@@ -34,10 +34,12 @@ McGuyverType::McGuyverType()
     for (RL::Drawable2D* icon: this->_assetManager->getUIelements()) {
         if (icon->getType() == "player") {
             icon->resize(Vector2{_window->getDimensions().x * 7.8f / 100,_window->getDimensions().y * 10.4f / 100 });
-
         }
         else if (icon->getType() == "bottomPannel") {
             icon->resize(Vector2{_window->getDimensions().x * 31.25f / 100,_window->getDimensions().y * 15.62f / 100 });
+        }
+        else if (icon->getType() == "power") {
+            icon->resize(Vector2{_window->getDimensions().x * 7.8f / 100 / 2,_window->getDimensions().y * 10.4f / 100 / 2 });
         }
     }
 }

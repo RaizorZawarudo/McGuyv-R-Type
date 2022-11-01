@@ -24,6 +24,10 @@ void RL::InputManager::recordInputs()
     //only record the moment you press it down
     if (IsKeyDown(KEY_W))
         this->_inputQueue.emplace_back('w');
+    if (IsKeyDown(KEY_Z))
+        this->_inputQueue.emplace_back('z');
+    if (IsKeyDown(KEY_Q))
+        this->_inputQueue.emplace_back('q');
     if (IsKeyDown(KEY_S))
         this->_inputQueue.emplace_back('s');
     if (IsKeyDown(KEY_A))

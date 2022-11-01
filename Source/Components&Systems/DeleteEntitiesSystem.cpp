@@ -21,7 +21,6 @@ DeleteEntitiesSystem::~DeleteEntitiesSystem()
 //NOT FINISHED, HAVE TO DECIDE HOW WE DELETE PLAYER ENTITIES
 void DeleteEntitiesSystem::update(std::vector<EntityID> &allEntities)
 {
-    std::cout << "client ID delete entities system" << _assetManager->getCurrentClientID() << std::endl;
     for (EntityID ent : EntityViewer<Position, IsAlive>(*_em.get())) {
          if (!_em->Get<IsAlive>(ent)->alive && _em->Get<EntityModelType>(ent)->modelType == RL::ModelType::POWERUP ) {
             _em->Remove<Timer>(ent);
@@ -78,5 +77,4 @@ void DeleteEntitiesSystem::update(std::vector<EntityID> &allEntities)
             _em->DestroyEntity(ent);
         }
     }
-    std::cout << "client ID delete system end" << _assetManager->getCurrentClientID() << std::endl;
 }

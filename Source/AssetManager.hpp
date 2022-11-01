@@ -41,12 +41,14 @@ class AssetManager {
         std::vector<RL::Drawable3D*> getObstacleModels();
         std::vector<RL::Drawable3D*> getExplosionModels();
         std::vector<RL::Drawable3D*> getEffectsModels3D();
+        std::vector<RL::Drawable3D*> getPowerUpModels();
         std::vector<Map*> getMaps();
         std::vector<RL::Drawable2D*> getBackgrounds();
         std::vector<RL::Drawable2D*> getUIelements();
         std::vector<Font> getAllFonts();
         int getCurrentMapBeingPlayed();
         EntityID getCurrentClientID();
+        int getLootRand();
 
 
         RL::Drawable2D* getSpecificBackground(std::string backgroundName);
@@ -56,10 +58,15 @@ class AssetManager {
         //setters
 
         void setCurrentMapBeingPlayed(int level);
+        void setLootRand(int random);
 
     private:
+        //game related variables need for updates etc
         EntityID _currentclientID;
         int _currentLevelBeingPlayed;
+        int _lootrand;
+
+
         //3d assets
         std::vector<RL::Drawable3D*> _zonesModels;
         std::vector<RL::Drawable3D*> _projectileModels;
@@ -79,6 +86,8 @@ class AssetManager {
 
         //fonts
         std::vector<Font> _fonts;
+
+        //
 
 };
 

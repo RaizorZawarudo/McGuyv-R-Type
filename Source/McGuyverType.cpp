@@ -112,6 +112,12 @@ void McGuyverType::gameLoop()
     _assetManager->getMaps().at(_currentLevel)->mapUpdate();
     _cameraManager->changeCameraPosition(_assetManager->getSpecificDrawableWithType(_assetManager->getMaps().at(_currentLevel)->getMapQueue().at(0)._sectionName, RL::ModelType::ZONE));
     //do all checks if needed ( pause game, open whatefver menu, communicated with whatever process)
+
+
+    //here we imagine we recive data from the server setting us the rand, to add into a system to communicate with server
+
+    _assetManager->setLootRand(std::rand());
+    
     //here we loop through all our systems to update them
     for( std::shared_ptr<ISystem> system : _systems)
         system->update(this->_allEntities);

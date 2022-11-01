@@ -11,6 +11,8 @@
 #include "InputSystem.hpp"
 #include "../AssetManager.hpp"
 
+const int DROPRATE = 25;
+
 class LootSystem : public ISystem {
     public:
         LootSystem(std::shared_ptr<EntityManager> em, std::shared_ptr<AssetManager> assetManager);

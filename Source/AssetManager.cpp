@@ -516,6 +516,11 @@ std::vector<RL::Drawable3D*> AssetManager::getEffectsModels3D()
     return this->_obstacleModels;
 }
 
+std::vector<RL::Drawable3D*> AssetManager::getPowerUpModels()
+{
+    return this->_powerUpModels;
+}
+
 std::vector<Map*> AssetManager::getMaps()
 {
     return this->_maps;
@@ -635,10 +640,20 @@ EntityID AssetManager::getCurrentClientID()
     return this->_currentclientID;
 }
 
+int AssetManager::getLootRand()
+{
+    return this->_lootrand;
+}
+
 
 //Setters
 
 void AssetManager::setCurrentMapBeingPlayed(int level)
 {
     this->_currentLevelBeingPlayed = level;
+}
+
+void AssetManager::setLootRand(int rand)
+{
+    this->_lootrand = rand;
 }

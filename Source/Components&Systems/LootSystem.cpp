@@ -19,18 +19,19 @@ LootSystem::~LootSystem()
 //to do : the randomness of lootm from a seed sent by server SIR
 void LootSystem::update(std::vector<EntityID> &allEntities)
 {
-    std::cout << "client ID loot system start" << _assetManager->getCurrentClientID() << std::endl;
-    int rand = std::rand() % 10;
+    if (_assetManager->getLootRand() % 100 > DROPRATE) // if the roll is below 15 it can loot, so basically we have a 15% drop chance
+        return;
+    int rand = _assetManager->getLootRand() % _assetManager->getPowerUpModels().size();
     for (EntityID ent : EntityViewer<Loot>(*_em.get())) {
         if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::POWERUP && _em->Get<EntityModelType>(ent)->modelType != RL::ModelType::SPACESHIP && !_em->Get<IsAlive>(ent)->alive) {
-            if (rand > 8)
-                create_loot(_em->Get<Position>(ent)->pos, "missileProj");
-            if (rand < 3)
-                create_loot(_em->Get<Position>(ent)->pos, "plasmaProj");
-            if (rand >= 3 && rand <= 5)
-                create_loot(_em->Get<Position>(ent)->pos, "shield");
-            if (rand >= 6 && rand <= 8)
-                create_loot(_em->Get<Position>(ent)->pos, "fireball");
+                create_loot(_em->Get<Position>(ent)->pos,  _assetManager->getPowerUpModels().at(rand)->getName());
+                std::cout << "created loot :" << _assetManager->getPowerUpModels().at(rand)->getName() << std::endl;
+            // if (rand < 3)
+            //     create_loot(_em->Get<Position>(ent)->pos, "plasmaProj");
+            // if (rand >= 3 && rand <= 5)
+            //     create_loot(_em->Get<Position>(ent)->pos, "shield");
+            // if (rand >= 6 && rand <= 8)
+            //     create_loot(_em->Get<Position>(ent)->pos, "fireball");
         }
     }
 }
@@ -59,15 +60,12 @@ void LootSystem::create_loot(Vector3 pos, std::string lootName)
         _em->Assign<Shield>(id, generateShieldLoot());
         _em->Assign<PowerUpType>(id, PowerUpType{PowerUpEnum::SHIELDPOWER});
     }
-    std::cout << "creating LOOT" << std::endl;
-    std::cout << "client ID loot system end" << _assetManager->getCurrentClientID() << std::endl;
 }
 
 ProjectileWeapon LootSystem::generateWeaponLoot(std::string projectileName)
 {
     ProjectileWeapon BaseWeapon;
     Vector3 Vel;
-
     BaseWeapon.name = projectileName;
     BaseWeapon.modelName = projectileName;
     BaseWeapon.maxAmmo = 999; // max amom is 999

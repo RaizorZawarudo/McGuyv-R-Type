@@ -43,8 +43,6 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
     Collider* projectileCollider = _em->Get<Collider>(projectile);
     Collider* otherCollider = _em->Get<Collider>(other);
     if (CheckCollisionBoxes(projectileCollider->collider, otherCollider->collider)) {
-
-        std::cout << _em->Get<ModelName>(projectile)->modelname << " collided with " << _em->Get<ModelName>(other)->modelname << std::endl;
         //create bullet impact (another explosion) entity with the path stored in the projectile´s components ==> createExplosion(_em->Get<ExplosionName>)(projectile)->name); this one has to be super small preferably except for badabig weapons
 
         //set bullet to dead
@@ -88,9 +86,7 @@ void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
     
     Collider* obstacleCollider = _em->Get<Collider>(obstacle);
     Collider* otherCollider = _em->Get<Collider>(other);
-    if (CheckCollisionBoxes(obstacleCollider->collider, otherCollider->collider)) {
-        std::cout << _em->Get<ModelName>(obstacle)->modelname << " collided with " << _em->Get<ModelName>(other)->modelname << std::endl;
-       
+    if (CheckCollisionBoxes(obstacleCollider->collider, otherCollider->collider)) {       
 
         //reduce other shield or hp by obstacle hp
         if (_em->Get<Shield>(other)) {
@@ -109,7 +105,6 @@ void CollisionSystem::obstacle_collisions(EntityID obstacle, EntityID other)
             Position* obstaclePos = _em->Get<Position>(obstacle);
             ModelName* otherName = _em->Get<ModelName>(other);
             create_explosion(obstaclePos->pos, otherName->explosionname);
-            std::cout << "client ID collisions system" << _assetManager->getCurrentClientID() << std::endl;
          }
         _em->Get<IsAlive>(obstacle)->alive = false;
         Position* obstaclePos = _em->Get<Position>(obstacle);
@@ -132,11 +127,10 @@ void CollisionSystem::powerUp_collisons(EntityID powerup, EntityID other)
             Collider* powerupCollider = _em->Get<Collider>(powerup);
             Collider* otherCollider = _em->Get<Collider>(other);
             if (CheckCollisionBoxes(powerupCollider->collider, otherCollider->collider)) {
-                std::cout << "collinding with player by powerup" << std::endl;
+                std::cout << "collinding with player by powerup" << _em->Get<ModelName>(powerup)->modelname << std::endl;
                 pick_up_weaponLoot(powerup, other);
                 _em->Get<IsAlive>(powerup)->alive = false;
             }
-
         }
         return;
     }
@@ -156,12 +150,16 @@ void CollisionSystem::powerUp_collisons(EntityID powerup, EntityID other)
 
 void CollisionSystem::pick_up_weaponLoot(EntityID powerup, EntityID other)
 {
+    std::cout << "now i should pickup weapon called " << _em->Get<ModelName>(powerup)->modelname << std::endl;
     //check if the player already has the weapon in base weapon
     if (_em->Get<Weaponset>(other)->weapons.at(0).modelName == _em->Get<Loot>(powerup)->weaponLoot.name)
         return;
-    for (int i = _em->Get<Weaponset>(other)->weapons.size()- 1; i < _em->Get<Weaponset>(other)->weapons.size(); i++) { 
+    std::cout << "its not the first weapon , it is : " << _em->Get<ModelName>(powerup)->modelname << std::endl;
+
+    for (int i = 0; i < _em->Get<Weaponset>(other)->weapons.size(); i++) { 
         //check if he has the weapon already looted to increase its ammo       
         if (_em->Get<Weaponset>(other)->weapons.at(i).modelName == _em->Get<Loot>(powerup)->weaponLoot.modelName) {
+            std::cout << "i have the weapon bruv gimme ammo" << std::endl;
             _em->Get<Weaponset>(other)->weapons.at(i).curAmmo += _em->Get<Loot>(powerup)->weaponLoot.curAmmo;
             _em->Get<Weaponset>(other)->weapons.at(i).curAmmo > 999 ? _em->Get<Weaponset>(other)->weapons.at(i).curAmmo = 999 : _em->Get<Weaponset>(other)->weapons.at(i).curAmmo + 0;
             return;
@@ -197,5 +195,4 @@ void CollisionSystem::create_explosion(Vector3 pos, std::string exploName)
     _em->Assign<Position>(id, Position{pos});
     _em->Assign<PitchYawRoll>(id, PitchYawRoll{0.0f, 0.0f, 0.0f});
     _em->Assign<AnimationData>(id, AnimationData{0, 0});
-    std::cout << "creating explosion" << std::endl;
 }

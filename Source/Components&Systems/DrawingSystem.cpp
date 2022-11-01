@@ -21,7 +21,6 @@ DrawingSystem::~DrawingSystem()
 
 void DrawingSystem::update(std::vector<EntityID> &allEntities)
 {
-    std::cout << "client ID drawing system" << _assetManager->getCurrentClientID() << std::endl;
     EntityID clientplayerID = 0;
     _renderer->beginDrawing();
         _renderer->clearBackground();
@@ -42,15 +41,13 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                 //find the player of this client and store his id for UI display later (score etc etc)
                 if (modelType->modelType == RL::ModelType::SPACESHIP && owner->id == _assetManager->getCurrentClientID()) {
                     clientplayerID = _ent;
-                    std::cout << "player owner ID = " << _assetManager->getCurrentClientID() << std::endl;
                 }
                 //update the animation of the model before printing it if its a explosion
                 if (modelType->modelType == RL::ModelType::EXPLOSION) {
                     AnimationData* animData = _em->Get<AnimationData>(_ent);
                     maxFrame = _assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->updateModelsAnimation(animData->currentFrame, animData->currentAnim);
                     animData->currentFrame <= maxFrame? animData->currentFrame++ : _em->Get<IsAlive>(_ent)->alive = false;
-                }
-                std::cout << "STUCK 1" << std::endl;    
+                }    
                 //draw shield depending on shield health
                 if (_em->Get<Shield>(_ent) && _em->Get<Shield>(_ent)->shieldActive && _em->Get<Shield>(_ent)->shield > 0) {
                     if (_em->Get<Shield>(_ent)->shield >= 80) _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("shieldblue80", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll); //change scale to obj Dimensions->lengthZ /2 , and change the shield models to be back to 1 square size in blender !
@@ -58,21 +55,16 @@ void DrawingSystem::update(std::vector<EntityID> &allEntities)
                     if (_em->Get<Shield>(_ent)->shield >= 25 && _em->Get<Shield>(_ent)->shield < 50) _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("shieldblue25", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll); //change scale to obj Dimensions->lengthZ /2 , and change the shield models to be back to 1 square size in blender !
                     if (_em->Get<Shield>(_ent)->shield > 0 && _em->Get<Shield>(_ent)->shield < 25) _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType("shieldblue00", RL::ModelType::EFFECT)->getModel(),objectPos->pos, 1.0f, owner->ownerType, pitchYawRoll); //change scale to obj Dimensions->lengthZ /2 , and change the shield models to be back to 1 square size in blender !  
                     }
-                std::cout << "STUCK 2" << std::endl;
                 if (_em->Get<IsAlive>(_ent)->alive)
                     _renderer->draw_3D_model(_assetManager->getSpecificDrawableWithType(objectModelName->modelname, modelType->modelType)->getModel(), objectPos->pos, modelScale->modelScale, owner->ownerType, pitchYawRoll);
-                std::cout << "STUCK 3" << std::endl;  
-            }
-        std::cout << "STUCK 4" << std::endl;      
+            }    
         _renderer->end3DMode();
         //now we draw the HUD
         _renderer->draw_2D_model(_assetManager->getSpecificIcon("playerPannel")->getTexture(),_window->getDimensions().x/100 * PANNELLEFTX ,_window->getDimensions().y/100 * PANNELSY);
         _renderer->draw_2D_model(_assetManager->getSpecificIcon("playerPannel")->getTexture(),_window->getDimensions().x/100 * PANNELRIGHTX ,_window->getDimensions().y/100 * PANNELSY);
         //now we draw the data relative to the player on top of the hud
-        std::cout << "client ID drawing system just before UI " << _assetManager->getCurrentClientID() << std::endl;
-        std::cout << "client ID from int at drawing system " << clientplayerID << std::endl;
+    
         playerUIDrawing(clientplayerID);
-        std::cout << "we drew the ui succesfully after death" << std::endl;
         
         
         DrawFPS(10, 10);
@@ -91,9 +83,6 @@ void DrawingSystem::shieldDrawing()
 
 void DrawingSystem::playerUIDrawing(EntityID clientplayerID)
 {
-    std::cout << "seggyy hunt playerUI" << std::endl;
-    std::cout << " clientplayerID int ui from int = " <<clientplayerID << std::endl;
-    std::cout << "client ID drawing system in UI function " << _assetManager->getCurrentClientID() << std::endl;
     std::string avatarstatusName = _em->Get<UIAvatarNames>(clientplayerID)->avatarName;
     
     //these three ifs handle the player avatar

@@ -217,6 +217,10 @@ enum TargetType {
     POWERUP_TARGET,
 };
 
+struct AI {
+    std::string style;
+};
+
 
 
 

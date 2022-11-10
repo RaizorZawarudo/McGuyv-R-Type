@@ -26,6 +26,7 @@ FILE(GLOB CFILES
         Source/Drawable2D.cpp
         Source/CameraManager.cpp
         Source/InputManager.cpp
+        Source/Components&Systems/BotSystem.cpp
         Source/Components&Systems/ShootingSystem.cpp
         Source/Components&Systems/DrawingSystem.cpp
         Source/Components&Systems/InputSystem.cpp
@@ -53,6 +54,7 @@ FILE(GLOB HEADERFILES
         Source/CameraManager.hpp
         Source/InputManager.hpp
         Source/Components&Systems/ISystem.hpp
+        Source/Components&Systems/BotSystem.hpp
         Source/Components&Systems/ShootingSystem.hpp
         Source/Components&Systems/DrawingSystem.hpp
         Source/Components&Systems/MovementSystem.hpp

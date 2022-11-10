@@ -144,9 +144,6 @@ std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, R
             if (j == 12 && type == RL::ModelType::PROJECTILE) {
                 explosionname = parsedCsv[i][j].c_str();
             }
-
-
-
         }
         //HERE WE CREATE A NEW 3D MODEL WITH THE INFO AND ADD IT TO THE VECTOR
         RL::Drawable3D *newModel = new RL::Drawable3D(type , modelName, modelPath, texturePath, animationPath, scale, style, length, width, height, cameraPositionMcGuyv, cameraFovMcGuyv, velocity, hp, shootCD, explosionname);

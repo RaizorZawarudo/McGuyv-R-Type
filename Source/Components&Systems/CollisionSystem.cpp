@@ -34,6 +34,8 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
 {
     if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::POWERUP)
         return;
+    if (_em->Get<EntityModelType>(other)->modelType == RL::ModelType::PROJECTILE)
+        return;
     if (_em->Get<EntityModelType>(projectile)->modelType != RL::ModelType::PROJECTILE)
         return;
     if (!_em->Get<IsAlive>(projectile)->alive)
@@ -61,7 +63,8 @@ void CollisionSystem::bullet_collisions(EntityID projectile, EntityID other)
         }
         
         // give points to owner
-        _em->Get<Score>(_em->Get<Owner>(projectile)->id)->score += _em->Get<Hp>(projectile)->hp;
+        if (_em->Get<Owner>(projectile)->ownerType == RL::ModelType::SPACESHIP)
+            _em->Get<Score>(_em->Get<Owner>(projectile)->id)->score += _em->Get<Hp>(projectile)->hp;
 
         //check if other hp is below zero : if yes set it to dead and create an explosion entity with the explosion path stored in the other´s components ==>  createExplosion(_em->Get<ExplosionName>(other)->name);
         if (_em->Get<Hp>(other)->hp <= 0) {

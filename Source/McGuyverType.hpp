@@ -18,6 +18,7 @@
 #include "ECS/EntityManager.hpp"
 #include "Components&Systems/ISystem.hpp"
 #include "Components&Systems/Components.hpp"
+#include "Components&Systems/BotSystem.hpp"
 #include "Components&Systems/ShootingSystem.hpp"
 #include "Components&Systems/MovementSystem.hpp"
 #include "Components&Systems/InputSystem.hpp"
@@ -74,7 +75,7 @@ class McGuyverType {
         //game related data     
         int _currentLevel = 1;
         Position _playerStartingPos = {0.0f, 1.0f, -8.0f};
-        Position _ennemyStartingPos = {0.0f, 4.0f, 0.0f}; //can delete 
+        Position _ennemyStartingPos = {0.0f, 4.0f, 15.0f}; //can delete 
         float _playerStartingZ = 8.0f; //can delete
         float enemyStartingZ = 20.0f; // cand delete
 

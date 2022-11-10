@@ -1,2 +1,2 @@
-Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height,velocity float,hp,explosionname
-tronDrone,simple,Source/Assets/Models/Ennemies/TronDrone/tronDrone.obj,0,0,1,1,1,1,0.2,100,lowPoly
+Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height,velocity float,hp,explosionname,weaponSet
+tronDrone,simple,Source/Assets/Models/Ennemies/TronDrone/tronDrone.obj,0,0,1,1,1,1,0.2,100,lowPoly,fireball

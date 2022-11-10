@@ -18,6 +18,7 @@ McGuyverType::McGuyverType()
 
 
     this->_systems.push_back(std::make_shared<InputSystem>(this->_entityManager, this->_inputManager, this->_thisClientPlayerEntityID));
+    this->_systems.push_back(std::make_shared<BotSystem>(this->_entityManager));
     this->_systems.push_back(std::make_shared<ShootingSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager)); //this sets the bounding boxes so it must come as the last system before collisions 
     //add collision system
@@ -64,16 +65,18 @@ void McGuyverType::startGame() // must have player choices etc
 
 
     createPlayer("dartAssault", "malibuPepe"); //add clientID in player constructor so it can be found for multiplayer in the server etc etc
-    
+    createEnnemy("tronDrone", _ennemyStartingPos.pos);
     
     
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
 
 
+    //MOCK OBSTACLE CREATION TO BE DELETED
     float x;
     float y;
     double lastshot= 0;
     bool shootingstaractive = false;
+    //END MOCK
 
     while (_window->isWindowOpen()) {
         //UI LOOP functions
@@ -81,16 +84,17 @@ void McGuyverType::startGame() // must have player choices etc
 
         
         // MOCK SPAWN OF OBSTACLES FOR TESTING TO DELETE !!
-        if (GetTime() - lastshot > 0.5) {
-            y = std::rand() % 9;
-            x = std::rand() % 7;
-            if ( std::rand() % 2 == 0)
-                x *= -1;
-            if (y < 1.5)
-                y = 1.5f;
-            createObstacle("cube1Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
-            lastshot = GetTime();            
-        }
+        // if (GetTime() - lastshot > 0.5) {
+        //     y = std::rand() % 9;
+        //     x = std::rand() % 7;
+        //     if ( std::rand() % 2 == 0)
+        //         x *= -1;
+        //     if (y < 1.5)
+        //         y = 1.5f;
+        //     createObstacle("cube1Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
+        //     lastshot = GetTime();            
+        // }
+        //END MOCK
     }
 
     
@@ -166,7 +170,7 @@ void McGuyverType::createEnnemy(std::string modelName, Vector3 ennemyPos) // her
 {
     EntityID id = _entityManager->CreateNewEntity();
     //register this entity as the player for this client
-    std::vector<int> playerInput;
+    std::vector<int> ennemyInput;
     Vector3 Vel;
     
     float scrollspeed;
@@ -174,15 +178,14 @@ void McGuyverType::createEnnemy(std::string modelName, Vector3 ennemyPos) // her
     
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::ENNEMY});
     
-    _entityManager->Assign<IsAlive>(id, IsAlive{true});
-    
-
-    
+    _entityManager->Assign<IsAlive>(id, IsAlive{true});    
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getExplosionName()});
+    std::cout << "explosion name of ennemy = " <<  _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getExplosionName() << std::endl;
     
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
-   
+
+    _entityManager->Assign<Loot>(id, Loot{true});   
     
     _entityManager->Assign<Position>(id,Position{ennemyPos});
     
@@ -196,7 +199,11 @@ void McGuyverType::createEnnemy(std::string modelName, Vector3 ennemyPos) // her
     _entityManager->Assign<Velocity>(id, Velocity{scrollspeed, scrollspeed, scrollspeed});
     _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getHp()});
 
+    _entityManager->Assign<AI>(id, AI{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getStyle()});
+    _entityManager->Assign<Input>(id, Input{ennemyInput});
+    _entityManager->Assign<Shield>(id, Shield{100});
     //add weaponset to mobs so that they can pickup weapons
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("fireball"), 0}); //add this to ennemies CSV and update asset manager to reflect weaponset name in the drawable3D
 
     
 }
@@ -234,24 +241,6 @@ void McGuyverType::createPlayer(std::string modelName, std::string avatarName) /
     //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
     _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("orangeLight"), 0}); //to be changed along with the constructor of this function to refelect the player choice of starting weapon
     //mock extra weapon for ui testing to delete later
-
-    ProjectileWeapon BaseWeapon2;
-    Vector3 Veli;
-
-    BaseWeapon2.name = "fireball";
-    BaseWeapon2.modelName = "fireball";
-    BaseWeapon2.maxAmmo = 999; // unlimitted ammo stock
-    BaseWeapon2.curAmmo = 100; // unlimitted ammo, both the -999 are for unlimited should define it later
-    BaseWeapon2.splash = 0.0f; //TODO : add in projectile CSV and in drawable 3d class and constructor and in asset manager loadProjectiles models
-    BaseWeapon2.range = 50.0f; // TODO: same as above
-    BaseWeapon2.cooldowninseconds = _assetManager->getSpecificDrawableWithType(BaseWeapon2.modelName, RL::ModelType::PROJECTILE)->getShootCD();
-    BaseWeapon2.damage = _assetManager->getSpecificDrawableWithType(BaseWeapon2.modelName, RL::ModelType::PROJECTILE)->getHp();
-    Veli = _assetManager->getSpecificDrawableWithType(BaseWeapon2.modelName, RL::ModelType::PROJECTILE)->getVelocity();
-    BaseWeapon2.vel = {Veli.x, Veli.y, Veli.z};
-    BaseWeapon2.lasttimeweaponwasshot = 0.0f;
-
-    _entityManager->Get<Weaponset>(id)->weapons.push_back(BaseWeapon2);
-    std::cout << "PLAYER LOL" << std::endl;
 }
 
 void McGuyverType::createObstacle(std::string modelName, Vector3 position)
@@ -262,9 +251,7 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
     _entityManager->Assign<EntityModelType>(id, EntityModelType{RL::ModelType::OBSTACLE});
     _entityManager->Assign<Owner>(id, Owner{this->_thisClientPlayerEntityID, RL::ModelType::ENNEMY});
 
-    _entityManager->Assign<Loot>(id, Loot{true});
-
-    
+    _entityManager->Assign<Loot>(id, Loot{true});    
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getExplosionName()});
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
@@ -280,10 +267,6 @@ void McGuyverType::createObstacle(std::string modelName, Vector3 position)
     scrollspeed = _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getScrollSpeed();
     _entityManager->Assign<Velocity>(id, Velocity{scrollspeed, scrollspeed, scrollspeed});
     _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::OBSTACLE)->getHp()});
-
-    //here we have to assign an Arsenal ( the weapons he has), an arsenal is a struct containing a vector of 3 weapon structs
-
-
 }
 
 

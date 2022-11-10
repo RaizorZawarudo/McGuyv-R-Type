@@ -156,7 +156,11 @@ void CollisionSystem::pick_up_weaponLoot(EntityID powerup, EntityID other)
         return;
     std::cout << "its not the first weapon , it is : " << _em->Get<ModelName>(powerup)->modelname << std::endl;
 
+    std::cout << "our weaponRACK size is : " << _em->Get<Weaponset>(other)->weapons.size() << std::endl;
+
     for (int i = 0; i < _em->Get<Weaponset>(other)->weapons.size(); i++) { 
+        std::cout << "I should be searching for a matching weapon = " << _em->Get<ModelName>(powerup)->modelname << std::endl;
+        std::cout << "and my weapon at this index is called = " << _em->Get<Weaponset>(other)->weapons.at(i).modelName << std::endl;
         //check if he has the weapon already looted to increase its ammo       
         if (_em->Get<Weaponset>(other)->weapons.at(i).modelName == _em->Get<Loot>(powerup)->weaponLoot.modelName) {
             std::cout << "i have the weapon bruv gimme ammo" << std::endl;
@@ -164,12 +168,12 @@ void CollisionSystem::pick_up_weaponLoot(EntityID powerup, EntityID other)
             _em->Get<Weaponset>(other)->weapons.at(i).curAmmo > 999 ? _em->Get<Weaponset>(other)->weapons.at(i).curAmmo = 999 : _em->Get<Weaponset>(other)->weapons.at(i).curAmmo + 0;
             return;
         }
-        //add weapon if we dont have it
-        if (_em->Get<Weaponset>(other)->weapons.size() < 3) {
-            _em->Get<Weaponset>(other)->weapons.push_back(_em->Get<Loot>(powerup)->weaponLoot);
-            return;
-        }     
     }
+        //add weapon if we dont have it
+    if (_em->Get<Weaponset>(other)->weapons.size() < 3) {
+        _em->Get<Weaponset>(other)->weapons.push_back(_em->Get<Loot>(powerup)->weaponLoot);
+        return;
+    }     
 }
 
 void CollisionSystem::pick_up_shieldLoot(EntityID powerup, EntityID other)

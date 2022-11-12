@@ -89,6 +89,33 @@ class MovementSystem : public ISystem {
                     forward = 0;
                 }
 
+                if (entityType->modelType == RL::ModelType::ENNEMY) {
+                    Input* entityMovement = _em->Get<Input>(ent);
+                    if (entityMovement->_inputQueue.empty()) {
+                        if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 1.0f;
+                        else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 1.0f;
+                        if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
+                        else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
+                        //if (entityPos->pos.z > PLAYERSTARTINGZ) entityPos->pos.z -= 0.2f;
+                    }
+
+                    for (int keypressed : entityMovement->_inputQueue) {
+                        if (keypressed == UP || keypressed == UP2) moveUp(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == DOWN) moveDown(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
+                            else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
+                        }
+
+                        if (keypressed == LEFT || keypressed == LEFT2) moveLeft(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == RIGHT) moveRight(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 0.5f;
+                            else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 0.5f;
+                        }
+                    }
+                }
+
 
                 
 

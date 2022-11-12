@@ -66,7 +66,6 @@ enum UserInput {
     DROPWEAPON = 108,
     NONE = -7,
     ESCAPE = -8,
-
 };
 
 struct Input {
@@ -219,6 +218,16 @@ enum TargetType {
 
 struct AI {
     std::string style;
+    bool isMoving;
+    float moveCooldown;
+    float lastTimeMoved;
+    float moveDetectRange;
+    float moveRange;
+    Vector3 moveTargetPos;
+
+    bool hasShot;
+    float shootCooldown;
+    float shootDetectRange;
 };
 
 

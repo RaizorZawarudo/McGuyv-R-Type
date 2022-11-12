@@ -156,8 +156,6 @@ std::vector<ProjectileWeapon> McGuyverType::generateStartWeaponset(std::string m
     BaseWeapon.lasttimeweaponwasshot = 0;
 
     startWeaponset.push_back(BaseWeapon);
-
-
     return startWeaponset;
 }
 
@@ -181,8 +179,6 @@ void McGuyverType::createEnnemy(std::string modelName, Vector3 ennemyPos) // her
     _entityManager->Assign<IsAlive>(id, IsAlive{true});    
     
     _entityManager->Assign<ModelName>(id, ModelName{modelName, _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getExplosionName()});
-    std::cout << "explosion name of ennemy = " <<  _assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getExplosionName() << std::endl;
-    
     _entityManager->Assign<ModelScale>(id, ModelScale{1.0f});
 
     _entityManager->Assign<Loot>(id, Loot{true});   
@@ -199,13 +195,42 @@ void McGuyverType::createEnnemy(std::string modelName, Vector3 ennemyPos) // her
     _entityManager->Assign<Velocity>(id, Velocity{scrollspeed, scrollspeed, scrollspeed});
     _entityManager->Assign<Hp>(id, Hp{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getHp()});
 
-    _entityManager->Assign<AI>(id, AI{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getStyle()});
+    // _entityManager->Assign<AI>(id, AI{_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getStyle()});
+    _entityManager->Assign<AI>(id, assignAI(_assetManager->getSpecificDrawableWithType(modelName, RL::ModelType::ENNEMY)->getStyle(), id));
     _entityManager->Assign<Input>(id, Input{ennemyInput});
     _entityManager->Assign<Shield>(id, Shield{100});
     //add weaponset to mobs so that they can pickup weapons
-    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("fireball"), 0}); //add this to ennemies CSV and update asset manager to reflect weaponset name in the drawable3D
+    _entityManager->Assign<Weaponset>(id, Weaponset{generateStartWeaponset("fireball"), 0}); //add this to ennemies CSV and update asset manager to reflect weaponset name in the drawable3D 
+}
 
+AI McGuyverType::assignAI(std::string AIType, EntityID ennemy)
+{
+    if (AIType == "simple")
+        return assignSimpleAI(AIType, ennemy);
+    // if (AIType == "anythingelse")
+    //     return assignSimpleAI(AIType, ennemy);
     
+    //else
+    //  return a simpleaie
+}
+
+AI McGuyverType::assignSimpleAI(std::string AIType, EntityID ennemy)
+{
+    AI newAI;
+
+    newAI.style = AIType;
+    newAI.isMoving = false;
+    newAI.moveCooldown = SIMPLEAIMOVECOOLDOWN;
+    newAI.lastTimeMoved = 0;
+    newAI.moveDetectRange = SIMPLEAIMOVEDETECTRANGE;
+    newAI.moveRange = SIMPLEMOVERANGE;
+    newAI.moveTargetPos = {0,0,0};
+
+    newAI.hasShot = false;
+    newAI.shootCooldown = SIMPLEAISHOOTCOOLDOWN;
+    newAI.shootDetectRange = SIMPLEAISHOOTDETECTRANGE;
+    
+    return newAI;
 }
 
 void McGuyverType::createPlayer(std::string modelName, std::string avatarName) // here we will add base weapon choice, avatar choice as well chosen by user in menu, the avatar is just cosmetic

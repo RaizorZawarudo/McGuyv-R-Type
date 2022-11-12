@@ -29,8 +29,8 @@ class BotSystem : public ISystem {
 
 
         void dodge_bullets(EntityID ennemy);
-        Vector3 findSafeSpotfromProjectile(EntityID ennemy);
-        void applyAIInputDodgeProjectile(EntityID ennemy);
+        Vector3 findSafeSpotfromProjectile(EntityID ennemy, float ennemyPosX, float ennemyPosY);
+        void applyAIKeystrokes(EntityID ennemy);
         bool is_in_range(EntityID ennemy);
 
 

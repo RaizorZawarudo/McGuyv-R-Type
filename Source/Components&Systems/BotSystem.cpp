@@ -31,6 +31,8 @@ void BotSystem::doAI_simple(EntityID ennemy)
     //dodge bullets and update movement keys input
     dodge_bullets(ennemy);
 
+    //target player === get in same X Y as player in order to fire
+
     //decide if its time to shoot
     fire_weapon_ennemy(ennemy);
    
@@ -43,7 +45,7 @@ void BotSystem::dodge_bullets(EntityID ennemy)
 {
     //if im moving i just move i dont check for bullets
     if (_em->Get<AI>(ennemy)->isMoving) {
-            applyAIInputDodgeProjectile(ennemy);
+            applyAIKeystrokes(ennemy);
             return;
     }
     //scan in a tube in front and back of mob if there is a bullet coming
@@ -67,29 +69,25 @@ void BotSystem::dodge_bullets(EntityID ennemy)
             _em->Get<AI>(ennemy)->isMoving = true;
 
             //find a target to move to with Algorithm you create DAN DAN DAN
-            _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy);
+            _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.x, _em->Get<Position>(ennemy)->pos.y);
 
             // _em->Get<AI>(ennemy)->moveTargetPos = {-4, 5, 0}; // z set to zero because mobs dont go forward in simple mode
 
-            applyAIInputDodgeProjectile(ennemy);
+            applyAIKeystrokes(ennemy);
         }
     }
 }
 
-Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy)
+Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy, float ennemyPosX , float ennemyPosY)
 {
     Vector3 newTargetPos;
-    int newSeedx = _assetManager->getLootRand() * _em->Get<Position>(ennemy)->pos.x;
-    int newSeedy = _assetManager->getLootRand() * _em->Get<Position>(ennemy)->pos.y;
+    int newSeedx = _assetManager->getLootRand() * ennemyPosX;
+    int newSeedy = _assetManager->getLootRand() * ennemyPosY;
 
-    std::cout << newSeedx << std::endl;
-    std::cout << newSeedy << std::endl;
     //find a random x using the random from asset manager
     int x = newSeedx * _em->Get<Hp>(ennemy)->hp % SIMPLEMOVERANGE;
     int y = newSeedy + _em->Get<Hp>(ennemy)->hp % SIMPLEMOVERANGE;
 
-    std::cout << x << std::endl;
-    std::cout << y << std::endl;
     if (_assetManager->getLootRand() % 2 == 1)
         x = -x;
     if (_assetManager->getLootRand() % 2 == 1)
@@ -101,9 +99,6 @@ Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy)
     newTargetPos.y = _em->Get<Position>(ennemy)->pos.y + y;
     newTargetPos.z = 0;
 
-    std::cout << newTargetPos.x << std::endl;
-    std::cout << newTargetPos.y << std::endl;
-
     if (newTargetPos.x > MAXLEFT)
         newTargetPos.x = MAXLEFT;
     if (newTargetPos.x < MAXRIGHT)
@@ -112,9 +107,30 @@ Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy)
         newTargetPos.y = MAXUP;
     if (newTargetPos.y < MAXDOWN)
         newTargetPos.y = MAXDOWN;
-    
-    std::cout << newTargetPos.x << std::endl;
-    std::cout << newTargetPos.y << std::endl;
+
+    //check if there is not already a monster there 
+    for (EntityID ent : EntityViewer<Position>(*_em.get())) {
+        //we only want to not got to ennemies or obstacles
+        if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::ENNEMY && 
+            _em->Get<EntityModelType>(ent)->modelType != RL::ModelType::OBSTACLE)
+            continue;
+        //check for their current pos 
+        if (newTargetPos.x == _em->Get<Position>(ent)->pos.x &&
+            newTargetPos.y == _em->Get<Position>(ent)->pos.y &&
+            _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent)->pos.z) {
+                return findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
+        }
+        //if ur not a ennemy aka ur an obstacle u dont have ai and target so you continue to next in loop
+        if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::ENNEMY)
+            continue;
+
+        //check for their target goals
+        if (newTargetPos.x == _em->Get<AI>(ent)->moveTargetPos.x &&
+            newTargetPos.y == _em->Get<AI>(ent)->moveTargetPos.y &&
+            _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent)->pos.z) {
+                return findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
+        }
+    }
 
     return newTargetPos;
 }
@@ -131,7 +147,7 @@ bool BotSystem::is_in_range(EntityID ennemy)
         return false;
 }
 
-void BotSystem::applyAIInputDodgeProjectile(EntityID ennemy)
+void BotSystem::applyAIKeystrokes(EntityID ennemy)
 {
     //here check if we reached target in order to set isMoving to false and Target to 0,0,0
     if (is_in_range(ennemy)) {

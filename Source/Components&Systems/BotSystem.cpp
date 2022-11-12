@@ -6,6 +6,7 @@
 */
 
 #include "BotSystem.hpp"
+#include "MovementSystem.hpp"
 
 BotSystem::BotSystem(std::shared_ptr<EntityManager> em, std::shared_ptr<AssetManager> assetManager): _assetManager(assetManager)
 {
@@ -50,12 +51,12 @@ void BotSystem::dodge_bullets(EntityID ennemy)
         if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::PROJECTILE) continue;
         
         //else i check for bullets in range
-        //check if bullet is in my X
-        if (_em->Get<Position>(ent)->pos.x < (_em->Get<Position>(ennemy)->pos.x - _em->Get<ModelDimensions>(ennemy)->widthX / 2) ||
-            _em->Get<Position>(ent)->pos.x > (_em->Get<Position>(ennemy)->pos.x + _em->Get<ModelDimensions>(ennemy)->widthX / 2)) return;
+        //check if bullet is in my X : EDIT = CHECK IF model dimensions, not just model pos, or else the ennemy dodges only when ur SUPER PRECISE AIM and its not in this game
+        if (_em->Get<Position>(ent)->pos.x + _em->Get<ModelDimensions>(ent)->widthX / 2 < (_em->Get<Position>(ennemy)->pos.x - _em->Get<ModelDimensions>(ennemy)->widthX / 2) ||
+            _em->Get<Position>(ent)->pos.x - _em->Get<ModelDimensions>(ent)->widthX / 2 > (_em->Get<Position>(ennemy)->pos.x + _em->Get<ModelDimensions>(ennemy)->widthX / 2)) return;
         //check if bullet is in my Y
-        if (_em->Get<Position>(ent)->pos.y < (_em->Get<Position>(ennemy)->pos.y - _em->Get<ModelDimensions>(ennemy)->heightY / 2) ||
-            _em->Get<Position>(ent)->pos.y > (_em->Get<Position>(ennemy)->pos.y + _em->Get<ModelDimensions>(ennemy)->heightY / 2)) return;
+        if (_em->Get<Position>(ent)->pos.y + _em->Get<ModelDimensions>(ent)->heightY / 2 < (_em->Get<Position>(ennemy)->pos.y - _em->Get<ModelDimensions>(ennemy)->heightY / 2) ||
+            _em->Get<Position>(ent)->pos.y - _em->Get<ModelDimensions>(ent)->heightY / 2 > (_em->Get<Position>(ennemy)->pos.y + _em->Get<ModelDimensions>(ennemy)->heightY / 2)) return;
         
         //check if bullet is in my Z range
         if (_em->Get<Position>(ent)->pos.z < (_em->Get<Position>(ennemy)->pos.x - _em->Get<AI>(ennemy)->moveDetectRange) ||
@@ -77,8 +78,45 @@ void BotSystem::dodge_bullets(EntityID ennemy)
 
 Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy)
 {
-    int x = _em->Get<Position>(ennemy)->pos.x 
+    Vector3 newTargetPos;
+    int newSeedx = _assetManager->getLootRand() + _em->Get<Position>(ennemy)->pos.x;
+    int newSeedy = _assetManager->getLootRand() + _em->Get<Position>(ennemy)->pos.y;
 
+    std::cout << newSeedx << std::endl;
+    std::cout << newSeedy << std::endl;
+    //find a random x using the random from asset manager
+    int x = newSeedx % SIMPLEMOVERANGE;
+    int y = newSeedy % SIMPLEMOVERANGE;
+
+    std::cout << x << std::endl;
+    std::cout << y << std::endl;
+    if (_assetManager->getLootRand() % 2 == 1)
+        x = -x;
+    if (_assetManager->getLootRand() % 2 == 1)
+        y = -y;
+    
+    //add the new x and x to the targetpos
+
+    newTargetPos.x = _em->Get<Position>(ennemy)->pos.x + x;
+    newTargetPos.y = _em->Get<Position>(ennemy)->pos.y + y;
+    newTargetPos.z = 0;
+
+    std::cout << newTargetPos.x << std::endl;
+    std::cout << newTargetPos.y << std::endl;
+
+    if (newTargetPos.x > MAXLEFT)
+        newTargetPos.x = MAXLEFT;
+    if (newTargetPos.x < MAXRIGHT)
+        newTargetPos.x = MAXRIGHT;
+    if (newTargetPos.y > MAXUP)
+        newTargetPos.y = MAXUP;
+    if (newTargetPos.y < MAXDOWN)
+        newTargetPos.y = MAXDOWN;
+    
+    std::cout << newTargetPos.x << std::endl;
+    std::cout << newTargetPos.y << std::endl;
+
+    return newTargetPos;
 }
 
 bool BotSystem::is_in_range(EntityID ennemy)
@@ -97,7 +135,6 @@ void BotSystem::applyAIInputDodgeProjectile(EntityID ennemy)
 {
     //here check if we reached target in order to set isMoving to false and Target to 0,0,0
     if (is_in_range(ennemy)) {
-        std::cout << "reached destination baby"<< std::endl;
         _em->Get<AI>(ennemy)->isMoving = false;
         _em->Get<AI>(ennemy)->moveTargetPos = {0, 0, 0};
         return;

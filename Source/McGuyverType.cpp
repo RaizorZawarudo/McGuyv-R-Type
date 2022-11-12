@@ -18,7 +18,7 @@ McGuyverType::McGuyverType()
 
 
     this->_systems.push_back(std::make_shared<InputSystem>(this->_entityManager, this->_inputManager, this->_thisClientPlayerEntityID));
-    this->_systems.push_back(std::make_shared<BotSystem>(this->_entityManager));
+    this->_systems.push_back(std::make_shared<BotSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<ShootingSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<MovementSystem>(this->_entityManager)); //this sets the bounding boxes so it must come as the last system before collisions 
     //add collision system
@@ -229,7 +229,7 @@ AI McGuyverType::assignSimpleAI(std::string AIType, EntityID ennemy)
     newAI.hasShot = false;
     newAI.shootCooldown = SIMPLEAISHOOTCOOLDOWN;
     newAI.shootDetectRange = SIMPLEAISHOOTDETECTRANGE;
-    
+
     return newAI;
 }
 

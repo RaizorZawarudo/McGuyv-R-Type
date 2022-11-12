@@ -59,8 +59,8 @@ void BotSystem::dodge_bullets(EntityID ennemy)
             _em->Get<Position>(ent)->pos.y - _em->Get<ModelDimensions>(ent)->heightY / 2 > (_em->Get<Position>(ennemy)->pos.y + _em->Get<ModelDimensions>(ennemy)->heightY / 2)) return;
         
         //check if bullet is in my Z range
-        if (_em->Get<Position>(ent)->pos.z < (_em->Get<Position>(ennemy)->pos.x - _em->Get<AI>(ennemy)->moveDetectRange) ||
-            _em->Get<Position>(ent)->pos.z > (_em->Get<Position>(ennemy)->pos.x + _em->Get<AI>(ennemy)->moveDetectRange)) return;
+        if (_em->Get<Position>(ent)->pos.z + _em->Get<ModelDimensions>(ent)->lengthZ / 2 < (_em->Get<Position>(ennemy)->pos.x - _em->Get<AI>(ennemy)->moveDetectRange) ||
+            _em->Get<Position>(ent)->pos.z - _em->Get<ModelDimensions>(ent)->lengthZ / 2 > (_em->Get<Position>(ennemy)->pos.x + _em->Get<AI>(ennemy)->moveDetectRange)) return;
 
         if (GetTime() -  _em->Get<AI>(ennemy)->lastTimeMoved > _em->Get<AI>(ennemy)->moveCooldown) {
             _em->Get<AI>(ennemy)->lastTimeMoved = GetTime();
@@ -79,14 +79,14 @@ void BotSystem::dodge_bullets(EntityID ennemy)
 Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy)
 {
     Vector3 newTargetPos;
-    int newSeedx = _assetManager->getLootRand() + _em->Get<Position>(ennemy)->pos.x;
-    int newSeedy = _assetManager->getLootRand() + _em->Get<Position>(ennemy)->pos.y;
+    int newSeedx = _assetManager->getLootRand() * _em->Get<Position>(ennemy)->pos.x;
+    int newSeedy = _assetManager->getLootRand() * _em->Get<Position>(ennemy)->pos.y;
 
     std::cout << newSeedx << std::endl;
     std::cout << newSeedy << std::endl;
     //find a random x using the random from asset manager
-    int x = newSeedx % SIMPLEMOVERANGE;
-    int y = newSeedy % SIMPLEMOVERANGE;
+    int x = newSeedx * _em->Get<Hp>(ennemy)->hp % SIMPLEMOVERANGE;
+    int y = newSeedy + _em->Get<Hp>(ennemy)->hp % SIMPLEMOVERANGE;
 
     std::cout << x << std::endl;
     std::cout << y << std::endl;

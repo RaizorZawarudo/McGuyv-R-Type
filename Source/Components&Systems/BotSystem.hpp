@@ -13,7 +13,7 @@
 
 const float MOVEBUFFER = 0.1f;
 
-const float SIMPLEAIMOVECOOLDOWN = 3.0;
+const float SIMPLEAIMOVECOOLDOWN = 1.0;
 const float SIMPLEAIMOVEDETECTRANGE = 10.0;
 const int SIMPLEMOVERANGE = 7.0;
 

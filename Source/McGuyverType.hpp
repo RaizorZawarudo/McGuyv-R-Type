@@ -78,6 +78,7 @@ class McGuyverType {
         int _currentLevel = 1;
         Position _playerStartingPos = {0.0f, 1.0f, -8.0f};
         Position _ennemyStartingPos = {4.0f, 1.0f, 15.0f}; //can delete 
+        Position _ennemyStartingPos2 = {1.0f, 5.0f, 15.0f};
         float _playerStartingZ = 8.0f; //can delete
         float enemyStartingZ = 20.0f; // cand delete
 

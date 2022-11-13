@@ -32,12 +32,13 @@ void BotSystem::doAI_simple(EntityID ennemy)
     dodge_bullets(ennemy);
     dodge_obstacles(ennemy);
 
-    //target player === get in same X Y as player in order to fire
-    //decide if its time to shoot
-    fire_weapon_ennemy(ennemy);
-   
+    //find_player_target(ennemy);
 
-    //check for obstacles and update movement keys (maybe not for level 1)
+    //target player === get in same X Y as player in order to fire
+    //decide if its time to shoot : => 50 means more than 50 % chance to shoot
+    int shootchance = _assetManager->getLootRand() * abs(_em->Get<Position>(ennemy)->pos.x * _em->Get<Position>(ennemy)->pos.y);
+    if (shootchance % 100 >= 50)
+        fire_weapon_ennemy(ennemy);
 
 }
 
@@ -51,6 +52,7 @@ void BotSystem::dodge_bullets(EntityID ennemy)
     //scan in a tube in front and back of mob if there is a bullet coming
     for (EntityID ent : EntityViewer<Position>(*_em.get())) {
         if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::PROJECTILE) continue;
+        if (_em->Get<Owner>(ent)->id == ennemy) continue;
         
         float ennemyLeft = _em->Get<Position>(ennemy)->pos.x + _em->Get<ModelDimensions>(ennemy)->widthX / 2;
         float ennemyRight = _em->Get<Position>(ennemy)->pos.x - _em->Get<ModelDimensions>(ennemy)->widthX / 2;
@@ -131,10 +133,40 @@ void BotSystem::dodge_obstacles(EntityID ennemy)
     }
 }
 
+void BotSystem::find_player_target(EntityID ennemy)
+{
+    //if im moving i just move i dont check for obstacles
+    if (_em->Get<AI>(ennemy)->isMoving) {
+            applyAIKeystrokes(ennemy);
+            return;
+    }
+
+    for (EntityID ent : EntityViewer<Position>(*_em.get())) {
+        //if your are not a spaceship we continue
+        if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::SPACESHIP) continue;
+        //if you are not in my range to target you contniue
+        if (_em->Get<Position>(ent)->pos.z < (_em->Get<Position>(ennemy)->pos.z - _em->Get<AI>(ennemy)->targetPlayerDetectRange)) continue;
+
+        //my move target becoms this player I find
+        _em->Get<AI>(ennemy)->moveTargetPos.x = _em->Get<Position>(ent)->pos.x;
+        _em->Get<AI>(ennemy)->moveTargetPos.x = _em->Get<Position>(ent)->pos.y;
+        _em->Get<AI>(ennemy)->moveTargetPos.z = 0;
+        break;        
+    }
+    if (GetTime() -  _em->Get<AI>(ennemy)->lastTimeMoved > _em->Get<AI>(ennemy)->moveCooldown) {
+            _em->Get<AI>(ennemy)->lastTimeMoved = GetTime();
+            _em->Get<AI>(ennemy)->isMoving = true;
+            applyAIKeystrokes(ennemy);
+    }
+}
+
 void BotSystem::fire_weapon_ennemy(EntityID ennemy)
 {
     //this line here adds shoot command in the inputs of the ennemy
-    //_em->Get<Input>(ennemy)->_inputQueue.emplace_back(SHOOT);
+    if (GetTime() - _em->Get<AI>(ennemy)->lastTimeShot > _em->Get<AI>(ennemy)->shootCooldown) {
+        _em->Get<Input>(ennemy)->_inputQueue.emplace_back(SHOOT);
+        _em->Get<AI>(ennemy)->lastTimeShot = GetTime();
+    }
 }
 
 Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy, float ennemyPosX , float ennemyPosY)

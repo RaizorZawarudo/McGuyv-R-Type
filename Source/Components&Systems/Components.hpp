@@ -222,11 +222,13 @@ struct AI {
     float moveCooldown;
     float lastTimeMoved;
     float moveDetectRange;
+    float targetPlayerDetectRange;
     float moveRange;
     Vector3 moveTargetPos;
 
     bool hasShot;
     float shootCooldown;
+    float lastTimeShot;
     float shootDetectRange;
 };
 

@@ -224,10 +224,12 @@ AI McGuyverType::assignSimpleAI(std::string AIType, EntityID ennemy)
     newAI.moveCooldown = SIMPLEAIMOVECOOLDOWN;
     newAI.lastTimeMoved = 0;
     newAI.moveDetectRange = SIMPLEAIMOVEDETECTRANGE;
+    newAI.targetPlayerDetectRange = SIMPLEAITARGETPLAYERDETECTRANGE;
     newAI.moveRange = SIMPLEMOVERANGE;
     newAI.moveTargetPos = {0,0,0};
 
     newAI.hasShot = false;
+    newAI.lastTimeShot = 0;
     newAI.shootCooldown = SIMPLEAISHOOTCOOLDOWN;
     newAI.shootDetectRange = SIMPLEAISHOOTDETECTRANGE;
 

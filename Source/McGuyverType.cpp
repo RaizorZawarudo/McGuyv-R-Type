@@ -85,16 +85,16 @@ void McGuyverType::startGame() // must have player choices etc
 
         
         // MOCK SPAWN OF OBSTACLES FOR TESTING TO DELETE !!
-        // if (GetTime() - lastshot > 0.5) {
-        //     y = std::rand() % 9;
-        //     x = std::rand() % 7;
-        //     if ( std::rand() % 2 == 0)
-        //         x *= -1;
-        //     if (y < 1.5)
-        //         y = 1.5f;
-        //     createObstacle("cube1Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
-        //     lastshot = GetTime();            
-        // }
+        if (GetTime() - lastshot > 2) {
+            y = std::rand() % 9;
+            x = std::rand() % 7;
+            if ( std::rand() % 2 == 0)
+                x *= -1;
+            if (y < 1.5)
+                y = 1.5f;
+            createObstacle("cube1Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
+            lastshot = GetTime();            
+        }
         //END MOCK
     }
 

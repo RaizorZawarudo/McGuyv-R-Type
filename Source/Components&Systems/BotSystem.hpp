@@ -13,12 +13,12 @@
 
 const float MOVEBUFFER = 0.1f;
 
-const float SIMPLEAIMOVECOOLDOWN = 1.0;
+const float SIMPLEAIMOVECOOLDOWN = 2.0;
 const float SIMPLEAIMOVEDETECTRANGE = 10.0;
 const int SIMPLEMOVERANGE = 7.0;
 
 const float SIMPLEAISHOOTCOOLDOWN = 2.0;
-const float SIMPLEAISHOOTDETECTRANGE = 20;
+const float SIMPLEAISHOOTDETECTRANGE = 10;
 
 class BotSystem : public ISystem {
     public:
@@ -32,6 +32,8 @@ class BotSystem : public ISystem {
         Vector3 findSafeSpotfromProjectile(EntityID ennemy, float ennemyPosX, float ennemyPosY);
         void applyAIKeystrokes(EntityID ennemy);
         bool is_in_range(EntityID ennemy);
+
+        void dodge_obstacles(EntityID ennemy);
 
 
         void fire_weapon_ennemy(EntityID ennemy);

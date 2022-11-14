@@ -141,6 +141,13 @@ void BotSystem::find_player_target(EntityID ennemy)
             return;
     }
 
+    //in all entities present, check for players and target one STEP 1
+
+    //in all entities that are ennemies with AI, check if their move target == to the one we
+    //just chose, if so find another target, if not proceed to apply keystrokes
+
+    // if same target == find another target
+
     for (EntityID ent : EntityViewer<Position>(*_em.get())) {
         //if your are not a spaceship we continue
         if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::SPACESHIP) continue;

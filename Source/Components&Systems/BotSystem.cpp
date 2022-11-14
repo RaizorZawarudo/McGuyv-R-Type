@@ -32,7 +32,7 @@ void BotSystem::doAI_simple(EntityID ennemy)
     dodge_bullets(ennemy);
     dodge_obstacles(ennemy);
 
-    //find_player_target(ennemy);
+    find_player_target(ennemy);
 
     //target player === get in same X Y as player in order to fire
     //decide if its time to shoot : => 50 means more than 50 % chance to shoot
@@ -140,14 +140,11 @@ void BotSystem::find_player_target(EntityID ennemy)
             applyAIKeystrokes(ennemy);
             return;
     }
-
-    //in all entities present, check for players and target one STEP 1
-
-    //in all entities that are ennemies with AI, check if their move target == to the one we
-    //just chose, if so find another target, if not proceed to apply keystrokes
-
     // if same target == find another target
 
+    // if no other target available, do nothing
+
+    //in all entities present, check for players and target one STEP 1
     for (EntityID ent : EntityViewer<Position>(*_em.get())) {
         //if your are not a spaceship we continue
         if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::SPACESHIP) continue;
@@ -156,15 +153,49 @@ void BotSystem::find_player_target(EntityID ennemy)
 
         //my move target becoms this player I find
         _em->Get<AI>(ennemy)->moveTargetPos.x = _em->Get<Position>(ent)->pos.x;
-        _em->Get<AI>(ennemy)->moveTargetPos.x = _em->Get<Position>(ent)->pos.y;
+        _em->Get<AI>(ennemy)->moveTargetPos.y = _em->Get<Position>(ent)->pos.y;
         _em->Get<AI>(ennemy)->moveTargetPos.z = 0;
-        break;        
+        // 
+
+        //in all entities that are ennemies with AI, check if their move target == to the one we
+        //just chose, if so find another target, if not proceed to apply keystrokes
+        for (EntityID ent2 : EntityViewer<Position>(*_em.get())) {
+        //we only want to not got to ennemies or obstacles
+            if ((_em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::ENNEMY && 
+                _em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::OBSTACLE) ||
+                ent == ennemy)
+                continue;
+            //check for their current pos 
+            if (_em->Get<AI>(ennemy)->moveTargetPos.x == _em->Get<Position>(ent2)->pos.x &&
+                _em->Get<AI>(ennemy)->moveTargetPos.y == _em->Get<Position>(ent2)->pos.y) { //&&
+                // _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent2)->pos.z) {
+                    std::cout << "checking for position of entities ennemy obstalce " << std::endl;
+                    _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
+                    break;
+            }
+            std::cout << "no entities ennemy or obstacle has the position of my target" << std::endl;
+            //if ur not a ennemy aka ur an obstacle u dont have ai and target so you continue to next in loop
+            if (_em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::ENNEMY)
+                continue;
+            std::cout << "no entities ennemy  has a target that is my target" << std::endl;
+
+            //check for their target goals
+            if (_em->Get<AI>(ennemy)->moveTargetPos.x == _em->Get<AI>(ent2)->moveTargetPos.x &&
+                _em->Get<AI>(ennemy)->moveTargetPos.y == _em->Get<AI>(ent2)->moveTargetPos.y) { // &&
+                // _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent)->pos.z) {
+                    std::cout << "checking for position ennemy target" << std::endl;
+                    _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
+                    break;
+            }
+            std::cout << "no entities ennemy  has a target that is my target" << std::endl;
+        }
+        
     }
     if (GetTime() -  _em->Get<AI>(ennemy)->lastTimeMoved > _em->Get<AI>(ennemy)->moveCooldown) {
             _em->Get<AI>(ennemy)->lastTimeMoved = GetTime();
             _em->Get<AI>(ennemy)->isMoving = true;
             applyAIKeystrokes(ennemy);
-    }
+        } 
 }
 
 void BotSystem::fire_weapon_ennemy(EntityID ennemy)
@@ -235,10 +266,10 @@ Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy, float ennemyPosX 
 
 bool BotSystem::is_in_range(EntityID ennemy)
 {
-    if ((_em->Get<Position>(ennemy)->pos.x <= _em->Get<AI>(ennemy)->moveTargetPos.x + 0.2f &&
-        _em->Get<Position>(ennemy)->pos.x >= _em->Get<AI>(ennemy)->moveTargetPos.x - 0.2f) &&
-        (_em->Get<Position>(ennemy)->pos.y <= _em->Get<AI>(ennemy)->moveTargetPos.y + 0.2f &&
-        _em->Get<Position>(ennemy)->pos.y >= _em->Get<AI>(ennemy)->moveTargetPos.y - 0.2f)) {
+    if ((_em->Get<Position>(ennemy)->pos.x <= _em->Get<AI>(ennemy)->moveTargetPos.x + 0.3f &&
+        _em->Get<Position>(ennemy)->pos.x >= _em->Get<AI>(ennemy)->moveTargetPos.x - 0.3f) &&
+        (_em->Get<Position>(ennemy)->pos.y <= _em->Get<AI>(ennemy)->moveTargetPos.y + 0.3f &&
+        _em->Get<Position>(ennemy)->pos.y >= _em->Get<AI>(ennemy)->moveTargetPos.y - 0.3f)) {
             return true;
     }
     else 

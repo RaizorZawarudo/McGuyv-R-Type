@@ -32,7 +32,7 @@ void BotSystem::doAI_simple(EntityID ennemy)
     dodge_bullets(ennemy);
     dodge_obstacles(ennemy);
 
-    find_player_target(ennemy);
+    // find_player_target(ennemy);
 
     //target player === get in same X Y as player in order to fire
     //decide if its time to shoot : => 50 means more than 50 % chance to shoot

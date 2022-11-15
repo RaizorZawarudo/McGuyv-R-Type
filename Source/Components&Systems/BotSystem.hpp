@@ -12,6 +12,7 @@
 #include "../AssetManager.hpp"
 
 const float MOVEBUFFER = 0.1f;
+const float RANGEBUFFER = 1.0;
 
 const float SIMPLEAIMOVECOOLDOWN = 2.5;
 const float SIMPLEAIMOVEDETECTRANGE = 10.0;
@@ -32,7 +33,8 @@ class BotSystem : public ISystem {
         void dodge_bullets(EntityID ennemy);
         Vector3 findSafeSpotfromProjectile(EntityID ennemy, float ennemyPosX, float ennemyPosY);
         void applyAIKeystrokes(EntityID ennemy);
-        bool is_in_range(EntityID ennemy);
+        bool is_in_range_of_target(EntityID ennemy);
+        bool check_for_vicinity(float x, float y);
 
         void dodge_obstacles(EntityID ennemy);
 

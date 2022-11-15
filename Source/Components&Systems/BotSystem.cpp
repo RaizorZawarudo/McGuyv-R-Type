@@ -32,7 +32,7 @@ void BotSystem::doAI_simple(EntityID ennemy)
     dodge_bullets(ennemy);
     dodge_obstacles(ennemy);
 
-    find_player_target(ennemy);
+    // find_player_target(ennemy);
 
     //target player === get in same X Y as player in order to fire
     //decide if its time to shoot : => 50 means more than 50 % chance to shoot
@@ -170,8 +170,8 @@ void BotSystem::find_player_target(EntityID ennemy)
                 ent2 == ennemy)
                 continue;
             //check for their current pos 
-            if (_em->Get<AI>(ennemy)->moveTargetPos.x == _em->Get<Position>(ent2)->pos.x &&
-                _em->Get<AI>(ennemy)->moveTargetPos.y == _em->Get<Position>(ent2)->pos.y) { //&&
+            if (check_for_vicinity(_em->Get<AI>(ennemy)->moveTargetPos.x, _em->Get<Position>(ent2)->pos.x) &&
+                check_for_vicinity(_em->Get<AI>(ennemy)->moveTargetPos.y, _em->Get<Position>(ent2)->pos.y)) { //&&
                 // _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent2)->pos.z) {
                     // _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
                     std::cout << "match" << std::endl;
@@ -182,14 +182,17 @@ void BotSystem::find_player_target(EntityID ennemy)
                 continue;
 
             //check for their target goals
-            if (_em->Get<AI>(ennemy)->moveTargetPos.x == _em->Get<AI>(ent2)->moveTargetPos.x &&
-                _em->Get<AI>(ennemy)->moveTargetPos.y == _em->Get<AI>(ent2)->moveTargetPos.y) { // &&
+            if (check_for_vicinity(_em->Get<AI>(ennemy)->moveTargetPos.x, _em->Get<AI>(ent2)->moveTargetPos.x) &&
+                check_for_vicinity(_em->Get<AI>(ennemy)->moveTargetPos.y, _em->Get<AI>(ent2)->moveTargetPos.y)) { // &&
                 // _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent)->pos.z) {
                     // _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
                     std::cout << "match2" << std::endl;
                     mcgyuverfixai = 1;
             }
-            if (mcgyuverfixai == 1) break;        
+            if (mcgyuverfixai == 1) {
+                _em->Get<AI>(ennemy)->moveTargetPos = _em->Get<Position>(ent)->pos;
+                break;        
+            }
         }
         if (mcgyuverfixai == 0) break; 
     }
@@ -201,6 +204,13 @@ void BotSystem::find_player_target(EntityID ennemy)
             _em->Get<AI>(ennemy)->isMoving = true;
             applyAIKeystrokes(ennemy);
         } 
+}
+
+bool BotSystem::check_for_vicinity(float x, float y)
+{
+    if (x >= (y - RANGEBUFFER) && x <= (y + RANGEBUFFER))
+        return true;
+    return false;
 }
 
 void BotSystem::fire_weapon_ennemy(EntityID ennemy)
@@ -269,7 +279,7 @@ Vector3 BotSystem::findSafeSpotfromProjectile(EntityID ennemy, float ennemyPosX 
     return newTargetPos;
 }
 
-bool BotSystem::is_in_range(EntityID ennemy)
+bool BotSystem::is_in_range_of_target(EntityID ennemy)
 {
     if ((_em->Get<Position>(ennemy)->pos.x <= _em->Get<AI>(ennemy)->moveTargetPos.x + 0.3f &&
         _em->Get<Position>(ennemy)->pos.x >= _em->Get<AI>(ennemy)->moveTargetPos.x - 0.3f) &&
@@ -284,25 +294,25 @@ bool BotSystem::is_in_range(EntityID ennemy)
 void BotSystem::applyAIKeystrokes(EntityID ennemy)
 {
     //here check if we reached target in order to set isMoving to false and Target to 0,0,0
-    if (is_in_range(ennemy)) {
+    if (is_in_range_of_target(ennemy)) {
         _em->Get<AI>(ennemy)->isMoving = false;
         _em->Get<AI>(ennemy)->moveTargetPos = {0, 0, 0};
         return;
     }
-    if (_em->Get<Position>(ennemy)->pos.x < _em->Get<AI>(ennemy)->moveTargetPos.x - MOVEBUFFER) {
+    if (_em->Get<Position>(ennemy)->pos.x < _em->Get<AI>(ennemy)->moveTargetPos.x - MOVEBUFFER && _em->Get<Input>(ennemy)->_inputQueue.size() < 3 ) {
         _em->Get<Input>(ennemy)->_inputQueue.emplace_back(LEFT);
         // std::cout << " going right " << std::endl;
     }
     
-    if (_em->Get<Position>(ennemy)->pos.x > _em->Get<AI>(ennemy)->moveTargetPos.x + MOVEBUFFER) {
+    if (_em->Get<Position>(ennemy)->pos.x > _em->Get<AI>(ennemy)->moveTargetPos.x + MOVEBUFFER && _em->Get<Input>(ennemy)->_inputQueue.size() < 3) {
         _em->Get<Input>(ennemy)->_inputQueue.emplace_back(RIGHT);
         // std::cout << " going left " << std::endl;
     }
-    if (_em->Get<Position>(ennemy)->pos.y < _em->Get<AI>(ennemy)->moveTargetPos.y - MOVEBUFFER) {
+    if (_em->Get<Position>(ennemy)->pos.y < _em->Get<AI>(ennemy)->moveTargetPos.y - MOVEBUFFER && _em->Get<Input>(ennemy)->_inputQueue.size() < 3) {
         _em->Get<Input>(ennemy)->_inputQueue.emplace_back(UP);
         // std::cout << " going up " << std::endl;
     }
-    if (_em->Get<Position>(ennemy)->pos.y > _em->Get<AI>(ennemy)->moveTargetPos.y + MOVEBUFFER) {
+    if (_em->Get<Position>(ennemy)->pos.y > _em->Get<AI>(ennemy)->moveTargetPos.y + MOVEBUFFER && _em->Get<Input>(ennemy)->_inputQueue.size() < 3) {
         _em->Get<Input>(ennemy)->_inputQueue.emplace_back(DOWN);
         // std::cout << " going down " << std::endl;
     }

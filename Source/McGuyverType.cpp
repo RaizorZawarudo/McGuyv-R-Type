@@ -16,7 +16,7 @@ McGuyverType::McGuyverType()
     this->_inputManager = std::make_shared<RL::InputManager>("InputManager");
     this->_entityManager = std::make_shared<EntityManager>();
 
-
+    // get random and inputs from server
     this->_systems.push_back(std::make_shared<InputSystem>(this->_entityManager, this->_inputManager, this->_thisClientPlayerEntityID));
     this->_systems.push_back(std::make_shared<BotSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<ShootingSystem>(this->_entityManager, this->_assetManager));
@@ -28,6 +28,7 @@ McGuyverType::McGuyverType()
     this->_systems.push_back(std::make_shared<ClearInputsSystem>(this->_entityManager, this->_inputManager));
     this->_systems.push_back(std::make_shared<DeleteEntitiesSystem>(this->_entityManager, this->_assetManager));
     this->_systems.push_back(std::make_shared<DrawingSystem>(this->_entityManager, this->_renderer, this->_assetManager, this->_cameraManager, this->_window));
+    //send client input to server
 
     //here we resize all the maps to be the dimension of the window
     for (Map* map: this->_assetManager->getMaps())
@@ -65,10 +66,6 @@ void McGuyverType::startGame() // must have player choices etc
 
 
     createPlayer("dartAssault", "malibuPepe"); //add clientID in player constructor so it can be found for multiplayer in the server etc etc
-    createEnnemy("tronDrone", _ennemyStartingPos.pos);
-    createEnnemy("tronDrone", _ennemyStartingPos2.pos);
-    createEnnemy("tronDrone", _ennemyStartingPos3.pos);
-    
     
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices
 
@@ -76,7 +73,10 @@ void McGuyverType::startGame() // must have player choices etc
     //MOCK OBSTACLE CREATION TO BE DELETED
     float x;
     float y;
+    float x1;
+    float y1;
     double lastshot= 0;
+    double firstshot=0;
     bool shootingstaractive = false;
     //END MOCK
 
@@ -95,6 +95,26 @@ void McGuyverType::startGame() // must have player choices etc
                 y = 1.5f;
             createObstacle("cube1Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
             lastshot = GetTime();            
+        }
+        //END MOCK
+        // MOCK SPAWN OF ENNEMIES FOR TESTING TO DELETE !!
+        if (GetTime() - firstshot > 3) {
+            y = std::rand() % 9;
+            x = std::rand() % 7;
+            y1 = _assetManager->getLootRand() % 9;
+            x1 = _assetManager->getLootRand() % 7;
+            if ( std::rand() % 2 == 0)
+                x *= -1;
+            if ( std::rand() % 2 == 0)
+                x1 *= -1;
+            if (y < 1.5)
+                y = 1.5f;
+            if (y1 < 1.5)
+                y1 = 1.5f;
+            createEnnemy("tronDrone", (Vector3){x, y, MAXPOSSIBLEZ -1});
+            createEnnemy("tronDrone", (Vector3){x1, y1, MAXPOSSIBLEZ -1});
+
+            firstshot = GetTime();            
         }
         //END MOCK
     }

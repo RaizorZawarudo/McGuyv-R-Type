@@ -114,7 +114,7 @@ class MovementSystem : public ISystem {
                             else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 0.5f;
                         }
                     }
-                    //entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
+                    entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
                 }
 
 

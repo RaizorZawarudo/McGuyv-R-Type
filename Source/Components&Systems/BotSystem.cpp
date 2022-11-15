@@ -32,7 +32,7 @@ void BotSystem::doAI_simple(EntityID ennemy)
     dodge_bullets(ennemy);
     dodge_obstacles(ennemy);
 
-    // find_player_target(ennemy);
+    find_player_target(ennemy);
 
     //target player === get in same X Y as player in order to fire
     //decide if its time to shoot : => 50 means more than 50 % chance to shoot
@@ -163,7 +163,7 @@ void BotSystem::find_player_target(EntityID ennemy)
         //we only want to not got to ennemies or obstacles
             if ((_em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::ENNEMY && 
                 _em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::OBSTACLE) ||
-                ent == ennemy)
+                ent2 == ennemy)
                 continue;
             //check for their current pos 
             if (_em->Get<AI>(ennemy)->moveTargetPos.x == _em->Get<Position>(ent2)->pos.x &&

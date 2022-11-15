@@ -67,6 +67,7 @@ void McGuyverType::startGame() // must have player choices etc
     createPlayer("dartAssault", "malibuPepe"); //add clientID in player constructor so it can be found for multiplayer in the server etc etc
     createEnnemy("tronDrone", _ennemyStartingPos.pos);
     createEnnemy("tronDrone", _ennemyStartingPos2.pos);
+    createEnnemy("tronDrone", _ennemyStartingPos3.pos);
     
     
     _assetManager->getMaps().at(_currentLevel)->setGameRunning(); // current level to be modified my ui choices

@@ -140,16 +140,20 @@ void BotSystem::find_player_target(EntityID ennemy)
             applyAIKeystrokes(ennemy);
             return;
     }
+    int mcgyuverfixai = 0;
     // if same target == find another target
 
     // if no other target available, do nothing
 
     //in all entities present, check for players and target one STEP 1
     for (EntityID ent : EntityViewer<Position>(*_em.get())) {
+        
         //if your are not a spaceship we continue
         if (_em->Get<EntityModelType>(ent)->modelType != RL::ModelType::SPACESHIP) continue;
         //if you are not in my range to target you contniue
         if (_em->Get<Position>(ent)->pos.z < (_em->Get<Position>(ennemy)->pos.z - _em->Get<AI>(ennemy)->targetPlayerDetectRange)) continue;
+
+        mcgyuverfixai = 0;
 
         //my move target becoms this player I find
         _em->Get<AI>(ennemy)->moveTargetPos.x = _em->Get<Position>(ent)->pos.x;
@@ -160,7 +164,7 @@ void BotSystem::find_player_target(EntityID ennemy)
         //in all entities that are ennemies with AI, check if their move target == to the one we
         //just chose, if so find another target, if not proceed to apply keystrokes
         for (EntityID ent2 : EntityViewer<Position>(*_em.get())) {
-        //we only want to not got to ennemies or obstacles
+            //we only want to get to ennemies or obstacles here to check their target pos or their pos
             if ((_em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::ENNEMY && 
                 _em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::OBSTACLE) ||
                 ent2 == ennemy)
@@ -169,28 +173,29 @@ void BotSystem::find_player_target(EntityID ennemy)
             if (_em->Get<AI>(ennemy)->moveTargetPos.x == _em->Get<Position>(ent2)->pos.x &&
                 _em->Get<AI>(ennemy)->moveTargetPos.y == _em->Get<Position>(ent2)->pos.y) { //&&
                 // _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent2)->pos.z) {
-                    std::cout << "checking for position of entities ennemy obstalce " << std::endl;
-                    _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
-                    break;
+                    // _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
+                    std::cout << "match" << std::endl;
+                    mcgyuverfixai = 1;
             }
-            std::cout << "no entities ennemy or obstacle has the position of my target" << std::endl;
             //if ur not a ennemy aka ur an obstacle u dont have ai and target so you continue to next in loop
             if (_em->Get<EntityModelType>(ent2)->modelType != RL::ModelType::ENNEMY)
                 continue;
-            std::cout << "no entities ennemy  has a target that is my target" << std::endl;
 
             //check for their target goals
             if (_em->Get<AI>(ennemy)->moveTargetPos.x == _em->Get<AI>(ent2)->moveTargetPos.x &&
                 _em->Get<AI>(ennemy)->moveTargetPos.y == _em->Get<AI>(ent2)->moveTargetPos.y) { // &&
                 // _em->Get<Position>(ennemy)->pos.z == _em->Get<Position>(ent)->pos.z) {
-                    std::cout << "checking for position ennemy target" << std::endl;
-                    _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
-                    break;
+                    // _em->Get<AI>(ennemy)->moveTargetPos = findSafeSpotfromProjectile(ennemy, _em->Get<Position>(ennemy)->pos.y, _em->Get<Position>(ennemy)->pos.x);
+                    std::cout << "match2" << std::endl;
+                    mcgyuverfixai = 1;
             }
-            std::cout << "no entities ennemy  has a target that is my target" << std::endl;
+            if (mcgyuverfixai == 1) break;        
         }
-        
+        if (mcgyuverfixai == 0) break; 
     }
+    if (mcgyuverfixai == 1)
+        return;
+
     if (GetTime() -  _em->Get<AI>(ennemy)->lastTimeMoved > _em->Get<AI>(ennemy)->moveCooldown) {
             _em->Get<AI>(ennemy)->lastTimeMoved = GetTime();
             _em->Get<AI>(ennemy)->isMoving = true;

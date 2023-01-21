@@ -97,6 +97,8 @@ void McGuyverType::startGame() // must have player choices etc
             lastshot = GetTime();            
         }
         //END MOCK
+
+        
         // MOCK SPAWN OF ENNEMIES FOR TESTING TO DELETE !!
         if (GetTime() - firstshot > 3) {
             y = std::rand() % 9;

@@ -531,6 +531,35 @@ std::vector<waveAsset_t> AssetManager::loadWaveData(const std::string &obstacleW
     return waveComponents;
 }
 
+int transformCSVintoGameCoords(int x)
+{
+    int a;
+    switch (x)
+    {
+    case 1:
+        a = 6;
+        break;
+    case 2:
+        a = 5;
+        break;
+    case 3:
+        a = 4;
+        break;
+    case 4:
+        a = 3;
+        break;
+    case 5:
+        a = 2;
+        break;
+    case 6:
+        a = 1;
+        break;
+    default:
+        break;
+    }
+    return a;
+}
+
 waveAsset_t AssetManager::loadWaveAssetData(std::string name, int i, int j)
 {
     waveAsset_t newWaveAsset;
@@ -538,7 +567,7 @@ waveAsset_t AssetManager::loadWaveAssetData(std::string name, int i, int j)
     newWaveAsset.codename = name;
 
     newWaveAsset.position.x = j - 8;
-    newWaveAsset.position.y = i;
+    newWaveAsset.position.y = transformCSVintoGameCoords(i);
 
     std::cout << "name : " << newWaveAsset.codename << " and position x : " << newWaveAsset.position.x << " and position y : " << newWaveAsset.position.y << std::endl;
 

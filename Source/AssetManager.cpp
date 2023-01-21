@@ -39,6 +39,7 @@ void AssetManager::loadAllModels()
     std::string powerUpCSVPath = "Source/Assets/Models/PowerUps/PowerUps.csv";
     std::string iconsUICSVPath = "Source/Assets/Icons/Icons.csv";
     std::string fontsCSVPath = "Source/Assets/Fonts/Fonts.csv";
+    std::string obstacleWavesCSVPath = "Source/Assets/ObstacleWaves/obstacleWaves.csv";
 
     //load all fonts
     this->_fonts = loadAllFonts(fontsCSVPath);
@@ -78,7 +79,12 @@ void AssetManager::loadAllModels()
     //done
 
     //load all obstacleWaves
-    //this->_obstacleWaves = loadObstacleWaves(obstacleWavesCSVPath)
+    this->_obstacleWaves = loadObstacleWaves(obstacleWavesCSVPath);
+
+    //here we check if ostacle waves were properly loaded
+
+    for (int i = 0; i < _obstacleWaves.size(); i++)
+        std::cout << "WAVE NAME : " << _obstacleWaves[i].name << std::endl;
 
     //load all enemyWaves
     //this->_ennemyWaves = loadEnnemyWaves(ennemyWavesCSVPath)
@@ -474,7 +480,7 @@ std::vector<Font> AssetManager::loadAllFonts(const std::string &fontCSVPath)
 
     std::string fontpath;
     Font newfont;
-     std::vector<Font> fontVector;
+    std::vector<Font> fontVector;
 
     for (long unsigned int i = 1; i < parsedCsv.size(); i++) {
         //HERE WE SEPARATE EACH cell of the csv into its designated value
@@ -487,6 +493,57 @@ std::vector<Font> AssetManager::loadAllFonts(const std::string &fontCSVPath)
     }
     return fontVector;
 }
+
+std::vector<Wave_t> AssetManager::loadObstacleWaves(const std::string &obstacleWavesCSVPath)
+{
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(obstacleWavesCSVPath);
+    Wave_t newWave;
+    std::string waveData;
+    std::vector<Wave_t> obstacleWaves;
+
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {
+        //HERE WE SEPARATE EACH cell of the csv into its designated value
+        for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
+            if (j == 0)
+                newWave.name = parsedCsv[i][j];
+            if (j == 1)
+                newWave.waveComponents = loadWaveData(parsedCsv[i][j]);
+        }
+        obstacleWaves.push_back(newWave);
+    }
+    return obstacleWaves;
+}
+
+std::vector<waveAsset_t> AssetManager::loadWaveData(const std::string &obstacleWaveDataCSVPath)
+{
+    std::vector<std::vector<std::string>> parsedCsv = csvToTable(obstacleWaveDataCSVPath);
+    std::vector<waveAsset_t> waveComponents;
+
+    //HERE WE PARSE THE WAVE DATA AND CREATE AN WAVE ENTITIY DEPENDING ON THE I J and name present in the cell
+    for (long unsigned int i = 1; i < parsedCsv.size(); i++) {
+        for (long unsigned int j = 1; j < parsedCsv[i].size(); j++) {
+            if (parsedCsv[i][j] != "")
+                // std::cout << "there is " << parsedCsv[i][j] << " at position "<< i << " " << j << std::endl;
+                 waveComponents.push_back(loadWaveAssetData(parsedCsv[i][j], i, j));
+        }
+    }
+    return waveComponents;
+}
+
+waveAsset_t AssetManager::loadWaveAssetData(std::string name, int i, int j)
+{
+    waveAsset_t newWaveAsset;
+
+    newWaveAsset.codename = name;
+    newWaveAsset.position.x = j - 8;
+    newWaveAsset.position.y = i;
+
+    std::cout << "name : " << newWaveAsset.codename << " and position x : " << newWaveAsset.position.x << " and position y : " << newWaveAsset.position.y << std::endl;
+
+    return newWaveAsset;
+}
+
+
 
 //Getters
 

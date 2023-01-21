@@ -14,10 +14,16 @@
 
 #pragma once
 
-typedef struct WavePositions {
-    std::string name;
+typedef struct waveAsset {
+    std::string codename;
     Vector3 position;
-} WavePositions_t;
+
+} waveAsset_t;
+
+typedef struct GameWave {
+    std::string name;
+    std::vector<waveAsset_t> waveComponents;
+} Wave_t;
 
 class AssetManager {
     public:
@@ -36,6 +42,12 @@ class AssetManager {
         std::vector<RL::Drawable2D*> loadAllBackgrounds(const std::string &path);
         std::vector<RL::Drawable2D*> loadAllIcons(const std::string &path);
         std::vector<Font> loadAllFonts(const std::string &path);
+        std::vector<Wave_t> loadObstacleWaves(const std::string &path);
+        //std::vector<Wave_t> loadEnnemyWaves(const std::string &path);
+
+        std::vector<waveAsset_t> loadWaveData(const std::string &path);
+        waveAsset_t loadWaveAssetData(std::string name, int i, int j);
+
 
         //getters
         std::vector<RL::Drawable3D*> getZonesModels();
@@ -89,8 +101,8 @@ class AssetManager {
         std::vector<Map*> _maps;
 
         //data assets
-        std::vector<WavePositions_t> _obstacleWaves;
-        std::vector<WavePositions_t> _ennemyWaves;
+        std::vector<Wave_t> _obstacleWaves;
+        std::vector<Wave_t> _ennemyWaves;
 
         //scenario   this is what decides how the game flows and when boss pops etc etc
         //           so this is a vector of scenarios where it has the ennemy waves and obstacles waves order

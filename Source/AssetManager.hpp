@@ -14,6 +14,10 @@
 
 #pragma once
 
+typedef struct WavePositions {
+    std::string name;
+    Vector3 position;
+} WavePositions_t;
 
 class AssetManager {
     public:
@@ -83,6 +87,18 @@ class AssetManager {
 
         //maps
         std::vector<Map*> _maps;
+
+        //data assets
+        std::vector<WavePositions_t> _obstacleWaves;
+        std::vector<WavePositions_t> _ennemyWaves;
+
+        //scenario   this is what decides how the game flows and when boss pops etc etc
+        //           so this is a vector of scenarios where it has the ennemy waves and obstacles waves order
+        //           for the current map the player selected, and also what are the requirements for a boss to pop etc
+        //           and when the scenario is being completed it can contact the map to tell it hey open boss room
+        // .         and when the boss is dead it should tell the scenario and tell the map that it died
+        //           so dont forget to do it the delete entity system a function that if the ennemy is a boss it should
+        // .         contact the map AND the scenario to push the game forward. also add scenario and map in the delete entity systemnow
 
         //fonts
         std::vector<Font> _fonts;

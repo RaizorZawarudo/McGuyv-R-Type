@@ -76,6 +76,12 @@ void AssetManager::loadAllModels()
     this->_powerUpModels = loadPowerUpModels(powerUpCSVPath, RL::ModelType::POWERUP);
 
     //done
+
+    //load all obstacleWaves
+    //this->_obstacleWaves = loadObstacleWaves(obstacleWavesCSVPath)
+
+    //load all enemyWaves
+    //this->_ennemyWaves = loadEnnemyWaves(ennemyWavesCSVPath)
 }
 
 std::vector<RL::Drawable3D*> AssetManager::loadModels(const std::string &path, RL::ModelType type)

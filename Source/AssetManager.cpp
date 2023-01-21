@@ -522,7 +522,8 @@ std::vector<waveAsset_t> AssetManager::loadWaveData(const std::string &obstacleW
     //HERE WE PARSE THE WAVE DATA AND CREATE AN WAVE ENTITIY DEPENDING ON THE I J and name present in the cell
     for (long unsigned int i = 1; i < parsedCsv.size(); i++) {
         for (long unsigned int j = 1; j < parsedCsv[i].size(); j++) {
-            if (parsedCsv[i][j] != "")
+            if (parsedCsv[i][j] != "free")
+
                 // std::cout << "there is " << parsedCsv[i][j] << " at position "<< i << " " << j << std::endl;
                  waveComponents.push_back(loadWaveAssetData(parsedCsv[i][j], i, j));
         }
@@ -535,6 +536,7 @@ waveAsset_t AssetManager::loadWaveAssetData(std::string name, int i, int j)
     waveAsset_t newWaveAsset;
 
     newWaveAsset.codename = name;
+
     newWaveAsset.position.x = j - 8;
     newWaveAsset.position.y = i;
 

@@ -59,6 +59,8 @@ class AssetManager {
         std::vector<RL::Drawable3D*> getEffectsModels3D();
         std::vector<RL::Drawable3D*> getPowerUpModels();
         std::vector<Map*> getMaps();
+        std::vector<Wave_t> getObstacleWaves();
+        std::vector<Wave_t> getEnnemyWaves();
         std::vector<RL::Drawable2D*> getBackgrounds();
         std::vector<RL::Drawable2D*> getUIelements();
         std::vector<Font> getAllFonts();

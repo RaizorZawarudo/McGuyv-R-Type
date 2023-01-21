@@ -617,6 +617,16 @@ std::vector<Map*> AssetManager::getMaps()
     return this->_maps;
 }
 
+std::vector<Wave_t> AssetManager::getObstacleWaves()
+{
+    return this->_obstacleWaves;
+}
+
+std::vector<Wave_t> AssetManager::getEnnemyWaves()
+{
+    return this->_ennemyWaves;
+}
+
 std::vector<RL::Drawable2D*> AssetManager::getBackgrounds()
 {
     return this->_ingameBackgrounds;

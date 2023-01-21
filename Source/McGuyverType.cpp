@@ -86,19 +86,20 @@ void McGuyverType::startGame() // must have player choices etc
 
         
         // MOCK SPAWN OF OBSTACLES FOR TESTING TO DELETE !!
-        if (GetTime() - lastshot > 2) {
-            y = std::rand() % 9;
-            x = std::rand() % 7;
-            if ( std::rand() % 2 == 0)
-                x *= -1;
-            if (y < 1.5)
-                y = 1.5f;
-            createObstacle("cube1Blue",(Vector3){x, y, MAXPOSSIBLEZ -1});
+        if (GetTime() - lastshot > 8) {
+            createObstacleWave("FullEdges");
+            // y = std::rand() % 9;
+            // x = std::rand() % 7;
+            // if ( std::rand() % 2 == 0)
+            //     x *= -1;
+            // if (y < 1.5)
+            //     y = 1.5f;
+            // createObstacle("C1",(Vector3){x, y, MAXPOSSIBLEZ -1});
             lastshot = GetTime();            
         }
         //END MOCK
 
-        
+
         // MOCK SPAWN OF ENNEMIES FOR TESTING TO DELETE !!
         if (GetTime() - firstshot > 3) {
             y = std::rand() % 9;
@@ -158,6 +159,20 @@ void McGuyverType::gameLoop()
     //then finish
 
     
+}
+
+void McGuyverType::createObstacleWave(std::string waveName)
+{
+    for (int i = 0; i < _assetManager->getObstacleWaves().size(); i++) {
+        if (waveName == _assetManager->getObstacleWaves()[i].name) {
+            std::cout << "WE found the wave : " << waveName << std::endl;
+            for (int j = 0; j < _assetManager->getObstacleWaves()[i].waveComponents.size(); j++) {
+                // std::cout << waveName << " has this obstacle : " << _assetManager->getObstacleWaves()[i].waveComponents[j].codename << std::endl;
+                createObstacle(_assetManager->getObstacleWaves()[i].waveComponents[j].codename, (Vector3){_assetManager->getObstacleWaves()[i].waveComponents[j].position.x ,_assetManager->getObstacleWaves()[i].waveComponents[j].position.y ,MAXPOSSIBLEZ -1});
+            }
+            std::cout << "END OF WAVE" << std::endl;
+        }        
+    }
 }
 
 std::vector<ProjectileWeapon> McGuyverType::generateStartWeaponset(std::string modelName)

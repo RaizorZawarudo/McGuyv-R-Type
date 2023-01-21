@@ -44,6 +44,11 @@ class McGuyverType {
         void createPlayer(std::string modelName, std::string avatarName);
         void createObstacle(std::string modelName, Vector3 position);
         void createEnnemy(std::string modelName, Vector3 position);
+        
+        //quick implementation of a wave creator to see if the files work
+        void createObstacleWave(std::string waveName);
+
+        
         AI assignAI(std::string AIType, EntityID ennemy);
         AI assignSimpleAI(std::string AIType, EntityID ennemy);
         std::vector<ProjectileWeapon> generateStartWeaponset(std::string modelName);

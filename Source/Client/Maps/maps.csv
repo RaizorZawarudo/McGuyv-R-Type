@@ -1,0 +1,3 @@
+Map Name,Map Path,Map BackgroundTexture Name
+MountainWorld,Source/Client/Maps/MountainWorld/mountainWorld.csv,sunvalleytron
+TestSystemWorld,Source/Client/Maps/TestSytemWorld/testSystemWorld.csv,city2

@@ -1,0 +1,35 @@
+\hypertarget{Client_2Components_6Systems_2InputSystem_8hpp_source}{}\doxysection{Input\+System.\+hpp}
+\label{Client_2Components_6Systems_2InputSystem_8hpp_source}\index{Source/Client/Components\&Systems/InputSystem.hpp@{Source/Client/Components\&Systems/InputSystem.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ DrawingSystem}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}ISystem.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../InputManager.hpp"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classInputSystem}{InputSystem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classISystem}{ISystem}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classInputSystem}{InputSystem}}(std::shared\_ptr<EntityManager>\ em,\ std::shared\_ptr<RL::InputManager>\ inputManager,\ EntityID\ clientID)\ :\ \_inputManager(inputManager)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \_em\ =\ em;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \_clientID\ =\ clientID;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classInputSystem}{\string~InputSystem}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ update(std::vector<EntityID>\ \&allEntities)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ std::vector<int>\ \_keysPressed;\ \textcolor{comment}{//to\ be\ changed\ to\ vector\ of\ vector\ when\ networking\ is\ implemeneted}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::InputManager>\ \_inputManager;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ EntityID\ \_clientID;}
+\DoxyCodeLine{00029\ \};}
+
+\end{DoxyCode}

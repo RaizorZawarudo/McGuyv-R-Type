@@ -1,0 +1,5 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height,velocity float,hp,explosionname,weaponSet
+tronDrone,simple,Source/Assets/Models/Ennemies/TronDrone/tronDrone.obj,0,0,1,1,1,1,0.2,100,lowPoly,fireball
+quadMothership,simple,Source/Assets/Models/Ennemies/quadMothership/quadMothership.obj,0,0,1,1,1,1,0.2,100,lowPoly,plasmaProj
+Beholder,boss,Source/Assets/Models/Ennemies/BeholderBOSS/Beholder.iqm,Source/Assets/Models/Ennemies/BeholderBOSS/Beholder_Base_color.png,Source/Assets/Models/Ennemies/BeholderBOSS/Beholder.iqm,3,1,1,1,0.2,1000,lowPoly,fireball
+GolemBOSS,boss,Source/Assets/Models/Ennemies/GolemBOSS/golemBOSS.obj,Source/Assets/Models/Ennemies/GolemBOSS/BossMonsterSketchfabTexture.png,Source/Assets/Models/Ennemies/GolemBOSS/BossMonsterAnimations.iqm,1,3,3,3,0.2,1000,lowPoly,fireball

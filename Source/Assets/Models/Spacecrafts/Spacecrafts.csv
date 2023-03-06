@@ -1,2 +1,0 @@
-Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height,velocity float,hp,explosionname
-dartAssault,simple,Source/Assets/Models/Spacecrafts/DartAssault/dartAssault.obj,Source/Assets/Models/Spacecrafts/DartAssault/ivdart_ivDart_mat_BaseColor.png,0,1,2,2,1,0.2,100,lowPoly

@@ -1,0 +1,6 @@
+Name,style,Model Path,Texture Path,Animation Path
+missileProj,projectile,Source/Client/Assets/Models/PowerUps/missileProj/powerUpCube.obj,0,0
+plasmaProj,projectile,Source/Client/Assets/Models/PowerUps/plasmaProj/powerUpCube.obj,0,0
+orangeLight,projectile,Source/Client/Assets/Models/PowerUps/orangeLight/powerUpCube.obj,0,0
+fireball,projectile,Source/Client/Assets/Models/PowerUps/fireball/powerUpCube.obj,0,0
+shield,shield,Source/Client/Assets/Models/PowerUps/Shield/powerUpCube.obj,0,0

@@ -1,0 +1,41 @@
+\hypertarget{UDPClient_8hpp_source}{}\doxysection{UDPClient.\+hpp}
+\label{UDPClient_8hpp_source}\index{Source/Client/Networking/UDPClient.hpp@{Source/Client/Networking/UDPClient.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ RType}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ UDPClient}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ UDPCLIENT\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ UDPCLIENT\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}boost/asio.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}boost/array.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}../../Server/Networking/Communication.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}../../Server/Networking/protocol/Serializator.hpp"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUDPClient}{UDPClient}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classCommunication}{Communication}}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classUDPClient}{UDPClient}}(boost::asio::io\_context\&\ ioContext,\ std::string\ host\ =\ std::string(\textcolor{stringliteral}{"{}127.0.0.1"{}}),\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ port\ =\ 1313);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classUDPClient}{\string~UDPClient}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ receive()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ std::string\ \&msg)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *message,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ boost::asio::ip::udp::endpoint\ \_serverEndpoint;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ boost::asio::ip::udp::socket\ \_socket;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ boost::array<char,\ 1024>\ \_recvBuffer;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ std::thread\ \_threadClient;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSerializator}{Serializator}}\ \_serializator;}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !UDPCLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

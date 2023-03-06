@@ -1,0 +1,39 @@
+\hypertarget{Server_2CameraManager_8hpp_source}{}\doxysection{Camera\+Manager.\+hpp}
+\label{Server_2CameraManager_8hpp_source}\index{Source/Server/CameraManager.hpp@{Source/Server/CameraManager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ CameraManager}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Drawable3D.hpp"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }RL\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }CameraManager\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ CameraManager();}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \string~CameraManager();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ changeCameraPosition(Drawable3D*\ mapModelInQueueAtZero);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ changeCameraX(Vector3\ newCamPos);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ changeCameraY(Vector3\ newCamPos);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ changeCameraZ(Vector3\ newCamPos);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ changeCameraFov(\textcolor{keywordtype}{float}\ newCamFov);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//getter}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ Camera\ getCamera();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ Camera\ \_ingameCamera;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ \}}
+
+\end{DoxyCode}

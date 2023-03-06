@@ -1,0 +1,4 @@
+Loop Zones,LoopZone Waves,wave amount,Boss Zones,BossRoom Boss
+CityPath1,Diago1,5,TestBossroom,GolemBOSS
+CityPath1,TwoWindows,12,TestBossroom,Beholder
+CityPath1,TwoWindows,3,TestBossroom,GolemBOSS

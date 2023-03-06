@@ -1,0 +1,132 @@
+\hypertarget{Server_2Drawable3D_8hpp_source}{}\doxysection{Drawable3\+D.\+hpp}
+\label{Server_2Drawable3D_8hpp_source}\index{Source/Server/Drawable3D.hpp@{Source/Server/Drawable3D.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ indie\_studio}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ Drawable3D}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <raylib.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <sys/stat.h>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}IDrawable.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}CsvParser.hpp"{}}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\#include\ "{}RaylibTypeEncaps.hpp"{}}}
+\DoxyCodeLine{00019\ \ \ \ \ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }RL\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{enum}\ ModelType\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ SPACESHIP\ =\ -\/1,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ MCGUYVER,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ ENNEMY,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ ZONE,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ PROJECTILE,\textcolor{comment}{//\ weapons}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ OBSTACLE,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ POWERUP,\textcolor{comment}{//loots}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ EXPLOSION,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ EFFECT\ \textcolor{comment}{//shield}}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{class\ }Drawable3D:\ \textcolor{keyword}{public}\ IDrawable\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ Drawable3D(RL::ModelType\ type,\ std::string\ name,\ std::string\ modelPath,\ std::string\ texturePath,\ std::string\ animationPath,\ \textcolor{keywordtype}{float}\ scale,\ std::string\ style,\ \textcolor{keywordtype}{float}\ lenght,\ \textcolor{keywordtype}{float}\ width,\ \textcolor{keywordtype}{float}\ height,\ Vector3\ cameraPositionMcGuyv,\ \textcolor{keywordtype}{float}\ cameraFovMcGuyv,\ Vector3\ velocity,\ \textcolor{keywordtype}{int}\ hp,\ \textcolor{keywordtype}{float}\ shootCD,\ std::string\ explosionname);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \string~Drawable3D();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ IDrawable\ methods}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ draw();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawPower();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ void\ reset();}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Image\ Loading\ /\ Manipulation\ methods}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load3DModel(std::string\ texturePath,\ std::string\ modelPath,\ std::string\ animationPath);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ unloadAll();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ resize(\textcolor{keywordtype}{float}\ newScale);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Animation}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ loadAnimation(std::string\ path);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ unloadAnimation();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ updateModelsAnimation(\textcolor{keywordtype}{int}\ currFrame,\ \textcolor{keywordtype}{int}\ \ currAnim);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ resetAnimSequence();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentAnim(\textcolor{keywordtype}{int}\ anim);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getCurrentAnim()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isAnimLoaded()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Getters\ and\ setters}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isImageLoaded()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setTint(Color\ newTint);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setRotation(\textcolor{keywordtype}{float}\ newRotation);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setPosition(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ getPosition();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ getBoxSize();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ Texture2D\ getTexture();}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ ModelAnimation*\ getAnimation();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ Model\ getModel();}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ getName();}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getLength();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getWidth();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getHeight();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getScale();}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ getCameraPositionMcGuyv();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getCameraFovMcGuyv();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ getVelocity();}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getHp();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getShootCD();}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ getExplosionName();}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ getStyle();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setBoundingBox();}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ BoundingBox\ getBoundingBox();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ ModelType\ \_type;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_name;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_style;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ Color\ \_tint\ =\ WHITE;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_scale;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ Model\ \_model;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_length;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_width;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_height;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ \_velocity;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ \_cameraPositionMcGuyv;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_cameraFovMcGuyv;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_hp;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_shootCD;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_explosionname;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Vector3\ \_boxSize;}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ BoundingBox\ \_boundingBox;}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ These\ initializations\ will\ not\ work}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Vector3\ \_position\ =\ \{0,\ 0,\ 0\};\ //useless\ do\ not\ add\ position\ in\ the\ model,\ add\ position\ in\ the\ entity\ data}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_imageLoaded\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ Image\ \_img;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ Texture2D\ \_texture;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ up;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Animation}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ ModelAnimation\ *\_animations;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentAnim\ =\ 0;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentFrame\ =\ 0;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \_animCount;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_animationLoaded\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_rotationAngle\ =\ 0.0f;}
+\DoxyCodeLine{00125\ \ \ \ \ \};}
+\DoxyCodeLine{00126\ \}}
+
+\end{DoxyCode}

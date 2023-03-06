@@ -1,0 +1,36 @@
+\hypertarget{macroSerializator_8hpp_source}{}\doxysection{macro\+Serializator.\+hpp}
+\label{macroSerializator_8hpp_source}\index{Source/Server/Networking/protocol/macroSerializator.hpp@{Source/Server/Networking/protocol/macroSerializator.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ B-\/CPP-\/500-\/BER-\/5-\/2-\/rtype-\/alban.de-\/tourtier}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ macroSerializator}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ MACROSERIALIZATOR\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MACROSERIALIZATOR\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ right\ macro\ for\ the\ size\ of\ each\ packet}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{enum}\ PACKET\_SIZE\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ SIZE\_DELETE\_ENTITY\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ long),}
+\DoxyCodeLine{00014\ \ \ \ \ SIZE\_UPDATE\_LOOT\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 4,}
+\DoxyCodeLine{00015\ \ \ \ \ SIZE\_UPDATE\_EXPLOSION\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 4,}
+\DoxyCodeLine{00016\ \ \ \ \ SIZE\_UPDATE\_ENNEMY\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 7,}
+\DoxyCodeLine{00017\ \ \ \ \ SIZE\_UPDATE\_OBSTACLE\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 4,}
+\DoxyCodeLine{00018\ \ \ \ \ SIZE\_UPDATE\_PROJECTILE\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ *\ 2\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 5,}
+\DoxyCodeLine{00019\ \ \ \ \ SIZE\_UPDATE\_PLAYER\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 3,}
+\DoxyCodeLine{00020\ \ \ \ \ SIZE\_UPDATE\_MAP\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 3,}
+\DoxyCodeLine{00021\ \ \ \ \ SIZE\_STATE\_GAME\ =\ 2,}
+\DoxyCodeLine{00022\ \ \ \ \ SIZE\_ACTION\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 3,}
+\DoxyCodeLine{00023\ \ \ \ \ SIZE\_SELECTION\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ +\ \textcolor{keyword}{sizeof}(int)\ *\ 3,}
+\DoxyCodeLine{00024\ \ \ \ \ SIZE\_ID\_CLIENT\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}),}
+\DoxyCodeLine{00025\ \ \ \ \ SIZE\_CAN\_SELECT\ =\ 1\ +\ \textcolor{keyword}{sizeof}(int)\ +\ 1,}
+\DoxyCodeLine{00026\ \ \ \ \ SIZE\_LONG\_INT\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int})\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ long),}
+\DoxyCodeLine{00027\ \ \ \ \ SIZE\_2\_INT\ =\ 1\ +\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int})\ *\ 2,}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !MACROSERIALIZATOR\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

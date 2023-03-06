@@ -1,0 +1,342 @@
+\hypertarget{classRL_1_1Drawable3D}{}\doxysection{RL\+::Drawable3D Class Reference}
+\label{classRL_1_1Drawable3D}\index{RL::Drawable3D@{RL::Drawable3D}}
+Inheritance diagram for RL\+::Drawable3D\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRL_1_1Drawable3D}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a4a3b206255288b6bc399fa1bd4bd3532}\label{classRL_1_1Drawable3D_a4a3b206255288b6bc399fa1bd4bd3532}} 
+{\bfseries Drawable3D} (RL\+::\+Model\+Type type, std\+::string name, std\+::string model\+Path, std\+::string texture\+Path, std\+::string animation\+Path, float scale, std\+::string style, float lenght, float width, float height, Vector3 camera\+Position\+Mc\+Guyv, float camera\+Fov\+Mc\+Guyv, Vector3 velocity, int hp, float shoot\+CD, std\+::string explosionname)
+\item 
+void \mbox{\hyperlink{classRL_1_1Drawable3D_af0a49cfac0d3d4d1388ed979dd044c00}{draw}} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a771b19c30d593a5e8bf5aa0b93df2cf7}\label{classRL_1_1Drawable3D_a771b19c30d593a5e8bf5aa0b93df2cf7}} 
+void {\bfseries draw\+Power} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a5dffa25e93ced17e11b947731033e39c}\label{classRL_1_1Drawable3D_a5dffa25e93ced17e11b947731033e39c}} 
+void {\bfseries load3\+DModel} (std\+::string texture\+Path, std\+::string model\+Path, std\+::string animation\+Path)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af8628db4baed676919cecd98d58e3a77}\label{classRL_1_1Drawable3D_af8628db4baed676919cecd98d58e3a77}} 
+void {\bfseries unload\+All} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a0cb7b3e1a32839adf841f721926b90fd}\label{classRL_1_1Drawable3D_a0cb7b3e1a32839adf841f721926b90fd}} 
+void {\bfseries resize} (float new\+Scale)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af72c614c2457fd3255a3ed4bc95eceae}\label{classRL_1_1Drawable3D_af72c614c2457fd3255a3ed4bc95eceae}} 
+void {\bfseries load\+Animation} (std\+::string path)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ab673cecac47561b55cccfefdf23d6e19}\label{classRL_1_1Drawable3D_ab673cecac47561b55cccfefdf23d6e19}} 
+void {\bfseries unload\+Animation} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a6cf5ad4a9c38d1965d36af19b016041b}\label{classRL_1_1Drawable3D_a6cf5ad4a9c38d1965d36af19b016041b}} 
+int {\bfseries update\+Models\+Animation} (int curr\+Frame, int curr\+Anim)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a0213415530de9fbdab91c724b714af73}\label{classRL_1_1Drawable3D_a0213415530de9fbdab91c724b714af73}} 
+void {\bfseries reset\+Anim\+Sequence} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_afc2e841f5bd6011d73b5eaf02b8721f0}\label{classRL_1_1Drawable3D_afc2e841f5bd6011d73b5eaf02b8721f0}} 
+void {\bfseries set\+Current\+Anim} (int anim)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a34976f3417dd4487e43c62500d5178d8}\label{classRL_1_1Drawable3D_a34976f3417dd4487e43c62500d5178d8}} 
+int {\bfseries get\+Current\+Anim} () const
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a7097016f78b63b6ea051f9a7a4dc9120}\label{classRL_1_1Drawable3D_a7097016f78b63b6ea051f9a7a4dc9120}} 
+bool {\bfseries is\+Anim\+Loaded} () const
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aea44065a48144c5be66f571423a5f9b8}\label{classRL_1_1Drawable3D_aea44065a48144c5be66f571423a5f9b8}} 
+bool {\bfseries is\+Image\+Loaded} () const
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aa02df8806fb27bad979b49c2a7e22ac3}\label{classRL_1_1Drawable3D_aa02df8806fb27bad979b49c2a7e22ac3}} 
+void {\bfseries set\+Tint} (Color new\+Tint)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a82ae8273110a78b674c6fb9d3db73271}\label{classRL_1_1Drawable3D_a82ae8273110a78b674c6fb9d3db73271}} 
+void {\bfseries set\+Rotation} (float new\+Rotation)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aba8e54b07621b51977b37fb1d9837d42}\label{classRL_1_1Drawable3D_aba8e54b07621b51977b37fb1d9837d42}} 
+void {\bfseries set\+Position} (float x, float y, float z)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a41b9b5f53a4340e9bcf18f2540d22ebf}\label{classRL_1_1Drawable3D_a41b9b5f53a4340e9bcf18f2540d22ebf}} 
+Vector3 {\bfseries get\+Position} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ab789c465a93587fb3491713b7af51d8a}\label{classRL_1_1Drawable3D_ab789c465a93587fb3491713b7af51d8a}} 
+Vector3 {\bfseries get\+Box\+Size} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ac82c10a686c95e155b59ca33fff7d393}\label{classRL_1_1Drawable3D_ac82c10a686c95e155b59ca33fff7d393}} 
+Texture2D {\bfseries get\+Texture} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_afb3137178b5ff73d61c0851d07251616}\label{classRL_1_1Drawable3D_afb3137178b5ff73d61c0851d07251616}} 
+Model\+Animation $\ast$ {\bfseries get\+Animation} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a26fc7398817c69f6f9b67144489374f9}\label{classRL_1_1Drawable3D_a26fc7398817c69f6f9b67144489374f9}} 
+Model {\bfseries get\+Model} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a9b1a70df905960bbad46d410c9d72b35}\label{classRL_1_1Drawable3D_a9b1a70df905960bbad46d410c9d72b35}} 
+std\+::string {\bfseries get\+Name} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a9a0562f7b6f3c6bf2fa33f2a1f02f534}\label{classRL_1_1Drawable3D_a9a0562f7b6f3c6bf2fa33f2a1f02f534}} 
+float {\bfseries get\+Length} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af5fee790bc0e7e052198af96e9b71890}\label{classRL_1_1Drawable3D_af5fee790bc0e7e052198af96e9b71890}} 
+float {\bfseries get\+Width} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a720b204bbae1532733c749d9ac750803}\label{classRL_1_1Drawable3D_a720b204bbae1532733c749d9ac750803}} 
+float {\bfseries get\+Height} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af0040da885b9a121295c93547631d33e}\label{classRL_1_1Drawable3D_af0040da885b9a121295c93547631d33e}} 
+float {\bfseries get\+Scale} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ac621d683bb22aa5e35cf83f03e7907bc}\label{classRL_1_1Drawable3D_ac621d683bb22aa5e35cf83f03e7907bc}} 
+Vector3 {\bfseries get\+Camera\+Position\+Mc\+Guyv} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a854ab7df832411074440f6ba20c5e948}\label{classRL_1_1Drawable3D_a854ab7df832411074440f6ba20c5e948}} 
+float {\bfseries get\+Camera\+Fov\+Mc\+Guyv} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ac096c64e1688197683a5cdbc86887765}\label{classRL_1_1Drawable3D_ac096c64e1688197683a5cdbc86887765}} 
+Vector3 {\bfseries get\+Velocity} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af0609e78633a9c8a7404a0a60910fd03}\label{classRL_1_1Drawable3D_af0609e78633a9c8a7404a0a60910fd03}} 
+int {\bfseries get\+Hp} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a166a1bf6c256c3d499bb534a68535fac}\label{classRL_1_1Drawable3D_a166a1bf6c256c3d499bb534a68535fac}} 
+float {\bfseries get\+Shoot\+CD} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a1160e38b2f28befd4f5ff3e33b7e780e}\label{classRL_1_1Drawable3D_a1160e38b2f28befd4f5ff3e33b7e780e}} 
+std\+::string {\bfseries get\+Explosion\+Name} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a5b3cba9ee6f93b270bdd91e840f9c33f}\label{classRL_1_1Drawable3D_a5b3cba9ee6f93b270bdd91e840f9c33f}} 
+std\+::string {\bfseries get\+Style} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_afcbfb09f925300b02e715c9d3f40f687}\label{classRL_1_1Drawable3D_afcbfb09f925300b02e715c9d3f40f687}} 
+void {\bfseries set\+Bounding\+Box} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_acf9046ed91700ebdb7d1d29ca648f3da}\label{classRL_1_1Drawable3D_acf9046ed91700ebdb7d1d29ca648f3da}} 
+Bounding\+Box {\bfseries get\+Bounding\+Box} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a4a3b206255288b6bc399fa1bd4bd3532}\label{classRL_1_1Drawable3D_a4a3b206255288b6bc399fa1bd4bd3532}} 
+{\bfseries Drawable3D} (RL\+::\+Model\+Type type, std\+::string name, std\+::string model\+Path, std\+::string texture\+Path, std\+::string animation\+Path, float scale, std\+::string style, float lenght, float width, float height, Vector3 camera\+Position\+Mc\+Guyv, float camera\+Fov\+Mc\+Guyv, Vector3 velocity, int hp, float shoot\+CD, std\+::string explosionname)
+\item 
+void \mbox{\hyperlink{classRL_1_1Drawable3D_af0a49cfac0d3d4d1388ed979dd044c00}{draw}} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a771b19c30d593a5e8bf5aa0b93df2cf7}\label{classRL_1_1Drawable3D_a771b19c30d593a5e8bf5aa0b93df2cf7}} 
+void {\bfseries draw\+Power} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a5dffa25e93ced17e11b947731033e39c}\label{classRL_1_1Drawable3D_a5dffa25e93ced17e11b947731033e39c}} 
+void {\bfseries load3\+DModel} (std\+::string texture\+Path, std\+::string model\+Path, std\+::string animation\+Path)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af8628db4baed676919cecd98d58e3a77}\label{classRL_1_1Drawable3D_af8628db4baed676919cecd98d58e3a77}} 
+void {\bfseries unload\+All} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a0cb7b3e1a32839adf841f721926b90fd}\label{classRL_1_1Drawable3D_a0cb7b3e1a32839adf841f721926b90fd}} 
+void {\bfseries resize} (float new\+Scale)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af72c614c2457fd3255a3ed4bc95eceae}\label{classRL_1_1Drawable3D_af72c614c2457fd3255a3ed4bc95eceae}} 
+void {\bfseries load\+Animation} (std\+::string path)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ab673cecac47561b55cccfefdf23d6e19}\label{classRL_1_1Drawable3D_ab673cecac47561b55cccfefdf23d6e19}} 
+void {\bfseries unload\+Animation} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a6cf5ad4a9c38d1965d36af19b016041b}\label{classRL_1_1Drawable3D_a6cf5ad4a9c38d1965d36af19b016041b}} 
+int {\bfseries update\+Models\+Animation} (int curr\+Frame, int curr\+Anim)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a0213415530de9fbdab91c724b714af73}\label{classRL_1_1Drawable3D_a0213415530de9fbdab91c724b714af73}} 
+void {\bfseries reset\+Anim\+Sequence} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_afc2e841f5bd6011d73b5eaf02b8721f0}\label{classRL_1_1Drawable3D_afc2e841f5bd6011d73b5eaf02b8721f0}} 
+void {\bfseries set\+Current\+Anim} (int anim)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a34976f3417dd4487e43c62500d5178d8}\label{classRL_1_1Drawable3D_a34976f3417dd4487e43c62500d5178d8}} 
+int {\bfseries get\+Current\+Anim} () const
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a7097016f78b63b6ea051f9a7a4dc9120}\label{classRL_1_1Drawable3D_a7097016f78b63b6ea051f9a7a4dc9120}} 
+bool {\bfseries is\+Anim\+Loaded} () const
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aea44065a48144c5be66f571423a5f9b8}\label{classRL_1_1Drawable3D_aea44065a48144c5be66f571423a5f9b8}} 
+bool {\bfseries is\+Image\+Loaded} () const
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aa02df8806fb27bad979b49c2a7e22ac3}\label{classRL_1_1Drawable3D_aa02df8806fb27bad979b49c2a7e22ac3}} 
+void {\bfseries set\+Tint} (Color new\+Tint)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a82ae8273110a78b674c6fb9d3db73271}\label{classRL_1_1Drawable3D_a82ae8273110a78b674c6fb9d3db73271}} 
+void {\bfseries set\+Rotation} (float new\+Rotation)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aba8e54b07621b51977b37fb1d9837d42}\label{classRL_1_1Drawable3D_aba8e54b07621b51977b37fb1d9837d42}} 
+void {\bfseries set\+Position} (float x, float y, float z)
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a41b9b5f53a4340e9bcf18f2540d22ebf}\label{classRL_1_1Drawable3D_a41b9b5f53a4340e9bcf18f2540d22ebf}} 
+Vector3 {\bfseries get\+Position} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ab789c465a93587fb3491713b7af51d8a}\label{classRL_1_1Drawable3D_ab789c465a93587fb3491713b7af51d8a}} 
+Vector3 {\bfseries get\+Box\+Size} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ac82c10a686c95e155b59ca33fff7d393}\label{classRL_1_1Drawable3D_ac82c10a686c95e155b59ca33fff7d393}} 
+Texture2D {\bfseries get\+Texture} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_afb3137178b5ff73d61c0851d07251616}\label{classRL_1_1Drawable3D_afb3137178b5ff73d61c0851d07251616}} 
+Model\+Animation $\ast$ {\bfseries get\+Animation} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a26fc7398817c69f6f9b67144489374f9}\label{classRL_1_1Drawable3D_a26fc7398817c69f6f9b67144489374f9}} 
+Model {\bfseries get\+Model} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a9b1a70df905960bbad46d410c9d72b35}\label{classRL_1_1Drawable3D_a9b1a70df905960bbad46d410c9d72b35}} 
+std\+::string {\bfseries get\+Name} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a9a0562f7b6f3c6bf2fa33f2a1f02f534}\label{classRL_1_1Drawable3D_a9a0562f7b6f3c6bf2fa33f2a1f02f534}} 
+float {\bfseries get\+Length} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af5fee790bc0e7e052198af96e9b71890}\label{classRL_1_1Drawable3D_af5fee790bc0e7e052198af96e9b71890}} 
+float {\bfseries get\+Width} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a720b204bbae1532733c749d9ac750803}\label{classRL_1_1Drawable3D_a720b204bbae1532733c749d9ac750803}} 
+float {\bfseries get\+Height} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af0040da885b9a121295c93547631d33e}\label{classRL_1_1Drawable3D_af0040da885b9a121295c93547631d33e}} 
+float {\bfseries get\+Scale} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ac621d683bb22aa5e35cf83f03e7907bc}\label{classRL_1_1Drawable3D_ac621d683bb22aa5e35cf83f03e7907bc}} 
+Vector3 {\bfseries get\+Camera\+Position\+Mc\+Guyv} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a854ab7df832411074440f6ba20c5e948}\label{classRL_1_1Drawable3D_a854ab7df832411074440f6ba20c5e948}} 
+float {\bfseries get\+Camera\+Fov\+Mc\+Guyv} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ac096c64e1688197683a5cdbc86887765}\label{classRL_1_1Drawable3D_ac096c64e1688197683a5cdbc86887765}} 
+Vector3 {\bfseries get\+Velocity} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af0609e78633a9c8a7404a0a60910fd03}\label{classRL_1_1Drawable3D_af0609e78633a9c8a7404a0a60910fd03}} 
+int {\bfseries get\+Hp} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a166a1bf6c256c3d499bb534a68535fac}\label{classRL_1_1Drawable3D_a166a1bf6c256c3d499bb534a68535fac}} 
+float {\bfseries get\+Shoot\+CD} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a1160e38b2f28befd4f5ff3e33b7e780e}\label{classRL_1_1Drawable3D_a1160e38b2f28befd4f5ff3e33b7e780e}} 
+std\+::string {\bfseries get\+Explosion\+Name} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a5b3cba9ee6f93b270bdd91e840f9c33f}\label{classRL_1_1Drawable3D_a5b3cba9ee6f93b270bdd91e840f9c33f}} 
+std\+::string {\bfseries get\+Style} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_afcbfb09f925300b02e715c9d3f40f687}\label{classRL_1_1Drawable3D_afcbfb09f925300b02e715c9d3f40f687}} 
+void {\bfseries set\+Bounding\+Box} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_acf9046ed91700ebdb7d1d29ca648f3da}\label{classRL_1_1Drawable3D_acf9046ed91700ebdb7d1d29ca648f3da}} 
+Bounding\+Box {\bfseries get\+Bounding\+Box} ()
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRL_1_1IDrawable_a91353fa1e864c942f87196e14000b09c}\label{classRL_1_1IDrawable_a91353fa1e864c942f87196e14000b09c}} 
+virtual void {\bfseries draw} ()=0
+\item 
+\mbox{\Hypertarget{classRL_1_1IDrawable_a91353fa1e864c942f87196e14000b09c}\label{classRL_1_1IDrawable_a91353fa1e864c942f87196e14000b09c}} 
+virtual void {\bfseries draw} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_abe2351cdaa524c04a5dbdaa2c0597b01}\label{classRL_1_1Drawable3D_abe2351cdaa524c04a5dbdaa2c0597b01}} 
+Model\+Type {\bfseries \+\_\+type}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a111c693b3865d0c7626c9b6de62c5362}\label{classRL_1_1Drawable3D_a111c693b3865d0c7626c9b6de62c5362}} 
+std\+::string {\bfseries \+\_\+name}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aaeea72f2af7aad5d91721c7549345016}\label{classRL_1_1Drawable3D_aaeea72f2af7aad5d91721c7549345016}} 
+std\+::string {\bfseries \+\_\+style}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ab2b3e1e37136f8c14edc6353f4178804}\label{classRL_1_1Drawable3D_ab2b3e1e37136f8c14edc6353f4178804}} 
+Color {\bfseries \+\_\+tint} = WHITE
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_adb7b2983b04f16a07fc10fec632fe1ab}\label{classRL_1_1Drawable3D_adb7b2983b04f16a07fc10fec632fe1ab}} 
+float {\bfseries \+\_\+scale}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a4321853a92d38360a5c7b0bbf186b12c}\label{classRL_1_1Drawable3D_a4321853a92d38360a5c7b0bbf186b12c}} 
+Model {\bfseries \+\_\+model}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a6b9c1ecd6a83f7ee0136e792bb9ed7a7}\label{classRL_1_1Drawable3D_a6b9c1ecd6a83f7ee0136e792bb9ed7a7}} 
+float {\bfseries \+\_\+length}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aa4c7cbbd45ab89a60543991ff89f47b7}\label{classRL_1_1Drawable3D_aa4c7cbbd45ab89a60543991ff89f47b7}} 
+float {\bfseries \+\_\+width}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a5c160e3dbcaa8a2bc748b5d5913908d0}\label{classRL_1_1Drawable3D_a5c160e3dbcaa8a2bc748b5d5913908d0}} 
+float {\bfseries \+\_\+height}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af6fc4669825d7fc5e71f6f1729b83336}\label{classRL_1_1Drawable3D_af6fc4669825d7fc5e71f6f1729b83336}} 
+Vector3 {\bfseries \+\_\+velocity}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_aea2c5eaff640f6984456228ec857438f}\label{classRL_1_1Drawable3D_aea2c5eaff640f6984456228ec857438f}} 
+Vector3 {\bfseries \+\_\+camera\+Position\+Mc\+Guyv}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a544e7eaf9c5580d3ff19d2554fbe71b2}\label{classRL_1_1Drawable3D_a544e7eaf9c5580d3ff19d2554fbe71b2}} 
+float {\bfseries \+\_\+camera\+Fov\+Mc\+Guyv}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a12737c1e208cee9399447dee8e0e1423}\label{classRL_1_1Drawable3D_a12737c1e208cee9399447dee8e0e1423}} 
+int {\bfseries \+\_\+hp}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a3adee24faf4d9db3bf40075f679a33b2}\label{classRL_1_1Drawable3D_a3adee24faf4d9db3bf40075f679a33b2}} 
+float {\bfseries \+\_\+shoot\+CD}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a1cdad57b9a809fb9a7ee52dd15da2591}\label{classRL_1_1Drawable3D_a1cdad57b9a809fb9a7ee52dd15da2591}} 
+std\+::string {\bfseries \+\_\+explosionname}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a83c8e1f3a633b2e8ffc1b90695082921}\label{classRL_1_1Drawable3D_a83c8e1f3a633b2e8ffc1b90695082921}} 
+bool {\bfseries \+\_\+image\+Loaded} = false
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a95d880dbcf49355a678fc40afb82da66}\label{classRL_1_1Drawable3D_a95d880dbcf49355a678fc40afb82da66}} 
+Image {\bfseries \+\_\+img}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a81959b278dd8d37a8444e8304c28d912}\label{classRL_1_1Drawable3D_a81959b278dd8d37a8444e8304c28d912}} 
+Texture2D {\bfseries \+\_\+texture}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_ac92c6089e5913d1bd042d10b2a471d83}\label{classRL_1_1Drawable3D_ac92c6089e5913d1bd042d10b2a471d83}} 
+int {\bfseries up}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a82f5aaa0f0d158a8d22c496eb57c65ac}\label{classRL_1_1Drawable3D_a82f5aaa0f0d158a8d22c496eb57c65ac}} 
+Model\+Animation $\ast$ {\bfseries \+\_\+animations}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a9d2f184caab17b510ddb439b8a986e96}\label{classRL_1_1Drawable3D_a9d2f184caab17b510ddb439b8a986e96}} 
+int {\bfseries \+\_\+current\+Anim} = 0
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a11443a94fc8c49b93f0182e90165aefb}\label{classRL_1_1Drawable3D_a11443a94fc8c49b93f0182e90165aefb}} 
+int {\bfseries \+\_\+current\+Frame} = 0
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a4c32cadfeb766d5c74cfbb8d711ff103}\label{classRL_1_1Drawable3D_a4c32cadfeb766d5c74cfbb8d711ff103}} 
+unsigned int {\bfseries \+\_\+anim\+Count}
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a78d217c1575f3b9b09c3a6958b38ab66}\label{classRL_1_1Drawable3D_a78d217c1575f3b9b09c3a6958b38ab66}} 
+bool {\bfseries \+\_\+animation\+Loaded} = false
+\item 
+\mbox{\Hypertarget{classRL_1_1Drawable3D_a532873a1874ed7c950960423c78f572c}\label{classRL_1_1Drawable3D_a532873a1874ed7c950960423c78f572c}} 
+float {\bfseries \+\_\+rotation\+Angle} = 0.\+0f
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af0a49cfac0d3d4d1388ed979dd044c00}\label{classRL_1_1Drawable3D_af0a49cfac0d3d4d1388ed979dd044c00}} 
+\index{RL::Drawable3D@{RL::Drawable3D}!draw@{draw}}
+\index{draw@{draw}!RL::Drawable3D@{RL::Drawable3D}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void RL\+::\+Drawable3\+D\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classRL_1_1IDrawable}{RL\+::\+IDrawable}}.
+
+\mbox{\Hypertarget{classRL_1_1Drawable3D_af0a49cfac0d3d4d1388ed979dd044c00}\label{classRL_1_1Drawable3D_af0a49cfac0d3d4d1388ed979dd044c00}} 
+\index{RL::Drawable3D@{RL::Drawable3D}!draw@{draw}}
+\index{draw@{draw}!RL::Drawable3D@{RL::Drawable3D}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void RL\+::\+Drawable3\+D\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classRL_1_1IDrawable}{RL\+::\+IDrawable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Client/Drawable3\+D.\+hpp\item 
+Source/\+Server/Drawable3\+D.\+hpp\item 
+Source/\+Client/Drawable3\+D.\+cpp\item 
+Source/\+Server/Drawable3\+D.\+cpp\end{DoxyCompactItemize}

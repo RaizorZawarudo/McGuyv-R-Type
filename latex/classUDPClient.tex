@@ -1,0 +1,72 @@
+\hypertarget{classUDPClient}{}\doxysection{UDPClient Class Reference}
+\label{classUDPClient}\index{UDPClient@{UDPClient}}
+Inheritance diagram for UDPClient\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUDPClient}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUDPClient_a1aa6d7a0d4b4354e8782bea0075e05a7}\label{classUDPClient_a1aa6d7a0d4b4354e8782bea0075e05a7}} 
+{\bfseries UDPClient} (boost\+::asio\+::io\+\_\+context \&io\+Context, std\+::string host=std\+::string(\char`\"{}127.\+0.\+0.\+1\char`\"{}), unsigned int port=1313)
+\item 
+void \mbox{\hyperlink{classUDPClient_affd3f54e3f4812bf063455492c736ea8}{receive}} () override
+\item 
+void \mbox{\hyperlink{classUDPClient_a6bd6c1edaaaf977f5b3b3a1e2ea905eb}{send}} (const std\+::string \&msg) override
+\item 
+\mbox{\Hypertarget{classUDPClient_a85f734557922f22e79ee7094694067a2}\label{classUDPClient_a85f734557922f22e79ee7094694067a2}} 
+void {\bfseries send} (const char $\ast$message, size\+\_\+t size)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classCommunication}{Communication}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCommunication_a967174de9a36d8fc8e4a1ece8e3327b3}\label{classCommunication_a967174de9a36d8fc8e4a1ece8e3327b3}} 
+{\bfseries Communication} (boost\+::asio\+::io\+\_\+context \&io\+Context)
+\item 
+\mbox{\Hypertarget{classCommunication_a6e8bbbca5deda5123ce0d7a31b93df3b}\label{classCommunication_a6e8bbbca5deda5123ce0d7a31b93df3b}} 
+virtual void {\bfseries receive} ()=0
+\item 
+\mbox{\Hypertarget{classCommunication_a7336a4bbc21d3469ad30baa8f7e2b6a6}\label{classCommunication_a7336a4bbc21d3469ad30baa8f7e2b6a6}} 
+virtual void {\bfseries send} (const std\+::string \&message)=0
+\item 
+\mbox{\Hypertarget{classCommunication_a8cd00a8dc42fb1e70c22567eef3e9bd3}\label{classCommunication_a8cd00a8dc42fb1e70c22567eef3e9bd3}} 
+std\+::vector$<$ boost\+::array$<$ char, 1024 $>$ $>$ {\bfseries get\+Messages} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classCommunication}{Communication}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCommunication_ae5e4e3fcb8818bf7c31ea6f084787c70}\label{classCommunication_ae5e4e3fcb8818bf7c31ea6f084787c70}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classMessageQueue}{Message\+Queue}}$<$ boost\+::array$<$ char, 1024 $>$ $>$ $>$ {\bfseries \+\_\+message\+Queue}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUDPClient_affd3f54e3f4812bf063455492c736ea8}\label{classUDPClient_affd3f54e3f4812bf063455492c736ea8}} 
+\index{UDPClient@{UDPClient}!receive@{receive}}
+\index{receive@{receive}!UDPClient@{UDPClient}}
+\doxysubsubsection{\texorpdfstring{receive()}{receive()}}
+{\footnotesize\ttfamily void UDPClient\+::receive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classCommunication}{Communication}}.
+
+\mbox{\Hypertarget{classUDPClient_a6bd6c1edaaaf977f5b3b3a1e2ea905eb}\label{classUDPClient_a6bd6c1edaaaf977f5b3b3a1e2ea905eb}} 
+\index{UDPClient@{UDPClient}!send@{send}}
+\index{send@{send}!UDPClient@{UDPClient}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void UDPClient\+::send (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classCommunication}{Communication}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Client/\+Networking/UDPClient.\+hpp\item 
+Source/\+Client/\+Networking/UDPClient.\+cpp\end{DoxyCompactItemize}

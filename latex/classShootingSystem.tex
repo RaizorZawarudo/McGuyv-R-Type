@@ -1,0 +1,59 @@
+\hypertarget{classShootingSystem}{}\doxysection{Shooting\+System Class Reference}
+\label{classShootingSystem}\index{ShootingSystem@{ShootingSystem}}
+Inheritance diagram for Shooting\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classShootingSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classShootingSystem_a9f4fc92fcff36eefdf085a7abc374762}\label{classShootingSystem_a9f4fc92fcff36eefdf085a7abc374762}} 
+{\bfseries Shooting\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager)
+\item 
+void \mbox{\hyperlink{classShootingSystem_ad407571a1fa18e079c1aa1318f28230b}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classShootingSystem_a320e8a4405047f7c14fd06a54ed79d82}\label{classShootingSystem_a320e8a4405047f7c14fd06a54ed79d82}} 
+void {\bfseries switch\+Weapon} (int weaponindex, \mbox{\hyperlink{structWeaponset}{Weaponset}} $\ast$weapon\+Set)
+\item 
+\mbox{\Hypertarget{classShootingSystem_a68f78538070bb8b3767ebca224f69056}\label{classShootingSystem_a68f78538070bb8b3767ebca224f69056}} 
+void {\bfseries drop\+Weapon} (\mbox{\hyperlink{structWeaponset}{Weaponset}} $\ast$weapon\+Set)
+\item 
+\mbox{\Hypertarget{classShootingSystem_a303fd959b7db7654849e9abc6d880445}\label{classShootingSystem_a303fd959b7db7654849e9abc6d880445}} 
+void {\bfseries create\+Projectile} (\mbox{\hyperlink{structPosition}{Position}} $\ast$entity\+Pos, \mbox{\hyperlink{structWeaponset}{Weaponset}} $\ast$weapon\+Set, \mbox{\hyperlink{structModelDimensions}{Model\+Dimensions}} $\ast$model\+Dimensions, Entity\+ID owner\+ID, \mbox{\hyperlink{structEntityModelType}{Entity\+Model\+Type}} $\ast$owner\+Model\+Type)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classShootingSystem_ad407571a1fa18e079c1aa1318f28230b}\label{classShootingSystem_ad407571a1fa18e079c1aa1318f28230b}} 
+\index{ShootingSystem@{ShootingSystem}!update@{update}}
+\index{update@{update}!ShootingSystem@{ShootingSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Shooting\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Server/\+Components\&\+Systems/Shooting\+System.\+hpp\item 
+Source/\+Server/\+Components\&\+Systems/Shooting\+System.\+cpp\end{DoxyCompactItemize}

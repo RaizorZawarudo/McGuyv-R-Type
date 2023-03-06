@@ -1,0 +1,7 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height,velocity float,hp,explosionname
+shogun1,simple,Source/Server/Assets/Models/Spacecrafts/PointyRacerColour/pointyRacerColour.obj,Source/Server/Assets/Models/Spacecrafts/PointyRacerColour/pointyRacerColopur.png,0,1,1,1,1,0.2,100,lowPoly
+shogun2,simple,Source/Server/Assets/Models/Spacecrafts/BlueRacerColour/blueRacerColour.obj,Source/Server/Assets/Models/Spacecrafts/BlueRacerColour/blueRacerColour.png,0,1,1,1,1,0.2,100,lowPoly
+protos1,simple,Source/Server/Assets/Models/Spacecrafts/DartAssault/dartAssault.obj,Source/Server/Assets/Models/Spacecrafts/DartAssault/ivdart_ivDart_mat_BaseColor.png,0,1,2,2,1,0.2,100,lowPoly
+protos2,simple,Source/Server/Assets/Models/Spacecrafts/RoundFat/roundFat.obj,0,0,1,2,2,1,0.2,150,lowPoly
+racer1,simple,Source/Server/Assets/Models/Spacecrafts/CircleFlat/circleFlat.obj,0,0,1,2,2,1,0.2,150,lowPoly
+racer2,simple,Source/Server/Assets/Models/Spacecrafts/Hornet/hornet.obj,0,0,1,2,2,1,0.2,150,lowPoly

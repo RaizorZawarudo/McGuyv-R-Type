@@ -1,0 +1,143 @@
+\hypertarget{Client_2Map_8hpp_source}{}\doxysection{Map.\+hpp}
+\label{Client_2Map_8hpp_source}\index{Source/Client/Map.hpp@{Source/Client/Map.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ indie\_studio}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ Map}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <raylib.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <iterator>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}CsvParser.hpp"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}Drawable3D.hpp"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ std::string\ \_pathName;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_length;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_width;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_height;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ Vector3\ \_cameraPositionMcGuyv;}
+\DoxyCodeLine{00030\ \ \ \ \ \}\ \mbox{\hyperlink{structrepeatPathData__t}{repeatPathData\_t}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::string\ \_bossRoomName;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::string\ \_bossName;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_length;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_width;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_height;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Vector3\ \_cameraPositionMcGuyv;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \}\ \mbox{\hyperlink{structbossRoomData__t}{bossRoomData\_t}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ std::string\ \_sectionName;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_zPosition;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_length;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_isBossRoom;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \}\ \mbox{\hyperlink{structmapQueueSection__t}{mapQueueSection\_t}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMap}{Map}}\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMap}{Map}}(std::string\ mapName,\ std::string\ mapPath,\ std::vector<RL::Drawable3D*>\ zonesModels,\ std::string\ backgroundName);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMap}{\string~Map}}();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//load\ map\ data}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ fillMapData(std::string\ mapPath,\ std::vector<RL::Drawable3D*>\ zonesModels);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structrepeatPathData__t}{repeatPathData\_t}}\ fillPathData(std::string\ zoneName,\ std::vector<RL::Drawable3D*>\ zonesModels);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structbossRoomData__t}{bossRoomData\_t}}\ fillBossRoomData(std::string\ zoneName,\ std::vector<RL::Drawable3D*>\ zonesModels);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Map\ update\ and\ logic\ and\ scrolling\ and\ (to\ add\ spawning\ of\ bosses\ and\ mobs\ and\ walls\ etc)}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ mapUpdate();}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ refillMapQueue();}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ updateMapQueue();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//getters}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::string\ getMapName();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::string\ getBackgroundName();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::vector<repeatPathData\_t>\ getMapPathsData();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::vector<bossRoomData\_t>\ getMapBossRoomData();}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::vector<mapQueueSection\_t>\ getMapQueue();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ getRepeathPathWaves();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::vector<int>\ getWaveAmountsVector();}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ std::vector<std::string>\ getBossRoomBossName();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getCurrentStage();}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getCurrentWave();}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getMaxStage();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ getIsFightingBoss();}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ getGameRunning();}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getScrollSpeed();}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ getCurrentSpeed();}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ getHasSpawnedBoss();}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ getHasSpawnedBossRoom();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{//setters}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setGameRunning();}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentWavePlusOne();}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentWaveToZero();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setFightingBossTrue();}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setFightingBossFalse();}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setHasSpawnedBossFalse();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ bossIsDown();}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setSpawnedBoss();}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setMapSpeed(\textcolor{keywordtype}{float}\ gas);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{//create\ a\ set\ map\ speed\ function\ to\ increase\ difficulty\ type\ with\ speed\ :D}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ std::string\ \_mapName;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ std::string\ \_backgroundName;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_scrollSpeed\ =\ 0.3f;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_currentSpeed\ =\ \_scrollSpeed;}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ std::vector<repeatPathData\_t>\ \_repeatPaths;\ \textcolor{comment}{//this\ should\ be\ in\ order\ of\ game\ aspect\ in\ the\ csv\ already}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ std::vector<bossRoomData\_t>\ \_bossRooms;\ \textcolor{comment}{//\ this\ should\ be\ in\ order\ also\ in\ csv}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//we\ dont\ need\ a\ display\ queue\ we\ just\ need\ to\ know\ what\ stage\ we\ are\ on\ \ and\ if\ we\ are\ fighting\ a\ boss}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ eg\ :\ we\ are\ in\ stage2,\ so\ we\ can\ only\ display\ repeatPaths[2]\ and\ if\ we\ enter\ the\ conditions\ to\ spawn\ boss,\ we\ will\ have\ }}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ fighting\ boss\ ==\ 1\ then\ we\ display\ the\ boss\ room\ at\ the\ end\ and\ stop\ adding\ new\ rooms\ .}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ \_repeatPathWaves;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ std::vector<int>\ \_waveamounts;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::vector<std::string>\ \_bossRoomBosses;}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ std::vector<mapQueueSection\_t>\ \_mapQueue;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//delete\ these\ two\ lines\ later,\ not\ usefull\ anymore}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ std::vector<std::string>\ \_repeatPathsnames;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ std::vector<std::string>\ \_bossRoomsnames;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_gameRunning\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentStage\ =\ 0;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentWave\ =\ 0;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_maxStage;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_isFightingBoss\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_hasSpawnedBossroom\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_hasSpawnedBossMob\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00137\ \};}
+
+\end{DoxyCode}

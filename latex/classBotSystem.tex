@@ -1,0 +1,77 @@
+\hypertarget{classBotSystem}{}\doxysection{Bot\+System Class Reference}
+\label{classBotSystem}\index{BotSystem@{BotSystem}}
+Inheritance diagram for Bot\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classBotSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBotSystem_a3ae05d74c482406c7dc64170abd8dc08}\label{classBotSystem_a3ae05d74c482406c7dc64170abd8dc08}} 
+{\bfseries Bot\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager)
+\item 
+void \mbox{\hyperlink{classBotSystem_a7cf376423ea53d2ec5228a02ea9b9f3c}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classBotSystem_a7a3d04d947117f4a0e72d9ae2e69f116}\label{classBotSystem_a7a3d04d947117f4a0e72d9ae2e69f116}} 
+void {\bfseries do\+AI\+\_\+simple} (Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classBotSystem_a74dd8c5ecfb6772f92841a7f203d6884}\label{classBotSystem_a74dd8c5ecfb6772f92841a7f203d6884}} 
+void {\bfseries dodge\+\_\+bullets} (Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classBotSystem_a53610aa2439329a95dbd145fee89d5a3}\label{classBotSystem_a53610aa2439329a95dbd145fee89d5a3}} 
+Vector3 {\bfseries find\+Safe\+Spotfrom\+Projectile} (Entity\+ID ennemy, float ennemy\+PosX, float ennemy\+PosY)
+\item 
+\mbox{\Hypertarget{classBotSystem_a6169c0927450637afa5e4177eeeec1c5}\label{classBotSystem_a6169c0927450637afa5e4177eeeec1c5}} 
+void {\bfseries apply\+AIKeystrokes} (Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classBotSystem_a20c67d9c6bd7e6fc12addf48580d344e}\label{classBotSystem_a20c67d9c6bd7e6fc12addf48580d344e}} 
+bool {\bfseries is\+\_\+in\+\_\+range\+\_\+of\+\_\+target} (Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classBotSystem_a004a4ce058dae9bf8e064c78a538775b}\label{classBotSystem_a004a4ce058dae9bf8e064c78a538775b}} 
+bool {\bfseries check\+\_\+for\+\_\+vicinity} (float x, float y)
+\item 
+\mbox{\Hypertarget{classBotSystem_a788bc1660d4c387fcc0443b9fe578d6a}\label{classBotSystem_a788bc1660d4c387fcc0443b9fe578d6a}} 
+void {\bfseries dodge\+\_\+obstacles} (Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classBotSystem_a0c201633b0add8c1639288b6e1734c1e}\label{classBotSystem_a0c201633b0add8c1639288b6e1734c1e}} 
+void {\bfseries find\+\_\+player\+\_\+target} (Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classBotSystem_a4c79c537202c52bb27d75e6c8b6230d7}\label{classBotSystem_a4c79c537202c52bb27d75e6c8b6230d7}} 
+void {\bfseries fire\+\_\+weapon\+\_\+ennemy} (Entity\+ID ennemy)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBotSystem_a7cf376423ea53d2ec5228a02ea9b9f3c}\label{classBotSystem_a7cf376423ea53d2ec5228a02ea9b9f3c}} 
+\index{BotSystem@{BotSystem}!update@{update}}
+\index{update@{update}!BotSystem@{BotSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Bot\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Server/\+Components\&\+Systems/Bot\+System.\+hpp\item 
+Source/\+Server/\+Components\&\+Systems/Bot\+System.\+cpp\end{DoxyCompactItemize}

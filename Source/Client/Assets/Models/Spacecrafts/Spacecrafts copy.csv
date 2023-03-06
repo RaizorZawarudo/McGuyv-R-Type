@@ -1,0 +1,10 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale,lenght,width,height,velocity float,hp,explosionname
+circleFlat,simple,Source/Client/Assets/Models/Spacecrafts/CircleFlat/circleFlat.obj,0,0,1,2,2,1,0.2,150,lowPoly
+jetLike,simple,Source/Client/Assets/Models/Spacecrafts/JetLike/jetLike.obj,0,0,1,2,2,1,0.22,100,lowPoly
+pointyRacerColour,simple,Source/Client/Assets/Models/Spacecrafts/PointyRacerColour/pointyRacerColour.obj,Source/Client/Assets/Models/Spacecrafts/PointyRacerColour/pointyRacerColopur.png,0,1,1,1,1,0.2,100,lowPoly
+blueRacer,simple,Source/Client/Assets/Models/Spacecrafts/BlueRacerColour/blueRacerColour.obj,Source/Client/Assets/Models/Spacecrafts/BlueRacerColour/blueRacerColour.png,0,1,1,1,1,0.2,100,lowPoly
+dartAssault,simple,Source/Client/Assets/Models/Spacecrafts/DartAssault/dartAssault.obj,Source/Client/Assets/Models/Spacecrafts/DartAssault/ivdart_ivDart_mat_BaseColor.png,0,1,2,2,1,0.2,100,lowPoly
+roundFat,simple,Source/Client/Assets/Models/Spacecrafts/RoundFat/roundFat.obj,0,0,1,2,2,1,0.2,150,lowPoly
+booster,simple,Source/Client/Assets/Models/Spacecrafts/Booster/booster.obj,0,0,1,2,2,1,0.2,150,lowPoly
+hornet,simple,Source/Client/Assets/Models/Spacecrafts/Hornet/hornet.obj,0,0,1,2,2,1,0.2,150,lowPoly
+warpShip,simple,Source/Client/Assets/Models/Spacecrafts/warpship/warpShip.obj,0,0,1,2,2,1,0.2,150,lowPoly

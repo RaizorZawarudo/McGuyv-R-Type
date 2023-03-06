@@ -1,7 +1,0 @@
-Name,Style,Model Path,Texture Path,Animation Path,scale,length,width,height,camera position,camera FOV
-SmallMountainPath,simple,Source/Assets/Models/Zones/SmallMountainPath/smallMountains.obj,0,0,1,800,16,0,-4;6;-15,80
-BigMountainPath,bossroom,Source/Assets/Models/Zones/BigMountainPath/bigMountains.obj,0,0,1,800,16,0,0;5;-15,90
-SmallMountainPathGreen,simple,Source/Assets/Models/Zones/SmallMountainPathGreen/smallMountainsGreen.obj,0,0,1,800,16,0,-4;6;-15,80
-PlaceHolderBossRoom,bossroom,Source/Assets/Models/Zones/PlaceHolderBossRoom/placeHolderBossRoom.obj,0,0,1,160,16,0,0;5;-15,90
-MountainsSmallv2,simple,Source/Assets/Models/Zones/MountainsSmallv2/mountainsSmallv2.obj,0,0,1,160,16,0,-4;6;-15,80
-MountainBigOriginTest,simple,Source/Assets/Models/Zones/MountainBigOriginTest/MB001-origin-moved.obj,0,0,1,400,16,0,-4;6;-15,80

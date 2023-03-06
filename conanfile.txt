@@ -1,0 +1,12 @@
+[requires]
+boost/1.81.0
+raylib/4.0.0
+
+[options]
+boost:shared=True
+raylib:shared=True
+
+[generators]
+cmake
+
+[imports]

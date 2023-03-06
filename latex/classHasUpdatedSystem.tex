@@ -1,0 +1,72 @@
+\hypertarget{classHasUpdatedSystem}{}\doxysection{Has\+Updated\+System Class Reference}
+\label{classHasUpdatedSystem}\index{HasUpdatedSystem@{HasUpdatedSystem}}
+Inheritance diagram for Has\+Updated\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHasUpdatedSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHasUpdatedSystem_a82e963ab4629cfaab089545d7d9331a0}\label{classHasUpdatedSystem_a82e963ab4629cfaab089545d7d9331a0}} 
+{\bfseries Has\+Updated\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em)
+\item 
+void \mbox{\hyperlink{classHasUpdatedSystem_a809fde496e6c1169ad98da3f2beb7722}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classHasUpdatedSystem_a3c5e15c6d617214bd069eb031e4fc819}\label{classHasUpdatedSystem_a3c5e15c6d617214bd069eb031e4fc819}} 
+{\bfseries Has\+Updated\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classUDPServer}{UDPServer}} $>$ udp\+Server, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager)
+\item 
+void \mbox{\hyperlink{classHasUpdatedSystem_a809fde496e6c1169ad98da3f2beb7722}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classHasUpdatedSystem_aac792a516a111448990a8a6552c53ba8}\label{classHasUpdatedSystem_aac792a516a111448990a8a6552c53ba8}} 
+void {\bfseries send\+Created\+Entity} (Entity\+ID id)
+\item 
+\mbox{\Hypertarget{classHasUpdatedSystem_acc338947195b9088dbc5fcc093267b5b}\label{classHasUpdatedSystem_acc338947195b9088dbc5fcc093267b5b}} 
+int {\bfseries get\+Index\+Model} (RL\+::\+Model\+Type type, Entity\+ID id)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHasUpdatedSystem_a809fde496e6c1169ad98da3f2beb7722}\label{classHasUpdatedSystem_a809fde496e6c1169ad98da3f2beb7722}} 
+\index{HasUpdatedSystem@{HasUpdatedSystem}!update@{update}}
+\index{update@{update}!HasUpdatedSystem@{HasUpdatedSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Has\+Updated\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+\mbox{\Hypertarget{classHasUpdatedSystem_a809fde496e6c1169ad98da3f2beb7722}\label{classHasUpdatedSystem_a809fde496e6c1169ad98da3f2beb7722}} 
+\index{HasUpdatedSystem@{HasUpdatedSystem}!update@{update}}
+\index{update@{update}!HasUpdatedSystem@{HasUpdatedSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Has\+Updated\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Client/\+Components\&\+Systems/Has\+Updated\+System.\+hpp\item 
+Source/\+Server/\+Components\&\+Systems/Has\+Updated\+System.\+hpp\item 
+Source/\+Server/\+Components\&\+Systems/Has\+Updated\+System.\+cpp\end{DoxyCompactItemize}

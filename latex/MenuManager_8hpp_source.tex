@@ -1,0 +1,111 @@
+\hypertarget{MenuManager_8hpp_source}{}\doxysection{Menu\+Manager.\+hpp}
+\label{MenuManager_8hpp_source}\index{Source/Client/MenuManager.hpp@{Source/Client/MenuManager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ MC\_GUYVER\ TYPE}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ MenuManager}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Renderer.hpp"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}AssetManager.hpp"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}CameraManager.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Window.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}InputManager.hpp"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Networking/UDPClient.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}../Server/Networking/protocol/Serializator.hpp"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}SoundManager.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string>}\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <raylib.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ HOVER\ =\ -\/54;}
+\DoxyCodeLine{00024\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ CLICK\ =\ -\/55;}
+\DoxyCodeLine{00025\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ NOINTERACT\ =\ -\/56;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ QUITGAME\ =\ 1000;}
+\DoxyCodeLine{00028\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ STARTSCREEN\ =\ 999;}
+\DoxyCodeLine{00029\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ CHARACTERSELECTSCREEN\ =\ 998;}
+\DoxyCodeLine{00030\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ GAMETYPESELECTIONSCREEN\ =\ 997;}
+\DoxyCodeLine{00031\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TIMETOPLAY\ =\ 996;}
+\DoxyCodeLine{00032\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PLAYING\ =\ 995;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WAITING\ =\ 994;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TITLEX\ =\ 40;}
+\DoxyCodeLine{00038\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TITLEY\ =\ 20;}
+\DoxyCodeLine{00039\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PLAYGAMEX\ =\ 25;}
+\DoxyCodeLine{00040\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ EXITX\ =\ 65;}
+\DoxyCodeLine{00041\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ PLAYGAMEY\ =\ 75.5;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{namespace\ }RL\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRL_1_1MenuManager}{MenuManager}}\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1MenuManager}{MenuManager}}(std::shared\_ptr<RL::Window>\ window,\ std::shared\_ptr<RL::CameraManager>\ cameraManager,\ std::shared\_ptr<AssetManager>\ assetManager,\ std::shared\_ptr<RL::Renderer>\ renderer,\ std::shared\_ptr<RL::InputManager>\ inputManager,\ std::shared\_ptr<RL::SoundManager>\ soundManager,\ std::shared\_ptr<UDPClient>\ udpClient);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1MenuManager}{\string~MenuManager}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ mouseInteractWithMenuElement(\mbox{\hyperlink{classRL_1_1Drawable2D}{RL::Drawable2D}}*\ element);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ drawMenu();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ StartScreen();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawTitle();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawHomePageButtons();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ gameTypeSelectionScreen();}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CharacterSelectionScreen();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//getter}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getCurScreen();}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ setCurentClientId();}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ getCharacterName();}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getMapSelectIndex();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ getRacerMode();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//setter}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setMenuPage(\textcolor{keywordtype}{int}\ menuPage);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::Renderer>\ \_renderer;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<AssetManager>\ \_assetManager;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::CameraManager>\ \_cameraManager;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::Window>\ \_window;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::InputManager>\ \_inputManager;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::SoundManager>\ \_soundManager;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<UDPClient>\ \_udpClient;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSerializator}{Serializator}}\ \_serializator;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_canSelect\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_hasSelected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<int>\ \_keysPressed;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<RL::Drawable2D*>\ \_menuElements;}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_selectedCharName\ =\ \textcolor{stringliteral}{"{}none"{}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_selectedWorld;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_selectedMode;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_mapSelectIndex\ =\ 0;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_racerMode\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//set\ to\ false\ by\ default,\ true\ is\ only\ for\ testing}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_isMaster\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_curScreen;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_prevScreen;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \};}
+\DoxyCodeLine{00105\ \};}
+
+\end{DoxyCode}

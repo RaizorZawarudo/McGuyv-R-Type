@@ -1,0 +1,87 @@
+\hypertarget{classUDPServer}{}\doxysection{UDPServer Class Reference}
+\label{classUDPServer}\index{UDPServer@{UDPServer}}
+Inheritance diagram for UDPServer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUDPServer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUDPServer_acecb6cc4c913f8a0a300de9505e44233}\label{classUDPServer_acecb6cc4c913f8a0a300de9505e44233}} 
+{\bfseries UDPServer} (boost\+::asio\+::io\+\_\+context \&io, unsigned int port=1313)
+\item 
+void \mbox{\hyperlink{classUDPServer_ac35cc091aae45ad7d7ca3e1fd438aa78}{send}} (const std\+::string \&message) override
+\item 
+\mbox{\Hypertarget{classUDPServer_ac441b68f1043149178fef42fe44ab90b}\label{classUDPServer_ac441b68f1043149178fef42fe44ab90b}} 
+void {\bfseries send} (const char $\ast$message, size\+\_\+t size)
+\item 
+\mbox{\Hypertarget{classUDPServer_ac1d0a32bd564bda3a99da3c1fb324345}\label{classUDPServer_ac1d0a32bd564bda3a99da3c1fb324345}} 
+int {\bfseries get\+Connected\+Clients} ()
+\item 
+\mbox{\Hypertarget{classUDPServer_ad9f89b7aff7b057dce5eebafad65b79a}\label{classUDPServer_ad9f89b7aff7b057dce5eebafad65b79a}} 
+void {\bfseries set\+Connected\+Clients} ()
+\item 
+void \mbox{\hyperlink{classUDPServer_ae7894a4723bc53933dbdf61b80811d1c}{receive}} () override
+\item 
+\mbox{\Hypertarget{classUDPServer_a9e794795efb8896365837a423d469be6}\label{classUDPServer_a9e794795efb8896365837a423d469be6}} 
+int {\bfseries get\+Clients\+Endpoint} () const
+\item 
+\mbox{\Hypertarget{classUDPServer_a7210a8be35667516a5a8e91186213541}\label{classUDPServer_a7210a8be35667516a5a8e91186213541}} 
+int {\bfseries get\+Client\+Id} (int index)
+\item 
+\mbox{\Hypertarget{classUDPServer_a4bf071fc3b3f8f2ef99ceca07e9771a6}\label{classUDPServer_a4bf071fc3b3f8f2ef99ceca07e9771a6}} 
+void {\bfseries sent\+To\+Client} (int index, char $\ast$message, size\+\_\+t size)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classCommunication}{Communication}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCommunication_a967174de9a36d8fc8e4a1ece8e3327b3}\label{classCommunication_a967174de9a36d8fc8e4a1ece8e3327b3}} 
+{\bfseries Communication} (boost\+::asio\+::io\+\_\+context \&io\+Context)
+\item 
+\mbox{\Hypertarget{classCommunication_a6e8bbbca5deda5123ce0d7a31b93df3b}\label{classCommunication_a6e8bbbca5deda5123ce0d7a31b93df3b}} 
+virtual void {\bfseries receive} ()=0
+\item 
+\mbox{\Hypertarget{classCommunication_a7336a4bbc21d3469ad30baa8f7e2b6a6}\label{classCommunication_a7336a4bbc21d3469ad30baa8f7e2b6a6}} 
+virtual void {\bfseries send} (const std\+::string \&message)=0
+\item 
+\mbox{\Hypertarget{classCommunication_a8cd00a8dc42fb1e70c22567eef3e9bd3}\label{classCommunication_a8cd00a8dc42fb1e70c22567eef3e9bd3}} 
+std\+::vector$<$ boost\+::array$<$ char, 1024 $>$ $>$ {\bfseries get\+Messages} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classCommunication}{Communication}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCommunication_ae5e4e3fcb8818bf7c31ea6f084787c70}\label{classCommunication_ae5e4e3fcb8818bf7c31ea6f084787c70}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classMessageQueue}{Message\+Queue}}$<$ boost\+::array$<$ char, 1024 $>$ $>$ $>$ {\bfseries \+\_\+message\+Queue}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUDPServer_ae7894a4723bc53933dbdf61b80811d1c}\label{classUDPServer_ae7894a4723bc53933dbdf61b80811d1c}} 
+\index{UDPServer@{UDPServer}!receive@{receive}}
+\index{receive@{receive}!UDPServer@{UDPServer}}
+\doxysubsubsection{\texorpdfstring{receive()}{receive()}}
+{\footnotesize\ttfamily void UDPServer\+::receive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classCommunication}{Communication}}.
+
+\mbox{\Hypertarget{classUDPServer_ac35cc091aae45ad7d7ca3e1fd438aa78}\label{classUDPServer_ac35cc091aae45ad7d7ca3e1fd438aa78}} 
+\index{UDPServer@{UDPServer}!send@{send}}
+\index{send@{send}!UDPServer@{UDPServer}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void UDPServer\+::send (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classCommunication}{Communication}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Server/\+Networking/UDPServer.\+hpp\item 
+Source/\+Server/\+Networking/UDPServer.\+cpp\end{DoxyCompactItemize}

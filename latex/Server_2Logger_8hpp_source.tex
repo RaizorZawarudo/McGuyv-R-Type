@@ -1,0 +1,28 @@
+\hypertarget{Server_2Logger_8hpp_source}{}\doxysection{Logger.\+hpp}
+\label{Server_2Logger_8hpp_source}\index{Source/Server/Logger.hpp@{Source/Server/Logger.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BOMBERMAN\_LOGGER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BOMBERMAN\_LOGGER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classLogger}{Logger}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{classLogger}{Logger}}(\textcolor{keyword}{const}\ std::string\ \&sectionName,\ \textcolor{keywordtype}{bool}\ standardOutput\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ log(std::string\ msg)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&getSectionName()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ setSectionName(\textcolor{keyword}{const}\ std::string\ \&sectionName);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ std::string\ \_sectionName;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_standardOutput;}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//BOMBERMAN\_LOGGER\_HPP}}
+
+\end{DoxyCode}

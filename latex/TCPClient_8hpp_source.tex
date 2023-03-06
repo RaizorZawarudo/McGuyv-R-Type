@@ -1,0 +1,33 @@
+\hypertarget{TCPClient_8hpp_source}{}\doxysection{TCPClient.\+hpp}
+\label{TCPClient_8hpp_source}\index{Source/Client/Networking/TCPClient.hpp@{Source/Client/Networking/TCPClient.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ B-\/CPP-\/500-\/BER-\/5-\/2-\/rtype-\/alban.de-\/tourtier}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ TCPClient}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ TCPCLIENT\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ TCPCLIENT\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <boost/array.hpp>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../../../../lib/asio.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTCPClient}{TCPClient}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{classTCPClient}{TCPClient}}(\textcolor{keyword}{const}\ std::string\ \&,\ \textcolor{keyword}{const}\ std::string\ \&port);}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{classTCPClient}{\string~TCPClient}}()\{\};}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{void}\ receive\_data();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ boost::asio::io\_context\ \_ioContext;}
+\DoxyCodeLine{00023\ \ \ boost::asio::ip::tcp::resolver\ \_resolver;}
+\DoxyCodeLine{00024\ \ \ boost::asio::ip::tcp::socket\ \_socket;}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !TCPCLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

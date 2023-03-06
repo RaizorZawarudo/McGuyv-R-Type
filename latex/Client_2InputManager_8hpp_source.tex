@@ -1,0 +1,37 @@
+\hypertarget{Client_2InputManager_8hpp_source}{}\doxysection{Input\+Manager.\+hpp}
+\label{Client_2InputManager_8hpp_source}\index{Source/Client/InputManager.hpp@{Source/Client/InputManager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <raylib.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\#include\ "{}RaylibTypeEncaps.hpp"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }RL\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRL_1_1InputManager}{InputManager}}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1InputManager}{InputManager}}();}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1InputManager}{InputManager}}(std::string\ name);}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1InputManager}{\string~InputManager}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ recordInput();}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ recordInputs();}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ popInputs();}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ playerHasPressedKeyAsChar(\textcolor{keywordtype}{int}\ key);\ \textcolor{comment}{//\ use\ like\ this\ :\ pHPKAC('p')\ or\ pHPKAC('w')\ or\ pHPKAC('-\/4')\ for\ up\ arrow}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::vector<int>\ getInputs();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ Vector2\ getMousePosition();}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isMouseLeftClicked();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isMouseRightClicked();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::string\ \_name;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::vector<int>\ \_inputQueue;}
+\DoxyCodeLine{00030\ \ \ \ \ \};\ \ \ \ }
+\DoxyCodeLine{00031\ \}}
+
+\end{DoxyCode}

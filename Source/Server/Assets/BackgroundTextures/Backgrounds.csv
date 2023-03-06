@@ -1,0 +1,8 @@
+name,path,type
+sunvalleytron,Source/Assets/BackgroundTextures/sunvalleytron.png,background
+city1,Source/Assets/BackgroundTextures/city1.png,background
+city2,Source/Assets/BackgroundTextures/city2.png,background
+grid0,Source/Assets/BackgroundTextures/grid_0.png,background
+grid1,Source/Assets/BackgroundTextures/grid_1.png,background
+aicity,Source/Assets/BackgroundTextures/aiCity.png,background
+neonracing,Source/Server/Assets/BackgroundTextures/neonracingbackground.png,background

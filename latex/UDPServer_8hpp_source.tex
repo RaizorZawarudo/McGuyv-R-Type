@@ -1,0 +1,58 @@
+\hypertarget{UDPServer_8hpp_source}{}\doxysection{UDPServer.\+hpp}
+\label{UDPServer_8hpp_source}\index{Source/Server/Networking/UDPServer.hpp@{Source/Server/Networking/UDPServer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ RType}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ Server}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ UDPSERVER\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ UDPSERVER\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}boost/bind/bind.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}boost/shared\_ptr.hpp"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}boost/array.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}iostream"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}Communication.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}protocol/Serializator.hpp"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structclient}{client}}\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ boost::asio::ip::udp::endpoint\ endpoint;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00022\ \}\ \mbox{\hyperlink{structclient}{client\_t}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUDPServer}{UDPServer}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classCommunication}{Communication}}\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classUDPServer}{UDPServer}}(boost::asio::io\_context\&\ io,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ port\ =\ 1313);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classUDPServer}{\string~UDPServer}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ std::string\&\ message)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *message,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getConnectedClients();}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setConnectedClients();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ receive()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getClientsEndpoint()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_clientsEndpoint.size();\ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getClientId(\textcolor{keywordtype}{int}\ index)\ \{\ \textcolor{keywordflow}{return}\ \_clientsEndpoint[index].id;\ \};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ sentToClient(\textcolor{keywordtype}{int}\ index,\ \textcolor{keywordtype}{char}\ *message,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleReceive(\textcolor{keyword}{const}\ boost::system::error\_code\&\ error,\ std::size\_t\ bytesTransfered);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleSend(\textcolor{keyword}{const}\ boost::system::error\_code\&\ error,\ std::size\_t\ bytesTransfered);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSerializator}{Serializator}}\ \_serializator;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ boost::array<char,\ 1024>\ \_recvBuffer;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ boost::asio::ip::udp::socket\ \_socket;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ boost::asio::ip::udp::endpoint\ \_senderEndpoint;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::vector<client\_t>\ \_clientsEndpoint;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ boost::asio::steady\_timer\ \_clock;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \_port;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !UDPSERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

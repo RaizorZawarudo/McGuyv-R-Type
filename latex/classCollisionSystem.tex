@@ -1,0 +1,71 @@
+\hypertarget{classCollisionSystem}{}\doxysection{Collision\+System Class Reference}
+\label{classCollisionSystem}\index{CollisionSystem@{CollisionSystem}}
+Inheritance diagram for Collision\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCollisionSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCollisionSystem_a5e21e852d3fe8a140c0bcfcd885796ad}\label{classCollisionSystem_a5e21e852d3fe8a140c0bcfcd885796ad}} 
+{\bfseries Collision\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager)
+\item 
+void \mbox{\hyperlink{classCollisionSystem_ae07be0cb2c0148afdd77488c8f6fd3fb}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classCollisionSystem_a5c2a44320eb1846008ab04e2e441a97a}\label{classCollisionSystem_a5c2a44320eb1846008ab04e2e441a97a}} 
+void {\bfseries bullet\+\_\+collisions} (Entity\+ID ent, Entity\+ID other)
+\item 
+\mbox{\Hypertarget{classCollisionSystem_a689620a36db16cca62319b2a4e2544d1}\label{classCollisionSystem_a689620a36db16cca62319b2a4e2544d1}} 
+void {\bfseries obstacle\+\_\+collisions} (Entity\+ID ent, Entity\+ID other)
+\item 
+\mbox{\Hypertarget{classCollisionSystem_a17f1d880350106a1ce6709661a9a881b}\label{classCollisionSystem_a17f1d880350106a1ce6709661a9a881b}} 
+void {\bfseries power\+Up\+\_\+collisons} (Entity\+ID ent, Entity\+ID other)
+\item 
+\mbox{\Hypertarget{classCollisionSystem_a3df0dda929bb675fdfaf54ca9a3d1555}\label{classCollisionSystem_a3df0dda929bb675fdfaf54ca9a3d1555}} 
+void {\bfseries body\+\_\+collisions} (Entity\+ID ent, Entity\+ID other)
+\item 
+\mbox{\Hypertarget{classCollisionSystem_a676649ec2bd3a54a0ac91955cb0844b1}\label{classCollisionSystem_a676649ec2bd3a54a0ac91955cb0844b1}} 
+void {\bfseries create\+\_\+explosion} (Vector3 pos, std\+::string explo\+Name)
+\item 
+\mbox{\Hypertarget{classCollisionSystem_ae944ab1c0a47435509e2956a19440b84}\label{classCollisionSystem_ae944ab1c0a47435509e2956a19440b84}} 
+void {\bfseries pick\+\_\+up\+\_\+weapon\+Loot} (Entity\+ID powerup, Entity\+ID other)
+\item 
+\mbox{\Hypertarget{classCollisionSystem_abb7aaf62c270d44097e6380bbaee320e}\label{classCollisionSystem_abb7aaf62c270d44097e6380bbaee320e}} 
+void {\bfseries pick\+\_\+up\+\_\+shield\+Loot} (Entity\+ID powerup, Entity\+ID other)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCollisionSystem_ae07be0cb2c0148afdd77488c8f6fd3fb}\label{classCollisionSystem_ae07be0cb2c0148afdd77488c8f6fd3fb}} 
+\index{CollisionSystem@{CollisionSystem}!update@{update}}
+\index{update@{update}!CollisionSystem@{CollisionSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Collision\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Server/\+Components\&\+Systems/Collision\+System.\+hpp\item 
+Source/\+Server/\+Components\&\+Systems/Collision\+System.\+cpp\end{DoxyCompactItemize}

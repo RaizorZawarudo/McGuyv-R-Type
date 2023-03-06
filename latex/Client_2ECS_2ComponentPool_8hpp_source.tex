@@ -1,0 +1,45 @@
+\hypertarget{Client_2ECS_2ComponentPool_8hpp_source}{}\doxysection{Component\+Pool.\+hpp}
+\label{Client_2ECS_2ComponentPool_8hpp_source}\index{Source/Client/ECS/ComponentPool.hpp@{Source/Client/ECS/ComponentPool.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ ComponentPool}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ COMPONENTPOOL\_HPP\_}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ COMPONENTPOOL\_HPP\_}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}ECS.hpp"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classComponentPool}{ComponentPool}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classComponentPool}{ComponentPool}}(\textcolor{keywordtype}{size\_t}\ elementsize)}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ elementSize\ =\ elementsize;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{char}[elementSize\ *\ MAX\_ENTITIES];}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classComponentPool}{\string~ComponentPool}}()}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ data;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *get(\textcolor{keywordtype}{size\_t}\ index)}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\ +\ index\ *\ elementSize;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *data;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ elementSize;}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !COMPONENTPOOL\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,61 @@
+\hypertarget{MessageQueue_8hpp_source}{}\doxysection{Message\+Queue.\+hpp}
+\label{MessageQueue_8hpp_source}\index{Source/Server/Networking/MessageQueue.hpp@{Source/Server/Networking/MessageQueue.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ B-\/CPP-\/500-\/BER-\/5-\/2-\/rtype-\/alban.de-\/tourtier}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ MessageQueue}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ MESSAGEQUEUE\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MESSAGEQUEUE\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}boost/array.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMessageQueue}{MessageQueue}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMessageQueue}{MessageQueue}}()\ \{\};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMessageQueue}{\string~MessageQueue}}()\ \{\};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ pushMessage(T\ message)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::recursive\_mutex>\ lock(\_mutex);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \_messageQueue.push(message);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ T\ popMessage()}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::recursive\_mutex>\ lock(\_mutex);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ T\ message;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_messageQueue.empty())\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ message\ =\ \_messageQueue.front();}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_messageQueue.pop();}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ message;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::vector<T>\ getMessages()}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::recursive\_mutex>\ lock(\_mutex);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ messages;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\_messageQueue.empty())\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ messages.push\_back(\_messageQueue.front());}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_messageQueue.pop();}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ messages;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::queue<T>\ \_messageQueue;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ std::recursive\_mutex\ \_mutex;}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !MESSAGEQUEUE\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,204 @@
+\hypertarget{Serializator_8hpp_source}{}\doxysection{Serializator.\+hpp}
+\label{Serializator_8hpp_source}\index{Source/Server/Networking/protocol/Serializator.hpp@{Source/Server/Networking/protocol/Serializator.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ B-\/CPP-\/500-\/BER-\/5-\/2-\/rtype-\/alban.de-\/tourtier}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ Serializator}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ SERIALIZATOR\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ SERIALIZATOR\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <bitset>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}macroSerializator.hpp"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }serializator}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{enum}\ Movement\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ LEFT,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ RIGHT,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ DOWN,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ UP,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ SHOOT}
+\DoxyCodeLine{00027\ \ \ \ \ \};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{enum}\ Header\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ deleteEntity,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ UpdateLoot,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ UpdateExplosion,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ UpdateEnnemy,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ UpdateObstacle,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ UpdateProjectile,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ UpdatePlayer,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ updateMap,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ stateGame,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ action,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ menu,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ startGame,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ canSelect,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ spaceShipSelection}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ \}\ \textcolor{comment}{//\ namespace\ serializator}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMsg}{Msg}}\ \{}
+\DoxyCodeLine{00048\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ getstatus()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_status;\};}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ setstatus(serializator::Header\ status)\ \{\_status\ =\ status;\};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ getId()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_id;\};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ setId(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{id})\ \{\_id\ =\ id;\};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ getOwnerId()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_ownerId;\};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ setOwnerId(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{id})\ \{\_ownerId\ =\ id;\};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{int}\ getWeaponId()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_weaponIndex;\};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ setWeaponId(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ weaponIndex)\ \{\_weaponIndex\ =\ weaponIndex;\};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{int}\ getClientHash()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_clientHashNumber;\};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ setClientHash(\textcolor{keywordtype}{int}\ clientHashNumber)\ \{\_clientHashNumber\ =\ clientHashNumber;\};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{int}\ getX()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_x;\};}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ setX(\textcolor{keywordtype}{int}\ x)\ \{\_x\ =\ x;\};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{int}\ getY()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_y;\};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ setY(\textcolor{keywordtype}{int}\ y)\ \{\_y\ =\ y;\};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ setZ(\textcolor{keywordtype}{int}\ z)\ \{\_z\ =\ z;\};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{int}\ getZ()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_z;\};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ setDirection(\textcolor{keywordtype}{int}\ direction)\ \{\_direction\ =\ direction;\};}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{int}\ getDirection()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_direction;\};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ getstate()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_state;\};}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ setstate(\textcolor{keywordtype}{bool}\ state)\ \{\_state\ =\ state;\};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{int}\ getaction()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_action;\};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ setaction(\textcolor{keywordtype}{int}\ action)\ \{\_action\ =\ action;\};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ getLootIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_lootIndex;\};}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ setLootIndex(\textcolor{keywordtype}{int}\ lootIndex)\ \{\ \_lootIndex\ =\ lootIndex;\};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{int}\ getExplosionIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_explosionIndex;\};}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ setExplosionIndex(\textcolor{keywordtype}{int}\ lootIndex)\ \{\ \_explosionIndex\ =\ lootIndex;\};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{int}\ getEnemyIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_enemyIndex;\};}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ setEnemyIndex(\textcolor{keywordtype}{int}\ lootIndex)\ \{\ \_enemyIndex\ =\ lootIndex;\};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{int}\ getObstacleIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_obstacleIndex;\};}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ setObstacleIndex(\textcolor{keywordtype}{int}\ lootIndex)\ \{\ \_obstacleIndex\ =\ lootIndex;\};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{int}\ getModelIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_modelIndex;\};}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ setModelIndex(\textcolor{keywordtype}{int}\ lootIndex)\ \{\ \_modelIndex\ =\ lootIndex;\};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{int}\ getSpaceShipIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_modelSpaceShip;\};}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ setSpaceShipIndex(\textcolor{keywordtype}{int}\ model)\ \{\ \_modelSpaceShip\ =\ model;\};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{int}\ getAvatarIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_avatarIndex;\};}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ setAvatarIndex(\textcolor{keywordtype}{int}\ lootIndex)\ \{\ \_avatarIndex\ =\ lootIndex;\};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ gettype()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_type;\};}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ settype(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ type)\ \{\_type\ =\ type;\};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ setYaw(\textcolor{keywordtype}{int}\ yaw)\ \{\_yaw\ =\ yaw;\};}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{int}\ getYaw()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_yaw;\};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ setPitch(\textcolor{keywordtype}{int}\ pitch)\ \{\_pitch\ =\ pitch;\};}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{int}\ getPitch()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_pitch;\};}
+\DoxyCodeLine{00112\ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ setRoll(\textcolor{keywordtype}{int}\ roll)\ \{\_roll\ =\ roll;\};}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{int}\ getRoll()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_roll;\};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ setStartGame(\textcolor{keywordtype}{bool}\ start)\ \{\_startGame\ =\ start;\};}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{bool}\ getStartGame()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_startGame;\};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ setMapIndex(\textcolor{keywordtype}{int}\ mapIndex)\ \{\_mapIndex\ =\ mapIndex;\};}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{int}\ getMapIndex()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_mapIndex;\};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ setRacerMode(\textcolor{keywordtype}{bool}\ racerMode)\ \{\_racerMode\ =\ racerMode;\};}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{bool}\ getRacerMode()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_racerMode;\};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ serializator::Movement\ getmovement()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_mvt;\};}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ setmovement(serializator::Movement\ type)\ \{\_mvt\ =\ type;\};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \_id\ =\ 0;}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \_ownerId\ =\ 0;}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{int}\ \_clientHashNumber\ =\ 0;}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_type\ =\ 0;}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{int}\ \_x\ =\ 0;}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{int}\ \_y\ =\ 0;}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{int}\ \_z\ =\ 0;}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{int}\ \_action\ =\ 0;}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_state\ =\ 0;}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{int}\ \_lootIndex\ =\ 0;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{int}\ \_explosionIndex\ =\ 0;}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{int}\ \_enemyIndex\ =\ 0;}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{int}\ \_obstacleIndex\ =\ 0;}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{int}\ \_direction\ =\ 0;}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{int}\ \_weaponIndex\ =\ 0;}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{int}\ \_modelIndex\ =\ 0;}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{int}\ \_modelSpaceShip\ =\ 0;}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{int}\ \_avatarIndex\ =\ 0;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{int}\ \_yaw\ =\ 0;}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{int}\ \_pitch\ =\ 0;}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{int}\ \_roll\ =\ 0;}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_startGame\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{int}\ \_mapIndex\ =\ 0;}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_racerMode\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00154\ \ \ \ \ serializator::Header\ \_status;}
+\DoxyCodeLine{00155\ \ \ \ \ serializator::Movement\ \_mvt;}
+\DoxyCodeLine{00156\ \};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSerializator}{Serializator}}\ \{}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00161\ \ \ \ \ \mbox{\hyperlink{classSerializator}{Serializator}}();}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \mbox{\hyperlink{classSerializator}{\string~Serializator}}();}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{char}\ enumToByte(serializator::Header);}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{char}\ enumToByte(serializator::Movement);}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{char}\ *intToByte(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long});}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{char}\ *intToByte(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{char}\ *intToByte(\textcolor{keywordtype}{float}\ number);}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{int}\ byteArrayToInt(\textcolor{keywordtype}{char}\ *byteArray);}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ byteArrayToLongLong(\textcolor{keywordtype}{char}\ *byteArray);}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageUpdEnnemies(serializator::Header,\ \textcolor{keywordtype}{int}\ model,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{int}\ pitch,\ \textcolor{keywordtype}{int}\ raw,\ \textcolor{keywordtype}{int}\ roll,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ serverEntityId);}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageRemoveEntity(serializator::Header,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long});}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackagePosEntity(serializator::Header,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ serverEntityId,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z);}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageUpgLootExp(serializator::Header,\ \textcolor{keywordtype}{int}\ ,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ serverEntityId);}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageUpdProjectile(serializator::Header,\ \textcolor{keywordtype}{int}\ ,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ serverEntityId,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ OwnerId);}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageUpdPowerUp(serializator::Header\ status,\ \textcolor{keywordtype}{int}\ model,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ entityId);}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageUpdObs(serializator::Header\ status,\ \textcolor{keywordtype}{int}\ model,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ entityId);}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageUpdExplosion(serializator::Header\ status,\ \textcolor{keywordtype}{int}\ model,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ entityId);}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageStateGame(serializator::Header\ status,\ \textcolor{keywordtype}{bool}\ state);}
+\DoxyCodeLine{00184\ \ \ \ \ }
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{comment}{//\ SERIALIZATOR\ MENU\ //}}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageSelection(serializator::Header\ status,\ \textcolor{keywordtype}{int}\ action);}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageSetClientId(serializator::Header\ status,\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageStartGame(serializator::Header\ status,\ \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageCanSelect(serializator::Header\ status,\ \textcolor{keywordtype}{int},\textcolor{keywordtype}{bool}\ state);}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{char}\ *createPackageSetSpaceShip(serializator::Header\ status,\ \textcolor{keywordtype}{int}\ indexSpaceShip,\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \mbox{\hyperlink{classMsg}{Msg}}\ bytesToStruct(\textcolor{keywordtype}{char}\ *l);}
+\DoxyCodeLine{00195\ \};}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ std::ostream\&\ operator<<\ (std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classMsg}{Msg}}\ \&message);}
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !SERIALIZATOR\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

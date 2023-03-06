@@ -1,0 +1,92 @@
+\hypertarget{classDataReceivingSystem}{}\doxysection{Data\+Receiving\+System Class Reference}
+\label{classDataReceivingSystem}\index{DataReceivingSystem@{DataReceivingSystem}}
+Inheritance diagram for Data\+Receiving\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDataReceivingSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a61609891d207f9e6c97d621f16c45c12}\label{classDataReceivingSystem_a61609891d207f9e6c97d621f16c45c12}} 
+{\bfseries Data\+Receiving\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classRL_1_1InputManager}{RL\+::\+Input\+Manager}} $>$ input\+Manager, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classRL_1_1MenuManager}{RL\+::\+Menu\+Manager}} $>$ \+\_\+menu\+Manager, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classUDPClient}{UDPClient}} $>$)
+\item 
+void \mbox{\hyperlink{classDataReceivingSystem_a5544039fc9537140208905dc464284ca}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_acb96b2ce36a0b1d1170afbb53d2c3a6b}\label{classDataReceivingSystem_acb96b2ce36a0b1d1170afbb53d2c3a6b}} 
+void {\bfseries create\+Player\+Client} (std\+::string model\+Name, unsigned long long ID, unsigned long long client\+Hash\+ID)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_af401631191fdc9c271424b7e91cbb220}\label{classDataReceivingSystem_af401631191fdc9c271424b7e91cbb220}} 
+void {\bfseries create\+Obstacle\+Client} (std\+::string model\+Name, Vector3 position, unsigned long long ID)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a88ec4936d72c57252a639f6f4e4110e0}\label{classDataReceivingSystem_a88ec4936d72c57252a639f6f4e4110e0}} 
+void {\bfseries create\+Ennemy\+Client} (std\+::string model\+Name, Vector3 position, unsigned long long ID)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_af71bbcd665d5f20d97611029bbc27ae9}\label{classDataReceivingSystem_af71bbcd665d5f20d97611029bbc27ae9}} 
+void {\bfseries create\+Projectile\+Client} (Vector3 entity\+Pos, int weapon\+Index, Entity\+ID owner\+ID, int direction, unsigned long long ID)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a58fb2777abcbf82eaf4f3e71dc2fee5a}\label{classDataReceivingSystem_a58fb2777abcbf82eaf4f3e71dc2fee5a}} 
+void {\bfseries create\+\_\+loot\+Client} (Vector3 pos, std\+::string loot\+Name, unsigned long long ID)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a9b9e7e8d693557b238c4d409b67bb11a}\label{classDataReceivingSystem_a9b9e7e8d693557b238c4d409b67bb11a}} 
+\mbox{\hyperlink{structProjectileWeapon}{Projectile\+Weapon}} {\bfseries generate\+Weapon\+Loot\+Client} (std\+::string projectile\+Name)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_ad0e01a631cedffdd0554526de0a5192b}\label{classDataReceivingSystem_ad0e01a631cedffdd0554526de0a5192b}} 
+\mbox{\hyperlink{structShield}{Shield}} {\bfseries generate\+Shield\+Loot\+Client} ()
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a6fcc42de2ad3cf56f205ea30ecb53f9c}\label{classDataReceivingSystem_a6fcc42de2ad3cf56f205ea30ecb53f9c}} 
+\mbox{\hyperlink{structAI}{AI}} {\bfseries assign\+AI} (std\+::string AIType, Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_af491ba024edcc4b21c2419e1572cdcfe}\label{classDataReceivingSystem_af491ba024edcc4b21c2419e1572cdcfe}} 
+\mbox{\hyperlink{structAI}{AI}} {\bfseries assign\+Simple\+AI} (std\+::string AIType, Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a6dadd9ee3536fc32115c7c1da458830f}\label{classDataReceivingSystem_a6dadd9ee3536fc32115c7c1da458830f}} 
+std\+::vector$<$ \mbox{\hyperlink{structProjectileWeapon}{Projectile\+Weapon}} $>$ {\bfseries generate\+Start\+Weaponset} (std\+::string model\+Name)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_abb5775655e6e16522993b43438faf86a}\label{classDataReceivingSystem_abb5775655e6e16522993b43438faf86a}} 
+std\+::vector$<$ \mbox{\hyperlink{structProjectileWeapon}{Projectile\+Weapon}} $>$ {\bfseries generate\+Start\+Weaponset\+Ennemies} (std\+::string model\+Name)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_aa6027892adc19413ed08fa7c44303364}\label{classDataReceivingSystem_aa6027892adc19413ed08fa7c44303364}} 
+void {\bfseries create\+\_\+explosion} (Vector3 pos, std\+::string explo\+Name, unsigned long long ID)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a56e4c1be571068a5fc59cea7512ba963}\label{classDataReceivingSystem_a56e4c1be571068a5fc59cea7512ba963}} 
+void {\bfseries create\+Entities} (Entity\+ID, char)
+\item 
+\mbox{\Hypertarget{classDataReceivingSystem_a36b4fa1e7eb017f95d3668e90e8b2a28}\label{classDataReceivingSystem_a36b4fa1e7eb017f95d3668e90e8b2a28}} 
+void {\bfseries apply\+New\+Position} (Entity\+ID id, int x, int y, int z, int pitch, int yaw, int roll)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDataReceivingSystem_a5544039fc9537140208905dc464284ca}\label{classDataReceivingSystem_a5544039fc9537140208905dc464284ca}} 
+\index{DataReceivingSystem@{DataReceivingSystem}!update@{update}}
+\index{update@{update}!DataReceivingSystem@{DataReceivingSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Data\+Receiving\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Client/\+Components\&\+Systems/Data\+Receiving\+System.\+hpp\item 
+Source/\+Client/\+Components\&\+Systems/Data\+Receiving\+System.\+cpp\end{DoxyCompactItemize}

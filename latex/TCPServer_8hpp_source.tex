@@ -1,0 +1,59 @@
+\hypertarget{TCPServer_8hpp_source}{}\doxysection{TCPServer.\+hpp}
+\label{TCPServer_8hpp_source}\index{Source/Server/Networking/TCPServer.hpp@{Source/Server/Networking/TCPServer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2023}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ B-\/CPP-\/500-\/BER-\/5-\/2-\/rtype-\/alban.de-\/tourtier}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ TCPServer}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ TCPSERVER\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ TCPSERVER\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <boost/array.hpp>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <boost/bind/bind.hpp>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <boost/enable\_shared\_from\_this.hpp>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <boost/shared\_ptr.hpp>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTCPConnection}{TCPConnection}}\ :\ \textcolor{keyword}{public}\ boost::enable\_shared\_from\_this<TCPConnection>\ \{}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{classTCPConnection}{TCPConnection}}(boost::asio::io\_context\ \&io\_context);}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{classTCPConnection}{\string~TCPConnection}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{typedef}\ boost::shared\_ptr<TCPConnection>\ pointer;}
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{static}\ pointer\ create(boost::asio::io\_context\ \&io\_context);}
+\DoxyCodeLine{00028\ \ \ boost::asio::ip::tcp::socket\ \&socket();}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{void}\ start();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ boost::asio::ip::tcp::socket\ \_socket;}
+\DoxyCodeLine{00033\ \ \ std::string\ \_message;}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{classTCPConnection}{TCPConnection}}(boost::asio::io\_context\ \&io\_context);}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{void}\ handleWrite(\textcolor{keyword}{const}\ boost::system::error\_code\ \&error,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ bytes\_transferred);}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTCPServer}{TCPServer}}\ \{}
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{classTCPServer}{TCPServer}}(boost::asio::io\_context\ \&ioContext,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ port\ =\ 1313);}
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{classTCPServer}{\string~TCPServer}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{void}\ startAccept();}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ handleAccept(TCPConnection::pointer\ newConnection,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ boost::system::error\_code\ \&error);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ boost::asio::io\_context\ \&\_ioContext;}
+\DoxyCodeLine{00050\ \ \ boost::asio::ip::tcp::acceptor\ \_acceptor;}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !TCPSERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

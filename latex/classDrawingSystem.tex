@@ -1,0 +1,71 @@
+\hypertarget{classDrawingSystem}{}\doxysection{Drawing\+System Class Reference}
+\label{classDrawingSystem}\index{DrawingSystem@{DrawingSystem}}
+Inheritance diagram for Drawing\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDrawingSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDrawingSystem_afca51f2be7902e11d3eee651ec3f1083}\label{classDrawingSystem_afca51f2be7902e11d3eee651ec3f1083}} 
+{\bfseries Drawing\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classRL_1_1Renderer}{RL\+::\+Renderer}} $>$ renderer, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classRL_1_1CameraManager}{RL\+::\+Camera\+Manager}} $>$ camera\+Manager, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classRL_1_1Window}{RL\+::\+Window}} $>$ window)
+\item 
+void \mbox{\hyperlink{classDrawingSystem_a05566c18634dd6a5781f85ba2812cefd}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classDrawingSystem_a006c75e3b392f5a2ac59a8a6a88d8370}\label{classDrawingSystem_a006c75e3b392f5a2ac59a8a6a88d8370}} 
+void {\bfseries explosion\+Drawing} ()
+\item 
+\mbox{\Hypertarget{classDrawingSystem_acb715555f6d23426e148d6d685482da6}\label{classDrawingSystem_acb715555f6d23426e148d6d685482da6}} 
+void {\bfseries shield\+Drawing} ()
+\item 
+\mbox{\Hypertarget{classDrawingSystem_adc55fb3629d266c455eca8c7d77d83d2}\label{classDrawingSystem_adc55fb3629d266c455eca8c7d77d83d2}} 
+void {\bfseries player\+UIDrawing} (Entity\+ID clientplayer\+ID)
+\item 
+\mbox{\Hypertarget{classDrawingSystem_abb2df071386d10959e261232faa079fd}\label{classDrawingSystem_abb2df071386d10959e261232faa079fd}} 
+void {\bfseries handle\+Weaponslots} (Entity\+ID clientplayer\+ID)
+\item 
+\mbox{\Hypertarget{classDrawingSystem_a6fe27a98cfdb06fc8a49ca64fe7842cf}\label{classDrawingSystem_a6fe27a98cfdb06fc8a49ca64fe7842cf}} 
+void {\bfseries handle\+Weapon\+Ammo} (Entity\+ID clientplayer\+ID)
+\item 
+\mbox{\Hypertarget{classDrawingSystem_af021abcdc5f9cbe81854b37460ef1385}\label{classDrawingSystem_af021abcdc5f9cbe81854b37460ef1385}} 
+void {\bfseries handle\+Weapon\+Icons} (Entity\+ID clientplayer\+ID)
+\item 
+\mbox{\Hypertarget{classDrawingSystem_a2c39d2ba8e4d2aea1df5ac23acebcb05}\label{classDrawingSystem_a2c39d2ba8e4d2aea1df5ac23acebcb05}} 
+void {\bfseries handle\+Shield} (Entity\+ID clientplayer\+ID)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDrawingSystem_a05566c18634dd6a5781f85ba2812cefd}\label{classDrawingSystem_a05566c18634dd6a5781f85ba2812cefd}} 
+\index{DrawingSystem@{DrawingSystem}!update@{update}}
+\index{update@{update}!DrawingSystem@{DrawingSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Drawing\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Client/\+Components\&\+Systems/Drawing\+System.\+hpp\item 
+Source/\+Client/\+Components\&\+Systems/Drawing\+System.\+cpp\end{DoxyCompactItemize}

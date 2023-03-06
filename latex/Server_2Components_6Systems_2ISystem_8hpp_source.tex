@@ -1,0 +1,31 @@
+\hypertarget{Server_2Components_6Systems_2ISystem_8hpp_source}{}\doxysection{ISystem.\+hpp}
+\label{Server_2Components_6Systems_2ISystem_8hpp_source}\index{Source/Server/Components\&Systems/ISystem.hpp@{Source/Server/Components\&Systems/ISystem.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ B-\/YEP-\/400-\/BER-\/4-\/1-\/indiestudio-\/josefine.mende}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ ISystem}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ ISYSTEM\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ISYSTEM\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../ECS/EntityViewer.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}Components.hpp"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classISystem}{ISystem}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classISystem}{\string~ISystem}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ update(std::vector<EntityID>\ \&allEntities)\ =\ 0;}
+\DoxyCodeLine{00020\ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::shared\_ptr<EntityManager>\ \_em;}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !ISYSTEM\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,106 @@
+\hypertarget{Server_2McGuyverType_8hpp_source}{}\doxysection{Mc\+Guyver\+Type.\+hpp}
+\label{Server_2McGuyverType_8hpp_source}\index{Source/Server/McGuyverType.hpp@{Source/Server/McGuyverType.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ McGuyverType}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Window.hpp"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}AssetManager.hpp"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Map.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}InputManager.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}Renderer.hpp"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}CameraManager.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}ECS/EntityManager.hpp"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}ECS/EntityViewer.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}ECS/ComponentPool.hpp"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}ECS/EntityManager.hpp"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/ISystem.hpp"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/Components.hpp"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/ScenarioSystem.hpp"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/BotSystem.hpp"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/ShootingSystem.hpp"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/MovementSystem.hpp"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/InputSystem.hpp"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/ClearInputsSystem.hpp"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/DeleteEntitiesSystem.hpp"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/CollisionSystem.hpp"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/LootSystem.hpp"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/HasUpdatedSystem.hpp"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}Networking/UDPServer.hpp"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}Networking/protocol/Serializator.hpp"{}}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMcGuyverType}{McGuyverType}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMcGuyverType}{McGuyverType}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMcGuyverType}{\string~McGuyverType}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ startGame();}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ gameLoop();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ createPlayer(std::string\ modelName,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ clientId);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ std::vector<ProjectileWeapon>\ generateStartWeaponset(std::string\ modelName);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//getters}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::shared\_ptr<EntityManager>\ getEm();}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ threadIoContext();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \_startTimestamp;\ \textcolor{comment}{//\ initialized\ at\ the\ start\ of\ the\ game}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::shared\_ptr<AssetManager>\ \_assetManager;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ boost::asio::io\_context\ \_ioContext;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::shared\_ptr<UDPServer>\ \_udpServer;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ std::thread\ \_serverThread;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSerializator}{Serializator}}\ \_serializator;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ std::shared\_ptr<RL::CameraManager>\ \_cameraManager;}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::InputManager>\ \_inputManager;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ std::shared\_ptr<RL::Renderer>\ \_renderer;}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ std::shared\_ptr<RL::Window>\ \_window;}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ std::shared\_ptr<EntityManager>\ \_entityManager;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<ISystem>>\ \_systems;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::vector<int>\ \_keysPressed;\ \textcolor{comment}{//the\ pressed\ by\ player\ must\ be\ saved\ every\ frame}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Entities}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::vector<EntityID>\ \_allEntities;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::vector<EntityID>\ \_players;}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//game\ related\ data\ \ \ \ \ }}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentLevel\ =\ 0;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structPosition}{Position}}\ \_playerStartingPos\ =\ \{0.0f,\ 5.0f,\ -\/8.0f\};}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structPosition}{Position}}\ \_ennemyStartingPos\ =\ \{4.0f,\ 1.0f,\ 35.0f\};\ \textcolor{comment}{//can\ delete\ }}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structPosition}{Position}}\ \_ennemyStartingPos2\ =\ \{1.0f,\ 5.0f,\ 15.0f\};\ \textcolor{comment}{//can\ delete}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structPosition}{Position}}\ \_ennemyStartingPos3\ =\ \{4.0f,\ 1.0f,\ 15.0f\};\ \textcolor{comment}{//can\ delete}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_playerStartingZ\ =\ 8.0f;\ \textcolor{comment}{//can\ delete}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ enemyStartingZ\ =\ 20.0f;\ \textcolor{comment}{//\ cand\ delete}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ EntityID\ \_thisClientPlayerEntityID\ =\ 100000;\ \textcolor{comment}{//create\ a\ rand\ function\ where\ initiatilising\ client\ to\ have\ a\ unique\ ID\ for\ networking}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{//timer}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//gamepaused}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//ui-\/related\ stuff}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{//drawable2D\ to\ be\ added\ to\ the\ assetmanager\ !!}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{comment}{//enemy\ waves\ and\ obstacle\ waves\ to\ be\ added\ to\ assetmanager!!}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_racerTimer\ =\ 0;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//main\ transfer\ functions\ to\ remake\ archi\ :\ DELETE\ ASAP}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ spaceshipIndex\ =\ 0;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ennemyIndex\ =\ 0;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ projectileIndex\ =\ 0;}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+
+\end{DoxyCode}

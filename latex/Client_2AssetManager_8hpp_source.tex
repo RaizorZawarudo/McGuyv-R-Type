@@ -1,0 +1,157 @@
+\hypertarget{Client_2AssetManager_8hpp_source}{}\doxysection{Asset\+Manager.\+hpp}
+\label{Client_2AssetManager_8hpp_source}\index{Source/Client/AssetManager.hpp@{Source/Client/AssetManager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ AssetManager}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Drawable3D.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}Drawable2D.hpp"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Map.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}ECS/ECS.hpp"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structScenario}{Scenario}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ std::string\ scenarioName;}
+\DoxyCodeLine{00020\ \ \ \ \ std::vector<std::string>\ waveNames;}
+\DoxyCodeLine{00021\ \ \ \ \ std::vector<std::string>\ waveTypes;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//can\ add\ minimum\ score\ /\ minimum\ time\ played\ in\ the\ scenario\ before\ a\ boss\ pops,\ to\ be\ optimised}}
+\DoxyCodeLine{00023\ \ \ \ \ std::vector<int>\ waveamounts;\ }
+\DoxyCodeLine{00024\ \}\ \mbox{\hyperlink{structScenario}{Scenario\_t}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structwaveAsset}{waveAsset}}\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ std::string\ codename;}
+\DoxyCodeLine{00028\ \ \ \ \ Vector3\ position;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \}\ \mbox{\hyperlink{structwaveAsset}{waveAsset\_t}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameWave}{GameWave}}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ std::string\ name;}
+\DoxyCodeLine{00034\ \ \ \ \ std::vector<waveAsset\_t>\ waveComponents;}
+\DoxyCodeLine{00035\ \}\ \mbox{\hyperlink{structGameWave}{Wave\_t}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classAssetManager}{AssetManager}}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAssetManager}{AssetManager}}(EntityID\ currentClientID);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAssetManager}{\string~AssetManager}}();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//loading\ functions}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ loadAllModels();}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ loadAllMaps();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ loadModels(\textcolor{keyword}{const}\ std::string\ \&path,\ RL::ModelType\ type);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ loadObstacleModels(\textcolor{keyword}{const}\ std::string\ \&path,\ RL::ModelType\ type);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ loadExplosionModels(\textcolor{keyword}{const}\ std::string\ \&path,\ RL::ModelType\ type);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ loadEffectModels3D(\textcolor{keyword}{const}\ std::string\ \&path,\ RL::ModelType\ type);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ loadPowerUpModels(\textcolor{keyword}{const}\ std::string\ \&path,\ RL::ModelType\ type);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::vector<Map*>\ loadMaps();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable2D*>\ loadAllBackgrounds(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable2D*>\ loadAllIcons(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ std::vector<Font>\ loadAllFonts(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::vector<Wave\_t>\ loadObstacleWaves(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::vector<Wave\_t>\ loadEnnemyWaves(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::vector<waveAsset\_t>\ loadWaveData(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structwaveAsset}{waveAsset\_t}}\ loadWaveAssetData(std::string\ name,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::vector<Wave\_t>\ loadEnnemyWaves(const\ std::string\ \&path);}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ std::vector<Scenario\_t>\ loadAllScenarios(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ std::vector<std::string>\ loadScenarioData(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ std::vector<std::string>\ loadScenarioDataAgain(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{//getters}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getZonesModels();}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getProjectileModels();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getSpacecraftModels();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getEnnemyModels();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getObstacleModels();}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getExplosionModels();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getEffectsModels3D();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ getPowerUpModels();}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ std::vector<Map*>\ getMaps();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ std::vector<Wave\_t>\ getObstacleWaves();}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ std::vector<Wave\_t>\ getEnnemyWaves();}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ std::vector<Scenario\_t>\ getScenarios();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable2D*>\ getBackgrounds();}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable2D*>\ getUIelements();}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ std::vector<Font>\ getAllFonts();}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getCurrentMapBeingPlayed();}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ EntityID\ getCurrentClientID();}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getLootRand();}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ getRacerMode();}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ getStartTimestamp();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1Drawable2D}{RL::Drawable2D}}*\ getSpecificBackground(std::string\ backgroundName);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1Drawable3D}{RL::Drawable3D}}*\ getSpecificDrawableWithType(std::string\ modelName,\ RL::ModelType\ modelType);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1Drawable2D}{RL::Drawable2D}}*\ getSpecificIcon(std::string\ modelName);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//setters}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentMapBeingPlayed(\textcolor{keywordtype}{int}\ level);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setLootRand(\textcolor{keywordtype}{int}\ random);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ startTime();}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setRacerMode();}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentClientID(EntityID\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//game\ related\ variables\ need\ for\ updates\ etc}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ EntityID\ \_currentclientID;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentLevelBeingPlayed;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_lootrand;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \_startTimestamp;\ \textcolor{comment}{//\ initialized\ at\ the\ start\ of\ the\ game}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//3d\ assets}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_zonesModels;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_projectileModels;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_spacecraftModels;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_ennemyModels;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_obstacleModels;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_explosionModelsAnim;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_effectsModels3D;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable3D*>\ \_powerUpModels;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//2d\ assets}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable2D*>\ \_ingameBackgrounds;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ std::vector<RL::Drawable2D*>\ \_IconsUIelements;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//maps}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ std::vector<Map*>\ \_maps;}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{comment}{//data\ assets}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ std::vector<Wave\_t>\ \_obstacleWaves;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ std::vector<Wave\_t>\ \_ennemyWaves;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ std::vector<Scenario\_t>\ \_scenarios;}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{comment}{//scenario\ \ \ this\ is\ what\ decides\ how\ the\ game\ flows\ and\ when\ boss\ pops\ etc\ etc}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ so\ this\ is\ a\ vector\ of\ scenarios\ where\ it\ has\ the\ ennemy\ waves\ and\ obstacles\ waves\ order}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ for\ the\ current\ map\ the\ player\ selected,\ and\ also\ what\ are\ the\ requirements\ for\ a\ boss\ to\ pop\ etc}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ and\ when\ the\ scenario\ is\ being\ completed\ it\ can\ contact\ the\ map\ to\ tell\ it\ hey\ open\ boss\ room}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ .\ \ \ \ \ \ \ \ \ and\ when\ the\ boss\ is\ dead\ it\ should\ tell\ the\ scenario\ and\ tell\ the\ map\ that\ it\ died}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ so\ dont\ forget\ to\ do\ it\ the\ delete\ entity\ system\ a\ function\ that\ if\ the\ ennemy\ is\ a\ boss\ it\ should}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ .\ \ \ \ \ \ \ \ \ contact\ the\ map\ AND\ the\ scenario\ to\ push\ the\ game\ forward.\ also\ add\ scenario\ and\ map\ in\ the\ delete\ entity\ systemnow}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{//fonts}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ std::vector<Font>\ \_fonts;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_racerMode\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \};}
+\DoxyCodeLine{00151\ }
+
+\end{DoxyCode}

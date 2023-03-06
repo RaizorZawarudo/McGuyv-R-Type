@@ -1,0 +1,92 @@
+\hypertarget{Client_2McGuyverType_8hpp_source}{}\doxysection{Mc\+Guyver\+Type.\+hpp}
+\label{Client_2McGuyverType_8hpp_source}\index{Source/Client/McGuyverType.hpp@{Source/Client/McGuyverType.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ McGuyverType}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Window.hpp"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}AssetManager.hpp"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Map.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}InputManager.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}SoundManager.hpp"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Renderer.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}CameraManager.hpp"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}ECS/EntityManager.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}ECS/EntityViewer.hpp"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}ECS/ComponentPool.hpp"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}ECS/EntityManager.hpp"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/ISystem.hpp"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/Components.hpp"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/MovementSystem.hpp"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/InputSystem.hpp"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/ClearInputsSystem.hpp"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/DrawingSystem.hpp"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/DeleteEntitiesSystem.hpp"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/DataReceivingSystem.hpp"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}MenuManager.hpp"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}Networking/UDPClient.hpp"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMcGuyverType}{McGuyverType}}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMcGuyverType}{McGuyverType}}();}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMcGuyverType}{\string~McGuyverType}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ startGame();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ gameLoop();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ udpClientThreadFunction();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{comment}{//entity\ creation\ functions}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ createSeggySafe();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//getters}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::shared\_ptr<EntityManager>\ getEm();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \_startTimestamp;\ \textcolor{comment}{//\ initialized\ at\ the\ start\ of\ the\ game}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::shared\_ptr<AssetManager>\ \_assetManager;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::thread\ \_udpClientThread;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::atomic<bool>\ \_isEnd\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ boost::asio::io\_context\ \_ioContext;;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ std::shared\_ptr<UDPClient>\ \_udpClient;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::SoundManager>\ \_soundManager;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::CameraManager>\ \_cameraManager;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::InputManager>\ \_inputManager;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::Renderer>\ \_renderer;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::Window>\ \_window;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::shared\_ptr<EntityManager>\ \_entityManager;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<ISystem>>\ \_systems;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::MenuManager>\ \_menuManager;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSerializator}{Serializator}}\ \_serializator;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::vector<int>\ \_keysPressed;\ \textcolor{comment}{//the\ pressed\ by\ player\ must\ be\ saved\ every\ frame}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Entities}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::vector<EntityID>\ \_allEntities;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ std::vector<EntityID>\ \_players;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//game\ related\ data\ \ \ \ \ }}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_currentLevel\ =\ 0;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_playerStartingZ\ =\ 8.0f;\ \textcolor{comment}{//can\ delete}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ enemyStartingZ\ =\ 20.0f;\ \textcolor{comment}{//\ cand\ delete}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ EntityID\ \_thisClientPlayerEntityID\ =\ 100000;\ \textcolor{comment}{//create\ a\ rand\ function\ where\ initiatilising\ client\ to\ have\ a\ unique\ ID\ for\ networking}}
+\DoxyCodeLine{00085\ \};}
+\DoxyCodeLine{00086\ }
+
+\end{DoxyCode}

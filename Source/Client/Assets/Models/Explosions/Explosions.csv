@@ -1,0 +1,3 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale float
+lowPoly,basic,Source/Client/Assets/Models/Explosions/lowPoly/fire.iqm,Source/Client/Assets/Models/Explosions/lowPoly/fire.png,Source/Client/Assets/Models/Explosions/lowPoly/fire.iqm,1
+orangePurp,basic,Source/Client/Assets/Models/Explosions/smallparticles/orangePurp.iqm,0,Source/Client/Assets/Models/Explosions/smallparticles/orangePurp.iqm,1

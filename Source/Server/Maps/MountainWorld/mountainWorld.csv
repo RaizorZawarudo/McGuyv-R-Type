@@ -1,0 +1,4 @@
+Loop Zones,LoopZone Waves,wave amount,Boss Zones,BossRoom Boss
+MushroomPath1,TwoWindows;tronDrones4,3,TestBossroom,GolemBOSS
+MushroomPath1,FullEdgesLowLag,3,TestBossroom,Beholder
+MushroomPath1,TwoWindows,3,TestBossroom,GolemBOSS

@@ -1,0 +1,5 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale int,lenght float,width float,height float
+shieldblue80,basic,Source/Client/Assets/Models/Effects/shieldBlue/shieldf80blue.obj,0,0,1,4,4,4
+shieldblue50,basic,Source/Client/Assets/Models/Effects/shieldBlue/shieldf5080blue.obj,0,0,1,4,4,4
+shieldblue25,basic,Source/Client/Assets/Models/Effects/shieldBlue/shieldf2550blue.obj,0,0,1,4,4,4
+shieldblue00,basic,Source/Client/Assets/Models/Effects/shieldBlue/shieldf0025blue.obj,0,0,1,4,4,4

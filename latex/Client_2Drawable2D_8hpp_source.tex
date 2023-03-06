@@ -1,0 +1,68 @@
+\hypertarget{Client_2Drawable2D_8hpp_source}{}\doxysection{Drawable2\+D.\+hpp}
+\label{Client_2Drawable2D_8hpp_source}\index{Source/Client/Drawable2D.hpp@{Source/Client/Drawable2D.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ Drawable2D.hpp}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ .}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <raylib.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <sys/stat.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <cmrc/cmrc.hpp>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}IDrawable.hpp"{}}}
+\DoxyCodeLine{00017\ CMRC\_DECLARE(\mbox{\hyperlink{structclient}{client}});}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\#include\ "{}RaylibTypeEncaps.hpp"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }RL\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRL_1_1Drawable2D}{Drawable2D}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classRL_1_1IDrawable}{IDrawable}}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1Drawable2D}{Drawable2D}}(std::string\ assetPath,\ std::string\ name,\ \textcolor{keywordtype}{float}\ width,\ \textcolor{keywordtype}{float}\ height,\ std::string\ type);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRL_1_1Drawable2D}{\string~Drawable2D}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ IDrawable\ methods}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ draw();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ void\ reset();}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Image\ Loading\ /\ Manipulation\ methods}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ loadImage(std::string\ assetPath);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ unloadAll();}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ resize(Vector2\ newSize);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Getters\ and\ setters}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isImageLoaded()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setTint(Color\ newTint);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setPosition(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ getPosition();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ Texture2D\ getTexture();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ getName();}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2\ getSize();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ getType();}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ These\ initializations\ will\ not\ work}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ Vector3\ \_position\ =\ \{0,\ 0,\ 0\};}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2\ \_size\ =\ \{0,\ 0\};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_name;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_type;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_imageLoaded\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ Image\ \_img;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ Texture2D\ \_texture;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ Color\ \_tint\ =\ WHITE;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ cmrc::embedded\_filesystem\ \_fs\ =\ cmrc::client::get\_filesystem();}
+\DoxyCodeLine{00061\ \ \ \ \ \};}
+\DoxyCodeLine{00062\ \}}
+
+\end{DoxyCode}

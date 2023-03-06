@@ -1,0 +1,60 @@
+\hypertarget{Server_2Renderer_8hpp_source}{}\doxysection{Renderer.\+hpp}
+\label{Server_2Renderer_8hpp_source}\index{Source/Server/Renderer.hpp@{Source/Server/Renderer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ indie\_studio}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ Drawer}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <raylib.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Map.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}AssetManager.hpp"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Components\&Systems/Components.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}raymath.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ how\ does\ the\ drawer\ work\ :}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//Drawer.clear()}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//Drawer.begin\_drawing()}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//Drawer.begin\_MODE()\ \ \ \ MODE=\ 2D\ or\ 3D}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//Drawer.draw\_XXX}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//Draweer.end\_MODE()}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }RL\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{class\ }Renderer\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ Renderer(std::string\ name);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \string~Renderer();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ clearBackground();\ \textcolor{comment}{//\ Done\ on\ window\ no\ ?}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawBackground(std::shared\_ptr<AssetManager>\ \mbox{\hyperlink{classAssetManager}{AssetManager}},\ \textcolor{keywordtype}{int}\ currentLevel);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ draw\_3D\_model(Model\ model,\ Vector3\ position,\ \textcolor{keywordtype}{float}\ scale,\ RL::ModelType\ ownerType,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structPitchYawRoll}{PitchYawRoll}}\ *pitchYawRoll);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ draw\_2D\_model(Texture2D\ texture,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//EDIT::\ drawMap\ should\ only\ draw,\ map\ logic\ of\ scrolling\ and\ spawning\ mobs\ etc\ will\ be\ in\ the\ map\ class\ for\ better\ encapsulations}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawMap(\mbox{\hyperlink{classMap}{Map}}*\ \mbox{\hyperlink{classMap}{Map}},\ Camera\ camera,\ std::shared\_ptr<AssetManager>\ \mbox{\hyperlink{classAssetManager}{AssetManager}});\ \textcolor{comment}{//should\ take\ map\ class\ as\ parameter,\ map\ class\ containing\ path\ and\ boosrooms\ (and\ transition\ rooms\ maybe\ if\ we\ do\ it)}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ draw\_text(std::string\ text,\ Color\ color,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ Font\ font,\ \textcolor{keywordtype}{float}\ size);\ \textcolor{comment}{//\ temporary,\ should\ create\ text\ class\ with\ font\ and\ size}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ translateCoordinatestoWorld(\textcolor{keywordtype}{int}\ pos,\ \textcolor{keywordtype}{int}\ borderSize);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ begin3DMode(Camera\ camera);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ beginDrawing();}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ end3DMode();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ endDrawing();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_name;}
+\DoxyCodeLine{00053\ \ \ \ \ \};\ \ \ }
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}

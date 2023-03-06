@@ -1,0 +1,255 @@
+/*
+** EPITECH PROJECT, 2022
+** B-YEP-400-BER-4-1-indiestudio-josefine.mende
+** File description:
+** MovementSystem
+*/
+
+#pragma once
+
+#include "ISystem.hpp"
+#include "../InputManager.hpp"
+#include "../AssetManager.hpp"
+
+const float MAXLEFT = 7.0F;
+const float MAXRIGHT = -7.0F;
+const float MAXUP = 6.0F;
+const float MAXDOWN = 1.0F;
+const float MAXFORWARD = 20.0f;
+const float PLAYERSTARTINGZ = -8.0f;
+
+
+class MovementSystem : public ISystem {
+    public:
+        MovementSystem(std::shared_ptr<EntityManager> em, std::shared_ptr<AssetManager> assetManager) :_assetManager(assetManager)
+        {
+            _em = em;
+        };
+
+        ~MovementSystem() {};
+
+        bool entityHasPressedKeyAsChar(Input *entityMovement, int key)
+        {
+            for (int i = 0; i < entityMovement->_inputQueue.size(); i++) {
+                    if (entityMovement->_inputQueue[i]== key)
+                        return true;
+            }
+             return false;        
+        };
+
+        void update(std::vector<EntityID> &allEntities) override {
+            for (EntityID ent : EntityViewer<Position, Velocity, EntityModelType, PitchYawRoll, Collider>(*_em.get())) {
+                _ent = ent;
+                EntityModelType* entityType = _em->Get<EntityModelType>(ent);
+                Position* entityPos = _em->Get<Position>(ent);
+                PitchYawRoll* pitchYawRoll = _em->Get<PitchYawRoll>(ent);
+                ModelDimensions* modelDimensions = _em->Get<ModelDimensions>(ent);
+                Collider* entityCollider = _em->Get<Collider>(ent);
+                Velocity* entityVel = _em->Get<Velocity>(ent);
+                Owner *entityOwner = _em->Get<Owner>(ent);
+                int forward = 0;
+
+                if (entityType->modelType == RL::ModelType::SPACESHIP) {
+                    Input* entityMovement = _em->Get<Input>(ent);
+                    for (int keypressed : entityMovement->_inputQueue) {
+                        if (keypressed == UP || keypressed == UP2) moveUp(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == DOWN) moveDown(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
+                            else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
+                        }
+
+                        if (keypressed == LEFT || keypressed == LEFT2) moveLeft(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == RIGHT) moveRight(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 0.5f;
+                            else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 0.5f;
+                        }
+
+                        if (keypressed == FORWARD) forward = 1;
+                    }
+                    if (forward == 1 )moveForward(entityPos, entityVel, entityMovement, pitchYawRoll);
+                    else
+                        if (entityPos->pos.z > PLAYERSTARTINGZ) entityPos->pos.z -= 0.2f;
+                    forward = 0;
+                }
+                if (entityType->modelType == RL::ModelType::ENNEMY) {
+                    Input* entityMovement = _em->Get<Input>(ent);
+                    for (int keypressed : entityMovement->_inputQueue) {
+                        if (keypressed == UP || keypressed == UP2) moveUp(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == DOWN) moveDown(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->pitch > 0.0f) pitchYawRoll->pitch -= 0.5f;
+                            else if (pitchYawRoll->pitch < 0.0f) pitchYawRoll->pitch += 0.5f;
+                        }
+
+                        if (keypressed == LEFT || keypressed == LEFT2) moveLeft(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else if (keypressed == RIGHT) moveRight(entityPos, entityVel, entityMovement, pitchYawRoll);
+                        else {
+                            if (pitchYawRoll->roll > 0.0f) pitchYawRoll->roll -= 0.5f;
+                            else if (pitchYawRoll->roll < 0.0f) pitchYawRoll->roll += 0.5f;
+                        }
+                    }
+                     if (_assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getCurrentSpeed() != _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getScrollSpeed())
+                        entityVel->z = _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getCurrentSpeed();
+                    entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
+                }
+                if (entityType->modelType == RL::ModelType::PROJECTILE) {
+                    entityPos->pos.x += entityVel->x;
+                    entityPos->pos.y += entityVel->y * (-1);
+                    entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
+                }
+                if (entityType->modelType == RL::ModelType::OBSTACLE) {
+                    //if we spawned the boss but are rushing towards it, the obstacles must speed up as well. Keep the 2 final waves of a level easy
+                    if (_assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getCurrentSpeed() != _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getScrollSpeed())
+                        entityVel->z = _assetManager->getMaps().at(_assetManager->getCurrentMapBeingPlayed())->getCurrentSpeed();
+                    entityPos->pos.z += entityVel->z * (entityOwner->ownerType) * (-1);
+                }
+                if (entityType->modelType == RL::ModelType::POWERUP) {
+                    pitchYawRoll->yaw += 0.5f;
+                    entityPos->pos.z += entityVel->z * (-1);
+                }
+            }
+        };
+        
+        void setEntityBoundingBox(Collider* entityCollider, Position* entityPos, ModelDimensions* modelDimensions)
+        {
+            entityCollider->collider = {(Vector3) {entityPos->pos.x - (modelDimensions->widthX ) / 2,
+                                         entityPos->pos.y - (modelDimensions->heightY ) / 2,
+                                         entityPos->pos.z - (modelDimensions->lengthZ ) / 2} ,
+                              (Vector3) {entityPos->pos.x + (modelDimensions->widthX ) / 2,
+                                         entityPos->pos.y + (modelDimensions->heightY ) / 2,
+                                         entityPos->pos.z + (modelDimensions->lengthZ ) / 2}
+                                         };
+
+        };
+
+        bool checkPressedUp(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::UP) || entityHasPressedKeyAsChar(entityMovement, UserInput::UP2) )
+                return true;
+            else
+                return false;
+         }
+
+        bool checkPressedDown(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::DOWN) || entityHasPressedKeyAsChar(entityMovement, UserInput::DOWN2) )
+                return true;
+            else
+                return false;
+        }
+
+        bool checkPressedLeft(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::LEFT) || entityHasPressedKeyAsChar(entityMovement, UserInput::LEFT2))
+                return true;
+            else
+                return false;
+        }
+
+        bool checkPressedRight(Input* entityMovement) {
+            if (entityHasPressedKeyAsChar(entityMovement, UserInput::RIGHT) || entityHasPressedKeyAsChar(entityMovement, UserInput::RIGHT2))
+                return true;
+            else
+                return false;
+        }
+
+        void moveLeft(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
+        {
+            pitchYawRoll->roll > -20.0f ? pitchYawRoll->roll -= 1.0f : pitchYawRoll->roll -= 0.0f;
+
+            if (pos->pos.x > MAXLEFT) return;
+
+            if ((pos->pos.y < MAXUP) && checkPressedUp(entityMovement)) {
+                moveUpLeft(pos, vel);
+                return;
+            }
+            if ((pos->pos.y > MAXUP) && checkPressedDown(entityMovement)) {
+                moveDownLeft(pos, vel);
+                return;
+            }
+            pos->pos.x += vel->x;
+        };
+
+        void moveRight(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
+        {        
+            pitchYawRoll->roll < 20.0f ? pitchYawRoll->roll += 1.0f : pitchYawRoll->roll += 0.0f;
+            if (pos->pos.x < MAXRIGHT) return;
+
+            if ((pos->pos.y < MAXUP) && checkPressedUp(entityMovement)) {
+                moveUpRight(pos, vel);
+                return;
+            }
+            if ((pos->pos.y > MAXUP) && checkPressedDown(entityMovement)) {
+                moveDownRight(pos, vel);
+                return;
+            }
+            pos->pos.x -= vel->x;
+        };
+
+        void moveUp(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
+        {
+            pitchYawRoll->pitch > -15.0f ? pitchYawRoll->pitch -= 1.0f : pitchYawRoll->pitch -= 0.0f;
+            if (pos->pos.y > MAXUP) return;
+            if ((pos->pos.x < MAXLEFT) && checkPressedLeft(entityMovement)) {
+                moveUpLeft(pos, vel);
+                return;
+            }
+            if ((pos->pos.x > -MAXRIGHT) && checkPressedRight(entityMovement)) {
+                moveUpRight(pos, vel);
+                return;
+            }
+            pos->pos.y += vel->y;
+        };
+
+        void moveDown(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
+        {
+            pitchYawRoll->pitch < 15.0f ? pitchYawRoll->pitch += MAXUP : pitchYawRoll->pitch += 0.0f;
+            if (pos->pos.y < MAXDOWN) return;
+            if ((pos->pos.x < MAXLEFT) && checkPressedLeft(entityMovement)) {
+                moveDownLeft(pos, vel);
+                return;
+            }
+            if ((pos->pos.x > MAXRIGHT) && checkPressedRight(entityMovement)) {
+                moveDownRight(pos, vel);
+                return;
+            }
+            pos->pos.y -= vel->y;
+        };
+
+        void moveForward(Position *pos, Velocity *vel, Input* entityMovement, PitchYawRoll* pitchYawRoll)
+        {
+            if (pos->pos.z > MAXFORWARD) return;
+            pos->pos.z += vel->z;
+        }
+
+        void moveUpLeft(Position *pos, Velocity *vel)
+        {
+                pos->pos.x += vel->x / 2;
+                pos->pos.y += vel->y / 2;
+
+        };
+
+        void moveUpRight(Position *pos, Velocity *vel)
+        {
+                pos->pos.x -= vel->x / 2;
+                pos->pos.y += vel->y / 2;
+
+        };
+
+        void moveDownLeft(Position *pos, Velocity *vel)
+        {
+                pos->pos.x += vel->x / 2;
+                pos->pos.y -= vel->y / 2;
+
+        };
+
+        void moveDownRight(Position *pos, Velocity *vel)
+        {
+                pos->pos.x -= vel->x / 2;
+                pos->pos.y -= vel->y / 2;
+
+        };
+
+    private:
+        EntityID _ent;
+        std::shared_ptr<AssetManager> _assetManager;
+};

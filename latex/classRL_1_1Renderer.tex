@@ -1,0 +1,85 @@
+\hypertarget{classRL_1_1Renderer}{}\doxysection{RL\+::Renderer Class Reference}
+\label{classRL_1_1Renderer}\index{RL::Renderer@{RL::Renderer}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a68e4b56b5c304ae20ed0d3267d1a0a29}\label{classRL_1_1Renderer_a68e4b56b5c304ae20ed0d3267d1a0a29}} 
+{\bfseries Renderer} (std\+::string name)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a4500142b48f6ecb3346fb3b2aa7f85ff}\label{classRL_1_1Renderer_a4500142b48f6ecb3346fb3b2aa7f85ff}} 
+void {\bfseries clear\+Background} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a329102c116e581d603bd08cb7fb3d43b}\label{classRL_1_1Renderer_a329102c116e581d603bd08cb7fb3d43b}} 
+void {\bfseries draw\+Background} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}}, int current\+Level)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a9fdd19a2ea3bc5a78b8c7ad73f3d61d5}\label{classRL_1_1Renderer_a9fdd19a2ea3bc5a78b8c7ad73f3d61d5}} 
+void {\bfseries draw\+\_\+3\+D\+\_\+model} (Model model, Vector3 position, float scale, RL\+::\+Model\+Type owner\+Type, const \mbox{\hyperlink{structPitchYawRoll}{Pitch\+Yaw\+Roll}} $\ast$pitch\+Yaw\+Roll)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a976017075f48be83fd307c6c64ea90cd}\label{classRL_1_1Renderer_a976017075f48be83fd307c6c64ea90cd}} 
+void {\bfseries draw\+\_\+2\+D\+\_\+model} (Texture2D texture, int x, int y)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a2b02b950d4c066875b0c5fec36f40d53}\label{classRL_1_1Renderer_a2b02b950d4c066875b0c5fec36f40d53}} 
+void {\bfseries draw\+Map} (\mbox{\hyperlink{classMap}{Map}} $\ast$\mbox{\hyperlink{classMap}{Map}}, Camera camera, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}})
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a96d73d9703d0be654a778004c283c1b9}\label{classRL_1_1Renderer_a96d73d9703d0be654a778004c283c1b9}} 
+void {\bfseries draw\+\_\+text} (std\+::string text, Color color, int x, int y, Font font, float size)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_ac7dc903df91653cddff1338c6d2ee91e}\label{classRL_1_1Renderer_ac7dc903df91653cddff1338c6d2ee91e}} 
+float {\bfseries translate\+Coordinatesto\+World} (int pos, int border\+Size)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a75cd549cdb603e5a98083e500ddf73eb}\label{classRL_1_1Renderer_a75cd549cdb603e5a98083e500ddf73eb}} 
+void {\bfseries begin3\+DMode} (Camera camera)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a656b24808a198369a616e1d27811ec7c}\label{classRL_1_1Renderer_a656b24808a198369a616e1d27811ec7c}} 
+void {\bfseries begin\+Drawing} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_aa3aff34f92663f23c5e1e3736854f425}\label{classRL_1_1Renderer_aa3aff34f92663f23c5e1e3736854f425}} 
+void {\bfseries end3\+DMode} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a0e34009343b46d3a8d447046dc031aee}\label{classRL_1_1Renderer_a0e34009343b46d3a8d447046dc031aee}} 
+void {\bfseries end\+Drawing} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a68e4b56b5c304ae20ed0d3267d1a0a29}\label{classRL_1_1Renderer_a68e4b56b5c304ae20ed0d3267d1a0a29}} 
+{\bfseries Renderer} (std\+::string name)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a4500142b48f6ecb3346fb3b2aa7f85ff}\label{classRL_1_1Renderer_a4500142b48f6ecb3346fb3b2aa7f85ff}} 
+void {\bfseries clear\+Background} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a329102c116e581d603bd08cb7fb3d43b}\label{classRL_1_1Renderer_a329102c116e581d603bd08cb7fb3d43b}} 
+void {\bfseries draw\+Background} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}}, int current\+Level)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a9fdd19a2ea3bc5a78b8c7ad73f3d61d5}\label{classRL_1_1Renderer_a9fdd19a2ea3bc5a78b8c7ad73f3d61d5}} 
+void {\bfseries draw\+\_\+3\+D\+\_\+model} (Model model, Vector3 position, float scale, RL\+::\+Model\+Type owner\+Type, const \mbox{\hyperlink{structPitchYawRoll}{Pitch\+Yaw\+Roll}} $\ast$pitch\+Yaw\+Roll)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a976017075f48be83fd307c6c64ea90cd}\label{classRL_1_1Renderer_a976017075f48be83fd307c6c64ea90cd}} 
+void {\bfseries draw\+\_\+2\+D\+\_\+model} (Texture2D texture, int x, int y)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a2b02b950d4c066875b0c5fec36f40d53}\label{classRL_1_1Renderer_a2b02b950d4c066875b0c5fec36f40d53}} 
+void {\bfseries draw\+Map} (\mbox{\hyperlink{classMap}{Map}} $\ast$\mbox{\hyperlink{classMap}{Map}}, Camera camera, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}})
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a96d73d9703d0be654a778004c283c1b9}\label{classRL_1_1Renderer_a96d73d9703d0be654a778004c283c1b9}} 
+void {\bfseries draw\+\_\+text} (std\+::string text, Color color, int x, int y, Font font, float size)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_ac7dc903df91653cddff1338c6d2ee91e}\label{classRL_1_1Renderer_ac7dc903df91653cddff1338c6d2ee91e}} 
+float {\bfseries translate\+Coordinatesto\+World} (int pos, int border\+Size)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a75cd549cdb603e5a98083e500ddf73eb}\label{classRL_1_1Renderer_a75cd549cdb603e5a98083e500ddf73eb}} 
+void {\bfseries begin3\+DMode} (Camera camera)
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a656b24808a198369a616e1d27811ec7c}\label{classRL_1_1Renderer_a656b24808a198369a616e1d27811ec7c}} 
+void {\bfseries begin\+Drawing} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_aa3aff34f92663f23c5e1e3736854f425}\label{classRL_1_1Renderer_aa3aff34f92663f23c5e1e3736854f425}} 
+void {\bfseries end3\+DMode} ()
+\item 
+\mbox{\Hypertarget{classRL_1_1Renderer_a0e34009343b46d3a8d447046dc031aee}\label{classRL_1_1Renderer_a0e34009343b46d3a8d447046dc031aee}} 
+void {\bfseries end\+Drawing} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Client/Renderer.\+hpp\item 
+Source/\+Server/Renderer.\+hpp\item 
+Source/\+Client/Renderer.\+cpp\item 
+Source/\+Server/Renderer.\+cpp\end{DoxyCompactItemize}

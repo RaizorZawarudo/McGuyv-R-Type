@@ -1,0 +1,108 @@
+\hypertarget{Client_2ECS_2EntityManager_8hpp_source}{}\doxysection{Entity\+Manager.\+hpp}
+\label{Client_2ECS_2EntityManager_8hpp_source}\index{Source/Client/ECS/EntityManager.hpp@{Source/Client/ECS/EntityManager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ EntityManager}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ ENTITY\_MANAGER\_HPP\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ENTITY\_MANAGER\_HPP\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}ECS.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}ComponentPool.hpp"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classEntityManager}{EntityManager}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structEntityManager_1_1EntityDesc}{EntityDesc}}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ EntityID\ id;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ ComponentMask\ mask;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classEntityManager}{EntityManager}}()\ \{\};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classEntityManager}{\string~EntityManager}}()\ \{\};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ EntityID\ CreateNewEntity()\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!freeEntities.empty())\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EntityIndex\ newIndex\ =\ freeEntities.back();}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ freeEntities.pop\_back();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EntityID\ newID\ =\ CreateEntityId(newIndex,\ GetEntityVersion(entities[newIndex].\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entities[newIndex].id\ =\ newID;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entities[newIndex].id;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ entities.push\_back(\{\ CreateEntityId(EntityIndex(entities.size()),\ 0),\ ComponentMask()\ \});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entities.back().id;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ EntityID\ CreateNewEntityWithID(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!freeEntities.empty())\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EntityIndex\ newIndex\ =\ freeEntities.back();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ freeEntities.pop\_back();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EntityID\ newID\ =\ id;\ \textcolor{comment}{//CreateEntityId(newIndex,\ GetEntityVersion(entities[newIndex].id));}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ entities[newIndex].id\ =\ newID;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entities[newIndex].id;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ entities.push\_back(\{\ CreateEntityId(EntityIndex(entities.size()),\ 0),\ ComponentMask()\ \});}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entities.back().id;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ DestroyEntity(EntityID\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ EntityID\ newID\ =\ CreateEntityId(EntityIndex(-\/1),\ GetEntityVersion(\textcolor{keywordtype}{id})\ +\ 1);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ entities[GetEntityIndex(\textcolor{keywordtype}{id})].id\ =\ newID;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ entities[GetEntityIndex(\textcolor{keywordtype}{id})].mask.reset();\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ freeEntities.push\_back(GetEntityIndex(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ T*\ Assign(EntityID\ \textcolor{keywordtype}{id},\ T\ value)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ componentId\ =\ GetId<T>();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (componentPools.size()\ <=\ componentId)\ \textcolor{comment}{//\ Not\ enough\ component\ pool}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ componentPools.resize(componentId\ +\ 1);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (componentPools[componentId]\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{comment}{//\ New\ component,\ make\ a\ new\ pool}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ componentPools[componentId]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classComponentPool}{ComponentPool}}(\textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Looks\ up\ the\ component\ in\ the\ pool,\ and\ initializes\ it\ with\ placement\ new}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ T\ *pComponent\ =\ \textcolor{keyword}{new}\ (componentPools[componentId]-\/>get(GetEntityIndex(\textcolor{keywordtype}{id})))\ T(value);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ bit\ for\ this\ component\ to\ true\ and\ return\ the\ created\ component}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ entities[GetEntityIndex(\textcolor{keywordtype}{id})].mask.set(componentId);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pComponent;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ T*\ Get(EntityID\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ componentId\ =\ GetId<T>();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!entities[GetEntityIndex(\textcolor{keywordtype}{id})].mask.test(componentId))}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ T\ *pComponent\ =\ \textcolor{keyword}{static\_cast<}T\ *\textcolor{keyword}{>}(componentPools[componentId]-\/>get(GetEntityIndex(\textcolor{keywordtype}{id})));}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pComponent;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Remove(EntityID\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ensures\ you're\ not\ accessing\ an\ entity\ that\ has\ been\ deleted}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (entities[GetEntityIndex(\textcolor{keywordtype}{id})].\textcolor{keywordtype}{id}\ !=\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ componentId\ =\ GetId<T>();}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ entities[GetEntityIndex(\textcolor{keywordtype}{id})].mask.reset(componentId);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ std::vector<EntityDesc>\ getEntities()\ \{\ \textcolor{keywordflow}{return}\ entities;\ \};}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ std::vector<ComponentPool\ *>\ getComponentPools()\ \{\ \textcolor{keywordflow}{return}\ componentPools;\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ std::vector<EntityDesc>\ entities;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ std::vector<ComponentPool\ *>\ componentPools;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ std::vector<EntityIndex>\ freeEntities;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !ENTITY\_MANAGER\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

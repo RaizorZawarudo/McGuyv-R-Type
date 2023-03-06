@@ -1,0 +1,59 @@
+\hypertarget{classLootSystem}{}\doxysection{Loot\+System Class Reference}
+\label{classLootSystem}\index{LootSystem@{LootSystem}}
+Inheritance diagram for Loot\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLootSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLootSystem_a6d93004956f472d7e0aa96796a1c0fd5}\label{classLootSystem_a6d93004956f472d7e0aa96796a1c0fd5}} 
+{\bfseries Loot\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager)
+\item 
+void \mbox{\hyperlink{classLootSystem_a4594687bf59482bc01dee6a74057dbcb}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classLootSystem_a7595b2f71546e28b960eac1a517ead05}\label{classLootSystem_a7595b2f71546e28b960eac1a517ead05}} 
+void {\bfseries create\+\_\+loot} (Vector3 pos, std\+::string loot\+Name)
+\item 
+\mbox{\Hypertarget{classLootSystem_a3b335e7449b1ce6b4f71b1f3e732aacd}\label{classLootSystem_a3b335e7449b1ce6b4f71b1f3e732aacd}} 
+\mbox{\hyperlink{structProjectileWeapon}{Projectile\+Weapon}} {\bfseries generate\+Weapon\+Loot} (std\+::string projectile\+Name)
+\item 
+\mbox{\Hypertarget{classLootSystem_a0c13dc1342f810fe92c4a78c903ed9d2}\label{classLootSystem_a0c13dc1342f810fe92c4a78c903ed9d2}} 
+\mbox{\hyperlink{structShield}{Shield}} {\bfseries generate\+Shield\+Loot} ()
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLootSystem_a4594687bf59482bc01dee6a74057dbcb}\label{classLootSystem_a4594687bf59482bc01dee6a74057dbcb}} 
+\index{LootSystem@{LootSystem}!update@{update}}
+\index{update@{update}!LootSystem@{LootSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Loot\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Server/\+Components\&\+Systems/Loot\+System.\+hpp\item 
+Source/\+Server/\+Components\&\+Systems/Loot\+System.\+cpp\end{DoxyCompactItemize}

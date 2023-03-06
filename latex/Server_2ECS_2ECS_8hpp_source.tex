@@ -1,0 +1,58 @@
+\hypertarget{Server_2ECS_2ECS_8hpp_source}{}\doxysection{ECS.\+hpp}
+\label{Server_2ECS_2ECS_8hpp_source}\index{Source/Server/ECS/ECS.hpp@{Source/Server/ECS/ECS.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ ECS}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ ECS\_HPP\_}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ ECS\_HPP\_}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <bitset>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ counter;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ MAX\_COMPONENTS\ =\ 320;}
+\DoxyCodeLine{00016\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ MAX\_ENTITIES\ =\ 5000;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ EntityIndex;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ EntityVersion;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\ EntityID;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{typedef}\ std::bitset<MAX\_COMPONENTS>\ ComponentMask;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{int}\ GetId()}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ curCounter\ =\ counter++;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ curCounter;}
+\DoxyCodeLine{00027\ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{inline}\ EntityID\ CreateEntityId(EntityIndex\ index,\ EntityVersion\ version)}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ Shift\ the\ index\ up\ 32,\ and\ put\ the\ version\ in\ the\ bottom}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ ((EntityID)index\ <<\ 32)\ |\ ((EntityID)version);}
+\DoxyCodeLine{00033\ \}}
+\DoxyCodeLine{00034\ \textcolor{keyword}{inline}\ EntityIndex\ GetEntityIndex(EntityID\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ Shift\ down\ 32\ so\ we\ lose\ the\ version\ and\ get\ our\ index}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{id}\ >>\ 32;}
+\DoxyCodeLine{00038\ \}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{inline}\ EntityVersion\ GetEntityVersion(EntityID\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Cast\ to\ a\ 32\ bit\ int\ to\ get\ our\ version\ number\ (loosing\ the\ top\ 32\ bits)}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ (EntityVersion)id;}
+\DoxyCodeLine{00043\ \}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ IsEntityValid(EntityID\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ index\ is\ our\ invalid\ index}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{id}\ >>\ 32)\ !=\ EntityIndex(-\/1);}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ INVALID\_ENTITY\ CreateEntityId(EntityIndex(-\/1),\ 0)}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !ECS\_HPP\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

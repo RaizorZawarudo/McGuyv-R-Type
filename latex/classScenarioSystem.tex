@@ -1,0 +1,71 @@
+\hypertarget{classScenarioSystem}{}\doxysection{Scenario\+System Class Reference}
+\label{classScenarioSystem}\index{ScenarioSystem@{ScenarioSystem}}
+Inheritance diagram for Scenario\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classScenarioSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classScenarioSystem_ade93e38cdeb2df48fd50678d202e3b53}\label{classScenarioSystem_ade93e38cdeb2df48fd50678d202e3b53}} 
+{\bfseries Scenario\+System} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ em, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classAssetManager}{Asset\+Manager}} $>$ asset\+Manager)
+\item 
+void \mbox{\hyperlink{classScenarioSystem_a9b2a4cecebbdf3d7c2ef3defdca96201}{update}} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities) override
+\item 
+\mbox{\Hypertarget{classScenarioSystem_a6a1bd07a737cecfdeb61da16acfab8cf}\label{classScenarioSystem_a6a1bd07a737cecfdeb61da16acfab8cf}} 
+void {\bfseries create\+Obstacle\+Wave} (std\+::string wave\+Name)
+\item 
+\mbox{\Hypertarget{classScenarioSystem_a5b4815ac4e317143e80f3fe4a2034381}\label{classScenarioSystem_a5b4815ac4e317143e80f3fe4a2034381}} 
+void {\bfseries create\+Obstacle} (std\+::string model\+Name, Vector3 position)
+\item 
+\mbox{\Hypertarget{classScenarioSystem_afbc86af88554c66ec2637e40272c347e}\label{classScenarioSystem_afbc86af88554c66ec2637e40272c347e}} 
+void {\bfseries create\+Ennemy\+Wave} (std\+::string wave\+Name)
+\item 
+\mbox{\Hypertarget{classScenarioSystem_ad3a0f4717c1312baf9f4f996382f12c0}\label{classScenarioSystem_ad3a0f4717c1312baf9f4f996382f12c0}} 
+void {\bfseries create\+Ennemy} (std\+::string model\+Name, Vector3 position)
+\item 
+\mbox{\Hypertarget{classScenarioSystem_ae25a1a66e248dba30a7615bc4c91aed3}\label{classScenarioSystem_ae25a1a66e248dba30a7615bc4c91aed3}} 
+std\+::vector$<$ \mbox{\hyperlink{structProjectileWeapon}{Projectile\+Weapon}} $>$ {\bfseries generate\+Start\+Weaponset\+Ennemies} (std\+::string model\+Name)
+\item 
+\mbox{\Hypertarget{classScenarioSystem_a4f839e2bf687c54ac12ff96c6ce13b40}\label{classScenarioSystem_a4f839e2bf687c54ac12ff96c6ce13b40}} 
+\mbox{\hyperlink{structAI}{AI}} {\bfseries assign\+AI} (std\+::string AIType, Entity\+ID ennemy)
+\item 
+\mbox{\Hypertarget{classScenarioSystem_abca3720fff6de146c33de4d8fe49a918}\label{classScenarioSystem_abca3720fff6de146c33de4d8fe49a918}} 
+\mbox{\hyperlink{structAI}{AI}} {\bfseries assign\+Simple\+AI} (std\+::string AIType, Entity\+ID ennemy)
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\item 
+\mbox{\Hypertarget{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}\label{classISystem_a2d3b03a8e9f1d828f50aab7b6378142f}} 
+virtual void {\bfseries update} (std\+::vector$<$ Entity\+ID $>$ \&all\+Entities)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classISystem}{ISystem}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classISystem_a6ec35def46d08c352bcfcfa19a18368d}\label{classISystem_a6ec35def46d08c352bcfcfa19a18368d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEntityManager}{Entity\+Manager}} $>$ {\bfseries \+\_\+em}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classScenarioSystem_a9b2a4cecebbdf3d7c2ef3defdca96201}\label{classScenarioSystem_a9b2a4cecebbdf3d7c2ef3defdca96201}} 
+\index{ScenarioSystem@{ScenarioSystem}!update@{update}}
+\index{update@{update}!ScenarioSystem@{ScenarioSystem}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Scenario\+System\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Entity\+ID $>$ \&}]{all\+Entities }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classISystem}{ISystem}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+Server/\+Components\&\+Systems/Scenario\+System.\+hpp\item 
+Source/\+Server/\+Components\&\+Systems/Scenario\+System.\+cpp\end{DoxyCompactItemize}

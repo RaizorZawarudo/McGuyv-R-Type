@@ -1,0 +1,9 @@
+Name,Style,Model Path,Texture Path,Animation Path,scale,length,width,height,camera position,camera FOV
+SmallMountainPath,simple,Source/Server/Assets/Models/Zones/SmallMountainPath/smallMountains.obj,0,0,1,800,16,0,-4;6;-15,80
+MushroomPath1,simple,Source/Server/Assets/Models/Zones/MushroomPath1/mushrooms.obj,0,0,1,100,16,0,-4;6;-15,80
+BigMountainPath,bossroom,Source/Server/Assets/Models/Zones/BigMountainPath/bigMountains.obj,0,0,1,800,16,0,0;5;-15,90
+SmallMountainPathGreen,simple,Source/Server/Assets/Models/Zones/SmallMountainPathGreen/smallMountainsGreen.obj,0,0,1,800,16,0,-4;6;-15,80
+MountainsSmallv2,simple,Source/Server/Assets/Models/Zones/MountainsSmallv2/mountainsSmallv2.obj,0,0,1,160,16,0,-4;6;-15,80
+PlaceHolderBossRoom,bossroom,Source/Server/Assets/Models/Zones/PlaceHolderBossRoom/placeHolderBossRoom.obj,0,0,1,160,16,0,0;5;-15,90
+CityPath1,simple,Source/Server/Assets/Models/Zones/CityPath1/cityPath1.obj,0,0,1,100,16,0,-4;6;-15,80
+TestBossroom,bossroom,Source/Server/Assets/Models/Zones/TestBossRoom/test-bossroom-002.obj,0,0,1,160,16,0,0;5;-15,90

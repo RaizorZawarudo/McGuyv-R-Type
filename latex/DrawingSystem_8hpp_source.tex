@@ -1,0 +1,86 @@
+\hypertarget{DrawingSystem_8hpp_source}{}\doxysection{Drawing\+System.\+hpp}
+\label{DrawingSystem_8hpp_source}\index{Source/Client/Components\&Systems/DrawingSystem.hpp@{Source/Client/Components\&Systems/DrawingSystem.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ EPITECH\ PROJECT,\ 2022}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**\ R-\/TYPE\ 3D}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ File\ description:}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**\ DrawingSystem}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}ISystem.hpp"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../Renderer.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../AssetManager.hpp"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../CameraManager.hpp"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}../Window.hpp"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}raymath.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PANNELLEFTX\ =\ 15;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PANNELRIGHTX\ =\ 55;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PANNELSY\ =\ 80;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PLAYERICONX\ =\ 17;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PLAYERICONY\ =\ 83;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WEAPON1ICONX\ =\ 3+28;}
+\DoxyCodeLine{00025\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WEAPON1ICONY\ =\ 86;}
+\DoxyCodeLine{00026\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WEAPON2ICONX\ =\ 3.9+32.2;}
+\DoxyCodeLine{00027\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WEAPON2ICONY\ =\ 86;}
+\DoxyCodeLine{00028\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WEAPON3ICONX\ =\ 4.1+37.2;}
+\DoxyCodeLine{00029\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WEAPON3ICONY\ =\ 86;}
+\DoxyCodeLine{00030\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SHIELDICONX\ =\ 26;}
+\DoxyCodeLine{00031\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SHIELDICONY\ =\ 86;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SCOREX\ =\ 62;}
+\DoxyCodeLine{00034\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SCOREY\ =\ 87;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAPON1INDX\ =\ 4.2+28;}
+\DoxyCodeLine{00037\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAPON1INDY\ =\ 82.5;}
+\DoxyCodeLine{00038\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAPON2INDX\ =\ 4.2+33;}
+\DoxyCodeLine{00039\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAPON2INDY\ =\ 82.5;}
+\DoxyCodeLine{00040\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAPON3INDX\ =\ 4.2+38;}
+\DoxyCodeLine{00041\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAPON3INDY\ =\ 82.5;}
+\DoxyCodeLine{00042\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ SHIELDINDX\ =\ 3.7+22.2;}
+\DoxyCodeLine{00043\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ SHIELDINDY\ =\ 83.2;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ SHIELDVALUEX\ =\ 3.5+23;}
+\DoxyCodeLine{00046\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ SHIELDVALUEY\ =\ 92;}
+\DoxyCodeLine{00047\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAP1AMMOX\ =\ 4.2+28;}
+\DoxyCodeLine{00048\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAP1AMMOY\ =\ 92;}
+\DoxyCodeLine{00049\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAP2AMMOX\ =\ 4.2+32.2;}
+\DoxyCodeLine{00050\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAP2AMMOY\ =\ 92;}
+\DoxyCodeLine{00051\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAP3AMMOX\ =\ 4.2+37.2;}
+\DoxyCodeLine{00052\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WEAP3AMMOY\ =\ 92;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDrawingSystem}{DrawingSystem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classISystem}{ISystem}}\ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classDrawingSystem}{DrawingSystem}}(std::shared\_ptr<EntityManager>\ em,\ std::shared\_ptr<RL::Renderer>\ renderer,\ std::shared\_ptr<AssetManager>\ assetManager,\ std::shared\_ptr<RL::CameraManager>\ cameraManager,\ std::shared\_ptr<RL::Window>\ window);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classDrawingSystem}{\string~DrawingSystem}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ update(std::vector<EntityID>\ \&allEntities)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ explosionDrawing();}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ shieldDrawing();}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ playerUIDrawing(EntityID\ clientplayerID);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleWeaponslots(EntityID\ clientplayerID);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleWeaponAmmo(EntityID\ clientplayerID);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleWeaponIcons(EntityID\ clientplayerID);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleShield(EntityID\ clientplayerID);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::Renderer>\ \_renderer;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::shared\_ptr<AssetManager>\ \_assetManager;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::CameraManager>\ \_cameraManager;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::shared\_ptr<RL::Window>\ \_window;}
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ }
+
+\end{DoxyCode}
